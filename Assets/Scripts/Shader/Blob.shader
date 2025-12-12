@@ -4,7 +4,7 @@ Shader "Custom/Blob"
     Properties
     {
         //[MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
-        //[MainTexture] _BaseMap("Base Map", 2D) = "white"
+        [MainTexture] _BaseMap("Base Map", 2D) = "white"
 
     }
 
@@ -31,6 +31,8 @@ Shader "Custom/Blob"
             int _CircleCount;
             float4 _Circles[MAX_CIRCLES];
             float _RotationSpeeds[MAX_CIRCLES];
+            half4 _InnerColor;
+            half4 _EdgeColor;
             //--------------------------------------DataStruct declaration--------------------------------------------------
             struct MeshData
             {
@@ -67,7 +69,7 @@ Shader "Custom/Blob"
             {
                 return (finish - start) * lerpValue; 
             }
-            float2 GetCirclePos(float orbitRadius, float lerpSpeed, float angleOffset, float rotationSpeed)
+            float2 GetCirclePos(float orbitRadius, float lerpPhase, float angleOffset, float rotationSpeed)
             {
                 angleOffset = angleOffset * 3.14 / 180.0;
                 float rotationDelta = (_UnityTime + angleOffset)*rotationSpeed;
@@ -75,7 +77,15 @@ Shader "Custom/Blob"
                 float2 start = normalize(float2(cos(rotationDelta), sin(rotationDelta))) * orbitRadius ;
                 float2 finish = -start;
                 
-                return VecLerp(start,finish, cos(_UnityTime*lerpSpeed));
+                return VecLerp(start,finish, cos(lerpPhase));
+            }
+            half4 ColorLerp(half4 a, half4 b, float t)
+            {
+                return a + half4(b.x-a.x,b.y-a.y,b.z-a.z, 0) * t;
+            }
+            float Length(half2 vec)
+            {
+                return sqrt(vec.x*vec.x + vec.y*vec.y);
             }
 
             //We work on fragments here, not vertices
@@ -84,9 +94,9 @@ Shader "Custom/Blob"
                 //Center the coordinates
                 half2 uv = (IN.positionHCS * 2 - _ScreenParams.xy)/_ScreenParams.x;
 
-                float intensity = 0;
+                float sd = 0;
 
-                intensity = SmoothUnionQuadraticPolynomial(
+                sd = SmoothUnionQuadraticPolynomial(
                     SDCircle(
                         uv,
                         GetCirclePos(_Circles[0].y,_Circles[0].z,_Circles[0].w, _RotationSpeeds[0]),
@@ -102,8 +112,8 @@ Shader "Custom/Blob"
 
                 for (int i = 2; i <_CircleCount; i++)
                 {
-                    intensity = SmoothUnionQuadraticPolynomial(
-                        intensity,
+                    sd = SmoothUnionQuadraticPolynomial(
+                        sd,
                         SDCircle(
                             uv,
                             GetCirclePos(_Circles[i].y,_Circles[i].z,_Circles[i].w, _RotationSpeeds[i]),
@@ -113,13 +123,62 @@ Shader "Custom/Blob"
                         );
                 }
                 
-                //Create that outline effect 
-                if (intensity < 0.0)
-                    intensity = 1.0; // Make the inner circle white
-                else
-                    intensity =  smoothstep(0.0, 0.1, intensity); //Limit the difuse outline
+                if (sd < 0) //Inner Blob
+                {
+                    //Weird trippy effect, kinda cool tho 
+                    //return half4(ColorLerp(_EdgeColor, _InnerColor,(abs(sd) * 10)%1 ).xyz,0) ;
 
-                return half4(intensity,intensity,intensity,0);
+                    //Edge/Inner 
+                    /*if (abs(sd) > 0.01)
+                        return _InnerColor ;
+                    else
+                        return _EdgeColor;*/
+
+                    //Toon like effect 
+                    if (abs(sd) > 0.1)
+                        return _InnerColor ;
+                    else
+                        return _EdgeColor;
+
+                    //Boring cell like effect
+                    /*sd = smoothstep(0.0, 0.05,abs(sd) );
+                    return sd * _InnerColor;*/
+                }
+                else //Outer Blob
+                {
+                    //Diffuse outline 
+                    /*sd =  smoothstep(0.0, 0.2, sd); 
+                    return sd * half4(1,1,1,0);*/
+
+                    //Dynamic diffuse outline, catching outside  
+                    //return half4(1,1,1,0) * (sd*2) / (pow(Length(uv),2) );
+
+                    //Dynamic diffuse
+                    return ( half4(1,1,1,0) * pow((sd*2),2) / (pow(Length(uv),2)) );
+                    
+                    //Wave effect, surely that's what drug feels like
+                    //return abs(cos(10*(sd-_UnityTime/5)) * _EdgeColor);
+
+                    //Drugs, but cooler
+                    /*return ColorLerp(
+                        half4(0,0,0,0),
+                        abs(cos(70*(sd - _UnityTime/5)) * _EdgeColor),
+                        Length(sd));*/
+
+                    //Fade along the sd, weird af
+                    /*return ColorLerp(
+                        (cos(15*(sd-_UnityTime/5)) * _EdgeColor),
+                        half4(0,0,0,0),
+                        Length(sd));*/
+
+                    //Vibrating edges 
+                    half4 bckg = half4(0,0,0,0);
+
+                    if (sd < 0.1)
+                        return ColorLerp(bckg,_EdgeColor,cos(500 * sd * (Length(uv) ))  );
+                    else 
+                        return bckg;
+                }
             }
             ENDHLSL
         }
