@@ -33,6 +33,8 @@ Shader "Custom/Blob"
             float _RotationSpeeds[MAX_CIRCLES];
             half4 _InnerColor;
             half4 _EdgeColor;
+            int _innerRenderMethod;
+            int _outerRenderMethod;
             //--------------------------------------DataStruct declaration--------------------------------------------------
             struct MeshData
             {
@@ -56,10 +58,7 @@ Shader "Custom/Blob"
                 return OUT;
             }
 
-            float SDCircle(half2 inpoint, half2 inorigin, float inradius)
-            {
-                return distance(inpoint, inorigin) - inradius;
-            }
+            //-------------------------Utils--------------------------------
             float SmoothUnionQuadraticPolynomial(float distA, float distB, float k)
             {
                 float h = max(k - abs(distA - distB), 0.0) / k;
@@ -81,22 +80,31 @@ Shader "Custom/Blob"
             }
             half4 ColorLerp(half4 a, half4 b, float t)
             {
-                return a + half4(b.x-a.x,b.y-a.y,b.z-a.z, 0) * t;
+                return a + half4(b.x-a.x,b.y-a.y,b.z-a.z, 1) * t;
             }
             float Length(half2 vec)
             {
                 return sqrt(vec.x*vec.x + vec.y*vec.y);
             }
-
-            //We work on fragments here, not vertices
-            half4 frag(v2f IN) : SV_Target
+            //-------------------------SDF--------------------------------
+            float SDCircle(half2 inpoint, half2 inorigin, float inradius)
             {
-                //Center the coordinates
-                half2 uv = (IN.positionHCS * 2 - _ScreenParams.xy)/_ScreenParams.x;
+                return distance(inpoint, inorigin) - inradius;
+            }
+            float SDSpikeCircle(half2 inpoint, half2 inorigin, float inradius )
+            {
+                float teta = atan(abs(inpoint.y - inorigin.y) / abs(inpoint.x - inorigin.x)) ;
+                return teta / 3.14/2;
 
-                float sd = 0;
+                //float amplitube = smoothstep(0,1, min(Length(inpoint) - 0.5, 0.08 ));
+                float amplitude = smoothstep(0,1, Length(inpoint) - 0.5);
 
-                sd = SmoothUnionQuadraticPolynomial(
+                return SDCircle(inpoint,inorigin,inradius) + (amplitude * (cos(teta * 50)) ) ; 
+            }
+            float GetCircleSd(float2 uv)
+            {
+                //Blend the two first circles 
+                float sd = SmoothUnionQuadraticPolynomial(
                     SDCircle(
                         uv,
                         GetCirclePos(_Circles[0].y,_Circles[0].z,_Circles[0].w, _RotationSpeeds[0]),
@@ -109,7 +117,7 @@ Shader "Custom/Blob"
                         ),
                     BLEND_FACTOR
                     );
-
+                //Blend any other circle 
                 for (int i = 2; i <_CircleCount; i++)
                 {
                     sd = SmoothUnionQuadraticPolynomial(
@@ -122,62 +130,155 @@ Shader "Custom/Blob"
                         BLEND_FACTOR
                         );
                 }
+
+                return sd;
+            }
+            float GetSpikeCircleSd(float2 uv)
+            {
+                //Blend the two first circles 
+                float sd = SmoothUnionQuadraticPolynomial(
+                    SDSpikeCircle(
+                        uv,
+                        GetCirclePos(_Circles[0].y,_Circles[0].z,_Circles[0].w, _RotationSpeeds[0]),
+                        _Circles[0].x
+                        ),
+                    SDSpikeCircle(
+                        uv,
+                        GetCirclePos(_Circles[1].y,_Circles[1].z,_Circles[1].w, _RotationSpeeds[1]),
+                        _Circles[1].x
+                        ),
+                    BLEND_FACTOR
+                    );
+                //Blend any other circle 
+                for (int i = 2; i <_CircleCount; i++)
+                {
+                    sd = SmoothUnionQuadraticPolynomial(
+                        sd,
+                        SDSpikeCircle(
+                            uv,
+                            GetCirclePos(_Circles[i].y,_Circles[i].z,_Circles[i].w, _RotationSpeeds[i]),
+                            _Circles[i].x
+                            ),
+                        BLEND_FACTOR
+                        );
+                }
+
+                return sd;
+            }
+
+            half4 frag(v2f IN) : SV_Target
+            { 
+                //Center the coordinates
+                half2 uv = (IN.positionHCS * 2 - _ScreenParams.xy)/_ScreenParams.x;
+
+                float sd = GetCircleSd(uv);
                 
                 if (sd < 0) //Inner Blob
                 {
-                    //Weird trippy effect, kinda cool tho 
-                    //return half4(ColorLerp(_EdgeColor, _InnerColor,(abs(sd) * 10)%1 ).xyz,0) ;
-
-                    //Edge/Inner 
-                    /*if (abs(sd) > 0.01)
-                        return _InnerColor ;
-                    else
-                        return _EdgeColor;*/
-
-                    //Toon like effect 
-                    if (abs(sd) > 0.1)
-                        return _InnerColor ;
-                    else
-                        return _EdgeColor;
-
-                    //Boring cell like effect
-                    /*sd = smoothstep(0.0, 0.05,abs(sd) );
-                    return sd * _InnerColor;*/
+                    if (_innerRenderMethod == 0)
+                    {
+                        //Edge/Inner 
+                        if (abs(sd) > 0.01)
+                            return _InnerColor ;
+                        else
+                            return _EdgeColor;
+                    }
+                    else if (_innerRenderMethod == 1)
+                    {
+                        //Toon like effect 
+                        if (abs(sd) > 0.1)
+                            return _InnerColor ;
+                        else
+                            return _EdgeColor;
+                    }
+                    else if (_innerRenderMethod == 2)
+                    {
+                        //Boring cell like effect
+                        sd = smoothstep(0.0, 0.05,abs(sd) );
+                        return sd * _InnerColor;
+                    }
+                    else if (_innerRenderMethod == 3)
+                    {
+                        //Weird trippy effect, kinda cool tho 
+                        return half4(ColorLerp(_EdgeColor, _InnerColor,(abs(sd) * 10)%1 ).xyz,0) ;
+                    }
+                    
+                    return half4 (0,0,0,0);
                 }
                 else //Outer Blob
                 {
-                    //Diffuse outline 
-                    /*sd =  smoothstep(0.0, 0.2, sd); 
-                    return sd * half4(1,1,1,0);*/
-
-                    //Dynamic diffuse outline, catching outside  
-                    //return half4(1,1,1,0) * (sd*2) / (pow(Length(uv),2) );
-
-                    //Dynamic diffuse
-                    return ( half4(1,1,1,0) * pow((sd*2),2) / (pow(Length(uv),2)) );
-                    
-                    //Wave effect, surely that's what drug feels like
-                    //return abs(cos(10*(sd-_UnityTime/5)) * _EdgeColor);
-
-                    //Drugs, but cooler
-                    /*return ColorLerp(
+                    if (_outerRenderMethod == 0)
+                    {
+                        //Diffuse outline 
+                        sd =  smoothstep(0.0, 0.2, sd); 
+                        return sd * half4(1,1,1,0);
+                    }
+                    else if (_outerRenderMethod == 1)
+                    {
+                        //Dynamic diffuse outline, catching outside  
+                        return half4(1,1,1,0) * (sd*2) / (pow(Length(uv),2) );
+                    }
+                    else if (_outerRenderMethod == 2)
+                    {
+                        //Dynamic diffuse
+                        return ( half4(1,1,1,0) * pow((sd*2),2) / (pow(Length(uv),2)) );
+                    }
+                    else if (_outerRenderMethod == 3)
+                    {
+                        //Wave effect, surely that's what drug feels like
+                        return abs(cos(10*(sd-_UnityTime/5)) * _EdgeColor);
+                    }
+                    else if (_outerRenderMethod == 4)
+                    {
+                        //Drugs, but cooler
+                        return ColorLerp(
                         half4(0,0,0,0),
                         abs(cos(70*(sd - _UnityTime/5)) * _EdgeColor),
-                        Length(sd));*/
-
-                    //Fade along the sd, weird af
-                    /*return ColorLerp(
+                        Length(sd));
+                    }
+                    else if (_outerRenderMethod == 5)
+                    {
+                        //Fade along the sd, weird af
+                        return ColorLerp(
                         (cos(15*(sd-_UnityTime/5)) * _EdgeColor),
                         half4(0,0,0,0),
-                        Length(sd));*/
+                        Length(sd));
+                    }
+                    else if (_outerRenderMethod == 6)
+                    {
+                        //Vibrating edges 
+                        half4 bckg = half4(0,0,0,0);
 
-                    //Vibrating edges 
-                    half4 bckg = half4(0,0,0,0);
+                        if (sd < 0.1)
+                            return ColorLerp(bckg,_EdgeColor,cos(500 * sd * (Length(uv) ))  );
+                        else 
+                            return bckg;
+                    }
+                    else if (_outerRenderMethod == 7)
+                    {
+                        //Vibrating edges 
+                        half4 bckg = half4(0,0,0,0);
 
-                    if (sd < 0.1)
-                        return ColorLerp(bckg,_EdgeColor,cos(500 * sd * (Length(uv) ))  );
-                    else 
-                        return bckg;
+                        if (sd > 0.01 && sd < 0.05)
+                            return ColorLerp(bckg,_EdgeColor,cos(400 * sd * (Length(uv)) - _UnityTime*5));
+                        else 
+                            return bckg;
+                    }
+                    else if (_outerRenderMethod == 8)
+                    {
+                        half4 bckg = half4(0,0,0,0);
+                        float spike = GetSpikeCircleSd(uv);
+                        return spike;
+
+                        return ColorLerp(bckg,_EdgeColor,cos(  (sd + sin(spike * 20) ) ) );
+
+                        if (sd > 0.01 && sd < 0.05)
+                            return _EdgeColor;
+                        else 
+                            return bckg;
+                    }
+
+                    return half4(1,1,1,0);
                 }
             }
             ENDHLSL

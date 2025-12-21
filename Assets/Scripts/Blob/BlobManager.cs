@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +11,14 @@ public class BlobManager : MonoBehaviour
     [SerializeField] Color blobEdgeColor;
     [SerializeField] Color blobInnerColor;
 
+    [SerializeField]
+    [Range(0, 3)]
+    int innerRenderMethod;
+
+    [SerializeField]
+    [Range(0, 8)]
+    int outerRenderMethod;
+
     private float ogAnger = 1f;
     private float anger = 1f;
     private float angerTarget = 5;
@@ -19,18 +26,14 @@ public class BlobManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(RiseAnger(goingAngry));
-            goingAngry = !goingAngry;
-        }
-
         blobMaterial.SetFloat("_UnityTime", Time.time);
         blobMaterial.SetColor("_InnerColor", blobInnerColor);
         blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
 
         int circleCount = circles.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
+        blobMaterial.SetInt("_innerRenderMethod", innerRenderMethod);
+        blobMaterial.SetInt("_outerRenderMethod", outerRenderMethod);
 
         Vector4[] rola = new Vector4[circleCount];
         float[] rotationSpeed = new float[circleCount];
@@ -65,11 +68,15 @@ public class BlobManager : MonoBehaviour
         }
     }
 
-    public void SetAnger(float angerValue)
+    [ContextMenu("SwitchMood")]
+    void GoAngry()
     {
-        anger = angerValue;
+        StartCoroutine(RiseAnger(goingAngry));
+        goingAngry = !goingAngry;
     }
 }
+
+
 
 [Serializable]
 public class CircleData

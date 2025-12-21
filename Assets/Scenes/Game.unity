@@ -1176,12 +1176,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlobManager
   blobMaterial: {fileID: 2100000, guid: d1879c45dd596f74c9886d8ceb7dc373, type: 2}
   circles:
-  - radius: 0.22
+  - radius: 0.1
     orbitRadius: 0.01
     lerpSpeed: 1
     angleOffset: 0
     rotationSpeed: -1
-    lerpPhase: 161.19269
+    lerpPhase: 216.2946
   - radius: 0.14
     orbitRadius: 0.19
     lerpSpeed: 1.5
@@ -1193,21 +1193,23 @@ MonoBehaviour:
     lerpSpeed: 0.5
     angleOffset: -50
     rotationSpeed: 0.5
-    lerpPhase: -156.18466
+    lerpPhase: 216.2946
   - radius: 0.2
     orbitRadius: 0.2
     lerpSpeed: 1
     angleOffset: 180
     rotationSpeed: -0.5
-    lerpPhase: 457.0249
+    lerpPhase: 216.2946
   - radius: 0.23
     orbitRadius: 0.13
     lerpSpeed: 1
     angleOffset: 90
     rotationSpeed: -0.5
-    lerpPhase: 273.0569
+    lerpPhase: 216.2946
   blobEdgeColor: {r: 1, g: 0, b: 1, a: 0}
   blobInnerColor: {r: 0, g: 1, b: 0.9680033, a: 0}
+  innerRenderMethod: 3
+  outerRenderMethod: 8
 --- !u!4 &1867051471
 Transform:
   m_ObjectHideFlags: 0
