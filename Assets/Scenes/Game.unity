@@ -1175,6 +1175,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobManager
   blobMaterial: {fileID: 2100000, guid: d1879c45dd596f74c9886d8ceb7dc373, type: 2}
+  first:
+    intensity: 1
+    mood: 0
+  second:
+    intensity: 0.1
+    mood: 0
+  third:
+    intensity: 0.1
+    mood: 0
+  angerProp:
+    minColor: {r: 1, g: 0.6784314, b: 0.6392157, a: 0}
+    maxColor: {r: 0.8117647, g: 0.27058825, b: 0.19607843, a: 0}
+  joiceProp:
+    minColor: {r: 0.9647059, g: 0.972549, b: 0.52156866, a: 0}
+    maxColor: {r: 1, g: 0.7882353, b: 0.20392157, a: 0}
+  sadnessProp:
+    minColor: {r: 0.68235296, g: 0.84313726, b: 0.94509804, a: 0}
+    maxColor: {r: 0.18431373, g: 0.49019608, b: 0.7058824, a: 0}
+  fearProp:
+    minColor: {r: 0.7529412, g: 0.94509804, b: 0.6901961, a: 0}
+    maxColor: {r: 0.3019608, g: 0.7294118, b: 0.3764706, a: 0}
   circles:
   - radius: 0.1
     orbitRadius: 0.01
@@ -1206,10 +1227,45 @@ MonoBehaviour:
     angleOffset: 90
     rotationSpeed: -0.5
     lerpPhase: 216.2946
-  blobEdgeColor: {r: 1, g: 0, b: 1, a: 0}
-  blobInnerColor: {r: 0, g: 1, b: 0.9680033, a: 0}
+  blobEdgeColor: {r: 1, g: 0, b: 0.86742973, a: 0}
+  blobInnerColor: {r: 0.8117647, g: 0.27058825, b: 0.19607843, a: 0}
   innerRenderMethod: 3
-  outerRenderMethod: 8
+  outerRenderMethod: 9
+  BPM: 60
+  beatCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 11.105704
+      outSlope: 11.105704
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.089999996
+      value: 0.9995133
+      inSlope: -1.0943856
+      outSlope: -1.0943856
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.9994473
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.1032567
+      outSlope: -1.1032567
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.9997237
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scaleFactorOnBeat: 0.2
 --- !u!4 &1867051471
 Transform:
   m_ObjectHideFlags: 0

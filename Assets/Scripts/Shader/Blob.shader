@@ -27,6 +27,7 @@ Shader "Custom/Blob"
             #define MAX_CIRCLES 32
             #define BLEND_FACTOR 0.14
 
+            float _LightFactor;
             float _UnityTime;
             int _CircleCount;
             float4 _Circles[MAX_CIRCLES];
@@ -70,6 +71,8 @@ Shader "Custom/Blob"
             }
             float2 GetCirclePos(float orbitRadius, float lerpPhase, float angleOffset, float rotationSpeed)
             {
+
+                return half2(-1,0);
                 angleOffset = angleOffset * 3.14 / 180.0;
                 float rotationDelta = (_UnityTime + angleOffset)*rotationSpeed;
                 
@@ -93,13 +96,13 @@ Shader "Custom/Blob"
             }
             float SDSpikeCircle(half2 inpoint, half2 inorigin, float inradius )
             {
+                float sd = SDCircle(inpoint,inorigin,inradius);
+
                 float teta = atan(abs(inpoint.y - inorigin.y) / abs(inpoint.x - inorigin.x)) ;
-                return teta / 3.14/2;
+                //return teta / 3.14/2;
 
                 //float amplitube = smoothstep(0,1, min(Length(inpoint) - 0.5, 0.08 ));
-                float amplitude = smoothstep(0,1, Length(inpoint) - 0.5);
-
-                return SDCircle(inpoint,inorigin,inradius) + (amplitude * (cos(teta * 50)) ) ; 
+                return cos(teta*70) + sd * 5 + 0.9/Length(inpoint);
             }
             float GetCircleSd(float2 uv)
             {
@@ -200,7 +203,13 @@ Shader "Custom/Blob"
                     else if (_innerRenderMethod == 3)
                     {
                         //Weird trippy effect, kinda cool tho 
-                        return half4(ColorLerp(_EdgeColor, _InnerColor,(abs(sd) * 10)%1 ).xyz,0) ;
+                        half4 color = half4(ColorLerp(_EdgeColor, _InnerColor,(abs(sd) * 10)%1.2 ).xyz,0) ;
+
+
+
+                        return max(((1 - abs(sd * 30)) * _LightFactor) , 0) + color;
+
+                        return color  ;
                     }
                     
                     return half4 (0,0,0,0);
@@ -268,17 +277,46 @@ Shader "Custom/Blob"
                     {
                         half4 bckg = half4(0,0,0,0);
                         float spike = GetSpikeCircleSd(uv);
-                        return spike;
+                        
+                        
+                        float wave = cos(400 * sd * (Length(uv)) - _UnityTime*5);
 
-                        return ColorLerp(bckg,_EdgeColor,cos(  (sd + sin(spike * 20) ) ) );
+                        //return wave;
+
+                        spike =  (1 - min(spike,1))  ;
+
+                        if (wave < 0.5)
+                            return spike ;
+                            else return bckg;
+
+
 
                         if (sd > 0.01 && sd < 0.05)
-                            return _EdgeColor;
+                            return ColorLerp(bckg,_EdgeColor,  wave );
                         else 
                             return bckg;
                     }
+                    else if (_outerRenderMethod == 9)
+                    {
+                        half4 bckg = half4(0,0,0,0);
 
-                    return half4(1,1,1,0);
+
+                        float lerp = cos(300 * sd * (Length(uv)) - _UnityTime*5) ;
+
+
+                        half4 color = ColorLerp(bckg,_EdgeColor,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
+
+                        half4 dimedLight = max((-1*lerp) , 0) * ColorLerp(1, bckg, min(sd * 12, 1)) * _LightFactor;
+
+                        return dimedLight + ColorLerp(color, bckg, min(sd * 12, 1)) ;
+
+                        return ColorLerp(color, bckg, min(sd * 12, 1)) ;
+
+
+                        return (0.2 * length(uv)) /sd;
+                    }
+
+                    return half4(0,0,0,0);
                 }
             }
             ENDHLSL
