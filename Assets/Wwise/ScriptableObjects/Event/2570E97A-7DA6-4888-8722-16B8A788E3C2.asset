@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07327add5be67934db61bc65e48d4a2f, type: 3}
+  m_Name: 2570E97A-7DA6-4888-8722-16B8A788E3C2
+  m_EditorClassIdentifier: AK.Wwise.Unity.API.WwiseTypes::WwiseEventReference
+  objectName: Debug
+  id: 1031089514
+  guid: 2570E97A-7DA6-4888-8722-16B8A788E3C2
+  IsInUserDefinedSoundBank: 1

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BlobManager : MonoBehaviour
 {
+    [Header("Channel inputs ")]
     [SerializeField] Material blobMaterial;
     [SerializeField]
     MoodInput first;
@@ -12,6 +13,7 @@ public class BlobManager : MonoBehaviour
     [SerializeField]
     MoodInput third;
 
+    [Header("Emotions parameters ")]
     [SerializeField]
     MoodProperties angerProp;
     [SerializeField]
@@ -21,18 +23,18 @@ public class BlobManager : MonoBehaviour
     [SerializeField]
     MoodProperties fearProp;
 
-    [SerializeField] List<CircleData> circles = new List<CircleData>();
+    [Header("Movements")]
+    [SerializeField] List<Part> partsData = new List<Part>();
+    [SerializeField] AnimationCurve speedCurve;
+    [SerializeField] float movementAreaRadius;
+    [SerializeField] float speedFactor;
+    [SerializeField][Range(0f, 1f)] float movementType;
 
-    [SerializeField] Color blobEdgeColor;
-    [SerializeField] Color blobInnerColor;
-
-    [SerializeField]
-    [Range(0, 3)]
-    int innerRenderMethod;
-
-    [SerializeField]
-    [Range(0, 9)]
-    int outerRenderMethod;
+    [Header("Render")]
+    [SerializeField][Range(0f,10)] float auraFrequency;
+    [SerializeField][Range(0f, 100f)] float auraRange;
+    [SerializeField][Range(-1f, 5f)] float auraWidth;
+    [SerializeField][Range(0f, 10f)] float uvLengthFactor;
 
     [Header("Beat Parameters ")]
     [SerializeField]
@@ -41,9 +43,33 @@ public class BlobManager : MonoBehaviour
     [SerializeField]
     AnimationCurve beatCurve;
     float beatFactor;
-
-    [Header("Scale Parameters")]
     [SerializeField] float scaleFactorOnBeat;
+    
+
+    [Header("Debug")]
+    [SerializeField] Color blobEdgeColor;
+    [SerializeField] Color blobInnerColor;
+    [SerializeField]
+    [Range(0, 3)]
+    int innerRenderMethod;
+    [SerializeField]
+    [Range(0, 9)]
+    int outerRenderMethod;
+
+    Vector4[] toShader;
+    int circleCount;
+
+    private void Awake()
+    {
+        circleCount = partsData.Count;
+        blobMaterial.SetInt("_CircleCount", circleCount);
+        toShader = new Vector4[circleCount];
+
+        for (int i = 0; i < circleCount; i++)
+        {
+            partsData[i].destination = partsData[i].origin = Vector2.zero;
+        }
+    }
 
     private void Update()
     {
@@ -55,34 +81,58 @@ public class BlobManager : MonoBehaviour
         blobEdgeColor = Color.HSVToRGB(h, 1, v);
         blobMaterial.SetColor("_InnerColor", blobInnerColor);
         blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
+        blobMaterial.SetFloat("_auraF", auraFrequency);
+        blobMaterial.SetFloat("_auraRange", auraRange);
+        blobMaterial.SetFloat("_auraWidth", auraWidth);
+        blobMaterial.SetFloat("_uvLengthFactor", uvLengthFactor);
 
         beatSpeed = BPM / 60;
         beatFactor = beatCurve.Evaluate((Time.time * beatSpeed) % 1);
         blobMaterial.SetFloat("_LightFactor", beatFactor);
 
-        int circleCount = circles.Count;
-        blobMaterial.SetInt("_CircleCount", circleCount);
+        
+        
         blobMaterial.SetInt("_innerRenderMethod", innerRenderMethod);
         blobMaterial.SetInt("_outerRenderMethod", outerRenderMethod);
 
-        Vector4[] rola = new Vector4[circleCount];
-        float[] rotationSpeed = new float[circleCount];
+        //Set pos
+        UpdatePartsPos();
+    }
 
+    private void UpdatePartsPos()
+    {
+        Vector2 computePos;
         for (int i = 0; i < circleCount; i++)
         {
-            circles[i].lerpPhase += (circles[i].lerpSpeed ) * Time.deltaTime;
+            //Linear lerp constant speed
+            partsData[i].lerpPhase += Time.deltaTime * (partsData[i].lerpSpeed / (Vector2.Distance(partsData[i].origin, partsData[i].destination) *2) )  * speedFactor;
 
-            rola[i] = new Vector4(
-                circles[i].radius + scaleFactorOnBeat * (beatFactor * circles[i].radius),
-                circles[i].orbitRadius,
-                circles[i].lerpPhase,
-                circles[i].angleOffset);
-            rotationSpeed[i] = circles[i].rotationSpeed;
+
+            float lerpValue = speedCurve.Evaluate(partsData[i].lerpPhase);
+            //Linear move 
+            Vector2 linearLerp = Vector2.Lerp(partsData[i].origin, partsData[i].destination, lerpValue);
+
+            //Curved movement 
+            Vector2 circularLerp = Vector3.Slerp(partsData[i].origin, partsData[i].destination, lerpValue);
+
+            computePos = Vector2.Lerp(linearLerp, circularLerp, movementType);
+
+
+            if (partsData[i].lerpPhase >= 1)
+            {
+                //Circle finished lerping
+                partsData[i].origin = partsData[i].destination;
+                partsData[i].destination.Set(UnityEngine.Random.Range(-movementAreaRadius, movementAreaRadius), UnityEngine.Random.Range(-movementAreaRadius, movementAreaRadius));
+                partsData[i].lerpPhase = 0;
+            }
+
+            toShader[i] = new Vector4(
+                computePos.x,
+                computePos.y,
+                partsData[i].radius + scaleFactorOnBeat * (beatFactor * partsData[i].radius),
+                0);
         }
-
-        //Awfull af way to pass data 
-        blobMaterial.SetVectorArray("_Circles", rola);
-        blobMaterial.SetFloatArray("_RotationSpeeds", rotationSpeed);
+        blobMaterial.SetVectorArray("_Circles", toShader);
     }
 
     private Color GetBlendColor()
@@ -145,12 +195,11 @@ public enum Mood
 
 
 [Serializable]
-public class CircleData
+public class Part
 {
     public float radius;
-    public float orbitRadius;
     public float lerpSpeed;
-    public float angleOffset;
-    public float rotationSpeed;
+    [HideInInspector]public Vector2 destination;
+    [HideInInspector]public Vector2 origin;
     [HideInInspector]public float lerpPhase;
 }

@@ -26,16 +26,20 @@ Shader "Custom/Blob"
             //--------------------------------------Variables--------------------------------------------------
             #define MAX_CIRCLES 32
             #define BLEND_FACTOR 0.14
-
-            float _LightFactor;
             float _UnityTime;
+
             int _CircleCount;
             float4 _Circles[MAX_CIRCLES];
-            float _RotationSpeeds[MAX_CIRCLES];
+
+            float _LightFactor;
             half4 _InnerColor;
             half4 _EdgeColor;
             int _innerRenderMethod;
             int _outerRenderMethod;
+            float _auraF;
+            float _auraRange;
+            float _auraWidth;
+            float _uvLengthFactor;
             //--------------------------------------DataStruct declaration--------------------------------------------------
             struct MeshData
             {
@@ -69,18 +73,6 @@ Shader "Custom/Blob"
             {
                 return (finish - start) * lerpValue; 
             }
-            float2 GetCirclePos(float orbitRadius, float lerpPhase, float angleOffset, float rotationSpeed)
-            {
-
-                return half2(-1,0);
-                angleOffset = angleOffset * 3.14 / 180.0;
-                float rotationDelta = (_UnityTime + angleOffset)*rotationSpeed;
-                
-                float2 start = normalize(float2(cos(rotationDelta), sin(rotationDelta))) * orbitRadius ;
-                float2 finish = -start;
-                
-                return VecLerp(start,finish, cos(lerpPhase));
-            }
             half4 ColorLerp(half4 a, half4 b, float t)
             {
                 return a + half4(b.x-a.x,b.y-a.y,b.z-a.z, 1) * t;
@@ -94,29 +86,19 @@ Shader "Custom/Blob"
             {
                 return distance(inpoint, inorigin) - inradius;
             }
-            float SDSpikeCircle(half2 inpoint, half2 inorigin, float inradius )
-            {
-                float sd = SDCircle(inpoint,inorigin,inradius);
-
-                float teta = atan(abs(inpoint.y - inorigin.y) / abs(inpoint.x - inorigin.x)) ;
-                //return teta / 3.14/2;
-
-                //float amplitube = smoothstep(0,1, min(Length(inpoint) - 0.5, 0.08 ));
-                return cos(teta*70) + sd * 5 + 0.9/Length(inpoint);
-            }
             float GetCircleSd(float2 uv)
             {
                 //Blend the two first circles 
                 float sd = SmoothUnionQuadraticPolynomial(
                     SDCircle(
                         uv,
-                        GetCirclePos(_Circles[0].y,_Circles[0].z,_Circles[0].w, _RotationSpeeds[0]),
-                        _Circles[0].x
+                        _Circles[0].xy,
+                        _Circles[0].z
                         ),
                     SDCircle(
                         uv,
-                        GetCirclePos(_Circles[1].y,_Circles[1].z,_Circles[1].w, _RotationSpeeds[1]),
-                        _Circles[1].x
+                        _Circles[1].xy,
+                        _Circles[1].z
                         ),
                     BLEND_FACTOR
                     );
@@ -127,8 +109,8 @@ Shader "Custom/Blob"
                         sd,
                         SDCircle(
                             uv,
-                            GetCirclePos(_Circles[i].y,_Circles[i].z,_Circles[i].w, _RotationSpeeds[i]),
-                            _Circles[i].x
+                            _Circles[i].xy,
+                            _Circles[i].z
                             ),
                         BLEND_FACTOR
                         );
@@ -136,39 +118,18 @@ Shader "Custom/Blob"
 
                 return sd;
             }
-            float GetSpikeCircleSd(float2 uv)
+            float SDSpikeCircle(half2 inpoint, half2 inorigin, float inradius )
             {
-                //Blend the two first circles 
-                float sd = SmoothUnionQuadraticPolynomial(
-                    SDSpikeCircle(
-                        uv,
-                        GetCirclePos(_Circles[0].y,_Circles[0].z,_Circles[0].w, _RotationSpeeds[0]),
-                        _Circles[0].x
-                        ),
-                    SDSpikeCircle(
-                        uv,
-                        GetCirclePos(_Circles[1].y,_Circles[1].z,_Circles[1].w, _RotationSpeeds[1]),
-                        _Circles[1].x
-                        ),
-                    BLEND_FACTOR
-                    );
-                //Blend any other circle 
-                for (int i = 2; i <_CircleCount; i++)
-                {
-                    sd = SmoothUnionQuadraticPolynomial(
-                        sd,
-                        SDSpikeCircle(
-                            uv,
-                            GetCirclePos(_Circles[i].y,_Circles[i].z,_Circles[i].w, _RotationSpeeds[i]),
-                            _Circles[i].x
-                            ),
-                        BLEND_FACTOR
-                        );
-                }
+                float sd = SDCircle(inpoint,inorigin,inradius);
 
-                return sd;
+                float teta = atan(abs(inpoint.y - inorigin.y) / abs(inpoint.x - inorigin.x)) ;
+                //return teta / 3.14/2;
+
+                //float amplitube = smoothstep(0,1, min(Length(inpoint) - 0.5, 0.08 ));
+                return cos(teta*70) + sd * 5 + 0.9/Length(inpoint);
             }
 
+            //-------------------------Rendeeeeer--------------------------------
             half4 frag(v2f IN) : SV_Target
             { 
                 //Center the coordinates
@@ -213,7 +174,7 @@ Shader "Custom/Blob"
                     }
                     
                     return half4 (0,0,0,0);
-                }
+                }   
                 else //Outer Blob
                 {
                     if (_outerRenderMethod == 0)
@@ -276,13 +237,11 @@ Shader "Custom/Blob"
                     else if (_outerRenderMethod == 8)
                     {
                         half4 bckg = half4(0,0,0,0);
-                        float spike = GetSpikeCircleSd(uv);
-                        
-                        
                         float wave = cos(400 * sd * (Length(uv)) - _UnityTime*5);
 
-                        //return wave;
+                        return wave;
 
+                        /*float spike = GetSpikeCircleSd(uv);
                         spike =  (1 - min(spike,1))  ;
 
                         if (wave < 0.5)
@@ -294,23 +253,23 @@ Shader "Custom/Blob"
                         if (sd > 0.01 && sd < 0.05)
                             return ColorLerp(bckg,_EdgeColor,  wave );
                         else 
-                            return bckg;
+                            return bckg;*/
                     }
                     else if (_outerRenderMethod == 9)
                     {
                         half4 bckg = half4(0,0,0,0);
 
 
-                        float lerp = cos(300 * sd * (Length(uv)) - _UnityTime*5) ;
+                        float lerp = cos(200 * _auraF * sd * (Length(uv) * _uvLengthFactor) - _UnityTime*5) + _auraWidth;
 
 
                         half4 color = ColorLerp(bckg,_EdgeColor,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
 
-                        half4 dimedLight = max((-1*lerp) , 0) * ColorLerp(1, bckg, min(sd * 12, 1)) * _LightFactor;
+                        //half4 dimedLight = max((-1*lerp) , 0) * ColorLerp(1, bckg, min(sd * 12, 1)) * _LightFactor;
 
-                        return dimedLight + ColorLerp(color, bckg, min(sd * 12, 1)) ;
+                        //return dimedLight + ColorLerp(color, bckg, min(sd * 12, 1)) ;
 
-                        return ColorLerp(color, bckg, min(sd * 12, 1)) ;
+                        return ColorLerp(color, bckg, min(sd * (100/_auraRange), 1)) ;
 
 
                         return (0.2 * length(uv)) /sd;

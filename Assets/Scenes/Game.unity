@@ -119,6 +119,144 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &46970487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 46970490}
+  - component: {fileID: 46970489}
+  - component: {fileID: 46970488}
+  - component: {fileID: 46970492}
+  - component: {fileID: 46970491}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &46970488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46970487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a178c284c161e83479146440c998a4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkBank
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: fc8b4cd40a0815b4eaeb2ccc0d600056, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!114 &46970489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46970487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2665af240fb478f4dbde0edf50797518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkInitializer
+  InitializationSettings: {fileID: 11400000, guid: 3ac69b5c1a7f0b94c9dab19b288e0139, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!4 &46970490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46970487}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &46970491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46970487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7e6ec0d37064440968a2b62d68d60f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkEvent
+  triggerList: f7e1664c
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 03618c570103b4b4999c7c0dbe262552, type: 2}
+  useCallbacks: 0
+  stopSoundOnDestroy: 1
+  Callbacks: []
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  eventIdInternal: 0
+  valueGuidInternal: 
+  m_callbackDataInternal: {fileID: 0}
+--- !u!114 &46970492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46970487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1150c4464872d41a0e868ea2947b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &514384353
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,8 +303,9 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420034}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -174,14 +313,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!114 &519420030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +423,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1147bbb59dabbc04fbd333fb908fad35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkAudioListener
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1150c4464872d41a0e868ea2947b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,10 +1350,10 @@ MonoBehaviour:
     intensity: 1
     mood: 0
   second:
-    intensity: 0.1
+    intensity: 1
     mood: 0
   third:
-    intensity: 0.1
+    intensity: 1
     mood: 0
   angerProp:
     minColor: {r: 1, g: 0.6784314, b: 0.6392157, a: 0}
@@ -1196,42 +1367,64 @@ MonoBehaviour:
   fearProp:
     minColor: {r: 0.7529412, g: 0.94509804, b: 0.6901961, a: 0}
     maxColor: {r: 0.3019608, g: 0.7294118, b: 0.3764706, a: 0}
-  circles:
+  partsData:
   - radius: 0.1
-    orbitRadius: 0.01
-    lerpSpeed: 1
-    angleOffset: 0
-    rotationSpeed: -1
-    lerpPhase: 216.2946
-  - radius: 0.14
-    orbitRadius: 0.19
-    lerpSpeed: 1.5
-    angleOffset: 30
-    rotationSpeed: -0.5
-    lerpPhase: 216.2946
-  - radius: 0.2
-    orbitRadius: 0.19
     lerpSpeed: 0.5
-    angleOffset: -50
-    rotationSpeed: 0.5
-    lerpPhase: 216.2946
+    destination: {x: 0.07909235, y: 0.023712039}
+    origin: {x: -0.03919089, y: 0.13984986}
+    lerpPhase: 0.8917964
   - radius: 0.2
-    orbitRadius: 0.2
-    lerpSpeed: 1
-    angleOffset: 180
-    rotationSpeed: -0.5
-    lerpPhase: 216.2946
-  - radius: 0.23
-    orbitRadius: 0.13
-    lerpSpeed: 1
-    angleOffset: 90
-    rotationSpeed: -0.5
-    lerpPhase: 216.2946
-  blobEdgeColor: {r: 1, g: 0, b: 0.86742973, a: 0}
-  blobInnerColor: {r: 0.8117647, g: 0.27058825, b: 0.19607843, a: 0}
-  innerRenderMethod: 3
-  outerRenderMethod: 9
-  BPM: 60
+    lerpSpeed: 0.7
+    destination: {x: -0.023928806, y: -0.107761756}
+    origin: {x: -0.058460496, y: 0.016874954}
+    lerpPhase: 0.03199812
+  - radius: 0.15
+    lerpSpeed: 0.5
+    destination: {x: -0.020198703, y: 0.055146493}
+    origin: {x: -0.17016278, y: -0.17939238}
+    lerpPhase: 0.1564418
+  - radius: 0.2
+    lerpSpeed: 0.4
+    destination: {x: 0.16991825, y: -0.101627484}
+    origin: {x: 0.0024951696, y: 0.04702933}
+    lerpPhase: 0.99481493
+  - radius: 0.19
+    lerpSpeed: 0.7
+    destination: {x: 0.101260945, y: -0.039217204}
+    origin: {x: -0.17480995, y: 0.19302465}
+    lerpPhase: 0.7701364
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.014950284
+      outSlope: 0.014950284
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.13836786
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  movementAreaRadius: 0.2
+  speedFactor: 0.2
+  movementType: 0
+  auraFrequency: 1.5
+  auraRange: 12
+  auraWidth: 0
+  uvLengthFactor: 1
+  BPM: 0
   beatCurve:
     serializedVersion: 2
     m_Curve:
@@ -1266,6 +1459,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   scaleFactorOnBeat: 0.2
+  blobEdgeColor: {r: 0.9981176, g: 0.108699426, b: 0, a: 1}
+  blobInnerColor: {r: 0.9981176, g: 0.67435294, b: 0.63478434, a: 1}
+  innerRenderMethod: 3
+  outerRenderMethod: 9
 --- !u!4 &1867051471
 Transform:
   m_ObjectHideFlags: 0
@@ -1476,3 +1673,4 @@ SceneRoots:
   - {fileID: 1023189336}
   - {fileID: 1026600517}
   - {fileID: 1867051471}
+  - {fileID: 46970490}
