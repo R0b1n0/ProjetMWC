@@ -20,11 +20,11 @@ MonoBehaviour:
       guid: 00000000000000000000000000000000
     - ElementName: Default Work Unit
       ObjectType: 12
-      guid: 718aae0ab3f8f147ba3061f3a7ef6c85
+      guid: fb5735710e255c4895060a0dd910a214
     ParentPath: Virtual Acoustics\Default Work Unit
-    guid: 718aae0ab3f8f147ba3061f3a7ef6c85
+    guid: fb5735710e255c4895060a0dd910a214
     GuidInternal: 
-    m_lastTime: -8584345925706369299
+    m_lastTime: -8584338992677920887
     List: []
   - PhysicalPath: Virtual Acoustics\Factory Acoustic Textures.wwu
     PathAndIcons:
@@ -37,7 +37,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Factory Acoustic Textures
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
     GuidInternal: 
-    m_lastTime: -8584411769754775808
+    m_lastTime: -8584338992678251079
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -299,11 +299,11 @@ MonoBehaviour:
       guid: 00000000000000000000000000000000
     - ElementName: Default Work Unit
       ObjectType: 12
-      guid: f2dd6e1678fe5e4da1237ab96092df6c
+      guid: e9de131c0a4f8041abaad6602d73a638
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
-    guid: f2dd6e1678fe5e4da1237ab96092df6c
+    guid: e9de131c0a4f8041abaad6602d73a638
     GuidInternal: 
-    m_lastTime: -8584345925708017060
+    m_lastTime: -8584338992681463402
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -314,11 +314,62 @@ MonoBehaviour:
         guid: 00000000000000000000000000000000
       - ElementName: Default Work Unit
         ObjectType: 12
-        guid: f2dd6e1678fe5e4da1237ab96092df6c
+        guid: e9de131c0a4f8041abaad6602d73a638
       - ElementName: Master Audio Bus
         ObjectType: 2
         guid: d8a41415a61d2a41a17e75ca0c2149f3
       Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus
+    - name: Slot1
+      guid: d607ab5af066934dae764a51d9ef9f8d
+      id: 3888770466
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: e9de131c0a4f8041abaad6602d73a638
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Slot1
+        ObjectType: 2
+        guid: d607ab5af066934dae764a51d9ef9f8d
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Slot1
+    - name: Slot2
+      guid: 7872cd35f386cd4e82893db0b4bdcd85
+      id: 3888770465
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: e9de131c0a4f8041abaad6602d73a638
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Slot2
+        ObjectType: 2
+        guid: 7872cd35f386cd4e82893db0b4bdcd85
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Slot2
+    - name: Slot3
+      guid: dc9ffc092725824f9298470600d566fb
+      id: 3888770464
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: e9de131c0a4f8041abaad6602d73a638
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Slot3
+        ObjectType: 2
+        guid: dc9ffc092725824f9298470600d566fb
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Slot3
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     PathAndIcons:
@@ -327,12 +378,26 @@ MonoBehaviour:
       guid: 00000000000000000000000000000000
     - ElementName: Default Work Unit
       ObjectType: 12
-      guid: 0579a2dc1dce4b4e97cad471dc9d8ca4
+      guid: b2887ed3ce76dd4a89c4ad185c32dc72
     ParentPath: SoundBanks\Default Work Unit
-    guid: 0579a2dc1dce4b4e97cad471dc9d8ca4
+    guid: b2887ed3ce76dd4a89c4ad185c32dc72
     GuidInternal: 
-    m_lastTime: -8584345925704077032
-    List: []
+    m_lastTime: -8584338992679921630
+    List:
+    - name: soundbankMWC
+      guid: 569dfb4b3f40b44e912fc5fba9e81779
+      id: 3963431987
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: b2887ed3ce76dd4a89c4ad185c32dc72
+      - ElementName: soundbankMWC
+        ObjectType: 7
+        guid: 569dfb4b3f40b44e912fc5fba9e81779
+      Path: SoundBanks\Default Work Unit\soundbankMWC
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -341,12 +406,63 @@ MonoBehaviour:
       guid: 00000000000000000000000000000000
     - ElementName: Default Work Unit
       ObjectType: 12
-      guid: 2fb9b6cb8dc6624697a96d4f3d60f33f
+      guid: 4170857d39210d48924b361cb0a0327e
     ParentPath: Events\Default Work Unit
-    guid: 2fb9b6cb8dc6624697a96d4f3d60f33f
+    guid: 4170857d39210d48924b361cb0a0327e
     GuidInternal: 
-    m_lastTime: -8584345925704849747
-    List: []
+    m_lastTime: -8584338992679476893
+    List:
+    - name: Debug
+      guid: 7ae97025a67d8848872216b8a788e3c2
+      id: 1031089514
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 4170857d39210d48924b361cb0a0327e
+      - ElementName: Debug
+        ObjectType: 3
+        guid: 7ae97025a67d8848872216b8a788e3c2
+      Path: Events\Default Work Unit\Debug
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: play2
+      guid: 7cf729df3769c14aa375881944172359
+      id: 500558111
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 4170857d39210d48924b361cb0a0327e
+      - ElementName: play2
+        ObjectType: 3
+        guid: 7cf729df3769c14aa375881944172359
+      Path: Events\Default Work Unit\play2
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Playall
+      guid: d19e9da7c1e0cd4fa8fc23e1ff3fe4a4
+      id: 1820532916
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 4170857d39210d48924b361cb0a0327e
+      - ElementName: Playall
+        ObjectType: 3
+        guid: d19e9da7c1e0cd4fa8fc23e1ff3fe4a4
+      Path: Events\Default Work Unit\Playall
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -355,12 +471,68 @@ MonoBehaviour:
       guid: 00000000000000000000000000000000
     - ElementName: Default Work Unit
       ObjectType: 12
-      guid: 9d9f38e4fa25dc4687de551f129afb59
+      guid: 4ea743dea268a64daafb933c3fb3954b
     ParentPath: Game Parameters\Default Work Unit
-    guid: 9d9f38e4fa25dc4687de551f129afb59
+    guid: 4ea743dea268a64daafb933c3fb3954b
     GuidInternal: 
-    m_lastTime: -8584345925704612316
-    List: []
+    m_lastTime: -8584338992680575289
+    List:
+    - name: intensity_Slot1
+      guid: 76f5551601d94e42a923dddb6f92da8d
+      id: 2328106540
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 4ea743dea268a64daafb933c3fb3954b
+      - ElementName: intensity_Slot1
+        ObjectType: 13
+        guid: 76f5551601d94e42a923dddb6f92da8d
+      Path: Game Parameters\Default Work Unit\intensity_Slot1
+    - name: intensity_Slot2
+      guid: 9e1ce68d1c30fc4eb884e337dc1d705c
+      id: 2328106543
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 4ea743dea268a64daafb933c3fb3954b
+      - ElementName: intensity_Slot2
+        ObjectType: 13
+        guid: 9e1ce68d1c30fc4eb884e337dc1d705c
+      Path: Game Parameters\Default Work Unit\intensity_Slot2
+    - name: intensity_Slot3
+      guid: b5d5f0b3a940e248a751934211e43506
+      id: 2328106542
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 4ea743dea268a64daafb933c3fb3954b
+      - ElementName: intensity_Slot3
+        ObjectType: 13
+        guid: b5d5f0b3a940e248a751934211e43506
+      Path: Game Parameters\Default Work Unit\intensity_Slot3
+    - name: Music_Intensity
+      guid: fde403ee3c55934197f39c2cf7a9ba4e
+      id: 872999148
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 4ea743dea268a64daafb933c3fb3954b
+      - ElementName: Music_Intensity
+        ObjectType: 13
+        guid: fde403ee3c55934197f39c2cf7a9ba4e
+      Path: Game Parameters\Default Work Unit\Music_Intensity
   - PhysicalPath: Game Parameters\Factory Soundseed Air Game Syncs.wwu
     PathAndIcons:
     - ElementName: Game Parameters
@@ -372,7 +544,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Factory Soundseed Air Game Syncs
     guid: 5577163b42fb8b4598bf96f557afb3b9
     GuidInternal: 
-    m_lastTime: -8584411769294775808
+    m_lastTime: -8584338992679582400
     List:
     - name: SS_Air_Fear
       guid: 59062ef746431c4ea1b1dab46a05101e
@@ -522,11 +694,11 @@ MonoBehaviour:
       guid: 00000000000000000000000000000000
     - ElementName: Default Work Unit
       ObjectType: 12
-      guid: 36ce7c96998aa8448bcf35813b45017e
+      guid: 9ac530129aa9c844a962904dd5e13636
     ParentPath: States\Default Work Unit
-    guid: 36ce7c96998aa8448bcf35813b45017e
+    guid: 9ac530129aa9c844a962904dd5e13636
     GuidInternal: 
-    m_lastTime: -8584345925705762251
+    m_lastTime: -8584338992680090187
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -536,12 +708,258 @@ MonoBehaviour:
       guid: 00000000000000000000000000000000
     - ElementName: Default Work Unit
       ObjectType: 12
-      guid: 0c0e435a4ea9974c832043dd91ff9c64
+      guid: a62d3208108b134e93596257994c400a
     ParentPath: Switches\Default Work Unit
-    guid: 0c0e435a4ea9974c832043dd91ff9c64
+    guid: a62d3208108b134e93596257994c400a
     GuidInternal: 
-    m_lastTime: -8584345925705941127
-    List: []
+    m_lastTime: -8584338992680519454
+    List:
+    - name: Slot1_Switch
+      guid: ed736574f3929f4f8a36d859b25f7156
+      id: 3202463081
+      PathAndIcons:
+      - ElementName: Switches
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a62d3208108b134e93596257994c400a
+      - ElementName: Slot1_Switch
+        ObjectType: 11
+        guid: ed736574f3929f4f8a36d859b25f7156
+      Path: Switches\Default Work Unit\Slot1_Switch
+      values:
+      - name: Anger
+        guid: a1b143354006294eb529d4689dc2ba9a
+        id: 954941502
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot1_Switch
+          ObjectType: 11
+          guid: ed736574f3929f4f8a36d859b25f7156
+        - ElementName: Anger
+          ObjectType: 10
+          guid: a1b143354006294eb529d4689dc2ba9a
+      - name: Fear
+        guid: 2033e010c3dcf64793832adebee64d23
+        id: 3133847859
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot1_Switch
+          ObjectType: 11
+          guid: ed736574f3929f4f8a36d859b25f7156
+        - ElementName: Fear
+          ObjectType: 10
+          guid: 2033e010c3dcf64793832adebee64d23
+      - name: Joy
+        guid: 56f0cbca8b4dc941b207082ca3374a9d
+        id: 545665465
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot1_Switch
+          ObjectType: 11
+          guid: ed736574f3929f4f8a36d859b25f7156
+        - ElementName: Joy
+          ObjectType: 10
+          guid: 56f0cbca8b4dc941b207082ca3374a9d
+      - name: Sadness
+        guid: 4adddf4586e17242a47330f97e3d3418
+        id: 478431442
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot1_Switch
+          ObjectType: 11
+          guid: ed736574f3929f4f8a36d859b25f7156
+        - ElementName: Sadness
+          ObjectType: 10
+          guid: 4adddf4586e17242a47330f97e3d3418
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
+    - name: Slot2_Switch
+      guid: 0b4f1f59bc1a684fadf2412bbed9095b
+      id: 922091568
+      PathAndIcons:
+      - ElementName: Switches
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a62d3208108b134e93596257994c400a
+      - ElementName: Slot2_Switch
+        ObjectType: 11
+        guid: 0b4f1f59bc1a684fadf2412bbed9095b
+      Path: Switches\Default Work Unit\Slot2_Switch
+      values:
+      - name: Anger
+        guid: 768db2d9dcc504468f9c48add8eba2a2
+        id: 954941502
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot2_Switch
+          ObjectType: 11
+          guid: 0b4f1f59bc1a684fadf2412bbed9095b
+        - ElementName: Anger
+          ObjectType: 10
+          guid: 768db2d9dcc504468f9c48add8eba2a2
+      - name: Fear
+        guid: 95c547db0b803c418058922230794021
+        id: 3133847859
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot2_Switch
+          ObjectType: 11
+          guid: 0b4f1f59bc1a684fadf2412bbed9095b
+        - ElementName: Fear
+          ObjectType: 10
+          guid: 95c547db0b803c418058922230794021
+      - name: Joy
+        guid: ca391e1b901242438c59bc68f1a55047
+        id: 545665465
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot2_Switch
+          ObjectType: 11
+          guid: 0b4f1f59bc1a684fadf2412bbed9095b
+        - ElementName: Joy
+          ObjectType: 10
+          guid: ca391e1b901242438c59bc68f1a55047
+      - name: Sadness
+        guid: a151f7a7c6143f42a1775e5e8bae6b6a
+        id: 478431442
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot2_Switch
+          ObjectType: 11
+          guid: 0b4f1f59bc1a684fadf2412bbed9095b
+        - ElementName: Sadness
+          ObjectType: 10
+          guid: a151f7a7c6143f42a1775e5e8bae6b6a
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
+    - name: Slot3_Switch
+      guid: 2baf7de5cfe2b446898fb458ef13e2ab
+      id: 261582435
+      PathAndIcons:
+      - ElementName: Switches
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a62d3208108b134e93596257994c400a
+      - ElementName: Slot3_Switch
+        ObjectType: 11
+        guid: 2baf7de5cfe2b446898fb458ef13e2ab
+      Path: Switches\Default Work Unit\Slot3_Switch
+      values:
+      - name: Anger
+        guid: 101dc24e2cae5e45a84f8b02441b7abe
+        id: 954941502
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot3_Switch
+          ObjectType: 11
+          guid: 2baf7de5cfe2b446898fb458ef13e2ab
+        - ElementName: Anger
+          ObjectType: 10
+          guid: 101dc24e2cae5e45a84f8b02441b7abe
+      - name: Fear
+        guid: 9f1bee829e9516468bbe9183c5068c71
+        id: 3133847859
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot3_Switch
+          ObjectType: 11
+          guid: 2baf7de5cfe2b446898fb458ef13e2ab
+        - ElementName: Fear
+          ObjectType: 10
+          guid: 9f1bee829e9516468bbe9183c5068c71
+      - name: Joy
+        guid: b96c596f68db9a4885131cba112005c9
+        id: 545665465
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot3_Switch
+          ObjectType: 11
+          guid: 2baf7de5cfe2b446898fb458ef13e2ab
+        - ElementName: Joy
+          ObjectType: 10
+          guid: b96c596f68db9a4885131cba112005c9
+      - name: Sadness
+        guid: 97b50f3ee3abb846830e3e883e2ae1e8
+        id: 478431442
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: a62d3208108b134e93596257994c400a
+        - ElementName: Slot3_Switch
+          ObjectType: 11
+          guid: 2baf7de5cfe2b446898fb458ef13e2ab
+        - ElementName: Sadness
+          ObjectType: 10
+          guid: 97b50f3ee3abb846830e3e883e2ae1e8
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
     PathAndIcons:
@@ -550,15 +968,15 @@ MonoBehaviour:
       guid: 00000000000000000000000000000000
     - ElementName: Default Work Unit
       ObjectType: 12
-      guid: 0feabdd342918844a522d74e856e258c
+      guid: 185b67c51ebb2844ad514d8ae5ae7e25
     ParentPath: Triggers\Default Work Unit
-    guid: 0feabdd342918844a522d74e856e258c
+    guid: 185b67c51ebb2844ad514d8ae5ae7e25
     GuidInternal: 
-    m_lastTime: -8584345925706742515
+    m_lastTime: -8584338992678150766
     List: []
-  ExpandedFileSystemItemIds: 080000000b0000000c0000000d000000
-  ExpandedWaapiItemIds: 080000000b0000000c0000000d000000
+  ExpandedFileSystemItemIds: 
+  ExpandedWaapiItemIds: 0c0000000d0000000e0000001a0000001b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
-  currentDataSource: 0
+  currentDataSource: 1
   CurrentPluginConfig: 

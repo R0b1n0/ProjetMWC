@@ -15,3 +15,4 @@ MonoBehaviour:
   objectName: soundbankMWC
   id: 3963431987
   guid: 4BFB9D56-403F-4EB4-912F-C5FBA9E81779
+  bank: {fileID: 11400000, guid: 4d9e10c20d847ee4498cbec9cd9bc272, type: 2}

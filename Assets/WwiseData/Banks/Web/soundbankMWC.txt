@@ -1,0 +1,57 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1031089514	Debug			\Default Work Unit\Debug	
+	1820532916	Playall			\Default Work Unit\Playall	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	261582435	Slot3_Switch			\Default Work Unit\Slot3_Switch	
+	922091568	Slot2_Switch			\Default Work Unit\Slot2_Switch	
+	3202463081	Slot1_Switch			\Default Work Unit\Slot1_Switch	
+
+Switch	ID	Name	Switch Group			Notes
+	478431442	Sadness	Slot3_Switch			
+	545665465	Joy	Slot3_Switch			
+	954941502	Anger	Slot3_Switch			
+	3133847859	Fear	Slot3_Switch			
+	478431442	Sadness	Slot2_Switch			
+	545665465	Joy	Slot2_Switch			
+	954941502	Anger	Slot2_Switch			
+	3133847859	Fear	Slot2_Switch			
+	478431442	Sadness	Slot1_Switch			
+	545665465	Joy	Slot1_Switch			
+	954941502	Anger	Slot1_Switch			
+	3133847859	Fear	Slot1_Switch			
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	2328106540	intensity_Slot1			\Default Work Unit\intensity_Slot1	
+	2328106542	intensity_Slot3			\Default Work Unit\intensity_Slot3	
+	2328106543	intensity_Slot2			\Default Work Unit\intensity_Slot2	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	4554825	RED_M_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\5B\{5B875DCF-257F-FB62-C1EA-1AFC9D90B756}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Anger\Anger\RED_M_I1_4M		1843300
+	54600267	RED_R_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\D1\{D1C00BF9-DA26-9A75-DC81-A1D9C856F74A}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Anger\Anger\RED_R_I3_4M		1843296
+	129675802	YELLOW_H_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\C5\{C5F65EC3-E548-9966-FC4F-3405468667B8}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Joy\Joy\YELLOW_H_I3_4M		2304100
+	144900858	BLUE_R_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\72\{728515E8-E3E2-AD79-F621-2CC84E34CD2C}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Sadness\Sadness\BLUE_R_I2_4M		1843300
+	149622091	BLUE_H_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\5B\{5B39DACE-8101-869C-72AB-340B1F38FE11}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Sadness\Sadness\BLUE_H_I2_4M		1843300
+	151605430	YELLOW_R_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\2D\{2D3B8771-E8B7-FAE8-7C3B-766BBAAB6D9E}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Joy\Joy\YELLOW_R_I2_4M		2304100
+	205749861	YELLOW_M_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\DE\{DEF915E4-9835-0D18-1E4A-6501DEAA06BC}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Joy\Joy\YELLOW_M_I1_4M		2304100
+	207043860	RED_M_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\FB\{FBC4B312-4AFB-795B-A796-B4B88738FE78}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Anger\Anger\RED_M_I3_4M		1843300
+	260419903	BLUE_H_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\86\{86722311-58FA-0666-64B4-797EB91C07E3}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Sadness\Sadness\BLUE_H_I3_4M		1843300
+	273629719	RED_R_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\5B\{5B317DDD-528A-90C6-EBAF-E99C13A8D121}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Anger\Anger\RED_R_I1_4M		1843300
+	275252652	BLUE_R_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\18\{1817AE5A-A7DB-356E-0A64-23F92E61C1A8}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Sadness\Sadness\BLUE_R_I3_4M		1843300
+	307034877	YELLOW_H_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\F9\{F90CBB45-ABDD-DCB4-C91C-2C997CEDDFE9}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Joy\Joy\YELLOW_H_I1_4M		2304100
+	396516285	BLUE_M_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\0D\{0D8EA171-927B-3CC8-55E5-E2BC91837BFF}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Sadness\Sadness\BLUE_M_I3_4M		1843300
+	448282858	YELLOW_R_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\3B\{3B5CB41D-26CD-1682-09BD-D4E3F48FE884}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Joy\Joy\YELLOW_R_I3_4M		2304100
+	449462969	RED_H_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\92\{92ED352A-180E-F82B-1D9B-06AB4194D17F}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Anger\Anger\RED_H_I2_4M		1843296
+	547657971	RED_M_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\AF\{AF02150F-E728-C43C-9777-CA215C1ADCFD}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Anger\Anger\RED_M_I2_4M		1843304
+	563033826	RED_R_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\DD\{DD05E2DD-53DE-78E7-9F34-E674EA860F4A}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Anger\Anger\RED_R_I2_4M		1843296
+	608118726	RED_H_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\97\{9733687D-76F1-EEFD-BEE9-0698736634D7}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Anger\Anger\RED_H_I1_4M		1843300
+	613531302	YELLOW_R_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\F9\{F9A36159-8EB7-CEBE-FCF6-31A0FB9FAA5A}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Joy\Joy\YELLOW_R_I1_4M		2304100
+	647193860	RED_H_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\F0\{F086EAA8-6B53-8381-F3C6-573A1B0229DE}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Anger\Anger\RED_H_I3_4M		1843296
+	705524785	YELLOW_M_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\60\{603F49C4-A232-E6E2-F183-CF374A7C3C5D}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Joy\Joy\YELLOW_M_I2_4M		2304100
+	721033910	BLUE_M_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\41\{4145E983-580F-D4C7-8AC5-1C6CD260A8E6}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Sadness\Sadness\BLUE_M_I2_4M		1843300
+	839462481	YELLOW_M_I3_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\A5\{A5CB2282-70DD-D721-6729-4EF9FC6D312F}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Joy\Joy\YELLOW_M_I3_4M		2304100
+	919539466	YELLOW_H_I2_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\51\{51AC42F0-4300-0B4D-B929-FE3DF770F375}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Joy\Joy\YELLOW_H_I2_4M		2304100
+	958871974	BLUE_M_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\C9\{C9BDE50C-F2EE-2417-4A02-5EEE6E168219}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot3_Melody\Sadness\Sadness\BLUE_M_I1_4M		1843300
+	965405984	BLUE_R_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\CC\{CC7F2B70-9147-DAAA-4275-6DB36E580458}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot1_Rhythm\Sadness\Sadness\BLUE_R_I1_4M		1843300
+	988604518	BLUE_H_I1_4M	C:\Users\robin\Desktop\Perso\Travail\Horde2025_26\Projet\Prod\ProjetMwc\MWC Wwise Project - Copie\.cache\9C\{9C73FFAD-BA10-56EC-D4FB-79BA7073ED31}.wem		\Interactive Music Hierarchy\Default Work Unit\Slot2_Harmony\Sadness\Sadness\BLUE_H_I1_4M		1843300
+

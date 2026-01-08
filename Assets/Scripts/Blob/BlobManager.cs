@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class BlobManager : MonoBehaviour
@@ -14,14 +15,7 @@ public class BlobManager : MonoBehaviour
     MoodInput third;
 
     [Header("Emotions parameters ")]
-    [SerializeField]
-    MoodProperties angerProp;
-    [SerializeField]
-    MoodProperties joiceProp;
-    [SerializeField]
-    MoodProperties sadnessProp;
-    [SerializeField]
-    MoodProperties fearProp;
+    [SerializeField] EmotionParameters moodBook;
 
     [Header("Movements")]
     [SerializeField] List<Part> partsData = new List<Part>();
@@ -31,10 +25,15 @@ public class BlobManager : MonoBehaviour
     [SerializeField][Range(0f, 1f)] float movementType;
 
     [Header("Render")]
-    [SerializeField][Range(0f,10)] float auraFrequency;
+    [SerializeField][Range(0f, 10)] float auraFrequency;
+    [SerializeField][Range(-100f, 100f)] float auraSpeed;
     [SerializeField][Range(0f, 100f)] float auraRange;
     [SerializeField][Range(-1f, 5f)] float auraWidth;
     [SerializeField][Range(0f, 10f)] float uvLengthFactor;
+    [SerializeField][Range(0f, 100f)] float lightSdScale;
+    [SerializeField][Range(-10f, 10f)] float xOffset;
+    [SerializeField][Range(-10f, 10f)] float yOffset;
+    float auraOffset;
 
     [Header("Beat Parameters ")]
     [SerializeField]
@@ -44,7 +43,7 @@ public class BlobManager : MonoBehaviour
     AnimationCurve beatCurve;
     float beatFactor;
     [SerializeField] float scaleFactorOnBeat;
-    
+
 
     [Header("Debug")]
     [SerializeField] Color blobEdgeColor;
@@ -55,9 +54,18 @@ public class BlobManager : MonoBehaviour
     [SerializeField]
     [Range(0, 9)]
     int outerRenderMethod;
+    [SerializeField][Range(0, 100)] int rtpcValue;
+    [SerializeField] AK.Wwise.RTPC rTPC;
+    [SerializeField] AnimationCurve waveFormCurve;
+    [SerializeField] AK.Wwise.RTPC beat;
 
     Vector4[] toShader;
     int circleCount;
+
+    State previousState = new();
+    State computedState = new();
+    float stateLerp;
+    bool stateLerping = false;
 
     private void Awake()
     {
@@ -67,45 +75,69 @@ public class BlobManager : MonoBehaviour
 
         for (int i = 0; i < circleCount; i++)
         {
-            partsData[i].destination = partsData[i].origin = Vector2.zero;
+            partsData[i].origin = Vector2.zero;
+            partsData[i].destination = new Vector2(
+                UnityEngine.Random.Range(-movementAreaRadius, movementAreaRadius),
+                UnityEngine.Random.Range(-movementAreaRadius, movementAreaRadius));
+            partsData[i].lerpPhase = 0;
         }
-    }
 
+        //speedFactor = computedState.speed;
+        LerpToComputedState(1);
+    }
     private void Update()
     {
+        //Set pos
+        UpdatePartsPos();
+
         blobMaterial.SetFloat("_UnityTime", Time.time);
 
-        blobInnerColor = GetBlendColor();
-        blobEdgeColor = blobInnerColor;
-        Color.RGBToHSV(blobInnerColor, out float h, out float s, out float v);
-        blobEdgeColor = Color.HSVToRGB(h, 1, v);
+        auraOffset += Time.deltaTime * auraSpeed;
+
         blobMaterial.SetColor("_InnerColor", blobInnerColor);
         blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
         blobMaterial.SetFloat("_auraF", auraFrequency);
         blobMaterial.SetFloat("_auraRange", auraRange);
+        blobMaterial.SetFloat("_auraOffset", auraOffset);
         blobMaterial.SetFloat("_auraWidth", auraWidth);
         blobMaterial.SetFloat("_uvLengthFactor", uvLengthFactor);
+        blobMaterial.SetFloat("_xOffset", xOffset);
+        blobMaterial.SetFloat("_yOffset", yOffset);
+        blobMaterial.SetFloat("_lightSdScale", lightSdScale);
+
+        blobMaterial.SetInt("_CircleCount", circleCount);
 
         beatSpeed = BPM / 60;
         beatFactor = beatCurve.Evaluate((Time.time * beatSpeed) % 1);
+        beatFactor = waveFormCurve.Evaluate(1 - ((-beat.GetGlobalValue()) / 48));
         blobMaterial.SetFloat("_LightFactor", beatFactor);
 
-        
-        
         blobMaterial.SetInt("_innerRenderMethod", innerRenderMethod);
         blobMaterial.SetInt("_outerRenderMethod", outerRenderMethod);
 
-        //Set pos
-        UpdatePartsPos();
-    }
+        if (stateLerping)
+        {
+            if (stateLerp >= 1)
+            {
+                stateLerping = false;
+                LerpToComputedState(1);
+            }
+            else
+            {
+                LerpToComputedState(stateLerp);
+                stateLerp += Time.deltaTime;
+            }
+        }
 
+        rTPC.SetGlobalValue(rtpcValue);
+    }
     private void UpdatePartsPos()
     {
         Vector2 computePos;
         for (int i = 0; i < circleCount; i++)
         {
             //Linear lerp constant speed
-            partsData[i].lerpPhase += Time.deltaTime * (partsData[i].lerpSpeed / (Vector2.Distance(partsData[i].origin, partsData[i].destination) *2) )  * speedFactor;
+            partsData[i].lerpPhase += Time.deltaTime * (partsData[i].lerpSpeed / (Vector2.Distance(partsData[i].origin, partsData[i].destination) * 2)) * speedFactor;
 
 
             float lerpValue = speedCurve.Evaluate(partsData[i].lerpPhase);
@@ -132,74 +164,124 @@ public class BlobManager : MonoBehaviour
                 partsData[i].radius + scaleFactorOnBeat * (beatFactor * partsData[i].radius),
                 0);
         }
+
         blobMaterial.SetVectorArray("_Circles", toShader);
     }
+    //---------------------------------------------State 
+    private float ComputeSpeed()
+    {
+        MoodProperties firstData = GetMoodData(first.mood);
+        MoodProperties secondData = GetMoodData(second.mood);
+        MoodProperties thirdData = GetMoodData(third.mood);
+        float divisionValue = (first.intensity + second.intensity + third.intensity);
 
+        return divisionValue != 0 ?
+            (firstData.speedFactor * Mathf.Pow(first.intensity, 2) +
+            secondData.speedFactor * Mathf.Pow(second.intensity, 2) +
+            thirdData.speedFactor * Mathf.Pow(third.intensity, 2)) / 100 / divisionValue
+            : 0.05f;
+    }
+    private State MakeSnapShot()
+    {
+        return new State { color = blobInnerColor, speed = speedFactor };
+    }
+    private void LerpToComputedState(float t)
+    {
+        //Colors
+        blobInnerColor = Color.Lerp(previousState.color, computedState.color, t);
+        Color.RGBToHSV(blobInnerColor, out float h, out float s, out float v);
+        blobEdgeColor = Color.HSVToRGB(h, s,1);
+
+        speedFactor = Mathf.Lerp(previousState.speed, computedState.speed, t);
+    }
+    public void StartLerping()
+    {
+        stateLerp = 0;
+        stateLerping = true;
+        previousState = MakeSnapShot();
+        computedState = new State { color = GetBlendColor(), speed = ComputeSpeed() };
+    }
+
+    //---------------------------------------------Color 
     private Color GetBlendColor()
     {
+        float divisionValue = (first.intensity + second.intensity + third.intensity);
+
+        //This mean absolutly no input 
+        if (divisionValue == 0)
+        {
+            return Color.gray;
+        }
+
         Color color1 = GetMoodColor(first.mood, first.intensity);
         Color color2 = GetMoodColor(second.mood, second.intensity);
         Color color3 = GetMoodColor(third.mood, third.intensity);
 
-        float divisionValue = (first.intensity + second.intensity + third.intensity);
 
         float r = (color1.r * first.intensity + color2.r * second.intensity + color3.r * third.intensity) / divisionValue;
         float g = (color1.g * first.intensity + color2.g * second.intensity + color3.g * third.intensity) / divisionValue;
         float b = (color1.b * first.intensity + color2.b * second.intensity + color3.b * third.intensity) / divisionValue;
 
-        return new Color(r, g, b );
-
+        return new Color(r, g, b);
     }
-
     private Color GetMoodColor(Mood mood, float intensity)
     {
         switch (mood)
         {
             case Mood.Anger:
-                return Color.Lerp(angerProp.minColor,angerProp.maxColor, intensity / 100f );
+                return Color.Lerp(moodBook.Anger.minColor, moodBook.Anger.maxColor, intensity / 100f);
             case Mood.Joice:
-                return Color.Lerp(joiceProp.minColor, joiceProp.maxColor, intensity / 100f);
+                return Color.Lerp(moodBook.Joice.minColor, moodBook.Joice.maxColor, intensity / 100f);
             case Mood.Fear:
-                return Color.Lerp(fearProp.minColor, fearProp.maxColor, intensity / 100f);
+                return Color.Lerp(moodBook.Fear.minColor, moodBook.Fear.maxColor, intensity / 100f);
             case Mood.Sadness:
-                return Color.Lerp(sadnessProp.minColor, sadnessProp.maxColor, intensity / 100f);
+                return Color.Lerp(moodBook.Sadness.minColor, moodBook.Sadness.maxColor, intensity / 100f);
         }
         return Color.white;
     }
-
+    private MoodProperties GetMoodData(Mood mood)
+    {
+        switch (mood)
+        {
+            case Mood.Anger:
+                return moodBook.Anger;
+            case Mood.Joice:
+                return moodBook.Joice;
+            case Mood.Fear:
+                return moodBook.Fear;
+            case Mood.Sadness:
+                return moodBook.Sadness;
+        }
+        return moodBook.Anger;
+    }
 }
 
 
 [Serializable]
 public struct MoodInput
 {
-    [Range(1f, 100f)] 
+    [Range(0f, 100f)]
     public float intensity;
     public Mood mood;
 }
 
-[Serializable]
-public struct MoodProperties
+public class State
 {
-    public Color minColor;
-    public Color maxColor;
+    public Color color;
+    public float speed;
+    public State()
+    {
+        color = Color.gray;
+        speed = 0.05f;
+    }
 }
-
-public enum Mood
-{
-    Anger, 
-    Joice,
-    Fear,
-    Sadness
-}
-
 
 [Serializable]
 public class Part
 {
     public float radius;
     public float lerpSpeed;
-    [HideInInspector]public Vector2 destination;
-    [HideInInspector]public Vector2 origin;
-    [HideInInspector]public float lerpPhase;
+    [HideInInspector] public Vector2 destination;
+    [HideInInspector] public Vector2 origin;
+    [HideInInspector] public float lerpPhase;
 }
