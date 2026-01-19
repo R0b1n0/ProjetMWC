@@ -19,6 +19,8 @@ Shader "Custom/Blob"
             #pragma vertex vert
             #pragma fragment frag
 
+            #pragma shader_feature _ENABLE_DEBUGVIEW
+
             //Usefull stuff
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             //--------------------------------------Render Variables--------------------------------------------------
@@ -137,6 +139,10 @@ Shader "Custom/Blob"
             //-------------------------Rendeeeeer--------------------------------
             half4 frag(v2f IN) : SV_Target
             { 
+                #if _ENABLE_DEBUGVIEW
+                    return float4(1, 0, 0, 1);
+                #endif
+
                 //Center the coordinates
                 half2 uv = (IN.positionHCS * 2 - _ScreenParams.xy)/_ScreenParams.x;
 

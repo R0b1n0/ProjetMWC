@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 46970488}
   - component: {fileID: 46970492}
   - component: {fileID: 46970491}
-  - component: {fileID: 46970494}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -258,19 +257,6 @@ MonoBehaviour:
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!114 &46970494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 46970487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.Addressables::AK.Wwise.Unity.WwiseAddressables.InitBankHolder
-  InitBank: {fileID: 11400000, guid: 623952c9dfcaeb34dbb1516a39a59df9, type: 2}
 --- !u!1 &420868073
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +435,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 96
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -555,7 +541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 800, y: 300}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &874297769
@@ -1040,6 +1026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1493176111}
   - component: {fileID: 1493176110}
+  - component: {fileID: 1493176112}
   m_Layer: 0
   m_Name: MarbleManager
   m_TagString: Untagged
@@ -1111,6 +1098,30 @@ MonoBehaviour:
   lerpInSpeed: 1
   idleSpeed: 2
   idleRange: 0.05
+  recoverCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   moodDic: {fileID: 11400000, guid: ec33d84d867bed64ea95e44c981a7a2b, type: 2}
   moodOrder: 00000000030000000100000002000000
 --- !u!4 &1493176111
@@ -1122,12 +1133,27 @@ Transform:
   m_GameObject: {fileID: 1493176109}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.64674, y: 0.17624, z: -5.95058}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1493176112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493176109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46a12bbe611fa4a8ac8c4b2252dc53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarbleInputs
+  marbleMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1616479310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,6 +1435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ad05f53eea3b14687683958bccd182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  cam: {fileID: 519420031}
 --- !u!1 &1867051469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1510,40 +1537,6 @@ MonoBehaviour:
   lightSdScale: 16.7
   xOffset: 1.1
   yOffset: 0.25
-  BPM: 0
-  beatCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 11.105704
-      outSlope: 11.105704
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.089999996
-      value: 0.9995133
-      inSlope: -1.0943856
-      outSlope: -1.0943856
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.9994473
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1.1032567
-      outSlope: -1.1032567
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.9997237
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   scaleFactorOnBeat: 0.2
   blobEdgeColor: {r: 0, g: 0.57640755, b: 0.94270587, a: 1}
   blobInnerColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}

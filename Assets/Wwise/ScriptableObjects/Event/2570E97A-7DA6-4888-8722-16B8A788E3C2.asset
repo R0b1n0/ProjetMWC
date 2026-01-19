@@ -15,5 +15,4 @@ MonoBehaviour:
   objectName: Debug
   id: 1031089514
   guid: 2570E97A-7DA6-4888-8722-16B8A788E3C2
-  AutoBank: {fileID: 0}
   IsInUserDefinedSoundBank: 1

@@ -36,11 +36,6 @@ public class BlobManager : MonoBehaviour
     float auraOffset;
 
     [Header("Beat Parameters ")]
-    [SerializeField]
-    float BPM;
-    float beatSpeed;
-    [SerializeField]
-    AnimationCurve beatCurve;
     float beatFactor;
     [SerializeField] float scaleFactorOnBeat;
 
@@ -107,8 +102,6 @@ public class BlobManager : MonoBehaviour
 
         blobMaterial.SetInt("_CircleCount", circleCount);
 
-        beatSpeed = BPM / 60;
-        beatFactor = beatCurve.Evaluate((Time.time * beatSpeed) % 1);
         beatFactor = waveFormCurve.Evaluate(1 - ((-beat.GetGlobalValue()) / 48));
         blobMaterial.SetFloat("_LightFactor", beatFactor);
 
