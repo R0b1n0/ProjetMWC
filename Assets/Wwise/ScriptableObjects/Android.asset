@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba59a005bc14bec40a5b5f0bc010d433, type: 3}
+  m_Script: {fileID: 11500000, guid: fadd372a56a66e545802b412bbd3220d, type: 3}
   m_Name: Android
   m_EditorClassIdentifier: AK.Wwise.Unity.API::AkAndroidSettings
   IgnorePropertyNameList: []
@@ -71,7 +71,6 @@ MonoBehaviour:
   - AdvancedSettings.m_MemoryMediaReservedLimit
   - AdvancedSettings.m_MemoryMediaAllocSizeHuge
   - AdvancedSettings.m_MemoryDebugLevel
-  - AdvancedSettings.m_LoadBankAsynchronously
   UserSettings:
     m_BasePath: Audio\GeneratedSoundBanks
     m_StartupLanguage: English(US)
@@ -115,7 +114,7 @@ MonoBehaviour:
     m_IOMemorySize: 2097152
     m_TargetAutoStreamBufferLengthMs: 380
     m_UseStreamCache: 0
-    m_LoadBankAsynchronously: 1
+    m_LoadBankAsynchronously: 0
     m_MaximumPinnedBytesInCache: 4294967295
     m_EnableGameSyncPreparation: 0
     m_ContinuousPlaybackLookAhead: 1

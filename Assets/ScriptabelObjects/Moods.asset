@@ -9,26 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45888f62f54c24e46bbe20fbdc02400c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7934cb845246e3946a1463f52e881c07, type: 3}
   m_Name: Moods
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   Anger:
-    minColor: {r: 1, g: 0.6784314, b: 0.6392157, a: 0}
-    maxColor: {r: 0.8117647, g: 0.27058825, b: 0.19607843, a: 0}
-    marbleColor: {r: 0.63529414, g: 0.3254902, b: 0.3254902, a: 0}
-    speedFactor: 0.2
+    minColor: {r: 0.9764706, g: 0.8392157, b: 0.8392157, a: 1}
+    maxColor: {r: 0.9254902, g: 0.53333336, b: 0.53333336, a: 1}
+    marbleColor: {r: 0.8490566, g: 0.40450338, b: 0.40450338, a: 1}
+    speedFactor: 0.5
   Joice:
-    minColor: {r: 0.9647059, g: 0.972549, b: 0.52156866, a: 0}
-    maxColor: {r: 1, g: 0.7882353, b: 0.20392157, a: 0}
-    marbleColor: {r: 0.7019608, g: 0.654902, b: 0.36078432, a: 0}
-    speedFactor: 0.4
+    minColor: {r: 1, g: 0.96862745, b: 0.8, a: 1}
+    maxColor: {r: 1, g: 0.8980392, b: 0.47843137, a: 1}
+    marbleColor: {r: 0.7075472, g: 0.6142481, b: 0.23028658, a: 1}
+    speedFactor: 1
   Sadness:
-    minColor: {r: 0.68235296, g: 0.84313726, b: 0.94509804, a: 0}
-    maxColor: {r: 0.18431373, g: 0.49019608, b: 0.7058824, a: 0}
-    marbleColor: {r: 0.3137255, g: 0.53333336, b: 0.59607846, a: 0}
-    speedFactor: 0.1
+    minColor: {r: 0.8509804, g: 0.91764706, b: 0.99607843, a: 1}
+    maxColor: {r: 0.52156866, g: 0.70980394, b: 0.9137255, a: 1}
+    marbleColor: {r: 0, g: 0.4587039, b: 0.6226415, a: 1}
+    speedFactor: 0.2
   Fear:
-    minColor: {r: 0.7529412, g: 0.94509804, b: 0.6901961, a: 0}
-    maxColor: {r: 0.3019608, g: 0.7294118, b: 0.3764706, a: 0}
-    marbleColor: {r: 0.57254905, g: 0.7490196, b: 0.44705883, a: 0}
-    speedFactor: 0.6
+    minColor: {r: 0.8745098, g: 0.9647059, b: 0.8901961, a: 0}
+    maxColor: {r: 0.5803922, g: 0.8666667, b: 0.65882355, a: 1}
+    marbleColor: {r: 0.23300104, g: 0.6415094, b: 0.3449211, a: 1}
+    speedFactor: 0.3

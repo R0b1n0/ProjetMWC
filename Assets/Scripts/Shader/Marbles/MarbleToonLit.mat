@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MarbleToonLit
-  m_Shader: {fileID: -6465566751694194690, guid: c722b5be9e5e66845a581cb28394afd7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 58cd3177eac749a469ac91b54fc6ccc4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

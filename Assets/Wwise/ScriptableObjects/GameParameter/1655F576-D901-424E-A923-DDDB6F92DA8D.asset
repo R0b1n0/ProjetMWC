@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc9e0c449f5a56b4bbe2cec74d7f3a3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bede275d224b9846897b982b3bdd565, type: 3}
   m_Name: 1655F576-D901-424E-A923-DDDB6F92DA8D
   m_EditorClassIdentifier: AK.Wwise.Unity.API.WwiseTypes::WwiseRtpcReference
   objectName: intensity_Slot1
