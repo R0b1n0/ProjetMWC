@@ -1,0 +1,43 @@
+{
+ "ProjectInfo": {
+  "Project": {
+   "Name": "MWC TEst",
+   "GUID": "{65D15D54-8D1E-4203-B4C6-4D6A20C760D9}",
+   "Generator": "2024.1.8.8898"
+  },
+  "CacheRoot": "../../../../../MWC Wwise Project - Copie/.cache",
+  "Platforms": [
+   {
+    "Name": "Android",
+    "GUID": "{BC6A7DA3-6EFC-47EC-9E94-A50D03B182FC}",
+    "BasePlatform": "Android",
+    "BasePlatformGUID": "{A2D401DE-B8B6-4FEB-8142-137C34D507CA}",
+    "Path": "../../../../../MWC Wwise Project - Copie/GeneratedSoundBanks/Android"
+   },
+   {
+    "Name": "Web",
+    "GUID": "{C762A81B-527A-47DA-B2A2-AD4893722BFA}",
+    "BasePlatform": "Web",
+    "BasePlatformGUID": "{639AD233-23F2-4C0F-9127-79F44C15E1DA}",
+    "Path": "../../../../../MWC Wwise Project - Copie/GeneratedSoundBanks/Web"
+   },
+   {
+    "Name": "Windows",
+    "GUID": "{82FF0F93-ADDB-4DC1-8DE3-5FA1A7BA6EBE}",
+    "BasePlatform": "Windows",
+    "BasePlatformGUID": "{6E0CB257-C6C8-4C5C-8366-2740DFC441EB}",
+    "Path": "../../../../../MWC Wwise Project - Copie/GeneratedSoundBanks/Windows"
+   }
+  ],
+  "Languages": [
+   {
+    "Name": "English(US)",
+    "Id": "684519430",
+    "GUID": "{2213EACF-CFCE-4F70-8888-B0128A743533}",
+    "Default": "true",
+    "UseAsStandIn": "true"
+   }
+  ],
+  "FileHash": "{0688D1A9-8779-CE19-8169-5AE7A90F5941}"
+ }
+}
