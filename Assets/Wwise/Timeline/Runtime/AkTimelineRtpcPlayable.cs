@@ -1,4 +1,4 @@
-#if !(UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#if !(UNITY_QNX) // Disable under unsupported platforms.
 #if !UNITY_2019_1_OR_NEWER
 #define AK_ENABLE_TIMELINE
 #endif
@@ -124,4 +124,4 @@ public class AkTimelineRtpcPlayable : UnityEngine.Playables.PlayableAsset, Unity
 #endif //#if UNITY_EDITOR
 }
 #endif // AK_ENABLE_TIMELINE
-#endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#endif // #if !(UNITY_QNX) // Disable under unsupported platforms.

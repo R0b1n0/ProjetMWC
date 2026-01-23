@@ -1,3 +1,5 @@
+using AK.Wwise.Unity.Logging;
+
 #if UNITY_EDITOR
 /*******************************************************************************
 The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
@@ -277,12 +279,12 @@ public class AkEventInspector : AkBaseInspector
 		{
 			if (!AkUnitySoundEngine.IsInitialized())
 			{
-				UnityEngine.Debug.LogWarning("Sound Engine is not initialized. No sound will be heard.");
+				WwiseLogger.Warning("Sound Engine is not initialized. No sound will be heard.");
 				return;
 			}
 			if (!AkSoundEngineController.Instance.EditorListenerIsInitialized() && !UnityEditor.EditorApplication.isPlaying)
 			{
-				UnityEngine.Debug.LogWarning("Editor Listener isn't initialized. No sound will be heard.");
+				WwiseLogger.Warning("Editor Listener isn't initialized. No sound will be heard.");
 				return;
 			}
 			if (akEvents.Contains(akEvent))

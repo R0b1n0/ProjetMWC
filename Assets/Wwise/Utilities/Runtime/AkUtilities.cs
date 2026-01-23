@@ -15,9 +15,10 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-#if !(UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#if !(UNITY_QNX) // Disable under unsupported platforms.
 using System;
 using System.Linq;
+using AK.Wwise.Unity.Logging;
 #if UNITY_EDITOR
 using System.IO;
 using UnityEditor;
@@ -57,6 +58,8 @@ public partial class AkUtilities
 		AkAmbient_v2019_1_0 = 17,
 		NewScriptableObjectFolder_v2019_2_0 = 18,
 		AutoDefinedSoundBanks_v2023_1_0 = 19,
+		RootOutputPath_v2025_1_0 = 20,
+		
 		/// <summary>
 		/// The value that is currently in the Version.txt file.
 		/// </summary>
@@ -93,6 +96,8 @@ public partial class AkUtilities
 	}
 
 	private static int migrationStartIndex = MigrationStopIndex;
+	
+	
 	#endregion
 
 	private static readonly System.Collections.Generic.Dictionary<string, string> s_ProjectBankPaths =
@@ -177,14 +182,14 @@ public partial class AkUtilities
 #endif
 		if (IsSoundbankOverrideEnabled(wwiseProjectFullPath))
 		{
-			UnityEngine.Debug.LogWarning(
+			WwiseLogger.Warning(
 				"The SoundBank generation process ignores the SoundBank Settings' Overrides currently enabled in the User settings. The project's SoundBank settings will be used.");
 		}
 
 		var wwiseConsole = GetWwiseConsole(wwiseInstallationPath);
 		if (wwiseConsole == null)
 		{
-			UnityEngine.Debug.LogError("Couldn't locate WwiseConsole, unable to generate SoundBanks.");
+			WwiseLogger.Error("Couldn't locate WwiseConsole, unable to generate SoundBanks.");
 			return;
 		}
 
@@ -222,15 +227,15 @@ public partial class AkUtilities
 		var output = ExecuteCommandLine(command, arguments);
 		if (output.Contains("Process completed successfully."))
 		{
-			UnityEngine.Debug.LogFormat("WwiseUnity: SoundBanks generation successful:\n{0}", output);
+			WwiseLogger.LogFormat("SoundBanks generation successful:\n{0}", output);
 		}
 		else if (output.Contains("Process completed with warning"))
 		{
-			UnityEngine.Debug.LogWarningFormat("WwiseUnity: SoundBanks generation has warning(s):\n{0}", output);
+			WwiseLogger.WarningFormat("SoundBanks generation has warning(s):\n{0}", output);
 		}
 		else
 		{
-			UnityEngine.Debug.LogErrorFormat("WwiseUnity: SoundBanks generation error:\n{0}", output);
+			WwiseLogger.ErrorFormat("SoundBanks generation error:\n{0}", output);
 		}
 		GeneratingSoundBanks = false;
 		UnityEditor.AssetDatabase.Refresh();
@@ -272,7 +277,6 @@ public partial class AkUtilities
 		UpdateSoundbanksDestinationFolders(wwiseProjectPath);
 		return s_ProjectBankPaths;
 	}
-
 
 	// Parses the .wproj to find out where SoundBanks are generated for the given path.
 	public static string GetWwiseSoundBankDestinationFolder(string Platform, string wwiseProjectAbsolutePath)
@@ -342,12 +346,16 @@ public partial class AkUtilities
 		}
 		catch (System.Exception ex)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+			WwiseLogger.Error("Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
 		}
 	}
 	
 	private static bool UpdateAutoBankSetting(string WwiseProjectPath)
 	{
+		if (WwiseProjectPath.Length == 0)
+		{
+			return false;
+		}
 		var doc = new System.Xml.XmlDocument { PreserveWhitespace = true };
 		doc.Load(WwiseProjectPath);
 		var Navigator = doc.CreateNavigator();
@@ -359,29 +367,6 @@ public partial class AkUtilities
 		s_AutoBankEnabled = node != null;
 		return s_AutoBankEnabled;
 	}
-	
-	public static string GetRootOutputPath(string WwiseProjectPath)
-	{
-		var doc = new System.Xml.XmlDocument { PreserveWhitespace = true };
-		doc.Load(WwiseProjectPath);
-		var Navigator = doc.CreateNavigator();
-
-		// Navigate the wproj file (XML format) to where our setting should be
-		var pathInXml = string.Format("/WwiseDocument/ProjectInfo/Project/PropertyList/Property[@Name='{0}']", "SoundBankHeaderFilePath");
-		var expression = System.Xml.XPath.XPathExpression.Compile(pathInXml);
-		var rootOutputPath = Navigator.SelectSingleNode(expression).GetAttribute("Value", "");
-#if UNITY_EDITOR_OSX
-		rootOutputPath = ParseOsxPathFromWinePath(rootOutputPath);
-		if (!Path.IsPathRooted(rootOutputPath))
-		{
-			string projectPath = Path.GetDirectoryName(WwiseProjectPath);
-			projectPath = ParseOsxPathFromWinePath(projectPath);
-			rootOutputPath = GetFullPath(projectPath, rootOutputPath);
-		}
-#endif
-		return rootOutputPath;
-	}
-	
 	public static void SetWwiseRootOutputPath(string WwiseProjectPath, string destinationPath)
 	{
 		try
@@ -417,7 +402,7 @@ public partial class AkUtilities
 		}
 		catch (System.Exception ex)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+			WwiseLogger.Error("Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
 		}
 	}
 	
@@ -471,7 +456,7 @@ public partial class AkUtilities
 		}
 		catch (System.Exception ex)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+			WwiseLogger.Error("Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
 		}
 	}
 
@@ -535,7 +520,7 @@ public partial class AkUtilities
 		}
 		catch (System.Exception ex)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+			WwiseLogger.Error("Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
 		}
 	}
 	
@@ -573,7 +558,7 @@ public partial class AkUtilities
 		}
 		catch (System.Exception ex)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+			WwiseLogger.Error("Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
 		}
 	}
 
@@ -596,7 +581,7 @@ public partial class AkUtilities
 		}
 		catch (System.Exception ex)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+			WwiseLogger.Error("Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
 		}
 	}
 
@@ -638,8 +623,8 @@ public partial class AkUtilities
 					if (node == null)
 					{
 						// SoundBankHeaderFilePath not in wproj, invalid wproj file
-						UnityEngine.Debug.LogError(
-							"WwiseUnity: Could not find SoundBankHeaderFilePath property in Wwise project file. File is invalid.");
+						WwiseLogger.Error(
+							"Could not find SoundBankHeaderFilePath property in Wwise project file. File is invalid.");
 						return false;
 					}
 
@@ -676,6 +661,7 @@ public partial class AkUtilities
 
 	public static bool SetSoundbankHeaderFilePath(string WwiseProjectPath, string SoundbankPath)
 	{
+		string pathRelativeToWwiseProject = AkUtilities.MakeRelativePath(System.IO.Path.GetDirectoryName(WwiseProjectPath), SoundbankPath);
 		try
 		{
 			if (WwiseProjectPath.Length == 0)
@@ -694,7 +680,7 @@ public partial class AkUtilities
 			var node = Navigator.SelectSingleNode(expression);
 			if (node == null)
 			{
-				UnityEngine.Debug.LogError(
+				WwiseLogger.Error(
 					"Could not find SoundBankHeaderFilePath property in Wwise project file. File is invalid.");
 				return false;
 			}
@@ -705,7 +691,9 @@ public partial class AkUtilities
 				return false;
 			}
 
-			node.SetValue(SoundbankPath);
+			node.SetValue(pathRelativeToWwiseProject);
+			
+
 			doc.Save(WwiseProjectPath);
 			return true;
 		}
@@ -797,7 +785,7 @@ public partial class AkUtilities
 		var dir = new System.IO.DirectoryInfo(sourceDirName);
 		if (!dir.Exists)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: Source directory doesn't exist");
+			WwiseLogger.Error("Source directory doesn't exist");
 			return false;
 		}
 
@@ -812,7 +800,7 @@ public partial class AkUtilities
 			var destFilePath = System.IO.Path.Combine(destDirName, file.Name);
 			if (System.IO.File.Exists(destFilePath))
 			{
-				UnityEngine.Debug.LogWarningFormat("WwiseUnity: Destination file path will be overwritten: {0}", destFilePath);
+				WwiseLogger.WarningFormat("Destination file path will be overwritten: {0}", destFilePath);
 			}
 
 			file.CopyTo(destFilePath, true);
@@ -838,7 +826,7 @@ public partial class AkUtilities
 		var dir = new System.IO.DirectoryInfo(sourceDirName);
 		if (!dir.Exists)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: Source directory doesn't exist");
+			WwiseLogger.Error("Source directory doesn't exist");
 			return false;
 		}
 
@@ -859,7 +847,7 @@ public partial class AkUtilities
 			destFilePath = System.IO.Path.Combine(destDirName, file.Name);
 			if (System.IO.File.Exists(destFilePath))
 			{
-				UnityEngine.Debug.LogWarningFormat("WwiseUnity: Destination file path will be overwritten: {0}", destFilePath);
+				WwiseLogger.WarningFormat("Destination file path will be overwritten: {0}", destFilePath);
 			}
 
 			source = System.IO.Path.Combine("Assets", AkUtilities.MakeRelativePath(UnityEngine.Application.dataPath, file.FullName));
@@ -868,7 +856,7 @@ public partial class AkUtilities
 			error = AssetDatabase.MoveAsset(source, destFilePath);
 			if (!string.IsNullOrEmpty(error))
 			{
-				UnityEngine.Debug.LogErrorFormat("WwiseUnity: Error while attempting to move <{0}> to <{1}>: {2}", source, destFilePath, error);
+				WwiseLogger.ErrorFormat("Error while attempting to move <{0}> to <{1}>: {2}", source, destFilePath, error);
 			}
 
 		}
@@ -889,7 +877,7 @@ public partial class AkUtilities
 
 			if (!string.IsNullOrEmpty(error))
 			{
-				UnityEngine.Debug.LogErrorFormat("WwiseUnity: Error while attempting to move <{0}> to <{1}>: {2}", source, destSubDirName, error);
+				WwiseLogger.ErrorFormat("Error while attempting to move <{0}> to <{1}>: {2}", source, destSubDirName, error);
 			}
 		}
 
@@ -915,7 +903,7 @@ public partial class AkUtilities
 			var error = UnityEditor.AssetDatabase.CreateFolder(parentFolder, folders[i]);
 			if (string.IsNullOrEmpty(error))
 			{
-				UnityEngine.Debug.LogFormat("WwiseUnity: Created folder <{0}> in <{0}>", folders[i], parentFolder);
+				WwiseLogger.LogFormat("Created folder <{0}> in <{0}>", folders[i], parentFolder);
 				created = true;
 				continue;
 			}
@@ -949,7 +937,7 @@ public partial class AkUtilities
 
 		if (!AssetDatabase.IsValidFolder(oldPath))
 		{
-			UnityEngine.Debug.LogWarningFormat("WwiseUnity: Refusing to move nonexistent folder <{0}>", oldPath);
+			WwiseLogger.WarningFormat("Refusing to move nonexistent folder <{0}>", oldPath);
 			return false;
 		}
 
@@ -963,7 +951,7 @@ public partial class AkUtilities
 				return true;
 			}
 
-			UnityEngine.Debug.LogErrorFormat("WwiseUnity: Error while attempting to rename folder <{0}> to <{1}>: {2}", oldPath, newPath, error);
+			WwiseLogger.ErrorFormat("Error while attempting to rename folder <{0}> to <{1}>: {2}", oldPath, newPath, error);
 			return false;
 		}
 
@@ -978,7 +966,7 @@ public partial class AkUtilities
 			return true;
 		}
 
-		UnityEngine.Debug.LogWarningFormat("WwiseUnity: Error while attempting to move folder <{0}> to <{1}>: {2}", oldPath, newPath, error);
+		WwiseLogger.WarningFormat("Error while attempting to move folder <{0}> to <{1}>: {2}", oldPath, newPath, error);
 		return false;
 	}
 
@@ -1139,7 +1127,7 @@ public partial class AkUtilities
 		var overlap = relativePathFolders.Intersect(rootPathFolders);
 		if (overlap.Count() > 0)
 		{
-			UnityEngine.Debug.LogWarning("AkUtilities.GetPathInPackage(): relativePath contains overlapping folder names with root path.\nrelativePath: " 
+			WwiseLogger.Warning("AkUtilities.GetPathInPackage(): relativePath contains overlapping folder names with root path.\nrelativePath: "
 				+ relativePath
 				+ "\nroot path: "
 				+ rootpath
@@ -1147,6 +1135,13 @@ public partial class AkUtilities
 		}
 
 		return System.IO.Path.Combine(rootpath, relativePath);
+	}
+	
+	public static bool IsRunningTest()
+	{
+		// Check for the presence of the main NUnit framework assembly.
+		return AppDomain.CurrentDomain.GetAssemblies()
+			.Any(a => a.GetName().Name == "nunit.framework");
 	}
 
 	/// <summary>
@@ -1205,4 +1200,4 @@ public partial class AkUtilities
 	}
 }
 
-#endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#endif // #if !(UNITY_QNX) // Disable under unsupported platforms.

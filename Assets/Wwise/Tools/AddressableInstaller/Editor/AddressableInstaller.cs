@@ -23,10 +23,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor.Callbacks;
+using AK.Wwise.Unity.Logging;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 #if AK_WWISE_ADDRESSABLES
-using System.Linq;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using AK.Wwise.Unity.WwiseAddressables;
@@ -74,6 +74,8 @@ public static class AddressableInstaller
 #if AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES
     private static bool _automaticallyUpdateExternalSourcesPath = false;
     private static string _externalSourcesPath = "";
+    private static bool _enableUninstallationPrompt = true;
+    private static bool _disableAsynchronousBankLoading = true;
 #else
     private static string _packageSource = "";
 #endif
@@ -120,8 +122,20 @@ public static class AddressableInstaller
             useCustomBuildScript = true;
         }
         AddressableAssetBuilder.ApplySettings(useCustomBuildScript, addressableAssetBuilderPath);
+        _enableUninstallationPrompt = AkWwiseEditorSettings.Instance.EnableUninstallationPrompt;
+        if (args.Contains("-disableUninstallationPrompt"))
+        {
+            int index = Array.IndexOf(args, "-disableUninstallationPrompt");
+            _enableUninstallationPrompt = args[index + 1] == "true";
+        } 
+        _disableAsynchronousBankLoading = AkWwiseEditorSettings.Instance.DisableAsynchronousBankLoading;
+        if (args.Contains("-disableAsynchronousBankLoadingOnUninstallation"))
+        {
+            int index = Array.IndexOf(args, "-disableAsynchronousBankLoadingOnUninstallation");
+            _disableAsynchronousBankLoading = args[index + 1] == "true";
+        }
 #else
-        _packageSource = AkWwiseEditorSettings.Instance.PackageSource;
+        _packageSource = AkWwiseEditorSettings.Instance.UseGitRepository ? WwiseSettings.GitRepositoryLink : AkWwiseEditorSettings.Instance.PackageSource;
         if (args.Contains("-packageSource"))
         {
             int index = Array.IndexOf(args, "-packageSource");
@@ -154,17 +168,17 @@ public static class AddressableInstaller
     /// <param name="errorMsg">The message to log</param>
     public static void LogError(string source, string errorMsg)
     {
-        Debug.LogError($"{source}: {errorMsg}");
+        WwiseLogger.Error($"{source}: {errorMsg}");
     }
 
     public static void LogWarning(string source, string errorMsg)
     {
-        Debug.LogWarning($"{source}: {errorMsg}");
+        WwiseLogger.Warning($"{source}: {errorMsg}");
     }
 
     public static void Log(string source, string errorMsg)
     {
-        Debug.Log($"{source}: {errorMsg}");
+        WwiseLogger.Log($"{source}: {errorMsg}");
     }
     private static AddRequest _addRequest;
 
@@ -189,6 +203,7 @@ public static class AddressableInstaller
             EditorUtility.DisplayDialog("Wwise Addressables installation aborted", $"The installation process was aborted as the following setting(s) were not set:\n{missingSettings}.\nAdjust your Wwise integration settings and try again.", "OK");
             return;
         }
+        AdjustLoadBankAsynchronously();
         if (!InstallAddressablePackage(_packageSource))
         {
             LogError(Name, $"Failed to install the Wwise Unity Addressable package from {_packageSource}");
@@ -202,11 +217,16 @@ public static class AddressableInstaller
     [MenuItem("Wwise/Uninstall Addressables")]
     public static void UninstallPackage()
     {
+        ReadSettings();
+        if (!AdjustLoadBankAsynchronously())
+        {
+            return;
+        }
         ToggleAkInitializer(false);
         AkSoundEngineController.Instance.DisableEditorLateUpdate();
         EditorApplication.update += ContinueUninstallation;
     }
-    
+
     /// <summary>
     /// Continue the uninstallation process after disabling Wwise components interacting with the Wwise Addressables Package.
     /// </summary>
@@ -221,13 +241,69 @@ public static class AddressableInstaller
         DeleteWwiseAddressablesBankFolder();
         //Delete the Wwise Addressable Groups
         DeleteWwiseAddressableGroups();
+        //Remove the build script
+        AddressableAssetBuilder.RemoveBuildScript();
         //Remove the Wwise Addresables Package
         RemoveWwiseAddressablePackage();
         EditorApplication.update -= ContinueUninstallation;
     }
     
 #endif
-    
+
+    private static bool AdjustLoadBankAsynchronously()
+    {
+#if AK_WWISE_ADDRESSABLES
+        bool shouldDisableAsynchronousBankLoading = false;
+        if (_enableUninstallationPrompt)
+        {
+            int dialogChoiceIndex = EditorUtility.DisplayDialogComplex(
+                "Wwise Unity Addressables Uninstallation",
+                "Do you want to toggle off the Load Bank Asynchronous setting during uninstallation? The setting was modified during the installation of the Wwise Unity Addressables integration package. It is toggled off for most projects that do not use addressables. In the Wwise Settings, you can set a default value for this prompt or prevent it from appearing.",
+                "Yes, change the setting.",
+                "No, don't change it.",
+                "Cancel"
+            );
+
+            if (dialogChoiceIndex == 2)
+            {
+                return false;
+            }
+            shouldDisableAsynchronousBankLoading = dialogChoiceIndex == 0;
+        }
+        else
+        {
+            shouldDisableAsynchronousBankLoading = _disableAsynchronousBankLoading;
+        }
+
+        if (shouldDisableAsynchronousBankLoading)
+        {
+            var platformSettings = AkWwiseInitializationSettings.GetAllPlatformSettings();
+            foreach (var platformSetting in platformSettings)
+            {
+                platformSetting.LoadBanksAsynchronously = false;
+                EditorUtility.SetDirty(platformSetting);
+            }
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+        return true;
+#else
+
+        var platformSettings = AkWwiseInitializationSettings.Instance.PlatformSettingsList;
+        foreach (var platformSetting in platformSettings)
+        {
+            if (platformSetting)
+            {
+                platformSetting.LoadBanksAsynchronously = true;
+                EditorUtility.SetDirty(platformSetting);
+            }
+        }
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        return true;
+#endif
+    }
+  
 #if AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES
     /// <summary>
     /// Setup the Wwise Addressable Package
@@ -267,7 +343,7 @@ public static class AddressableInstaller
         ReadSettings();
         //Reset the Root output Path and SoundBank Paths to asset the Unity Application Data Path.
         var settings = AkWwiseEditorSettings.Instance;
-        AddressableBankPathSetter.SetSoundbankPath(settings.SoundbankPath);
+        AddressableBankPathSetter.SetStreamingAssetsPath(settings.WwiseStreamingAssetsPath);
         AddressableBankPathSetter.SetExternalSourcePath("GeneratedSoundBanks");
 
         //Regenerate the soundbanks
@@ -288,6 +364,9 @@ public static class AddressableInstaller
         //Re-enable the SoundEngineController LateUpdate and the AkInitializer that were disabled during the uninstallation process.
         AkSoundEngineController.Instance.EnableEditorLateUpdate();
         ToggleAkInitializer(true);
+#if UNITY_ADDRESSABLES
+        AddressableAssetBuilder.Build(false);
+#endif
         if (UnityEditorInternal.InternalEditorUtility.inBatchMode)
         {
             EditorApplication.Exit(0);
@@ -302,7 +381,7 @@ public static class AddressableInstaller
     {
         if (string.IsNullOrEmpty(packageSource))
         {
-            Debug.LogError("Package source not provided. Use -packageSource=<url_or_path> in the command line.");
+            WwiseLogger.Error("Package source not provided. Use -packageSource=<url_or_path> in the command line.");
             return false;
         }
         
@@ -318,7 +397,7 @@ public static class AddressableInstaller
         }
         else
         {
-            Debug.LogError($"Invalid package source: {packageSource}. Ensure it is a valid Git URL or local path.");
+            WwiseLogger.Error($"Invalid package source: {packageSource}. Ensure it is a valid Git URL or local path.");
             return false;
         }
 
@@ -331,7 +410,7 @@ public static class AddressableInstaller
     /// <param name="url">The Git URL of the package.</param>
     private static void InstallFromUrl(string url)
     {
-        Debug.Log($"Installing package from Git URL: {url}");
+        WwiseLogger.Log($"Installing package from Git URL: {url}");
         _addRequest = Client.Add(url);
         EditorApplication.update += Progress;
     }
@@ -394,11 +473,11 @@ public static class AddressableInstaller
         {
             if (_addRequest.Status == StatusCode.Success)
             {
-                Debug.Log($"Successfully installed package: {_addRequest.Result.packageId}");
+                WwiseLogger.Log($"Successfully installed package: {_addRequest.Result.packageId}");
             }
             else if (_addRequest.Status >= StatusCode.Failure)
             {
-                Debug.LogError($"Failed to install package: {_addRequest.Error.message}");
+                WwiseLogger.Error($"Failed to install package: {_addRequest.Error.message}");
             }
 
             EditorApplication.update -= Progress;
@@ -427,7 +506,7 @@ public static class AddressableInstaller
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log("Addressables cleaned successfully.");
+        WwiseLogger.Log("Addressables cleaned successfully.");
     }
     
     /// <summary>
@@ -442,7 +521,7 @@ public static class AddressableInstaller
 
         if (targetObject == null)
         {
-            Debug.LogError($"GameObject '{targetObjectName}' not found in the scene.");
+            WwiseLogger.Error($"GameObject '{targetObjectName}' not found in the scene.");
             return;
         }
 
@@ -451,11 +530,11 @@ public static class AddressableInstaller
         if (component != null)
         {
             UnityEngine.GameObject.DestroyImmediate(component);
-            Debug.Log($"Removed component '{targetComponentName}' from '{targetObjectName}'.");
+            WwiseLogger.Log($"Removed component '{targetComponentName}' from '{targetObjectName}'.");
         }
         else
         {
-            Debug.LogWarning($"Component '{targetComponentName}' not found on '{targetObjectName}'.");
+            WwiseLogger.Warning($"Component '{targetComponentName}' not found on '{targetObjectName}'.");
         }
     }
     
@@ -478,16 +557,16 @@ public static class AddressableInstaller
         {
             if (AssetDatabase.DeleteAsset(folderPath))
             {
-                Debug.Log($"Folder deleted: {folderPath}");
+                WwiseLogger.Log($"Folder deleted: {folderPath}");
             }
             else
             {
-                Debug.LogError($"Failed to delete folder: {folderPath}");
+                WwiseLogger.Error($"Failed to delete folder: {folderPath}");
             }
         }
         else
         {
-            Debug.LogError($"Folder does not exist: {folderPath}");
+            WwiseLogger.Error($"Folder does not exist: {folderPath}");
         }
     }
     

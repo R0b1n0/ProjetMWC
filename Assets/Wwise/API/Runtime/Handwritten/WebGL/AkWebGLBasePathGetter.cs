@@ -15,7 +15,7 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-﻿#if UNITY_WEBGL && !UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
 public partial class AkBasePathGetter
 {
 	static string DefaultPlatformName = "Web";
@@ -41,3 +41,16 @@ public partial class AkBasePathGetter
 	}
 }
 #endif
+
+#if UNITY_EDITOR
+[UnityEditor.InitializeOnLoad]
+public partial class AkWebGLBasePathGetter
+{
+	static AkWebGLBasePathGetter()
+	{
+		AkBasePathGetter.AddTargetPlatform(UnityEditor.BuildTarget.WebGL, "Web");
+	}
+}
+#endif
+
+

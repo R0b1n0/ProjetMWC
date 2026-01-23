@@ -26,11 +26,6 @@ public class AkAndroidBuildPreprocessor
 			return;
 		}
 
-		AkBuildPreprocessor.RegisterBuildTarget(UnityEditor.BuildTarget.Android, new AkBuildPreprocessor.PlatformConfiguration
-		{
-			WwisePlatformName = "Android"
-		});
-		
 		WwiseSetupWizard.AddBuildTargetGroup(UnityEditor.BuildTargetGroup.Android);
 	}
 }

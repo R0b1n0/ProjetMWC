@@ -1,4 +1,4 @@
-#if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#if !(UNITY_QNX) // Disable under unsupported platforms.
 /*******************************************************************************
 The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
 Technology released in source code form as part of the game integration package.
@@ -15,6 +15,9 @@ software or, alternatively, in accordance with the terms contained
 in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
+
+using AK.Wwise.Unity.Logging;
+
 [UnityEngine.AddComponentMenu("Wwise/Spatial Audio/AkRoomPortal")]
 [UnityEngine.RequireComponent(typeof(UnityEngine.BoxCollider))]
 [UnityEngine.DisallowMultipleComponent]
@@ -58,6 +61,10 @@ public class AkRoomPortal : AkTriggerHandler
 	[UnityEngine.SerializeField]
 	private AkRoom[] rooms = new AkRoom[MAX_ROOMS_PER_PORTAL];
 
+	[UnityEngine.Tooltip("Set to true to set this portal as static: a portal that will not move during gameplay. A non-static portal will check the state of its transform each frame and update the portal in Wwise if there is a change.")]
+	/// Set to true to set this portal as static: a portal that will not move during gameplay. A non-static portal will check the state of its transform each frame and update the portal in Wwise if there is a change.
+	public bool isStatic = false;
+
 	/// The list of rooms sorted by priority in front and in the back of the portal
 	private AkRoom.PriorityList[] roomList = { new AkRoom.PriorityList(), new AkRoom.PriorityList() };
 
@@ -72,9 +79,8 @@ public class AkRoomPortal : AkTriggerHandler
 	private UnityEngine.BoxCollider portalCollider;
 	private bool portalSet = false;
 	private bool portalNeedsUpdate = false;
-	private UnityEngine.Vector3 previousPosition;
-	private UnityEngine.Vector3 previousScale;
-	private UnityEngine.Quaternion previousRotation;
+
+	private ulong[] previousRoomIDs = new ulong[MAX_ROOMS_PER_PORTAL];
 
 	private void SetRoomPortal()
 	{
@@ -103,7 +109,7 @@ public class AkRoomPortal : AkTriggerHandler
 		}
 		else
 		{
-			UnityEngine.Debug.LogWarning(name + " Portal placement is invalid. The portal is not set in the Spatial Audio engine. The front and back Rooms of the Portal cannot be the same or have a ReverbZone-parent relationship.");
+			WwiseLogger.Warning(name + " Portal placement is invalid. The portal is not set in the Spatial Audio engine. The front and back Rooms of the Portal cannot be the same or have a ReverbZone-parent relationship.");
 			if (portalSet)
 			{
 				AkUnitySoundEngine.RemovePortal(GetID());
@@ -195,9 +201,13 @@ public class AkRoomPortal : AkTriggerHandler
 		RegisterTriggers(closePortalTriggerList, ClosePortal);
 
 		// init update condition
-		previousPosition = transform.position;
-		previousScale = transform.lossyScale;
-		previousRotation = transform.rotation;
+		transform.hasChanged = false;
+
+		// init previous room IDs
+		for (var i = 0; i < MAX_ROOMS_PER_PORTAL; ++i)
+		{
+			previousRoomIDs[i] = AkRoom.INVALID_ROOM_ID;
+		}
 
 		base.Awake();
 	}
@@ -249,15 +259,14 @@ public class AkRoomPortal : AkTriggerHandler
 	}
 	private void Update()
 	{
-		if (previousPosition != transform.position ||
-			previousScale != transform.lossyScale ||
-			previousRotation != transform.rotation)
+		// don't update if is static
+		if (isStatic) return;
+
+		if (transform.hasChanged)
 		{
 			portalNeedsUpdate = true;
 			AkRoomManager.RegisterPortalUpdate(this);
-			previousPosition = transform.position;
-			previousScale = transform.lossyScale;
-			previousRotation = transform.rotation;
+			transform.hasChanged = false;
 		}
 	}
 
@@ -320,13 +329,15 @@ public class AkRoomPortal : AkTriggerHandler
 		for (var i = 0; i < MAX_ROOMS_PER_PORTAL; ++i)
 		{
 			var room = roomList[i].GetHighestPriorityActiveAndEnabledRoom();
+			var roomID = room != null ? room.GetID() : AkRoom.INVALID_ROOM_ID;
 
-			if (room != rooms[i])
+			if (roomID != previousRoomIDs[i])
 			{
 				wasUpdated = true;
 			}
 
 			rooms[i] = room;
+			previousRoomIDs[i] = roomID;
 		}
 
 		return wasUpdated;
@@ -407,19 +418,19 @@ public class AkRoomPortal : AkTriggerHandler
 	[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
 	public void SetRoom(int in_roomIndex, AkRoom in_room)
 	{
-		UnityEngine.Debug.LogFormat("SetRoom is deprecated. Highest priority, active and enabled room will be automatically chosen. Make sure room priorities and game object placements are correct.");
+		WwiseLogger.LogFormat("SetRoom is deprecated. Highest priority, active and enabled room will be automatically chosen. Make sure room priorities and game object placements are correct.");
 	}
 
 	[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
 	public void SetFrontRoom(AkRoom room)
 	{
-		UnityEngine.Debug.LogFormat("SetFrontRoom is deprecated. Highest priority, active and enabled room will be automatically chosen. Make sure room priorities and game object placements are correct.");
+		WwiseLogger.LogFormat("SetFrontRoom is deprecated. Highest priority, active and enabled room will be automatically chosen. Make sure room priorities and game object placements are correct.");
 	}
 
 	[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
 	public void SetBackRoom(AkRoom room)
 	{
-		UnityEngine.Debug.LogFormat("SetBackRoom is deprecated. Highest priority, active and enabled room will be automatically chosen. Make sure room priorities and game object placements are correct.");
+		WwiseLogger.LogFormat("SetBackRoom is deprecated. Highest priority, active and enabled room will be automatically chosen. Make sure room priorities and game object placements are correct.");
 	}
 
 	[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
@@ -435,4 +446,4 @@ public class AkRoomPortal : AkTriggerHandler
 	}
 	#endregion
 }
-#endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#endif // #if !(UNITY_QNX) // Disable under unsupported platforms.

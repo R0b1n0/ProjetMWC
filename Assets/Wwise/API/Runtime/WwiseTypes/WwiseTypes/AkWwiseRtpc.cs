@@ -15,7 +15,7 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-#if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#if !(UNITY_QNX) // Disable under unsupported platforms.
 
 namespace AK.Wwise
 {
@@ -33,11 +33,11 @@ namespace AK.Wwise
 
 		public override WwiseObjectType WwiseObjectType { get { return WwiseObjectType.GameParameter; } }
 
-		public void SetValue(UnityEngine.GameObject gameObject, float value)
+		public void SetValue(UnityEngine.GameObject gameObject, float value, int changeDuration = 0)
 		{
 			if (IsValid())
 			{
-				var result = AkUnitySoundEngine.SetRTPCValue(Id, value, gameObject);
+				var result = AkUnitySoundEngine.SetRTPCValue(Id, value, gameObject, changeDuration);
 				Verify(result);
 			}
 		}
@@ -71,4 +71,4 @@ namespace AK.Wwise
 		}
 	}
 }
-#endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#endif // #if !(UNITY_QNX) // Disable under unsupported platforms.

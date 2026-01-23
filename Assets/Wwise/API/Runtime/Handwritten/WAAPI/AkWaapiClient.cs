@@ -39,6 +39,11 @@ internal class AkWaapiClient
 		await wamp.Connect(uri, timeout);
 	}
 
+	public void CancelConnectionAttempt()
+	{
+		wamp.CancelCurrentConnection();
+	}
+
 	private void Wamp_Disconnected()
 	{
 		if (Disconnected != null)

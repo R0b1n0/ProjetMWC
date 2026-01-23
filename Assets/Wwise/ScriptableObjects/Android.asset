@@ -110,6 +110,9 @@ MonoBehaviour:
       m_MaxDiffractionAngleDegrees: 180
       m_SmoothingConstantMs: 0
       m_TransmissionOperation: 2
+      m_ClusteringMinPoints: 0
+      m_ClusteringMaxDistance: 5
+      m_ClusteringDeadZoneDistance: 10
   AdvancedSettings:
     m_IOMemorySize: 2097152
     m_TargetAutoStreamBufferLengthMs: 380
@@ -137,8 +140,9 @@ MonoBehaviour:
     m_MemoryMediaAllocSizeHuge: 2097152
     m_MemoryDebugLevel: 0
     m_AudioAPI: -1
-    m_RoundFrameSizeToHardwareSize: 0
-    m_UseLowLatencyMode: 1
+    m_SpatializerAPI: 256
+    m_AudioPath: 1
+    m_VerboseSink: 0
   CommsSettings:
     m_PoolSize: 262144
     m_DiscoveryBroadcastPort: 24024

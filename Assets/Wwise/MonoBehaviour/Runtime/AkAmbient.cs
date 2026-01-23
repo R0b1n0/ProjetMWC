@@ -1,4 +1,4 @@
-#if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#if !(UNITY_QNX) // Disable under unsupported platforms.
 /*******************************************************************************
 The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
 Technology released in source code form as part of the game integration package.
@@ -48,7 +48,7 @@ public class AkAmbient : AkEvent
 	public static System.Collections.Generic.Dictionary<uint, AkMultiPosEvent> multiPosEventTree =
 		new System.Collections.Generic.Dictionary<uint, AkMultiPosEvent>();
 
-	public AkMultiPositionType MultiPositionType = AkMultiPositionType.MultiPositionType_MultiSources;
+	public AkMultiPositionType MultiPositionType = AkMultiPositionType.AkMultiPositionType_MultiSources;
 	public MultiPositionTypeLabel multiPositionTypeLabel = MultiPositionTypeLabel.Simple_Mode;
 
 	private static UnityEngine.Color SPHERE_DEFAULT_COLOR = new UnityEngine.Color(1.0f, 0.0f, 0.0f, 0.1f);
@@ -324,4 +324,4 @@ public class AkAmbient : AkEvent
 #endif
 	#endregion
 }
-#endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#endif // #if !(UNITY_QNX) // Disable under unsupported platforms.

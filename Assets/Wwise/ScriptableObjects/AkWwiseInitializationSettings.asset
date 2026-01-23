@@ -60,6 +60,9 @@ MonoBehaviour:
       m_MaxDiffractionAngleDegrees: 180
       m_SmoothingConstantMs: 0
       m_TransmissionOperation: 2
+      m_ClusteringMinPoints: 0
+      m_ClusteringMaxDistance: 5
+      m_ClusteringDeadZoneDistance: 10
   AdvancedSettings:
     m_IOMemorySize: 2097152
     m_TargetAutoStreamBufferLengthMs: 380

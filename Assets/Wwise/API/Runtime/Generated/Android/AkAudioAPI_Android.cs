@@ -10,10 +10,17 @@
 //------------------------------------------------------------------------------
 
 
+///  Main Sound Engine interface, specific Android.
 public enum AkAudioAPI {
+  ///  Use AAudio (lower latency, available only for Android 8.1 or above)
   AkAudioAPI_AAudio = 1 << 0,
+  ///  Use OpenSL ES (older API, compatible with all Android devices)
   AkAudioAPI_OpenSL_ES = 1 << 1,
-  AkAudioAPI_Last,
-  AkAudioAPI_Default = AkAudioAPI_AAudio|AkAudioAPI_OpenSL_ES
+  ///  Add this bit to opt into the Dolby Atmos API for 3D audio where available.
+  AkAudioAPI_DolbyAtmos = 1 << 8,
+  ///  Add this bit to opt into the Android Spatializer API for 3D audio where available. Note that this may have a noticeable negative impact on audio output latency.
+  AkAudioAPI_AndroidSpatializer = 1 << 9,
+  ///  Default value, will select the more appropriate API (Dolby Atmos for supported devices, AAudio for most devices, OpenSL for older devices)
+  AkAudioAPI_Default = AkAudioAPI_AAudio|AkAudioAPI_OpenSL_ES|AkAudioAPI_DolbyAtmos
 }
 #endif // #if UNITY_ANDROID && ! UNITY_EDITOR

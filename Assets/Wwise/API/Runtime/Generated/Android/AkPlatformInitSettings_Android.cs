@@ -9,6 +9,9 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
+///  Platform specific initialization settings
+/// <seealso cref="AK.SoundEngine.Init"/>
+/// <seealso cref="AK.SoundEngine.GetDefaultPlatformInitSettings"/>
 
 public class AkPlatformInitSettings : global::System.IDisposable {
   private global::System.IntPtr swigCPtr;
@@ -50,6 +53,7 @@ public class AkPlatformInitSettings : global::System.IDisposable {
     }
   }
 
+  ///  Lower engine threading properties
   public AkThreadProperties threadLEngine { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_threadLEngine_set(swigCPtr, AkThreadProperties.getCPtr(value)); } 
     get {
       global::System.IntPtr cPtr = AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_threadLEngine_get(swigCPtr);
@@ -58,6 +62,7 @@ public class AkPlatformInitSettings : global::System.IDisposable {
     } 
   }
 
+  ///  Ouput thread threading properties
   public AkThreadProperties threadOutputMgr { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_threadOutputMgr_set(swigCPtr, AkThreadProperties.getCPtr(value)); } 
     get {
       global::System.IntPtr cPtr = AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_threadOutputMgr_get(swigCPtr);
@@ -66,6 +71,7 @@ public class AkPlatformInitSettings : global::System.IDisposable {
     } 
   }
 
+  ///  Bank manager threading properties (its default priority is AK_THREAD_PRIORITY_NORMAL)
   public AkThreadProperties threadBankManager { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_threadBankManager_set(swigCPtr, AkThreadProperties.getCPtr(value)); } 
     get {
       global::System.IntPtr cPtr = AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_threadBankManager_get(swigCPtr);
@@ -74,6 +80,7 @@ public class AkPlatformInitSettings : global::System.IDisposable {
     } 
   }
 
+  ///  Monitor threading properties (its default priority is AK_THREAD_PRIORITY_ABOVENORMAL). This parameter is not used in Release build.	
   public AkThreadProperties threadMonitor { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_threadMonitor_set(swigCPtr, AkThreadProperties.getCPtr(value)); } 
     get {
       global::System.IntPtr cPtr = AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_threadMonitor_get(swigCPtr);
@@ -82,25 +89,24 @@ public class AkPlatformInitSettings : global::System.IDisposable {
     } 
   }
 
+  ///  Main audio API to use. Leave to AkAPI_Default for the default sink (default value). \ref AkAudioAPI
   public AkAudioAPI eAudioAPI { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_eAudioAPI_set(swigCPtr, (int)value); }  get { return (AkAudioAPI)AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_eAudioAPI_get(swigCPtr); } 
   }
 
+  ///  Which audio path to use. See enum for details. Default: AkAudioPath_LowLatency
+  public AkAudioPath eAudioPath { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_eAudioPath_set(swigCPtr, (int)value); }  get { return (AkAudioPath)AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_eAudioPath_get(swigCPtr); } 
+  }
+
+  ///  Sampling Rate.  Set to 0 to get the native sample rate.  Default value is 0.
   public uint uSampleRate { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_uSampleRate_set(swigCPtr, value); }  get { return AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_uSampleRate_get(swigCPtr); } 
   }
 
+  ///  Number of refill buffers in voice buffer.  Defaults to 4.	
   public ushort uNumRefillsInVoice { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_uNumRefillsInVoice_set(swigCPtr, value); }  get { return AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_uNumRefillsInVoice_get(swigCPtr); } 
   }
 
-  public bool bRoundFrameSizeToHWSize { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_bRoundFrameSizeToHWSize_set(swigCPtr, value); }  get { return AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_bRoundFrameSizeToHWSize_get(swigCPtr); } 
-  }
-
+  ///  Enable this to inspect sink behavior. Useful for debugging non-standard Android devices.
   public bool bVerboseSink { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_bVerboseSink_set(swigCPtr, value); }  get { return AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_bVerboseSink_get(swigCPtr); } 
-  }
-
-  public bool bEnableLowLatency { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_bEnableLowLatency_set(swigCPtr, value); }  get { return AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_bEnableLowLatency_get(swigCPtr); } 
-  }
-
-  public bool bEnableExclusiveMode { set { AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_bEnableExclusiveMode_set(swigCPtr, value); }  get { return AkUnitySoundEnginePINVOKE.CSharp_AkPlatformInitSettings_bEnableExclusiveMode_get(swigCPtr); } 
   }
 
 }

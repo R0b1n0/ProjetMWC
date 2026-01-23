@@ -3,7 +3,7 @@
   "Project": {
    "Name": "MWC TEst",
    "GUID": "{65D15D54-8D1E-4203-B4C6-4D6A20C760D9}",
-   "Generator": "2024.1.8.8898"
+   "Generator": "2025.1.4.9062"
   },
   "CacheRoot": "../../../../../MWC Wwise Project - Copie/.cache",
   "Platforms": [
@@ -38,6 +38,6 @@
     "UseAsStandIn": "true"
    }
   ],
-  "FileHash": "{0688D1A9-8779-CE19-8169-5AE7A90F5941}"
+  "FileHash": "{2FB9961A-D7BF-9597-C203-6FE762572F07}"
  }
 }

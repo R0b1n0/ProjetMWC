@@ -1,4 +1,4 @@
-#if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#if !(UNITY_QNX) // Disable under unsupported platforms.
 /*******************************************************************************
 The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
 Technology released in source code form as part of the game integration package.
@@ -15,6 +15,8 @@ software or, alternatively, in accordance with the terms contained
 in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
+
+using AK.Wwise.Unity.Logging;
 
 [UnityEngine.AddComponentMenu("Wwise/Spatial Audio/AkReverbZone")]
 ///@brief This component establishes a parent-child relationship between two Rooms and allows for sound propagation between them as if they were the same Room, without the need for a connecting Portal.
@@ -64,7 +66,7 @@ public class AkReverbZone : UnityEngine.MonoBehaviour
 	{
 		if (reverbZone == null)
 		{
-			UnityEngine.Debug.LogError("SetReverbZone: Invalid Room component as the Reverb Zone parameter.");
+			WwiseLogger.Error("SetReverbZone: Invalid Room component as the Reverb Zone parameter.");
 			return;
 		}
 
@@ -81,7 +83,7 @@ public class AkReverbZone : UnityEngine.MonoBehaviour
 	{
 		if (reverbZone == null)
 		{
-			UnityEngine.Debug.LogWarning("RemoveReverbZone has an invalid Room component as its Reverb Zone parameter.");
+			WwiseLogger.Warning("RemoveReverbZone has an invalid Room component as its Reverb Zone parameter.");
 			return;
 		}
 
@@ -115,6 +117,7 @@ public class AkReverbZone : UnityEngine.MonoBehaviour
 		RemoveReverbZone();
 	}
 
+	// editor only function
 	private void OnValidate()
 	{
 		if (ReverbZone == null)
@@ -132,18 +135,19 @@ public class AkReverbZone : UnityEngine.MonoBehaviour
 		needsUpdate = true;
 	}
 
+	// needsUpdate is only set to true in editor. No need to update in non-editor
+#if UNITY_EDITOR
 	private void Update()
 	{
-#if UNITY_EDITOR
 		if (!UnityEditor.EditorApplication.isPlaying)
 		{
 			return;
 		}
-#endif
 		if (isActiveAndEnabled && needsUpdate)
 		{
 			SetReverbZone();
 		}
 	}
+#endif
 }
-#endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#endif // #if !(UNITY_QNX) // Disable under unsupported platforms.

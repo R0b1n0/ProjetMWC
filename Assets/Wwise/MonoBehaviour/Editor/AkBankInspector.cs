@@ -1,3 +1,5 @@
+using AK.Wwise.Unity.Logging;
+
 #if UNITY_EDITOR
 /*******************************************************************************
 The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
@@ -85,7 +87,7 @@ public class AkBankInspector : AkBaseInspector
 			}
 			catch (System.Exception e)
 			{
-				UnityEngine.Debug.Log("WwiseUnity: Could not delete existing decoded SoundBank. Please delete it manually. " + e);
+				WwiseLogger.Log("Could not delete existing decoded SoundBank. Please delete it manually. " + e);
 			}
 		}
 #endif
