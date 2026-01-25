@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 9b62b878242345242b2c57733189f619
+guid: 09671c585f951f3439ae745d4bf9a9e1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1801735411788782058
-    second: Halo_0
+      213: -5911380669817619209
+    second: Cercle_Contour_Bille_MVT_0
+  - first:
+      213: 3389962575096016179
+    second: Cercle_Contour_Bille_MVT_1
+  - first:
+      213: -7430114666496984936
+    second: Cercle_Contour_Bille_MVT_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Halo_0
+      name: Cercle_Contour_Bille_MVT_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 318
-        height: 263
+        x: 19
+        y: 160
+        width: 137
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 61666116033fef6e0800000000000000
-      internalID: -1801735411788782058
+      spriteID: 7fcf863c99e86fda0800000000000000
+      internalID: -5911380669817619209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cercle_Contour_Bille_MVT_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 14
+        width: 40
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33d677250019b0f20800000000000000
+      internalID: 3389962575096016179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cercle_Contour_Bille_MVT_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 0
+        width: 67
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 898f607c31ee2e890800000000000000
+      internalID: -7430114666496984936
       vertices: []
       indices: 
       edges: []
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Halo_0: -1801735411788782058
+      Cercle_Contour_Bille_MVT_0: -5911380669817619209
+      Cercle_Contour_Bille_MVT_1: 3389962575096016179
+      Cercle_Contour_Bille_MVT_2: -7430114666496984936
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
