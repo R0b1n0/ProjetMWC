@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class MarbleInputs : MonoBehaviour
 {
@@ -10,14 +9,11 @@ public class MarbleInputs : MonoBehaviour
     public static Action<MarbleBehaviour> OnDragBegin;
     public static Action<MarbleBehaviour> OnDragEnd;
 
-    Vector3 og; 
-
     private void Start()
     {
         InputManager.instance.OnTouchStartEvent += OnTouchStarted;
         InputManager.instance.OnTouchEndEvent += OnTouchEnd;
     }
-
 
     private void OnTouchStarted()
     {
@@ -63,11 +59,5 @@ public class MarbleInputs : MonoBehaviour
 
         
         return false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        
-        Gizmos.DrawRay(new Ray(og, Vector3.forward));
     }
 }

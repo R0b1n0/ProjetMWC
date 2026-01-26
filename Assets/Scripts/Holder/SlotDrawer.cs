@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SlotDrawer : MonoBehaviour
@@ -32,20 +31,23 @@ public class SlotDrawer : MonoBehaviour
             satellites.Add(satellite.GetComponent<SatelliteBehaviour>());
             satellites[i].targetScale = satelliteMaxScale;
         }
-        RotateSatellites();
 
+        outerDrawer.radius = outerCircleRadius;
+        innerDrawer.radius = innerCircleRadius;
+
+        RotateSatellites();
         SetSatelliteCount(1);
     }
 
     private void Update()
     {
+
         //spin the outer circles
         outerCircleAngleOffset += Time.deltaTime * outerCircleRotationSpeed * Mathf.Deg2Rad;
         outerDrawer.SetOffset(outerCircleAngleOffset);
 
         RotateSatellites();
     }
-
 
     private void RotateSatellites()
     {

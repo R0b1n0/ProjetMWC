@@ -102,5 +102,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60287af8f86d0f04cab7d3ff7ffe5892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SatelliteBehaviour
-  scaleSpeed: 2
+  scaleSpeed: 8
   targetScale: 0

@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - MarbleHolder
   layers:
   - Default
   - TransparentFX

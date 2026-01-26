@@ -483,9 +483,10 @@ GameObject:
   - component: {fileID: 710942470}
   - component: {fileID: 710942469}
   - component: {fileID: 710942468}
+  - component: {fileID: 710942473}
   m_Layer: 5
   m_Name: Holder (3)
-  m_TagString: Untagged
+  m_TagString: MarbleHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -526,7 +527,7 @@ MonoBehaviour:
   innerDrawer: {fileID: 710942469}
   outerCircleRotationSpeed: 10
   innerCircleRadius: 0.31
-  outerCircleRadius: 0.4
+  outerCircleRadius: 0.35
   satelliteCount: 3
   satelliteMaxScale: 10
 --- !u!114 &710942469
@@ -597,7 +598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5911380669817619209, guid: 09671c585f951f3439ae745d4bf9a9e1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -615,6 +616,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710942466}
   m_CullTransparentMesh: 1
+--- !u!58 &710942473
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710942466}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 67
 --- !u!1 &874297767
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,10 +689,10 @@ RectTransform:
   - {fileID: 710942467}
   m_Father: {fileID: 1023189336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 800, y: 300}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &874297769
 MonoBehaviour:
@@ -735,9 +772,10 @@ GameObject:
   - component: {fileID: 928505569}
   - component: {fileID: 928505570}
   - component: {fileID: 928505571}
+  - component: {fileID: 928505572}
   m_Layer: 5
   m_Name: Holder
-  m_TagString: Untagged
+  m_TagString: MarbleHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -789,7 +827,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5911380669817619209, guid: 09671c585f951f3439ae745d4bf9a9e1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -864,9 +902,45 @@ MonoBehaviour:
   innerDrawer: {fileID: 928505570}
   outerCircleRotationSpeed: 10
   innerCircleRadius: 0.31
-  outerCircleRadius: 0.4
+  outerCircleRadius: 0.35
   satelliteCount: 3
   satelliteMaxScale: 10
+--- !u!58 &928505572
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928505565}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 67
 --- !u!1 &1023189332
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,9 +992,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -962,7 +1036,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1636188112}
-  - {fileID: 1684752311}
   - {fileID: 874297768}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1117,6 +1190,7 @@ MonoBehaviour:
   - {fileID: 1952278430}
   - {fileID: 1847573762}
   - {fileID: 710942467}
+  marbleHolderTag: MarbleHolder
   lerpInCurve:
     serializedVersion: 2
     m_Curve:
@@ -1186,8 +1260,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  moodDic: {fileID: 11400000, guid: 1fd867208380e8d4e931cb75a83923cc, type: 2}
-  moodOrder: 00000000030000000100000002000000
+  marbleLoadingTime: 2
+  moodOrder: 00000000010000000200000003000000
 --- !u!1 &1616479310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,41 +1464,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636188111}
   m_CullTransparentMesh: 1
---- !u!1 &1684752310
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1684752311}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1684752311
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684752310}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1023189336}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1739910707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,9 +1523,10 @@ GameObject:
   - component: {fileID: 1847573765}
   - component: {fileID: 1847573764}
   - component: {fileID: 1847573763}
+  - component: {fileID: 1847573768}
   m_Layer: 5
   m_Name: Holder (2)
-  m_TagString: Untagged
+  m_TagString: MarbleHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1527,7 +1567,7 @@ MonoBehaviour:
   innerDrawer: {fileID: 1847573764}
   outerCircleRotationSpeed: 10
   innerCircleRadius: 0.31
-  outerCircleRadius: 0.4
+  outerCircleRadius: 0.35
   satelliteCount: 3
   satelliteMaxScale: 10
 --- !u!114 &1847573764
@@ -1598,7 +1638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5911380669817619209, guid: 09671c585f951f3439ae745d4bf9a9e1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1616,6 +1656,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1847573761}
   m_CullTransparentMesh: 1
+--- !u!58 &1847573768
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847573761}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 67
 --- !u!1 &1867051469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,7 +1746,6 @@ MonoBehaviour:
   third:
     intensity: 0
     mood: 0
-  moodBook: {fileID: 11400000, guid: 1fd867208380e8d4e931cb75a83923cc, type: 2}
   partsData:
   - radius: 0.1
     lerpSpeed: 0.5
@@ -1802,9 +1877,10 @@ GameObject:
   - component: {fileID: 1952278433}
   - component: {fileID: 1952278432}
   - component: {fileID: 1952278431}
+  - component: {fileID: 1952278436}
   m_Layer: 5
   m_Name: Holder (1)
-  m_TagString: Untagged
+  m_TagString: MarbleHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1845,7 +1921,7 @@ MonoBehaviour:
   innerDrawer: {fileID: 1952278432}
   outerCircleRotationSpeed: 10
   innerCircleRadius: 0.31
-  outerCircleRadius: 0.4
+  outerCircleRadius: 0.35
   satelliteCount: 3
   satelliteMaxScale: 10
 --- !u!114 &1952278432
@@ -1916,7 +1992,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5911380669817619209, guid: 09671c585f951f3439ae745d4bf9a9e1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1934,6 +2010,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952278429}
   m_CullTransparentMesh: 1
+--- !u!58 &1952278436
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952278429}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 67
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

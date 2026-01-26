@@ -6,6 +6,7 @@ public class MarbleBehaviour : MonoBehaviour
     private Collider coll;
     [HideInInspector] public Transform trans;
     [HideInInspector] public Color color;
+    [HideInInspector] public Color ogColor;
     [HideInInspector] public int index;
     [HideInInspector] public MarbleState state {  get; private set; }
     [HideInInspector] public float lerpValue = 0;
@@ -13,13 +14,11 @@ public class MarbleBehaviour : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField] AnimationCurve scalingCurve;
-    [SerializeField] float scaleOffset;
+    [SerializeField] float grabScaleOffset;
+    [SerializeField] float levelScaleOffset;
     [SerializeField] float scaleSpeed;
-    private float sizeLerp;
-
 
     private float initialScale;
-
 
     public Vector3 OnReleasePos { get; private set; }
 
@@ -37,6 +36,7 @@ public class MarbleBehaviour : MonoBehaviour
 
     public void Initialize(Color color, int index)
     {
+        ogColor = color;
         this.color = color;
         this.index = index;
         mat.color = color;
@@ -69,11 +69,17 @@ public class MarbleBehaviour : MonoBehaviour
         state = newState;
     }
 
+    public void OnLevelUpdate(int newLevel)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Expand(newLevel));
+    }
+
     public void OnGrabbed()
     {
         SetState(MarbleState.dragged);
         StopAllCoroutines();
-        StartCoroutine(Expand());
+        StartCoroutine(Expand(0));
     }
 
     public void OnRelease()
@@ -83,33 +89,64 @@ public class MarbleBehaviour : MonoBehaviour
         StartCoroutine(Shrink());
     }
 
-    private IEnumerator Expand()
+    private IEnumerator Expand(int level)
     {
         float targetScale;
-        while (sizeLerp < 1)
+        float onScaleInitial = trans.localScale.x;
+        Color onScaleColor = mat.color;
+        Color targetColor = GetMarbleColor(level);
+        float scaleOffset = (grabScaleOffset + level * levelScaleOffset);
+        float lerp = 0;
+
+        while (lerp < 1)
         {
-            sizeLerp += Time.deltaTime * scaleSpeed;
-            targetScale = initialScale + scaleOffset *  scalingCurve.Evaluate((sizeLerp));
+            lerp += Time.deltaTime * scaleSpeed;
+            targetScale = onScaleInitial + scaleOffset *  scalingCurve.Evaluate((lerp));
             trans.localScale = new Vector3(targetScale, targetScale, targetScale);
+            mat.color = Color.Lerp(onScaleColor, targetColor, lerp);
             yield return null;
         }
 
-        targetScale = initialScale + scaleOffset;
+        targetScale = onScaleInitial + grabScaleOffset;
         trans.localScale = new Vector3(targetScale, targetScale, targetScale);
-
+        mat.color = targetColor;
     }
 
     private IEnumerator Shrink()
     {
         float targetScale;
-        while (sizeLerp > 0)
+        float onShrinkBeginSize = trans.localScale.x;
+        Color onScaleColor = mat.color;
+        float lerp = 0;
+
+        while (lerp < 1)
         {
-            sizeLerp -= Time.deltaTime * scaleSpeed;
-            targetScale = initialScale + scaleOffset * scalingCurve.Evaluate((sizeLerp));
+            lerp += Time.deltaTime * scaleSpeed;
+            targetScale = onShrinkBeginSize - ( (onShrinkBeginSize - initialScale) * lerp);
             trans.localScale = new Vector3(targetScale, targetScale, targetScale);
+            mat.color = Color.Lerp(onScaleColor, ogColor, lerp);
             yield return null;
         }
         trans.localScale = new Vector3(initialScale, initialScale, initialScale);
+        mat.color = ogColor;
+    }
+
+    private Color GetMarbleColor(int intensityLevel)
+    {
+        switch (intensityLevel)
+        {
+            case 0:
+                return MarbleManager.instance.GetMoodData(index).marbleColor;
+
+            case 1:
+                return MarbleManager.instance.GetMoodData(index).marbleColor1;
+
+            case 2:
+                return MarbleManager.instance.GetMoodData(index).marbleColor2;
+
+            default:
+                return Color.rosyBrown;
+        }
     }
 }
 

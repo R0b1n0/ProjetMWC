@@ -162,5 +162,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  scaleOffset: 0.1
+  grabScaleOffset: 0.1
+  levelScaleOffset: 0.01
   scaleSpeed: 7
