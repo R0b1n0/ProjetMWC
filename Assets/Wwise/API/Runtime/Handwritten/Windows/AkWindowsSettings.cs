@@ -16,6 +16,11 @@ Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
 ﻿#if (UNITY_STANDALONE_WIN && !UNITY_EDITOR) || UNITY_EDITOR_WIN
+
+#if UNITY_STANDALONE_WIN
+using AK.Wwise.Unity.Logging;
+#endif
+
 public partial class AkCommonUserSettings
 {
 	partial void SetSampleRate(AkPlatformInitSettings settings)
@@ -43,7 +48,7 @@ public partial class AkCommonUserSettings
 		}
 		else
 		{
-			UnityEngine.Debug.Log("Cannot find Wwise plugin path");
+			WwiseLogger.Log("Cannot find Wwise plugin path");
 			return null;
 		}
 #else

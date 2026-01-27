@@ -2,8 +2,8 @@
 <WwiseSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <CopySoundBanksAsPreBuildStep>true</CopySoundBanksAsPreBuildStep>
   <GenerateSoundBanksAsPreBuildStep>true</GenerateSoundBanksAsPreBuildStep>
-  <SoundbankPath>../StreamingAssets</SoundbankPath>
-  <GeneratedSoundbanksPath>StreamingAssets/Audio/GeneratedSoundBanks</GeneratedSoundbanksPath>
+  <WwiseStreamingAssetsPath>Audio\GeneratedSoundBanks</WwiseStreamingAssetsPath>
+  <RootOutputPath>StreamingAssets/Audio/GeneratedSoundBanks</RootOutputPath>
   <CreatedPicker>true</CreatedPicker>
   <CreateWwiseGlobal>true</CreateWwiseGlobal>
   <CreateWwiseListener>true</CreateWwiseListener>
@@ -12,11 +12,13 @@
   <ShowMissingRigidBodyWarning>true</ShowMissingRigidBodyWarning>
   <ShowSpatialAudioWarningMsg>true</ShowSpatialAudioWarningMsg>
   <WwiseInstallationPathMac />
-  <WwiseInstallationPathWindows>C:\Audiokinetic\Wwise2024.1.8.8898</WwiseInstallationPathWindows>
+  <WwiseInstallationPathWindows>C:\Audiokinetic\Wwise2025.1.4.9062</WwiseInstallationPathWindows>
   <WwiseProjectPath>../../MWC Wwise Project - Copie/MWC TEst.wproj</WwiseProjectPath>
   <UseWaapi>true</UseWaapi>
   <WaapiPort>8080</WaapiPort>
   <WaapiIP>127.0.0.1</WaapiIP>
+  <AutoSyncWaapi>true</AutoSyncWaapi>
+  <WaapiChangePending>false</WaapiChangePending>
   <InstallationWasRequested>false</InstallationWasRequested>
   <UseGitRepository>true</UseGitRepository>
   <PackageSource>https://github.com/audiokinetic/WwiseUnityAddressables.git#v24.1.8</PackageSource>
@@ -25,6 +27,8 @@
   <AddressableAssetBuilderPath>Assets/AddressableAssetsData/DataBuilders\BuildScriptWwisePacked.asset</AddressableAssetBuilderPath>
   <AutomaticallyUpdateExternalSourcesPath>false</AutomaticallyUpdateExternalSourcesPath>
   <ExternalSourcesPath>WwiseData/Bank</ExternalSourcesPath>
+  <EnableUninstallationPrompt>true</EnableUninstallationPrompt>
+  <DisableAsynchronousBankLoading>true</DisableAsynchronousBankLoading>
   <XMLTranslatorTimeout>0</XMLTranslatorTimeout>
   <WaapiTranslatorTimeout>0</WaapiTranslatorTimeout>
 </WwiseSettings>

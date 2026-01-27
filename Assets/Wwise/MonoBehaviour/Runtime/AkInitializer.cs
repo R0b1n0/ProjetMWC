@@ -1,4 +1,4 @@
-#if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#if !(UNITY_QNX) // Disable under unsupported platforms.
 /*******************************************************************************
 The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
 Technology released in source code form as part of the game integration package.
@@ -19,6 +19,7 @@ Copyright (c) 2025 Audiokinetic Inc.
 #if AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES
 using AK.Wwise.Unity.WwiseAddressables;
 #endif
+using AK.Wwise.Unity.Logging;
 
 [UnityEngine.AddComponentMenu("Wwise/AkInitializer")]
 [UnityEngine.ExecuteAlways]
@@ -85,6 +86,12 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 
 		if (ms_Instance)
 		{
+#if UNITY_EDITOR
+			if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+			{
+				return;
+			}
+#endif
 			DestroyImmediate(this);
 			return;
 		}
@@ -122,7 +129,7 @@ public class AkInitializer : UnityEngine.MonoBehaviour
         {
 			return ms_Instance.gameObject;
         }
-		UnityEngine.Debug.LogWarning("AkInitializer is null.");
+		WwiseLogger.Warning("AkInitializer is null.");
 		return null;
 	}
 
@@ -148,7 +155,14 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 		var bankHolder = UnityEngine.Object.FindObjectOfType<AK.Wwise.Unity.WwiseAddressables.InitBankHolder>();
 		if (bankHolder == null)
 		{
-			bankHolder = UnityEditor.Undo.AddComponent<AK.Wwise.Unity.WwiseAddressables.InitBankHolder>(gameObject);
+			if (AkUtilities.IsRunningTest())
+			{
+				bankHolder = gameObject.AddComponent<InitBankHolder>();
+			}
+			else
+			{
+				bankHolder = UnityEditor.Undo.AddComponent<AK.Wwise.Unity.WwiseAddressables.InitBankHolder>(gameObject);
+			}
 		}
 #endif
 
@@ -157,7 +171,7 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
 			bool bRegistered = AkVerifyPluginRegistration();
 			if (!bRegistered)
-				UnityEngine.Debug.Log("Wwise plug-in registration has failed. Some plug-ins may fail to initialize.");
+				WwiseLogger.Log("Wwise plug-in registration has failed. Some plug-ins may fail to initialize.");
 #endif
 			AkSoundEngineController.Instance.Init(this);
 			CreateRoomGeometryData();
@@ -316,7 +330,7 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 			UnityEditor.EditorUtility.SetDirty(initializationSettings);
 			UnityEditor.AssetDatabase.SaveAssets();
 			
-			UnityEngine.Debug.Log("WwiseUnity: Converted from AkInitializer to AkWwiseInitializationSettings.");
+			WwiseLogger.Log("Converted from AkInitializer to AkWwiseInitializationSettings.");
 			hasMigrated = true;
 		}
 	}
@@ -330,7 +344,7 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 
 	public void Migrate15()
 	{
-		UnityEngine.Debug.Log("WwiseUnity: AkInitializer.Migrate15 for " + gameObject.name);
+		WwiseLogger.Log("AkInitializer.Migrate15 for " + gameObject.name);
 
 		if (migration15data != null)
 		{
@@ -345,4 +359,4 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 #endif
 #endregion
 			}
-#endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#endif // #if !(UNITY_QNX) // Disable under unsupported platforms.

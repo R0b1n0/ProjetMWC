@@ -47,3 +47,14 @@ public partial class AkBasePathGetter
 	}
 }
 #endif
+
+#if UNITY_EDITOR
+[UnityEditor.InitializeOnLoad]
+public partial class AkAndroidBasePathGetter
+{
+	static AkAndroidBasePathGetter()
+	{
+		AkBasePathGetter.AddTargetPlatform(UnityEditor.BuildTarget.Android, "Android");
+	}
+}
+#endif

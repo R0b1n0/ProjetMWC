@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using AK.Wwise.Unity.Logging;
 
 internal class AkPlatformPluginList
 {
@@ -110,7 +111,7 @@ internal class AkPlatformPluginList
 		var allPaths = AkUtilities.GetAllBankPaths(AkWwiseEditorSettings.WwiseProjectAbsolutePath);
 		var bNeedRefresh = false;
 		var projectDir = AkBasePathGetter.GetWwiseProjectDirectory();
-		var baseSoundBankPath = AkBasePathGetter.GetFullSoundBankPathEditor();
+		var baseSoundBankPath = AkWwiseEditorSettings.GetRootOutputPath();
 
 		AkWwiseInitializationSettings.UpdatePlatforms();
 
@@ -172,7 +173,7 @@ internal class AkPlatformPluginList
 				}
 				catch (System.Exception ex)
 				{
-					UnityEngine.Debug.LogError("WwiseUnity: " + pluginFile + " could not be parsed. " + ex.Message);
+					WwiseLogger.Error(pluginFile + " could not be parsed. " + ex.Message);
 				}
 			}
 
@@ -273,7 +274,7 @@ internal class AkPlatformPluginList
 		}
 		catch (System.Exception ex)
 		{
-			UnityEngine.Debug.LogError("WwiseUnity: plugins could not be parsed. " + ex.Message);
+			WwiseLogger.Error("Plugins could not be parsed. " + ex.Message);
 		}
 
 		return newPlugins;

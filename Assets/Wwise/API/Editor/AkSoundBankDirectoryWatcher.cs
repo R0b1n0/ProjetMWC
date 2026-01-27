@@ -18,6 +18,7 @@ Copyright (c) 2025 Audiokinetic Inc.
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using AK.Wwise.Unity.Logging;
 
 #if UNITY_EDITOR
 namespace Wwise.API.Editor.SoundBankDirectoryWatcher.Common
@@ -70,7 +71,7 @@ namespace Wwise.API.Editor.SoundBankDirectoryWatcher.Common
 			{
 				if (!emptyPathErrorWasLogged)
 				{
-					Debug.LogWarning("WwiseProjectPath is empty in the Wwise integration settings. Set it in order to enable the project database.");
+					WwiseLogger.Warning("WwiseProjectPath is empty in the Wwise integration settings. Set it in order to enable the project database.");
 					emptyPathErrorWasLogged = true;
 				}
 				return;
@@ -79,7 +80,11 @@ namespace Wwise.API.Editor.SoundBankDirectoryWatcher.Common
 			if (System.DateTime.Now.Subtract(s_lastFileCheck).Seconds >= SecondsBetweenChecks &&
 			    !UnityEditor.EditorApplication.isCompiling && !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode && !AkUtilities.GeneratingSoundBanks)
 			{
-				var filename = System.IO.Path.Combine(AkBasePathGetter.GetWwiseRootOutputPath());
+				var filename = AkWwiseEditorSettings.GetRootOutputPath();
+				if (string.IsNullOrEmpty(filename))
+				{
+					return;
+				}
 				var wProjPath = System.IO.Path.Combine(AkBasePathGetter.GetWwiseProjectPath());
 				var time = System.IO.File.GetLastWriteTime(filename);
 				Task.Run(() => InitProjectDB(filename, wProjPath, time));
@@ -91,13 +96,15 @@ namespace Wwise.API.Editor.SoundBankDirectoryWatcher.Common
 		{
 			Execute();
 		}
-		
+
 		private async Task InitProjectDB(string filename, string wProjPath, DateTime time)
 		{
 			if (time > s_lastSoundBankDirectoryUpdate || forceUpdate)
 			{
+				forceUpdate = false;
+				s_lastSoundBankDirectoryUpdate = time;
 				if (!await WwiseProjectDatabase.InitAsync(filename, platformName))
-				{	
+				{
 					var userWarning = "";
 					if (!AkUtilities.IsSettingEnabled(wProjPath,"GenerateSoundBankJSON"))
 					{
@@ -108,10 +115,8 @@ namespace Wwise.API.Editor.SoundBankDirectoryWatcher.Common
 						userWarning = "Ensure that the SoundBanks Path in the Integration Settings matches the Root Output Path in the Wwise Project Settings on the SoundBanks tab, then regenerate the SoundBanks.";
 					}
 
-					UnityEngine.Debug.LogError("WwiseUnity: Cannot find ProjectInfo.json at " + filename + ". " + userWarning);
+					WwiseLogger.Error("Cannot find ProjectInfo.json at " + filename + ". " + userWarning);
 				}
-				s_lastSoundBankDirectoryUpdate = time;
-				forceUpdate = false;
 
 				initCallbackRequired = true;
 			}

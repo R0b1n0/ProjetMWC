@@ -1,19 +1,28 @@
+using System.Collections;
 using UnityEngine;
 
 public class MarbleBehaviour : MonoBehaviour
 {
     private Collider coll;
-    public Transform trans;
-    public Color color;
-    public int index;
-    public MarbleState state {  get; private set; }
-    public float lerpValue = 0;
-    public Material mat;
+    [HideInInspector] public Transform trans;
+    [HideInInspector] public Color color;
+    [HideInInspector] public Color ogColor;
+    [HideInInspector] public int index;
+    [HideInInspector] public MarbleState state {  get; private set; }
+    [HideInInspector] public float lerpValue = 0;
+    [HideInInspector] public Material mat;
+
+    [Header("Animation")]
+    [SerializeField] AnimationCurve scalingCurve;
+    [SerializeField] float grabScaleOffset;
+    [SerializeField] float levelScaleOffset;
+    [SerializeField] float scaleSpeed;
+
+    private float initialScale;
 
     public Vector3 OnReleasePos { get; private set; }
 
     Renderer rend;
-
 
     private void Awake()
     {
@@ -22,10 +31,12 @@ public class MarbleBehaviour : MonoBehaviour
         rend = trans.GetComponent<Renderer>();
         mat = new(rend.material);
         rend.material = mat;
+        initialScale = trans.localScale.x;
     }
 
     public void Initialize(Color color, int index)
     {
+        ogColor = color;
         this.color = color;
         this.index = index;
         mat.color = color;
@@ -34,6 +45,7 @@ public class MarbleBehaviour : MonoBehaviour
 
     public void SetState(MarbleState newState)
     {
+        lerpValue = 0;
         //Enter
         switch (newState)
         {
@@ -57,16 +69,84 @@ public class MarbleBehaviour : MonoBehaviour
         state = newState;
     }
 
+    public void OnLevelUpdate(int newLevel)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Expand(newLevel));
+    }
+
     public void OnGrabbed()
     {
         SetState(MarbleState.dragged);
-
+        StopAllCoroutines();
+        StartCoroutine(Expand(0));
     }
 
     public void OnRelease()
     {
         OnReleasePos = trans.position;
-        lerpValue = 0;
+        StopAllCoroutines();
+        StartCoroutine(Shrink());
+    }
+
+    private IEnumerator Expand(int level)
+    {
+        float targetScale;
+        float onScaleInitial = trans.localScale.x;
+        Color onScaleColor = mat.color;
+        Color targetColor = GetMarbleColor(level);
+        float scaleOffset = (grabScaleOffset + level * levelScaleOffset);
+        float lerp = 0;
+
+        while (lerp < 1)
+        {
+            lerp += Time.deltaTime * scaleSpeed;
+            targetScale = onScaleInitial + scaleOffset *  scalingCurve.Evaluate((lerp));
+            trans.localScale = new Vector3(targetScale, targetScale, targetScale);
+            mat.color = Color.Lerp(onScaleColor, targetColor, lerp);
+            yield return null;
+        }
+
+        targetScale = onScaleInitial + grabScaleOffset;
+        trans.localScale = new Vector3(targetScale, targetScale, targetScale);
+        mat.color = targetColor;
+    }
+
+    private IEnumerator Shrink()
+    {
+        float targetScale;
+        float onShrinkBeginSize = trans.localScale.x;
+        Color onScaleColor = mat.color;
+        float lerp = 0;
+
+        while (lerp < 1)
+        {
+            lerp += Time.deltaTime * scaleSpeed;
+            targetScale = onShrinkBeginSize - ( (onShrinkBeginSize - initialScale) * lerp);
+            trans.localScale = new Vector3(targetScale, targetScale, targetScale);
+            mat.color = Color.Lerp(onScaleColor, ogColor, lerp);
+            yield return null;
+        }
+        trans.localScale = new Vector3(initialScale, initialScale, initialScale);
+        mat.color = ogColor;
+    }
+
+    private Color GetMarbleColor(int intensityLevel)
+    {
+        switch (intensityLevel)
+        {
+            case 0:
+                return MarbleManager.instance.GetMoodData(index).marbleColor;
+
+            case 1:
+                return MarbleManager.instance.GetMoodData(index).marbleColor1;
+
+            case 2:
+                return MarbleManager.instance.GetMoodData(index).marbleColor2;
+
+            default:
+                return Color.rosyBrown;
+        }
     }
 }
 

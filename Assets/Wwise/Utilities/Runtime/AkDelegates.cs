@@ -16,6 +16,7 @@ Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 using System;
 using UnityEngine;
+using AK.Wwise.Unity.Logging;
 
 public static class AkDelegates
 {
@@ -38,7 +39,7 @@ public static class AkDelegates
                 // If the Unity object is null/destroyed, unsubscribe and skip
                 if (unityTarget == null)
                 {
-                    Debug.Log($"WwiseUnity: Removing stale delegate from Action. Method: {del.Method.Name}, Target ID: {unityTarget.GetInstanceID()}");
+                    WwiseLogger.Log($"Removing stale delegate from Action. Method: {del.Method.Name}, Target ID: {unityTarget.GetInstanceID()}");
                     action -= (Action)del;
                     continue;
                 }
@@ -50,7 +51,7 @@ public static class AkDelegates
             }
             catch (MissingReferenceException missingReferenceException)
             {
-                Debug.LogError($"WwiseUnity: Missing Reference Exception caught during safe Invoke. Method: {del.Method.Name}. Error: {missingReferenceException.Message}");
+                WwiseLogger.Error($"Missing Reference Exception caught during safe Invoke. Method: {del.Method.Name}. Error: {missingReferenceException.Message}");
                 if (del.Target is UnityEngine.Object unityTargetOnException && unityTargetOnException == null)
                 {
                     action -= (Action)del;
@@ -58,7 +59,7 @@ public static class AkDelegates
             }
             catch (Exception ex)
             {
-                Debug.LogError($"WwiseUnity: Unexpected exception during safe Invoke. Method: {del.Method.Name}. Error: {ex.Message}");
+                WwiseLogger.Error($"Unexpected exception during safe Invoke. Method: {del.Method.Name}. Error: {ex.Message}");
             }
         }
     }

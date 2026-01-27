@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class BlobManager : MonoBehaviour
@@ -13,9 +12,6 @@ public class BlobManager : MonoBehaviour
     MoodInput second;
     [SerializeField]
     MoodInput third;
-
-    [Header("Emotions parameters ")]
-    [SerializeField] EmotionParameters moodBook;
 
     [Header("Movements")]
     [SerializeField] List<Part> partsData = new List<Part>();
@@ -160,7 +156,8 @@ public class BlobManager : MonoBehaviour
 
         blobMaterial.SetVectorArray("_Circles", toShader);
     }
-    //---------------------------------------------State 
+
+    #region State
     private float ComputeSpeed()
     {
         MoodProperties firstData = GetMoodData(first.mood);
@@ -183,7 +180,7 @@ public class BlobManager : MonoBehaviour
         //Colors
         blobInnerColor = Color.Lerp(previousState.color, computedState.color, t);
         Color.RGBToHSV(blobInnerColor, out float h, out float s, out float v);
-        blobEdgeColor = Color.HSVToRGB(h, s,1);
+        blobEdgeColor = Color.HSVToRGB(h, s, 1);
 
         speedFactor = Mathf.Lerp(previousState.speed, computedState.speed, t);
     }
@@ -194,8 +191,8 @@ public class BlobManager : MonoBehaviour
         previousState = MakeSnapShot();
         computedState = new State { color = GetBlendColor(), speed = ComputeSpeed() };
     }
-
-    //---------------------------------------------Color 
+    #endregion
+    #region Color
     private Color GetBlendColor()
     {
         float divisionValue = (first.intensity + second.intensity + third.intensity);
@@ -219,16 +216,17 @@ public class BlobManager : MonoBehaviour
     }
     private Color GetMoodColor(Mood mood, float intensity)
     {
+        EmotionParameters inst = EmotionParameters.Instance;
         switch (mood)
         {
             case Mood.Anger:
-                return Color.Lerp(moodBook.Anger.minColor, moodBook.Anger.maxColor, intensity / 100f);
+                return Color.Lerp(inst.Anger.minColor, inst.Anger.maxColor, intensity / 100f);
             case Mood.Joice:
-                return Color.Lerp(moodBook.Joice.minColor, moodBook.Joice.maxColor, intensity / 100f);
+                return Color.Lerp(inst.Joice.minColor, inst.Joice.maxColor, intensity / 100f);
             case Mood.Fear:
-                return Color.Lerp(moodBook.Fear.minColor, moodBook.Fear.maxColor, intensity / 100f);
+                return Color.Lerp(inst.Fear.minColor, inst.Fear.maxColor, intensity / 100f);
             case Mood.Sadness:
-                return Color.Lerp(moodBook.Sadness.minColor, moodBook.Sadness.maxColor, intensity / 100f);
+                return Color.Lerp(inst.Sadness.minColor, inst.Sadness.maxColor, intensity / 100f);
         }
         return Color.white;
     }
@@ -237,16 +235,23 @@ public class BlobManager : MonoBehaviour
         switch (mood)
         {
             case Mood.Anger:
-                return moodBook.Anger;
+                return EmotionParameters.Instance.Anger;
             case Mood.Joice:
-                return moodBook.Joice;
+                return EmotionParameters.Instance.Joice;
             case Mood.Fear:
-                return moodBook.Fear;
+                return EmotionParameters.Instance.Fear;
             case Mood.Sadness:
-                return moodBook.Sadness;
+                return EmotionParameters.Instance.Sadness;
         }
-        return moodBook.Anger;
+        return EmotionParameters.Instance.Anger;
     }
+    #endregion
+    #region Utils
+    public bool IsWithinBlobBounds(Vector3 screenPos)
+    {
+        return false;
+    }
+    #endregion
 }
 
 

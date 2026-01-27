@@ -15,12 +15,12 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-#if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#if !(UNITY_QNX) // Disable under unsupported platforms.
 
 namespace AK.Wwise
 {
 	[System.Serializable]
-	///@brief This type represents an auxiliary send in the Master-Mixer Hierarchy.
+	///@brief This type represents an auxiliary send in the Busses.
 	public class AuxBus : BaseType
 	{
 		public WwiseAuxBusReference WwiseObjectReference;
@@ -34,4 +34,4 @@ namespace AK.Wwise
 		public override WwiseObjectType WwiseObjectType { get { return WwiseObjectType.AuxBus; } }
 	}
 }
-#endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.
+#endif // #if !(UNITY_QNX) // Disable under unsupported platforms.

@@ -17,6 +17,7 @@ Copyright (c) 2025 Audiokinetic Inc.
 
 #if UNITY_EDITOR
 using UnityEditor;
+using AK.Wwise.Unity.Logging;
 
 [UnityEditor.InitializeOnLoad]
 public class AkWindowsPluginActivator : AkPlatformPluginActivator
@@ -58,7 +59,7 @@ public class AkWindowsPluginActivator : AkPlatformPluginActivator
 	{
 		if (pluginImporterInformation.PluginArch != "x86" && pluginImporterInformation.PluginArch != "x86_64")
 		{
-			UnityEngine.Debug.Log("WwiseUnity: Architecture not found: " + pluginImporterInformation.PluginArch);
+			WwiseLogger.Log("Architecture not found: " + pluginImporterInformation.PluginArch);
 			return false;
 		}
 

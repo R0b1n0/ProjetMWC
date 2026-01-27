@@ -72,29 +72,44 @@ public class AkAndroidSettings : AkWwiseInitializationSettings.PlatformSettings
 	{
 		public enum AudioAPI
 		{
-			None = 0,
-			AAudio = 1 << 0,
-			OpenSL_ES = 1 << 1,
-			Default = ~0
+			AndroidAudio = 1 << 0,
+			OpenSL_ES = 1 << 1
+		}
+		
+		public enum SpatializerAPI
+		{
+			DolbyAtmos = 1 << 8,
+			AndroidSpatializer = 1 << 9
 		}
 
-		[UnityEngine.Tooltip("Main audio API to use. Leave set to \"Default\" for the default audio sink.")]
+		public enum AudioPath
+		{
+			Legacy,
+			LowLatency,
+			Exclusive
+		}
+
+		[UnityEngine.Tooltip("Main audio API to allow using for audio output. Leave set to \"Everything\" to let the sink decide the best audio API for the device.")]
 		[AkEnumFlag(typeof(AudioAPI))]
-		public AudioAPI m_AudioAPI = AudioAPI.Default;
+		public AudioAPI m_AudioAPI = AudioAPI.AndroidAudio | AudioAPI.OpenSL_ES;
+		
+		[UnityEngine.Tooltip("Spatializer API to allow using for 3D audio support. Note that Android Spatializer has noticeable latency issues. Disabling all spatializer APIs will effectively disable 3D audio.")]
+		[AkEnumFlag(typeof(SpatializerAPI))]
+		public SpatializerAPI m_SpatializerAPI = SpatializerAPI.DolbyAtmos;
 
-		[UnityEngine.Tooltip("(deprecated) Rounds the pipeline buffer size to a multiple of the hardware-preferred frame size. This setting is deprecated. This has no impact on performance and should be left to false (the default).")]
-		public bool m_RoundFrameSizeToHardwareSize = false;
+		[UnityEngine.Tooltip("Which audio path to use. Legacy gives best compatibility with the widest range of devices but noticeably high latency. Exclusive has best latency but has several drawbacks and bad compatibility. LowLatency is a good balance between the two.")]
+		public AudioPath m_AudioPath = AudioPath.LowLatency;
 
-		[UnityEngine.Tooltip("Use the lowest output latency possible for the current hardware. If true (default), the output audio device will be initialized in low-latency operation, allowing for more responsive audio playback on most devices. However, when operating in low-latency mode, some devices may have differences in audio reproduction. If false, the output audio device will be initialized without low-latency operation.")]
-		public bool m_UseLowLatencyMode = true;
+		[UnityEngine.Tooltip("Enable system-level verbose logging for the Wwise sink. Useful for troubleshooting audio output problems on some devices.")]
+		public bool m_VerboseSink = false;
 
 		public override void CopyTo(AkPlatformInitSettings settings)
 		{
 #if UNITY_ANDROID && !UNITY_EDITOR
-			settings.eAudioAPI = (AkAudioAPI)m_AudioAPI;
-			settings.bRoundFrameSizeToHWSize = m_RoundFrameSizeToHardwareSize;
-			settings.bEnableLowLatency = m_UseLowLatencyMode;
-#endif		
+			settings.eAudioAPI = (AkAudioAPI)m_AudioAPI | (AkAudioAPI)m_SpatializerAPI;
+			settings.eAudioPath = (AkAudioPath)m_AudioPath;
+			settings.bVerboseSink = m_VerboseSink;
+#endif
 		}
 	}
 

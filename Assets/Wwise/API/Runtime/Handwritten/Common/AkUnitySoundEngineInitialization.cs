@@ -15,19 +15,21 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
+#if UNITY_ANDROID && !UNITY_EDITOR
 using System;
-using System.Threading.Tasks;
+#endif
+using System.Runtime.InteropServices;
+using AK.Wwise.Unity.Logging;
 
 public class AkUnitySoundEngineInitialization
 {
 	protected static AkUnitySoundEngineInitialization m_Instance;
 
 	public System.Action initializationDelegate;
-	
+
 	public System.Action reInitializationDelegate;
-	
+
 	public System.Action terminationDelegate;
-	
 	public static AkUnitySoundEngineInitialization Instance
 	{
 		get
@@ -43,7 +45,7 @@ public class AkUnitySoundEngineInitialization
 
 	public bool InitializeSoundEngine()
 	{
-		UnityEngine.Debug.LogFormat("WwiseUnity: Wwise(R) SDK Version {0}.", AkUnitySoundEngine.WwiseVersion);
+		WwiseLogger.LogFormat("Wwise(R) SDK Version {0}.", AkUnitySoundEngine.WwiseVersion);
 		
 #if UNITY_ANDROID && ! UNITY_EDITOR
 		//Obtains the Android Java Object "currentActivity" in order to set it for the android io hook initialization
@@ -61,24 +63,51 @@ public class AkUnitySoundEngineInitialization
 		}
 		catch (Exception ex)
 		{
-			UnityEngine.Debug.LogError($"Failed to pass activity to native code: {ex.Message}");
+			WwiseLogger.Error($"Failed to pass activity to native code: {ex.Message}");
 		}
 #endif
-		var ActivePlatformSettings = AkWwiseInitializationSettings.ActivePlatformSettings;
-		var initResult = AkUnitySoundEngine.Init(ActivePlatformSettings.AkInitializationSettings);
+#if UNITY_OPENHARMONY && !UNITY_EDITOR
+		//Obtains the OpenHarmony TS Object "applicationContext" in order to set it for the OpenHarmony io hook initialization
+		try
+		{
+			// Init using the current applicationContext via the AkUnitySoundEngineInitHelp.ts script
+			using (var akSoundEngineTs = new UnityEngine.OpenHarmonyJSObject("AkUnitySoundEngineInitHelper"))
+			{
+				akSoundEngineTs.Call("Init");
+			}
+		}
+		catch (System.Exception ex)
+		{
+			WwiseLogger.Error($"Failed to pass applicationContext to native code: {ex.Message}");
+		}
+#endif
+		var activePlatformSettings = AkWwiseInitializationSettings.ActivePlatformSettings;
+		var initSettings = activePlatformSettings.AkInitializationSettings;
+		// DO NOT REMOVE until AkInitializationSettings.getCPtr(AkInitializationSettings obj) uses a safe handle (e.g. HandleRef)
+		var handle = GCHandle.Alloc(initSettings);
+		var initResult = AkUnitySoundEngine.Init(initSettings);
+		handle.Free();
 		if (initResult != AKRESULT.AK_Success)
 		{
-			UnityEngine.Debug.LogError($"WwiseUnity: Failed to initialize the sound engine. Reason: {initResult}");
+			WwiseLogger.Error($"Failed to initialize the sound engine. Reason: {initResult}");
 			AkUnitySoundEngine.Term();
 			return false;
 		}
 
-		if (AkUnitySoundEngine.InitSpatialAudio(ActivePlatformSettings.AkSpatialAudioInitSettings) != AKRESULT.AK_Success)
+		var spatialAudioInitSettings = activePlatformSettings.AkSpatialAudioInitSettings;
+		// DO NOT REMOVE until AkSpatialAudioInitSettings.getCPtr(AkSpatialAudioInitSettings obj) uses a safe handle (e.g. HandleRef)
+		handle = GCHandle.Alloc(spatialAudioInitSettings);
+		if (AkUnitySoundEngine.InitSpatialAudio(spatialAudioInitSettings) != AKRESULT.AK_Success)
 		{
-			UnityEngine.Debug.LogWarning("WwiseUnity: Failed to initialize spatial audio.");
+			WwiseLogger.Warning("Failed to initialize spatial audio.");
 		}
+		handle.Free();
 
-		AkUnitySoundEngine.InitCommunication(ActivePlatformSettings.AkCommunicationSettings);
+		var communicationSettings = activePlatformSettings.AkCommunicationSettings;
+		// DO NOT REMOVE until AkCommunicationSettings.getCPtr(AkCommunicationSettings obj) uses a safe handle (e.g. HandleRef)
+		handle = GCHandle.Alloc(communicationSettings);
+		AkUnitySoundEngine.InitCommunication(communicationSettings);
+		handle.Free();
 
 		var akBasePathGetterInstance = AkBasePathGetter.Get();
 		var soundBankBasePath = akBasePathGetterInstance.SoundBankBasePath;
@@ -88,14 +117,14 @@ public class AkUnitySoundEngineInitialization
 		if (string.IsNullOrEmpty(soundBankBasePath))
 		{
 			// this is a nearly impossible situation
-			UnityEngine.Debug.LogError("WwiseUnity: Couldn't find SoundBanks base path. Terminating sound engine.");
+			WwiseLogger.Error("Couldn't find SoundBanks base path. Terminating sound engine.");
 			AkUnitySoundEngine.Term();
 			return false;
 		}
 
 		var persistentDataPath = akBasePathGetterInstance.PersistentDataPath;
 		var isBasePathSameAsPersistentPath = soundBankBasePath == persistentDataPath;
-		
+
 #if UNITY_ANDROID
 		var canSetBasePath = !isBasePathSameAsPersistentPath;
 		var canSetPersistentDataPath = true;
@@ -109,12 +138,12 @@ public class AkUnitySoundEngineInitialization
 #if !AK_WWISE_ADDRESSABLES
 #if !UNITY_ANDROID || UNITY_EDITOR
 #if UNITY_EDITOR
-			var format = "WwiseUnity: Failed to set SoundBanks base path to <{0}>. Make sure SoundBank path is correctly set under Edit > Project Settings > Wwise > Editor > Asset Management.";
+			var format = "Failed to set SoundBanks base path to <{0}>. Make sure SoundBank path is correctly set under Edit > Project Settings > Wwise > Editor > Asset Management.";
 #else
-			var format = "WwiseUnity: Failed to set SoundBanks base path to <{0}>. Make sure SoundBank path is correctly set under Edit > Project Settings > Wwise > Initialization.";
+			var format = "Failed to set SoundBanks base path to <{0}>. Make sure SoundBank path is correctly set under Edit > Project Settings > Wwise > Initialization.";
 #endif
 			// It might be normal for SetBasePath to return AK_PathNotFound on Android. Silence the error log to avoid confusion.
-			UnityEngine.Debug.LogErrorFormat(format, soundBankBasePath);
+			WwiseLogger.ErrorFormat(format, soundBankBasePath);
 #endif
 #endif
 		}
@@ -134,10 +163,10 @@ public class AkUnitySoundEngineInitialization
 			AkUnitySoundEngine.AddBasePath(decodedBankFullPath);
 		}
 
-		AkUnitySoundEngine.SetCurrentLanguage(ActivePlatformSettings.InitialLanguage);
+		AkUnitySoundEngine.SetCurrentLanguage(activePlatformSettings.InitialLanguage);
 
-		AkCallbackManager.Init(ActivePlatformSettings.CallbackManagerInitializationSettings);
-		UnityEngine.Debug.Log("WwiseUnity: Sound engine initialized successfully.");
+		AkCallbackManager.Init(activePlatformSettings.CallbackManagerInitializationSettings);
+		WwiseLogger.Log("Sound engine initialized successfully.");
 		LoadInitBank();
 		initializationDelegate?.InvokeUnitySafe();
 		return true;
@@ -168,7 +197,7 @@ public class AkUnitySoundEngineInitialization
 		}
 
 		AkCallbackManager.Init(AkWwiseInitializationSettings.ActivePlatformSettings.CallbackManagerInitializationSettings);
-		
+
 		reInitializationDelegate?.InvokeUnitySafe();
 		return true;
 	}
@@ -203,7 +232,7 @@ public class AkUnitySoundEngineInitialization
 		return result;
 #else
 		return false;
-#endif // UNITY_EDITOR 
+#endif // UNITY_EDITOR
 	}
 
 	public void ResetSoundEngine()
@@ -232,16 +261,8 @@ public class AkUnitySoundEngineInitialization
 		{
 			return;
 		}
-
+		
 		terminationDelegate?.InvokeUnitySafe();
-
-		AkUnitySoundEngine.SetOfflineRendering(false);
-
-		// Stop everything, and make sure the callback buffer is empty. We try emptying as much as possible, and wait 10 ms before retrying.
-		// Callbacks can take a long time to be posted after the call to RenderAudio().
-		AkUnitySoundEngine.StopAll();
-		AkUnitySoundEngine.UnregisterAllGameObjects();
-		ClearBanks();
 		AkUnitySoundEngine.Term();
 
 		// Make sure we have no callbacks left after Term. Some might be posted during termination.
@@ -250,7 +271,7 @@ public class AkUnitySoundEngineInitialization
 		AkCallbackManager.Term();
 		ResetBanks();
 
-		UnityEngine.Debug.Log("WwiseUnity: Sound engine terminated successfully.");
+		WwiseLogger.Log("Sound engine terminated successfully.");
 	}
 }
 

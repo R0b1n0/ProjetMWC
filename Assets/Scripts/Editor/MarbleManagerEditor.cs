@@ -54,7 +54,7 @@ public class MarbleManagerEditor : Editor
 
         if (GUILayout.Button("Start Lerping"))
         {
-            script.TriggerAnimation();
+            script.TriggerLerpInAnimation();
         }
 
         serializedObject.ApplyModifiedProperties();

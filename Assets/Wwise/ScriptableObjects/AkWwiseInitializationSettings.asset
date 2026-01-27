@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7680052791ee1e9448198bbf90f1d117, type: 3}
+  m_Script: {fileID: 11500000, guid: 306a4b64a6ae12145b37ef4b528af321, type: 3}
   m_Name: AkWwiseInitializationSettings
   m_EditorClassIdentifier: AK.Wwise.Unity.API::AkWwiseInitializationSettings
   PlatformSettingsNameList:
@@ -17,9 +17,9 @@ MonoBehaviour:
   - Web
   - Windows
   PlatformSettingsList:
-  - {fileID: 11400000, guid: 3550cbfc4325ce54ab404f5ca8ac9ebe, type: 2}
-  - {fileID: 11400000, guid: faeb3e0b130c25e49bfb8e8bdb5cd1d4, type: 2}
-  - {fileID: 11400000, guid: fc22551706f598b4cb61405bf220841f, type: 2}
+  - {fileID: 11400000, guid: 0a67dc643b178e547a01749ab749089a, type: 2}
+  - {fileID: 11400000, guid: 43d50dd5df728a44fb69c3b8d034a08a, type: 2}
+  - {fileID: 11400000, guid: 1decee7a6728c9a42a17fa690145f59b, type: 2}
   InvalidReferencePlatforms: []
   UserSettings:
     m_BasePath: Audio\GeneratedSoundBanks
@@ -60,6 +60,9 @@ MonoBehaviour:
       m_MaxDiffractionAngleDegrees: 180
       m_SmoothingConstantMs: 0
       m_TransmissionOperation: 2
+      m_ClusteringMinPoints: 0
+      m_ClusteringMaxDistance: 5
+      m_ClusteringDeadZoneDistance: 10
   AdvancedSettings:
     m_IOMemorySize: 2097152
     m_TargetAutoStreamBufferLengthMs: 380

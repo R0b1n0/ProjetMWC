@@ -27,7 +27,9 @@ public class AkSurfaceReflectorInspector : UnityEditor.Editor
 	private UnityEditor.SerializedProperty TransmissionLossValues;
 	private UnityEditor.SerializedProperty EnableDiffraction;
 	private UnityEditor.SerializedProperty EnableDiffractionOnBoundaryEdges;
+	private UnityEditor.SerializedProperty BypassPortalSubtraction;
 	private UnityEditor.SerializedProperty Solid;
+	private UnityEditor.SerializedProperty isStatic;
 
 	public void OnEnable()
 	{
@@ -39,19 +41,26 @@ public class AkSurfaceReflectorInspector : UnityEditor.Editor
 		EnableDiffraction = serializedObject.FindProperty("EnableDiffraction");
 		EnableDiffractionOnBoundaryEdges = serializedObject.FindProperty("EnableDiffractionOnBoundaryEdges");
 		Solid = serializedObject.FindProperty("Solid");
+		BypassPortalSubtraction = serializedObject.FindProperty("BypassPortalSubtraction");
+		isStatic = serializedObject.FindProperty("isStatic");
 	}
 
 	public override void OnInspectorGUI()
 	{
 		serializedObject.Update();
 
-		UnityEditor.EditorGUILayout.PropertyField(Mesh);
+		UnityEditor.EditorGUILayout.PropertyField(isStatic);
 
-		UnityEditor.EditorGUILayout.PropertyField(AcousticTextures, true);
-		CheckArraySize(m_AkSurfaceReflector, m_AkSurfaceReflector.AcousticTextures.Length, "acoustic textures");
+		using (new UnityEditor.EditorGUILayout.VerticalScope("box"))
+		{
+			UnityEditor.EditorGUILayout.PropertyField(Mesh);
 
-		UnityEditor.EditorGUILayout.PropertyField(TransmissionLossValues, true);
-		CheckArraySize(m_AkSurfaceReflector, m_AkSurfaceReflector.TransmissionLossValues.Length, "transmission loss values");
+			UnityEditor.EditorGUILayout.PropertyField(AcousticTextures, true);
+			CheckArraySize(m_AkSurfaceReflector, m_AkSurfaceReflector.AcousticTextures.Length, "acoustic textures");
+
+			UnityEditor.EditorGUILayout.PropertyField(TransmissionLossValues, true);
+			CheckArraySize(m_AkSurfaceReflector, m_AkSurfaceReflector.TransmissionLossValues.Length, "transmission loss values");
+		}
 
 		UnityEditor.EditorGUILayout.PropertyField(EnableDiffraction);
 		if (EnableDiffraction.boolValue)
@@ -59,6 +68,7 @@ public class AkSurfaceReflectorInspector : UnityEditor.Editor
 			UnityEditor.EditorGUILayout.PropertyField(EnableDiffractionOnBoundaryEdges);
 		}
 
+		UnityEditor.EditorGUILayout.PropertyField(BypassPortalSubtraction);
 		UnityEditor.EditorGUILayout.PropertyField(Solid);
 
 		serializedObject.ApplyModifiedProperties();

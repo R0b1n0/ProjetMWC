@@ -9,6 +9,19 @@ public class EmotionParameters : ScriptableObject
     [SerializeField] public MoodProperties Sadness;
     [SerializeField] public MoodProperties Fear;
 
+    static EmotionParameters instance;
+    public static EmotionParameters Instance
+    {
+        get
+        {
+            if (!instance)
+            {
+                instance = Resources.Load<EmotionParameters>("Moods");
+            }
+            return instance;
+        }
+    }
+
     public MoodProperties GetMoodInfo(Mood mood)
     {
         switch (mood)
@@ -41,5 +54,7 @@ public struct MoodProperties
     public Color minColor;
     public Color maxColor;
     public Color marbleColor;
+    public Color marbleColor1;
+    public Color marbleColor2;
     public float speedFactor;
 }

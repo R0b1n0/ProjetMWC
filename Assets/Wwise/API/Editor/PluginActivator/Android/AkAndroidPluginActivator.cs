@@ -17,6 +17,7 @@ Copyright (c) 2025 Audiokinetic Inc.
 
 #if UNITY_EDITOR
 using UnityEditor;
+using AK.Wwise.Unity.Logging;
 
 [UnityEditor.InitializeOnLoad]
 public class AkAndroidPluginActivator : AkPlatformPluginActivator
@@ -66,7 +67,7 @@ public class AkAndroidPluginActivator : AkPlatformPluginActivator
 		}
 		else
 		{
-			UnityEngine.Debug.Log("WwiseUnity: Architecture not found: " + pluginImporterInformation.PluginArch);
+			WwiseLogger.Log("Architecture not found: " + pluginImporterInformation.PluginArch);
 		}
 		return true;
 	}

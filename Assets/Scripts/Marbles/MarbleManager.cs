@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class MarbleManager : MonoBehaviour
 {
+    public static MarbleManager instance;
+
     [SerializeField] Camera mainCam;
     [SerializeField] GameObject marblePb;
     [SerializeField] RectTransform[] holders;
+    [SerializeField] string marbleHolderTag;
+
     List<MarbleBehaviour> marbles = new List<MarbleBehaviour>();
+    List<SlotDrawer> drawers = new List<SlotDrawer>();
+    int draggedMarbleIndex;
 
     [Header("LerpIn")]
     [SerializeField] AnimationCurve lerpInCurve;
@@ -20,14 +26,23 @@ public class MarbleManager : MonoBehaviour
     [Header("Recover")]
     [SerializeField] AnimationCurve recoverCurve;
 
-    [SerializeField] EmotionParameters moodDic;
+    [Header("Params")]
+    [SerializeField] float marbleLoadingTime;
 
     [SerializeField]
     [HideInInspector]
     private List<Mood> moodOrder;
 
+    private float loadValue;
+    private float maxLoadValue = 2;
+
     private void Start()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+
         MarbleInputs.OnDragBegin += OnDragBegin;
         MarbleInputs.OnDragEnd += OnDragEnd;
         StartCoroutine(SetupOnStart());
@@ -47,26 +62,50 @@ public class MarbleManager : MonoBehaviour
     private void OnDragBegin(MarbleBehaviour selectedMarble)
     {
         selectedMarble.SetState(MarbleState.dragged);
+        draggedMarbleIndex = selectedMarble.index;
+        loadValue = 0;
     }
     private void OnDragEnd(MarbleBehaviour selectedMarble)
     {
         //Check if we're above the blob 
         selectedMarble.SetState(MarbleState.recover);
+        drawers[draggedMarbleIndex].SetSatelliteCount(1);
+        draggedMarbleIndex = -1;
     }
+
+    #region Utils
+    private bool TryGetHolderIndex(RectTransform rect, out int index)
+    {
+        index = 0;
+        for (int i = 0; i < holders.Length; i++)
+        {
+            if(rect ==  holders[i])
+            {
+                index = i;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public MoodProperties GetMoodData(int index)
+    {
+        return EmotionParameters.Instance.GetMoodInfo(moodOrder[index]);
+    }
+    #endregion
 
     #region Animation 
     private void HandleMarbles()
     {
         for (int i = 0; i < marbles.Count; i++)
         {
-            
             switch (marbles[i].state)
             {
                 case MarbleState.idle:
                     IdleMarble(marbles[i]);
                     break;
                 case MarbleState.dragged:
-                    DragMArble(marbles[i]);
+                    DragMarble(marbles[i]);
                     break;
                 case MarbleState.recover:
                     RecoverMarble(marbles[i]);
@@ -80,11 +119,53 @@ public class MarbleManager : MonoBehaviour
         marble.trans.position = new Vector3(holders[marble.index].position.x, holders[marble.index].position.y + Mathf.Sin(marble.lerpValue) * idleRange, 0);
         marble.lerpValue += Time.deltaTime * idleSpeed;
     }
-    private void DragMArble(MarbleBehaviour marble)
+    private void DragMarble(MarbleBehaviour marble)
     {
-        Vector2 inputPos = InputManager.instance.TouchWorldPos;
-        marble.trans.position = Vector3.MoveTowards(marble.trans.position, new Vector3(inputPos.x, inputPos.y , -2), 0.5f);
+        Vector2 randomOffset = new Vector2(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f));
+        float offsetFactor = loadValue / maxLoadValue;
+
+        //Detect slot under cursor
+        Ray ray = Camera.main.ScreenPointToRay(InputManager.instance.TouchScreenPos);
+        RaycastHit2D hit2D = Physics2D.GetRayIntersection(ray);
+
+        if (hit2D.collider != null && 
+            hit2D.transform.CompareTag(marbleHolderTag) && 
+            hit2D.transform.TryGetComponent(out RectTransform holder) &&
+            TryGetHolderIndex(holder, out int holderIndex) &&
+            holderIndex == marble.index)
+        {
+            LoadMarble();
+        }
+
+        Vector2 inputPos = InputManager.instance.TouchWorldPos + randomOffset * offsetFactor;
+        marble.trans.position = Vector3.MoveTowards(marble.trans.position, new Vector3(inputPos.x, inputPos.y, -2), 0.5f);
     }
+
+    #region Load Marble
+    private void LoadMarble()
+    {
+        int previousWhole = Mathf.FloorToInt(loadValue);
+
+        if (loadValue < 2)
+            loadValue += Time.deltaTime / marbleLoadingTime;
+        else
+            loadValue = 2;
+
+        int flooredValue = Mathf.FloorToInt(loadValue);
+
+        if (previousWhole != flooredValue)
+        {
+            //New loading level 
+            OnIntensityLevelUpdate(flooredValue);
+        }
+    }
+    private void OnIntensityLevelUpdate(int newLevel)
+    {
+        //Maybe it should be event driven, but i'm going the easy naive way here
+        marbles[draggedMarbleIndex].OnLevelUpdate(newLevel);
+        drawers[draggedMarbleIndex].SetSatelliteCount(newLevel+1);
+    }
+    #endregion
     private void RecoverMarble(MarbleBehaviour marble)
     {
         RectTransform holder = holders[marble.index];
@@ -100,7 +181,7 @@ public class MarbleManager : MonoBehaviour
         }
     }
 
-    public void TriggerAnimation()
+    public void TriggerLerpInAnimation()
     {
         StartCoroutine(LerpIn(marbles));
     }
@@ -113,7 +194,8 @@ public class MarbleManager : MonoBehaviour
             GameObject marble = Instantiate(marblePb);
             MarbleBehaviour marbleBh = marble.GetComponent<MarbleBehaviour>();
             marbles.Add(marbleBh);
-            marbleBh.Initialize(moodDic.GetMoodInfo(moodOrder[i]).marbleColor, i);
+            marbleBh.Initialize(EmotionParameters.Instance.GetMoodInfo(moodOrder[i]).marbleColor, i);
+            drawers.Add(holders[i].GetComponent<SlotDrawer>());
 
             Vector3[] corners = new Vector3[4];
             holders[i].GetWorldCorners(corners);

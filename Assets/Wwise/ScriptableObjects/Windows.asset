@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce16e3d69e3b92a418a8ef32e9d855ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 51a4e39836c2f2d46b6c5404dd34eb4f, type: 3}
   m_Name: Windows
   m_EditorClassIdentifier: AK.Wwise.Unity.API::AkWindowsSettings
   IgnorePropertyNameList: []
@@ -74,7 +74,6 @@ MonoBehaviour:
   - AdvancedSettings.m_MemoryMediaReservedLimit
   - AdvancedSettings.m_MemoryMediaAllocSizeHuge
   - AdvancedSettings.m_MemoryDebugLevel
-  - AdvancedSettings.m_LoadBankAsynchronously
   UserSettings:
     m_BasePath: Audio\GeneratedSoundBanks
     m_StartupLanguage: English(US)
@@ -114,11 +113,14 @@ MonoBehaviour:
       m_MaxDiffractionAngleDegrees: 180
       m_SmoothingConstantMs: 0
       m_TransmissionOperation: 2
+      m_ClusteringMinPoints: 0
+      m_ClusteringMaxDistance: 5
+      m_ClusteringDeadZoneDistance: 10
   AdvancedSettings:
     m_IOMemorySize: 2097152
     m_TargetAutoStreamBufferLengthMs: 380
     m_UseStreamCache: 0
-    m_LoadBankAsynchronously: 1
+    m_LoadBankAsynchronously: 0
     m_MaximumPinnedBytesInCache: 4294967295
     m_EnableGameSyncPreparation: 0
     m_ContinuousPlaybackLookAhead: 1
