@@ -41,7 +41,8 @@ public class SlotDrawer : MonoBehaviour
 
     private void Update()
     {
-
+        outerDrawer.radius = outerCircleRadius;
+        innerDrawer.radius = innerCircleRadius;
         //spin the outer circles
         outerCircleAngleOffset += Time.deltaTime * outerCircleRotationSpeed * Mathf.Deg2Rad;
         outerDrawer.SetOffset(outerCircleAngleOffset);

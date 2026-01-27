@@ -156,7 +156,8 @@ public class BlobManager : MonoBehaviour
 
         blobMaterial.SetVectorArray("_Circles", toShader);
     }
-    //---------------------------------------------State 
+
+    #region State
     private float ComputeSpeed()
     {
         MoodProperties firstData = GetMoodData(first.mood);
@@ -179,7 +180,7 @@ public class BlobManager : MonoBehaviour
         //Colors
         blobInnerColor = Color.Lerp(previousState.color, computedState.color, t);
         Color.RGBToHSV(blobInnerColor, out float h, out float s, out float v);
-        blobEdgeColor = Color.HSVToRGB(h, s,1);
+        blobEdgeColor = Color.HSVToRGB(h, s, 1);
 
         speedFactor = Mathf.Lerp(previousState.speed, computedState.speed, t);
     }
@@ -190,8 +191,8 @@ public class BlobManager : MonoBehaviour
         previousState = MakeSnapShot();
         computedState = new State { color = GetBlendColor(), speed = ComputeSpeed() };
     }
-
-    //---------------------------------------------Color 
+    #endregion
+    #region Color
     private Color GetBlendColor()
     {
         float divisionValue = (first.intensity + second.intensity + third.intensity);
@@ -244,6 +245,13 @@ public class BlobManager : MonoBehaviour
         }
         return EmotionParameters.Instance.Anger;
     }
+    #endregion
+    #region Utils
+    public bool IsWithinBlobBounds(Vector3 screenPos)
+    {
+        return false;
+    }
+    #endregion
 }
 
 
