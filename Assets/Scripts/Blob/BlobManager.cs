@@ -49,6 +49,7 @@ public class BlobManager : MonoBehaviour
     [SerializeField] AK.Wwise.RTPC rTPC;
     [SerializeField] AnimationCurve waveFormCurve;
     [SerializeField] AK.Wwise.RTPC beat;
+    [SerializeField] AK.Wwise.RTPC auraRangeRTPC;
 
     Vector4[] toShader;
     int circleCount;
@@ -88,7 +89,13 @@ public class BlobManager : MonoBehaviour
         blobMaterial.SetColor("_InnerColor", blobInnerColor);
         blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
         blobMaterial.SetFloat("_auraF", auraFrequency);
-        blobMaterial.SetFloat("_auraRange", auraRange);
+
+        Debug.Log("rtp auraRange value raw " + auraRangeRTPC.GetGlobalValue());
+        Debug.Log("rtp auraRange value normalized " + (1 + ((auraRangeRTPC.GetGlobalValue() + 15) / 8)));
+        Debug.Log("rtpc beat value raw " + beat.GetGlobalValue());
+        //Debug.Log((auraRangeRTPC.GetGlobalValue() + 23) / 8);
+
+        blobMaterial.SetFloat("_auraRange", auraRange * ( 1 + ((auraRangeRTPC.GetGlobalValue() + 15 ) / 8)));
         blobMaterial.SetFloat("_auraOffset", auraOffset);
         blobMaterial.SetFloat("_auraWidth", auraWidth);
         blobMaterial.SetFloat("_uvLengthFactor", uvLengthFactor);
