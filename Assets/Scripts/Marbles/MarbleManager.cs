@@ -28,6 +28,7 @@ public class MarbleManager : MonoBehaviour
 
     [Header("Params")]
     [SerializeField] float marbleLoadingTime;
+    [SerializeField, Range(0, 1)] float marbleScaleRelativToHolder;
 
     [SerializeField]
     [HideInInspector]
@@ -46,12 +47,15 @@ public class MarbleManager : MonoBehaviour
         MarbleInputs.OnDragBegin += OnDragBegin;
         MarbleInputs.OnDragEnd += OnDragEnd;
         StartCoroutine(SetupOnStart());
+
+        Utils.OnScreenRescale += UpdateMarblesOnCanvaResize;
     }
 
     private void OnDestroy()
     {
         MarbleInputs.OnDragBegin -= OnDragBegin;
         MarbleInputs.OnDragEnd -= OnDragEnd;
+        Utils.OnScreenRescale -= UpdateMarblesOnCanvaResize;
     }
 
     private void Update()
@@ -87,7 +91,6 @@ public class MarbleManager : MonoBehaviour
         }
         return false;
     }
-
     public MoodProperties GetMoodData(int index)
     {
         return EmotionParameters.Instance.GetMoodInfo(moodOrder[index]);
@@ -141,6 +144,18 @@ public class MarbleManager : MonoBehaviour
         marble.trans.position = Vector3.MoveTowards(marble.trans.position, new Vector3(inputPos.x, inputPos.y, -2), 0.5f);
     }
 
+    private void UpdateMarblesOnCanvaResize()
+    {
+        Vector3[] corners = new Vector3[4];
+        holders[0].GetWorldCorners(corners);
+        float scale = (corners[3].x - corners[0].x) * marbleScaleRelativToHolder;
+
+        for (int i = 0; i < marbles.Count; i++)
+        {
+            marbles[i].UpdateOnCanvaRescale(scale);
+        }
+    }
+
     #region Load Marble
     private void LoadMarble()
     {
@@ -188,17 +203,18 @@ public class MarbleManager : MonoBehaviour
     private IEnumerator SetupOnStart()
     {
         yield return new WaitForEndOfFrame();
+
+        Vector3[] corners = new Vector3[4];
+        holders[0].GetWorldCorners(corners);
+        float scale = (corners[3].x - corners[0].x) * marbleScaleRelativToHolder;
         //Instantiate the marbles 
         for (int i = 0; i < holders.Length; i++)
         {
             GameObject marble = Instantiate(marblePb);
             MarbleBehaviour marbleBh = marble.GetComponent<MarbleBehaviour>();
             marbles.Add(marbleBh);
-            marbleBh.Initialize(EmotionParameters.Instance.GetMoodInfo(moodOrder[i]).marbleColor, i);
+            marbleBh.Initialize(EmotionParameters.Instance.GetMoodInfo(moodOrder[i]).marbleColor, i, scale);
             drawers.Add(holders[i].GetComponent<SlotDrawer>());
-
-            Vector3[] corners = new Vector3[4];
-            holders[i].GetWorldCorners(corners);
 
             marble.transform.position = new Vector3(holders[i].position.x, holders[i].position.y - (corners[1].y - corners[0].y),0);
         }

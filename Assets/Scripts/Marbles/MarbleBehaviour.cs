@@ -18,7 +18,9 @@ public class MarbleBehaviour : MonoBehaviour
     [SerializeField] float levelScaleOffset;
     [SerializeField] float scaleSpeed;
 
-    private float initialScale;
+    float OnInitScale;
+    float defaultScale;
+    float OnInitS2WFactor;
 
     public Vector3 OnReleasePos { get; private set; }
 
@@ -31,15 +33,27 @@ public class MarbleBehaviour : MonoBehaviour
         rend = trans.GetComponent<Renderer>();
         mat = new(rend.material);
         rend.material = mat;
-        initialScale = trans.localScale.x;
     }
 
-    public void Initialize(Color color, int index)
+    public void UpdateOnCanvaRescale(float newDefaultScale)
+    {
+        defaultScale = newDefaultScale;
+        if (state == MarbleState.idle)
+        {
+            trans.localScale = new Vector3(defaultScale, defaultScale, defaultScale);
+        }
+    }
+
+    public void Initialize(Color color, int index, float initScale)
     {
         ogColor = color;
         this.color = color;
         this.index = index;
         mat.color = color;
+        OnInitScale = initScale;
+        defaultScale = initScale;
+        trans.localScale = new Vector3(OnInitScale, OnInitScale, OnInitScale);
+        OnInitS2WFactor = Utils.screen2World;
         SetState(MarbleState.lerpIn);
     }
 
@@ -122,12 +136,12 @@ public class MarbleBehaviour : MonoBehaviour
         while (lerp < 1)
         {
             lerp += Time.deltaTime * scaleSpeed;
-            targetScale = onShrinkBeginSize - ( (onShrinkBeginSize - initialScale) * lerp);
+            targetScale = onShrinkBeginSize - ( (onShrinkBeginSize - defaultScale) * lerp);
             trans.localScale = new Vector3(targetScale, targetScale, targetScale);
             mat.color = Color.Lerp(onScaleColor, ogColor, lerp);
             yield return null;
         }
-        trans.localScale = new Vector3(initialScale, initialScale, initialScale);
+        trans.localScale = new Vector3(defaultScale, defaultScale, defaultScale);
         mat.color = ogColor;
     }
 

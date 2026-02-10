@@ -1,6 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
+[RequireComponent(typeof(RectTransform))]
 public class SlotDrawer : MonoBehaviour
 {
     [Header("References")]
@@ -10,19 +13,22 @@ public class SlotDrawer : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] float outerCircleRotationSpeed;
-    [SerializeField] float innerCircleRadius;
-    [SerializeField] float outerCircleRadius;
+    [SerializeField, Range(0,1)] float innerCircleRadius;
+    [SerializeField, Range(0, 1)] float outerCircleRadius;
     [Min(0),SerializeField] int satelliteCount;
     [SerializeField] float satelliteMaxScale;
 
     List<SatelliteBehaviour> satellites = new List<SatelliteBehaviour>();
 
     float outerCircleAngleOffset;
+    RectTransform holder;
+    CircleCollider2D coll;
 
     private void Awake()
     {
-        innerDrawer.radius = innerCircleRadius;
-
+        holder = GetComponent<RectTransform>();
+        coll = GetComponent<CircleCollider2D>();
+        
         //Create the satellites
         for (int i = 0; i < satelliteCount; i++)
         {
@@ -32,22 +38,35 @@ public class SlotDrawer : MonoBehaviour
             satellites[i].targetScale = satelliteMaxScale;
         }
 
-        outerDrawer.radius = outerCircleRadius;
-        innerDrawer.radius = innerCircleRadius;
+        Utils.OnScreenRescale += Rescale;
 
         RotateSatellites();
         SetSatelliteCount(1);
     }
 
+    private void OnDestroy()
+    {
+        Utils.OnScreenRescale -= Rescale;
+    }
+
     private void Update()
     {
-        outerDrawer.radius = outerCircleRadius;
-        innerDrawer.radius = innerCircleRadius;
         //spin the outer circles
         outerCircleAngleOffset += Time.deltaTime * outerCircleRotationSpeed * Mathf.Deg2Rad;
         outerDrawer.SetOffset(outerCircleAngleOffset);
 
         RotateSatellites();
+    }
+
+    private void Rescale()
+    {
+        Vector3[] holderCornersS = new Vector3[4];
+        holder.GetLocalCorners(holderCornersS);
+        float holderHalfWidth = (holderCornersS[2].x - holderCornersS[0].x) / 2 * Utils.screen2World;
+
+        outerDrawer.radius = holderHalfWidth * outerCircleRadius;
+        innerDrawer.radius = holderHalfWidth * innerCircleRadius;
+        coll.radius = (holderCornersS[2].x - holderCornersS[0].x) / 2 * innerCircleRadius;
     }
 
     private void RotateSatellites()
@@ -60,7 +79,7 @@ public class SlotDrawer : MonoBehaviour
                 new Vector3(
                     Mathf.Cos(outerCircleAngleOffset + offset), 
                     Mathf.Sin(outerCircleAngleOffset + offset), 
-                    0).normalized * innerCircleRadius ;
+                    0).normalized * innerDrawer.radius;
         }
     }
 
@@ -74,5 +93,4 @@ public class SlotDrawer : MonoBehaviour
                 satellites[i].ScaleDown();
         }
     }
-
 }
