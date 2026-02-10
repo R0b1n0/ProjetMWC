@@ -174,7 +174,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 6bf5542534aabac43933e559a04a524b, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 6aa12dfc407bb8646a8fcaf6d6a8f0ef, type: 2}
   useCallbacks: 0
   stopSoundOnDestroy: 1
   Callbacks: []
@@ -1984,7 +1984,7 @@ MonoBehaviour:
   movementType: 0
   auraFrequency: 1.7
   auraSpeed: 5
-  auraRange: 7.9
+  auraRange: 8
   auraWidth: -0.7
   uvLengthFactor: 1
   lightSdScale: 16.7
@@ -2045,7 +2045,11 @@ MonoBehaviour:
   beat:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 1c4b06a7dd1d95845b0bcdf70270eb47, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 3d5c5e7ce8215cb478f93845e352b0af, type: 2}
+  auraRangeRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 95b87f530ed9ca649bb14a267cbbd2f3, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
