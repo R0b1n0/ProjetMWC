@@ -1458,7 +1458,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   marbleLoadingTime: 2
-  marbleScaleRelativToHolder: 1
+  marbleScaleRelativToHolder: 0.3
   moodOrder: 00000000010000000200000003000000
 --- !u!1 &1564028636
 GameObject:
@@ -1871,7 +1871,7 @@ Transform:
   m_GameObject: {fileID: 1739910707}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.10498, y: 1.50019, z: 0.36133}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1916,7 +1916,7 @@ Transform:
   m_GameObject: {fileID: 1867051469}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 377.9277, y: 229.5089, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
