@@ -90,10 +90,10 @@ public class BlobManager : MonoBehaviour
         blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
         blobMaterial.SetFloat("_auraF", auraFrequency);
 
-        Debug.Log("rtp auraRange value raw " + auraRangeRTPC.GetGlobalValue());
+        /*Debug.Log("rtp auraRange value raw " + auraRangeRTPC.GetGlobalValue());
         Debug.Log("rtp auraRange value normalized " + (1 + ((auraRangeRTPC.GetGlobalValue() + 15) / 8)));
         Debug.Log("rtpc beat value raw " + beat.GetGlobalValue());
-        //Debug.Log((auraRangeRTPC.GetGlobalValue() + 23) / 8);
+        Debug.Log((auraRangeRTPC.GetGlobalValue() + 23) / 8);*/
 
         blobMaterial.SetFloat("_auraRange", auraRange * ( 1 + ((auraRangeRTPC.GetGlobalValue() + 15 ) / 8)));
         blobMaterial.SetFloat("_auraOffset", auraOffset);
