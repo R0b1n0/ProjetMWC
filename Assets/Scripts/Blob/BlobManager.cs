@@ -29,6 +29,7 @@ public class BlobManager : MonoBehaviour
     [SerializeField][Range(0f, 100f)] float lightSdScale;
     [SerializeField][Range(-10f, 10f)] float xOffset;
     [SerializeField][Range(-10f, 10f)] float yOffset;
+    [SerializeField] RtpcDependent lightFactor;
     float auraOffset;
 
     [Header("Beat Parameters ")]
@@ -107,6 +108,7 @@ public class BlobManager : MonoBehaviour
 
         beatFactor = waveFormCurve.Evaluate(1 - ((-beat.GetGlobalValue()) / 48));
         blobMaterial.SetFloat("_LightFactor", beatFactor);
+        blobMaterial.SetFloat("_LightFactor", lightFactor.Get());
 
         blobMaterial.SetInt("_innerRenderMethod", innerRenderMethod);
         blobMaterial.SetInt("_outerRenderMethod", outerRenderMethod);
@@ -289,4 +291,56 @@ public class Part
     [HideInInspector] public Vector2 destination;
     [HideInInspector] public Vector2 origin;
     [HideInInspector] public float lerpPhase;
+}
+
+[Serializable]
+public struct RtpcDependent
+{
+    public AK.Wwise.RTPC rtpc;
+    public EEvaluationMode evaluationMode;
+
+    public int rtpcMin;
+    public int rtpcMax;
+    public AnimationCurve normalizedCurve;
+    public AnimationCurve rangeCurve;
+    public float baseValue;
+
+    public float outputMin;
+    public float outputMax;
+
+    public float Get()
+    {
+        if (rtpc.WwiseObjectReference == null) 
+            return baseValue;
+
+        float normalizedRtpc = (rtpc.GetGlobalValue() - rtpcMin) / Math.Abs(rtpcMax - rtpcMin);
+
+        if (normalizedRtpc == float.NaN)
+            return 0;
+
+        switch (evaluationMode)
+        {
+            case EEvaluationMode.LinearNormalized:
+                return normalizedRtpc;
+
+            case EEvaluationMode.LinearRange:
+                    return outputMin + normalizedRtpc * (outputMax - outputMin);
+                
+            case EEvaluationMode.NormalizedCurve:
+                return normalizedCurve.Evaluate(normalizedRtpc);
+                
+            case EEvaluationMode.CurvedRange:
+                    return outputMin + normalizedCurve.Evaluate(normalizedRtpc) * (outputMax - outputMin);
+        }
+
+        return baseValue;
+    }
+
+    public enum EEvaluationMode
+    {
+        LinearNormalized,
+        LinearRange,
+        NormalizedCurve,
+        CurvedRange
+    }
 }
