@@ -16,7 +16,8 @@ public class Utils : MonoBehaviour
 
     private void OnRectTransformDimensionsChange()
     {
-        StartCoroutine(ProcessScreenScaler());
+        if (canva.gameObject.activeSelf) 
+            StartCoroutine(ProcessScreenScaler());
     }
    
     private void ComputeScreenToWorldFactor()
