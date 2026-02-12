@@ -2005,6 +2005,65 @@ MonoBehaviour:
   lightSdScale: 16.7
   xOffset: 1.1
   yOffset: 0.25
+  lightFactor:
+    rtpc:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 3d5c5e7ce8215cb478f93845e352b0af, type: 2}
+    evaluationMode: 0
+    rtpcMin: -48
+    rtpcMax: 0
+    normalizedCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.8136098
+        outSlope: 0.8136098
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.81463623
+        value: 0.662796
+        inSlope: 0.8136098
+        outSlope: 0.8136098
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 0
+      m_RotationOrder: 4
+    rangeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    baseValue: 5
+    outputMin: 0
+    outputMax: 49.89
   scaleFactorOnBeat: 0.2
   blobEdgeColor: {r: 0, g: 0.57640755, b: 0.94270587, a: 1}
   blobInnerColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
