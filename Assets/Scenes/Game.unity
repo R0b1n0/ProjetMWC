@@ -1459,6 +1459,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   marbleLoadingTime: 2
   marbleScaleRelativToHolder: 0.3
+  marbleSpeedOnDrag: 8
+  accelerationTreshold: 2
   moodOrder: 00000000010000000200000003000000
 --- !u!1 &1564028636
 GameObject:

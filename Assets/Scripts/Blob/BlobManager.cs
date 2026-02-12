@@ -106,8 +106,8 @@ public class BlobManager : MonoBehaviour
 
         blobMaterial.SetInt("_CircleCount", circleCount);
 
-        beatFactor = waveFormCurve.Evaluate(1 - ((-beat.GetGlobalValue()) / 48));
-        blobMaterial.SetFloat("_LightFactor", beatFactor);
+        /*beatFactor = waveFormCurve.Evaluate(1 - ((-beat.GetGlobalValue()) / 48));
+        blobMaterial.SetFloat("_LightFactor", beatFactor);*/
         blobMaterial.SetFloat("_LightFactor", lightFactor.Get());
 
         blobMaterial.SetInt("_innerRenderMethod", innerRenderMethod);

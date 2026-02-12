@@ -30,6 +30,10 @@ public class MarbleManager : MonoBehaviour
     [SerializeField] float marbleLoadingTime;
     [SerializeField, Range(0, 1)] float marbleScaleRelativToHolder;
 
+    [Header("DragParam")]
+    [SerializeField] float marbleSpeedOnDrag;
+    [SerializeField] float accelerationTreshold;
+
     [SerializeField]
     [HideInInspector]
     private List<Mood> moodOrder;
@@ -141,7 +145,18 @@ public class MarbleManager : MonoBehaviour
         }
 
         Vector2 inputPos = InputManager.instance.TouchWorldPos + randomOffset * offsetFactor;
-        marble.trans.position = Vector3.MoveTowards(marble.trans.position, new Vector3(inputPos.x, inputPos.y, -2), 0.5f);
+        Vector3 target = new Vector3(inputPos.x, inputPos.y, -2);
+        float d2Target = Vector3.Distance(target, marble.trans.position);
+        float stepDistance = Time.deltaTime * marbleSpeedOnDrag * Mathf.Max(d2Target, accelerationTreshold);
+
+        if (d2Target <= stepDistance)
+        {
+            marble.transform.position = target;
+        }
+        else
+        {
+            marble.trans.position = marble.trans.position + (target - marble.trans.position).normalized * stepDistance;
+        }
     }
 
     private void UpdateMarblesOnCanvaResize()
