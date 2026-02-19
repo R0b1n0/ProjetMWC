@@ -75,7 +75,7 @@ public class MarbleManager : MonoBehaviour
     }
     private void OnDragEnd(MarbleBehaviour selectedMarble)
     {
-        //Check if we're above the blob 
+
         selectedMarble.SetState(MarbleState.recover);
         drawers[draggedMarbleIndex].SetSatelliteCount(1);
         draggedMarbleIndex = -1;

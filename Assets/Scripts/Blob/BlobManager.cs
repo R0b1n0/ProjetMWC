@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BlobManager : MonoBehaviour
 {
+    public static BlobManager instance;
+
     [Header("Channel inputs ")]
     [SerializeField] Material blobMaterial;
     [SerializeField]
@@ -69,7 +71,16 @@ public class BlobManager : MonoBehaviour
 
     private void Awake()
     {
-        circleCount = partsData.Count;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+            circleCount = partsData.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
         toShader = new Vector4[circleCount + 1];
 
@@ -178,10 +189,9 @@ public class BlobManager : MonoBehaviour
         //Add the marble extra aura 
         if (renderMarbleAura)
         {
-            Vector2 marbleViewportPos = Utils.World2UV(marble.trans.position);
+            Vector2 marbleUvPos = Utils.World2UV(marble.trans.position);
             float radius = Utils.World2UV(marble.trans.localScale).x / 1.9f * marbleAuraScale;
-            toShader[toShader.Length-1] = new Vector4(marbleViewportPos.x, marbleViewportPos.y, radius);
-
+            toShader[toShader.Length-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius);
             blobMaterial.SetInt("_CircleCount", circleCount + 1);
             blobMaterial.SetVectorArray("_Circles", toShader);
             return;
@@ -323,14 +333,14 @@ public class BlobManager : MonoBehaviour
 
         for(int i = 0; i < circleCount; i++)
         {
-            if ((partsData[i].currentPos - UvPos).magnitude - uvRadius - partsData[i].radius < 0.14)
+            if ((partsData[i].currentPos - UvPos).magnitude - uvRadius - partsData[i].radius < 0.07)
             {
                 inBounds = true;
                 break;
             }
         }
 
-        return false;
+        return inBounds;
     }
     #endregion
 }
