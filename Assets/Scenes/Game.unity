@@ -1057,7 +1057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d433413526b1b45b0cf3b432b6791f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Utils
-  canva: {fileID: 1023189336}
 --- !u!1 &1026600514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,29 +1948,29 @@ MonoBehaviour:
   partsData:
   - radius: 0.1
     lerpSpeed: 0.5
-    destination: {x: -0.108527526, y: 0.096094795}
-    origin: {x: 0.09885597, y: 0.10682306}
-    lerpPhase: 0.80760384
+    destination: {x: 0.13147168, y: -0.11312543}
+    origin: {x: -0.14973406, y: 0.096063465}
+    lerpPhase: 0.58854365
   - radius: 0.2
     lerpSpeed: 0.7
-    destination: {x: 0.042900354, y: 0.017098933}
-    origin: {x: 0.16964306, y: 0.18684866}
-    lerpPhase: 0.8097789
+    destination: {x: -0.14057817, y: -0.16713671}
+    origin: {x: 0.100179434, y: -0.008469224}
+    lerpPhase: 0.6298714
   - radius: 0.15
     lerpSpeed: 0.5
-    destination: {x: -0.022463769, y: 0.05461473}
-    origin: {x: -0.02000615, y: -0.15163012}
-    lerpPhase: 0.60234815
+    destination: {x: 0.057575174, y: -0.021966621}
+    origin: {x: -0.07759689, y: 0.051860847}
+    lerpPhase: 0.34461105
   - radius: 0.2
     lerpSpeed: 0.4
-    destination: {x: -0.12398709, y: 0.17775679}
-    origin: {x: 0.17457543, y: -0.14595257}
-    lerpPhase: 0.14242844
+    destination: {x: 0.08185596, y: 0.058178283}
+    origin: {x: -0.18419982, y: 0.04576175}
+    lerpPhase: 0.11116446
   - radius: 0.19
     lerpSpeed: 0.7
-    destination: {x: 0.1480596, y: -0.101901725}
-    origin: {x: -0.058105923, y: -0.016386196}
-    lerpPhase: 0.22616613
+    destination: {x: 0.053553477, y: 0.12581344}
+    origin: {x: 0.005164176, y: -0.12306915}
+    lerpPhase: 0.18161881
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -1997,22 +1996,22 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   movementAreaRadius: 0.2
-  speedFactor: 0
+  speedFactor: 0.05
   movementType: 0
-  auraFrequency: 1.7
+  auraFrequency: 0.72
   auraSpeed: 5
-  auraRange: 8
+  auraRange: 3.4
   auraWidth: -0.7
   uvLengthFactor: 1
-  lightSdScale: 16.7
+  lightSdScale: 17.5
   xOffset: 1.1
   yOffset: 0.25
   lightFactor:
     rtpc:
       idInternal: 0
       valueGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: 3d5c5e7ce8215cb478f93845e352b0af, type: 2}
-    evaluationMode: 0
+      WwiseObjectReference: {fileID: 0}
+    evaluationMode: 1
     rtpcMin: -48
     rtpcMax: 0
     normalizedCurve:
@@ -2063,12 +2062,13 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    baseValue: 5
+    baseValue: 0
     outputMin: 0
-    outputMax: 49.89
+    outputMax: 3
   scaleFactorOnBeat: 0.2
-  blobEdgeColor: {r: 0, g: 0.57640755, b: 0.94270587, a: 1}
-  blobInnerColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+  auraScaleSpeed: 3
+  blobEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+  blobInnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   innerRenderMethod: 3
   outerRenderMethod: 9
   rtpcValue: 0

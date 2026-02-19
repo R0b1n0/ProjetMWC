@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,6 +37,12 @@ public class BlobManager : MonoBehaviour
     float beatFactor;
     [SerializeField] float scaleFactorOnBeat;
 
+    [Header("DragParam")]
+    [SerializeField, Tooltip("How long it takes for the dragged marble aura to appear")] float auraScaleSpeed;
+    bool renderMarbleAura;
+    float marbleAuraScale;
+    MarbleBehaviour marble;
+
 
     [Header("Debug")]
     [SerializeField] Color blobEdgeColor;
@@ -64,7 +71,7 @@ public class BlobManager : MonoBehaviour
     {
         circleCount = partsData.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
-        toShader = new Vector4[circleCount];
+        toShader = new Vector4[circleCount + 1];
 
         for (int i = 0; i < circleCount; i++)
         {
@@ -75,8 +82,15 @@ public class BlobManager : MonoBehaviour
             partsData[i].lerpPhase = 0;
         }
 
+        MarbleInputs.OnDragBegin += DragBegin;
+        MarbleInputs.OnDragEnd += DragEnd;
+
         //speedFactor = computedState.speed;
         LerpToComputedState(1);
+    }
+    private void OnDestroy()
+    {
+        MarbleInputs.OnDragBegin -= DragBegin;
     }
     private void Update()
     {
@@ -103,8 +117,6 @@ public class BlobManager : MonoBehaviour
         blobMaterial.SetFloat("_xOffset", xOffset);
         blobMaterial.SetFloat("_yOffset", yOffset);
         blobMaterial.SetFloat("_lightSdScale", lightSdScale);
-
-        blobMaterial.SetInt("_CircleCount", circleCount);
 
         /*beatFactor = waveFormCurve.Evaluate(1 - ((-beat.GetGlobalValue()) / 48));
         blobMaterial.SetFloat("_LightFactor", beatFactor);*/
@@ -137,7 +149,6 @@ public class BlobManager : MonoBehaviour
             //Linear lerp constant speed
             partsData[i].lerpPhase += Time.deltaTime * (partsData[i].lerpSpeed / (Vector2.Distance(partsData[i].origin, partsData[i].destination) * 2)) * speedFactor;
 
-
             float lerpValue = speedCurve.Evaluate(partsData[i].lerpPhase);
             //Linear move 
             Vector2 linearLerp = Vector2.Lerp(partsData[i].origin, partsData[i].destination, lerpValue);
@@ -147,7 +158,6 @@ public class BlobManager : MonoBehaviour
 
             computePos = Vector2.Lerp(linearLerp, circularLerp, movementType);
 
-
             if (partsData[i].lerpPhase >= 1)
             {
                 //Circle finished lerping
@@ -156,6 +166,8 @@ public class BlobManager : MonoBehaviour
                 partsData[i].lerpPhase = 0;
             }
 
+            partsData[i].currentPos = computePos;
+
             toShader[i] = new Vector4(
                 computePos.x,
                 computePos.y,
@@ -163,8 +175,57 @@ public class BlobManager : MonoBehaviour
                 0);
         }
 
+        //Add the marble extra aura 
+        if (renderMarbleAura)
+        {
+            Vector2 marbleViewportPos = Utils.World2UV(marble.trans.position);
+            float radius = Utils.World2UV(marble.trans.localScale).x / 1.9f * marbleAuraScale;
+            toShader[toShader.Length-1] = new Vector4(marbleViewportPos.x, marbleViewportPos.y, radius);
+
+            blobMaterial.SetInt("_CircleCount", circleCount + 1);
+            blobMaterial.SetVectorArray("_Circles", toShader);
+            return;
+        }
+
+        blobMaterial.SetInt("_CircleCount", circleCount);
         blobMaterial.SetVectorArray("_Circles", toShader);
     }
+
+    #region DragBehaviour
+    void DragBegin(MarbleBehaviour draggedMarble)
+    {
+        marbleAuraScale = 0;
+        marble = draggedMarble;
+        renderMarbleAura = true;
+        StopAllCoroutines();
+
+        StartCoroutine(LerpMarbleAura());
+    }
+    void DragEnd(MarbleBehaviour draggedMarble)
+    {
+        marble = null;
+        renderMarbleAura = false;
+    }
+    IEnumerator LerpMarbleAura()
+    {
+        while (renderMarbleAura)
+        {
+            marbleAuraScale += Time.deltaTime / auraScaleSpeed;
+            if (marbleAuraScale > 1)
+                marbleAuraScale = 1;
+
+            yield return null;
+        }
+
+        while (marbleAuraScale > 0)
+        {
+            marbleAuraScale -= Time.deltaTime / auraScaleSpeed;
+            yield return null;
+        }
+
+        marbleAuraScale = 0;
+    }
+    #endregion
 
     #region State
     private float ComputeSpeed()
@@ -256,8 +317,19 @@ public class BlobManager : MonoBehaviour
     }
     #endregion
     #region Utils
-    public bool IsWithinBlobBounds(Vector3 screenPos)
+    public bool IsWithinBlobBounds(Vector2 UvPos, float uvRadius)
     {
+        bool inBounds = false;
+
+        for(int i = 0; i < circleCount; i++)
+        {
+            if ((partsData[i].currentPos - UvPos).magnitude - uvRadius - partsData[i].radius < 0.14)
+            {
+                inBounds = true;
+                break;
+            }
+        }
+
         return false;
     }
     #endregion
@@ -288,6 +360,8 @@ public class Part
 {
     public float radius;
     public float lerpSpeed;
+    //All of those are UV value
+    [HideInInspector] public Vector2 currentPos;
     [HideInInspector] public Vector2 destination;
     [HideInInspector] public Vector2 origin;
     [HideInInspector] public float lerpPhase;

@@ -149,6 +149,8 @@ public class MarbleManager : MonoBehaviour
         float d2Target = Vector3.Distance(target, marble.trans.position);
         float stepDistance = Time.deltaTime * marbleSpeedOnDrag * Mathf.Max(d2Target, accelerationTreshold);
 
+
+        //Lerp without overshooting
         if (d2Target <= stepDistance)
         {
             marble.transform.position = target;
@@ -158,7 +160,6 @@ public class MarbleManager : MonoBehaviour
             marble.trans.position = marble.trans.position + (target - marble.trans.position).normalized * stepDistance;
         }
     }
-
     private void UpdateMarblesOnCanvaResize()
     {
         Vector3[] corners = new Vector3[4];

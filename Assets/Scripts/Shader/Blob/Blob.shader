@@ -246,27 +246,16 @@ Shader "Custom/Blob"
                         float wave = cos(400 * sd * (Length(uv)) - _UnityTime*5);
 
                         return wave;
-
-                        /*float spike = GetSpikeCircleSd(uv);
-                        spike =  (1 - min(spike,1))  ;
-
-                        if (wave < 0.5)
-                            return spike ;
-                            else return bckg;
-
-
-
-                        if (sd > 0.01 && sd < 0.05)
-                            return ColorLerp(bckg,_EdgeColor,  wave );
-                        else 
-                            return bckg;*/
                     }
                     else if (_outerRenderMethod == 9)
                     {
                         half4 bckg = half4(0,0,0,0);
 
                         float lightValue = (1/(sd * _lightSdScale + _xOffset) - _yOffset) * _LightFactor * length(uv);
-                        float lerp = cos(200 * _auraF * sd * (Length(uv) * _uvLengthFactor) - (_auraOffset)) + _auraWidth;
+
+                        //This line was here to make the aura fade with UV length, but it messes the whole marble aura waves so...
+                        //float lerp = cos(200 * _auraF * sd * (Length(uv) * _uvLengthFactor) - (_auraOffset)) + _auraWidth;
+                        float lerp = cos(200 * _auraF * sd  - (_auraOffset)) + _auraWidth;
                         half4 color = ColorLerp(bckg,_EdgeColor,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
 
                         return max(ColorLerp(color, bckg, min(sd * (100/_auraRange), 1)), lightValue/2);
