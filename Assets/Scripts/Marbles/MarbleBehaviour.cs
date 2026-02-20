@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public class MarbleBehaviour : MonoBehaviour
     [HideInInspector] public float lerpValue = 0;
     [HideInInspector] public Material mat;
 
-    [Header("Animation")]
+    [Header("Scaling Animation")]
     [SerializeField] AnimationCurve scalingCurve;
     [SerializeField] float grabScaleOffset;
     [SerializeField] float levelScaleOffset;
@@ -27,6 +28,9 @@ public class MarbleBehaviour : MonoBehaviour
     public Vector3 OnReleasePos { get; private set; }
 
     Renderer rend;
+
+    public static event Action<MarbleBehaviour> RenderAura;
+    public static event Action<MarbleBehaviour> StopAuraRender;
 
     private void Awake()
     {
@@ -68,10 +72,12 @@ public class MarbleBehaviour : MonoBehaviour
                 coll.enabled = false;
                 break;
             case MarbleState.dragged:
-                coll.enabled = false; 
+                coll.enabled = false;
+                RenderAura?.Invoke(this);
                 break;
             case MarbleState.idle:
                 coll.enabled = true;
+                StopAuraRender?.Invoke(this);
                 break;
             case MarbleState.recover: 
                 coll.enabled = false;

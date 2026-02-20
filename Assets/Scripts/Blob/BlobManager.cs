@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class BlobManager : MonoBehaviour
 {
@@ -39,11 +40,7 @@ public class BlobManager : MonoBehaviour
     float beatFactor;
     [SerializeField] float scaleFactorOnBeat;
 
-    [Header("DragParam")]
-    [SerializeField, Tooltip("How long it takes for the dragged marble aura to appear")] float auraScaleSpeed;
-    bool renderMarbleAura;
-    float marbleAuraScale;
-    MarbleBehaviour marble;
+    MarbleAuraManager marbleAura = new();
 
 
     [Header("Debug")]
@@ -80,9 +77,9 @@ public class BlobManager : MonoBehaviour
             Destroy(this);
         }
 
-            circleCount = partsData.Count;
+        circleCount = partsData.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
-        toShader = new Vector4[circleCount + 1];
+        toShader = new Vector4[circleCount + 4];
 
         for (int i = 0; i < circleCount; i++)
         {
@@ -93,15 +90,8 @@ public class BlobManager : MonoBehaviour
             partsData[i].lerpPhase = 0;
         }
 
-        MarbleInputs.OnDragBegin += DragBegin;
-        MarbleInputs.OnDragEnd += DragEnd;
-
         //speedFactor = computedState.speed;
         LerpToComputedState(1);
-    }
-    private void OnDestroy()
-    {
-        MarbleInputs.OnDragBegin -= DragBegin;
     }
     private void Update()
     {
@@ -116,11 +106,6 @@ public class BlobManager : MonoBehaviour
         blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
         blobMaterial.SetFloat("_auraF", auraFrequency);
 
-        /*Debug.Log("rtp auraRange value raw " + auraRangeRTPC.GetGlobalValue());
-        Debug.Log("rtp auraRange value normalized " + (1 + ((auraRangeRTPC.GetGlobalValue() + 15) / 8)));
-        Debug.Log("rtpc beat value raw " + beat.GetGlobalValue());
-        Debug.Log((auraRangeRTPC.GetGlobalValue() + 23) / 8);*/
-
         blobMaterial.SetFloat("_auraRange", auraRange * ( 1 + ((auraRangeRTPC.GetGlobalValue() + 15 ) / 8)));
         blobMaterial.SetFloat("_auraOffset", auraOffset);
         blobMaterial.SetFloat("_auraWidth", auraWidth);
@@ -129,8 +114,6 @@ public class BlobManager : MonoBehaviour
         blobMaterial.SetFloat("_yOffset", yOffset);
         blobMaterial.SetFloat("_lightSdScale", lightSdScale);
 
-        /*beatFactor = waveFormCurve.Evaluate(1 - ((-beat.GetGlobalValue()) / 48));
-        blobMaterial.SetFloat("_LightFactor", beatFactor);*/
         blobMaterial.SetFloat("_LightFactor", lightFactor.Get());
 
         blobMaterial.SetInt("_innerRenderMethod", innerRenderMethod);
@@ -186,56 +169,21 @@ public class BlobManager : MonoBehaviour
                 0);
         }
 
+        int partCount = circleCount;
         //Add the marble extra aura 
-        if (renderMarbleAura)
+        marbleAura.ProcessMarblesAura();
+        foreach(MarbleAuraRenderState state in marbleAura.marbles2Render)
         {
-            Vector2 marbleUvPos = Utils.World2UV(marble.trans.position);
-            float radius = Utils.World2UV(marble.trans.localScale).x / 1.9f * marbleAuraScale;
-            toShader[toShader.Length-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius);
-            blobMaterial.SetInt("_CircleCount", circleCount + 1);
-            blobMaterial.SetVectorArray("_Circles", toShader);
-            return;
+            partCount++;
+            Vector2 marbleUvPos = Utils.World2UV(state.marble.trans.position);
+            float radius = Utils.World2UV(state.marble.trans.localScale).x / 1.9f * state.scale;
+
+            toShader[partCount-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius);
         }
 
-        blobMaterial.SetInt("_CircleCount", circleCount);
+        blobMaterial.SetInt("_CircleCount", partCount);
         blobMaterial.SetVectorArray("_Circles", toShader);
     }
-
-    #region DragBehaviour
-    void DragBegin(MarbleBehaviour draggedMarble)
-    {
-        marbleAuraScale = 0;
-        marble = draggedMarble;
-        renderMarbleAura = true;
-        StopAllCoroutines();
-
-        StartCoroutine(LerpMarbleAura());
-    }
-    void DragEnd(MarbleBehaviour draggedMarble)
-    {
-        marble = null;
-        renderMarbleAura = false;
-    }
-    IEnumerator LerpMarbleAura()
-    {
-        while (renderMarbleAura)
-        {
-            marbleAuraScale += Time.deltaTime / auraScaleSpeed;
-            if (marbleAuraScale > 1)
-                marbleAuraScale = 1;
-
-            yield return null;
-        }
-
-        while (marbleAuraScale > 0)
-        {
-            marbleAuraScale -= Time.deltaTime / auraScaleSpeed;
-            yield return null;
-        }
-
-        marbleAuraScale = 0;
-    }
-    #endregion
 
     #region State
     private float ComputeSpeed()
