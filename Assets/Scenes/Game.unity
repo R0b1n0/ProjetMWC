@@ -1948,26 +1948,31 @@ MonoBehaviour:
   partsData:
   - radius: 0.1
     lerpSpeed: 0.5
+    currentPos: {x: 0, y: 0}
     destination: {x: 0.13147168, y: -0.11312543}
     origin: {x: -0.14973406, y: 0.096063465}
     lerpPhase: 0.58854365
   - radius: 0.2
     lerpSpeed: 0.7
+    currentPos: {x: 0, y: 0}
     destination: {x: -0.14057817, y: -0.16713671}
     origin: {x: 0.100179434, y: -0.008469224}
     lerpPhase: 0.6298714
   - radius: 0.15
     lerpSpeed: 0.5
+    currentPos: {x: 0, y: 0}
     destination: {x: 0.057575174, y: -0.021966621}
     origin: {x: -0.07759689, y: 0.051860847}
     lerpPhase: 0.34461105
   - radius: 0.2
     lerpSpeed: 0.4
+    currentPos: {x: 0, y: 0}
     destination: {x: 0.08185596, y: 0.058178283}
     origin: {x: -0.18419982, y: 0.04576175}
     lerpPhase: 0.11116446
   - radius: 0.19
     lerpSpeed: 0.7
+    currentPos: {x: 0, y: 0}
     destination: {x: 0.053553477, y: 0.12581344}
     origin: {x: 0.005164176, y: -0.12306915}
     lerpPhase: 0.18161881
@@ -2066,7 +2071,7 @@ MonoBehaviour:
     outputMin: 0
     outputMax: 3
   scaleFactorOnBeat: 0.2
-  auraScaleSpeed: 3
+  auraScaleSpeed: 1
   blobEdgeColor: {r: 1, g: 1, b: 1, a: 1}
   blobInnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   innerRenderMethod: 3

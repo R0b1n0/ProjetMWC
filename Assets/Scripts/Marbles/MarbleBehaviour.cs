@@ -20,7 +20,9 @@ public class MarbleBehaviour : MonoBehaviour
 
     float OnInitScale;
     float defaultScale;
-    float OnInitS2WFactor;
+
+    public float speed;
+    public Vector3 directionOnRelease;
 
     public Vector3 OnReleasePos { get; private set; }
 
@@ -53,7 +55,6 @@ public class MarbleBehaviour : MonoBehaviour
         OnInitScale = initScale;
         defaultScale = initScale;
         trans.localScale = new Vector3(OnInitScale, OnInitScale, OnInitScale);
-        OnInitS2WFactor = Utils.screen2World;
         SetState(MarbleState.lerpIn);
     }
 
@@ -96,7 +97,7 @@ public class MarbleBehaviour : MonoBehaviour
         StartCoroutine(Expand(0));
     }
 
-    public void OnRelease()
+    public void OnRecoverBegin()
     {
         OnReleasePos = trans.position;
         StopAllCoroutines();
@@ -170,5 +171,6 @@ public enum MarbleState
     idle, 
     recover, 
     consummed, 
-    lerpIn
+    lerpIn,
+    thrown
 }

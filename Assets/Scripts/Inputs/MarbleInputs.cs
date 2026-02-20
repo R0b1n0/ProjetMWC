@@ -31,7 +31,6 @@ public class MarbleInputs : MonoBehaviour
     {
         if (heldMarble)
         {
-            heldMarble.OnRelease();
             if (OnDragEnd != null)
             {
                 OnDragEnd.Invoke(heldMarble);
