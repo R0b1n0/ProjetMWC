@@ -354,6 +354,8 @@ MonoBehaviour:
   outerCircleRadius: 0.9
   satelliteCount: 3
   satelliteMaxScale: 20
+  salettilesSpeed: 0
+  outerCircleAngleOffset: 250
 --- !u!114 &478479405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,6 +907,8 @@ MonoBehaviour:
   outerCircleRadius: 0.9
   satelliteCount: 3
   satelliteMaxScale: 20
+  salettilesSpeed: 0
+  outerCircleAngleOffset: 10
 --- !u!58 &928505572
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1233,6 +1237,8 @@ MonoBehaviour:
   outerCircleRadius: 0.9
   satelliteCount: 3
   satelliteMaxScale: 20
+  salettilesSpeed: 0
+  outerCircleAngleOffset: 323
 --- !u!114 &1136680574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,6 +1564,8 @@ MonoBehaviour:
   outerCircleRadius: 0.9
   satelliteCount: 3
   satelliteMaxScale: 20
+  salettilesSpeed: 0
+  outerCircleAngleOffset: 180
 --- !u!114 &1564028640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,7 +2079,6 @@ MonoBehaviour:
     outputMin: 0
     outputMax: 3
   scaleFactorOnBeat: 0.2
-  auraScaleSpeed: 1
   blobEdgeColor: {r: 1, g: 1, b: 1, a: 1}
   blobInnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   innerRenderMethod: 3

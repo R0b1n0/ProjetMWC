@@ -83,7 +83,7 @@ public class MarbleManager : MonoBehaviour
         Vector2 inputDir = InputManager.instance.TouchWorldPos - draggedMarblePreviousPos;
         float marbleSpeedOnRelease = (inputDir.magnitude / Time.deltaTime)/10;
         selectedMarble.speed = marbleSpeedOnRelease;
-        selectedMarble.directionOnRelease = inputDir.normalized;
+        selectedMarble.direction = inputDir.normalized;
     }
 
     #region Utils
@@ -195,16 +195,35 @@ public class MarbleManager : MonoBehaviour
     }
     private void ThrowMarble(MarbleBehaviour marble)
     {
-        marble.speed -= Time.deltaTime*3;
-
         Vector2 viewportPos = Utils.World2ViewPort(marble.trans.position);
-        //3 give some room, it makes sure the marbles are stopped while out of view
+        Vector2 uvPos = Utils.World2UV(marble.trans.position);
+
+        marble.speed -= Time.deltaTime * 3;
+        //Stop the marble once it's out of view (3 is arbitrary, we just need smth above sqrt(2))
         if (viewportPos.sqrMagnitude > 3)
             marble.speed = 0;
+        Vector3 movementVector = new();
 
-        marble.trans.position = marble.trans.position + marble.directionOnRelease * (marble.speed * Time.deltaTime);
+        //Move towards the blob if close enough
+        Vector2 closestPartPos = BlobManager.instance.GetClosestPart(uvPos);
+        Vector3 v2Part = closestPartPos - uvPos;
+        float d2Part = v2Part.magnitude;
 
-        if (marble.speed <= 0.01f)
+        if (d2Part < 0.6f)
+        {
+            //Magic number, make it a variable :/ 
+            movementVector += v2Part.normalized * Time.deltaTime;
+            marble.speed -= Time.deltaTime * 20;
+        }
+
+        movementVector += marble.direction * (Mathf.Max(marble.speed,0) * Time.deltaTime);
+
+        marble.trans.position += movementVector;
+
+        marble.direction = movementVector.normalized;
+
+        //either absorbed or recovered
+        if (movementVector.magnitude <= 0.001f || d2Part <= 0.005f)
         {
             marble.OnRecoverBegin();
             marble.SetState(MarbleState.recover);

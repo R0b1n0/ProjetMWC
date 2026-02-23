@@ -290,6 +290,24 @@ public class BlobManager : MonoBehaviour
 
         return inBounds;
     }
+    public Vector2 GetClosestPart(Vector2 UvPos)
+    {
+        Vector2 closestPartPos = new();
+        float sd = 2;
+
+        float currentSD;
+        foreach (Part part in partsData)
+        {
+            currentSD = (part.currentPos - UvPos).magnitude;
+            if (currentSD < sd)
+            {
+                sd = currentSD;
+                closestPartPos = part.currentPos;
+            }
+        }
+
+        return closestPartPos;
+    }
     #endregion
 }
 

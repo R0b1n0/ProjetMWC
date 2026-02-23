@@ -23,7 +23,7 @@ public class MarbleBehaviour : MonoBehaviour
     float defaultScale;
 
     public float speed;
-    public Vector3 directionOnRelease;
+    public Vector3 direction;
 
     public Vector3 OnReleasePos { get; private set; }
 
