@@ -6,8 +6,8 @@ public class MarbleInputs : MonoBehaviour
     [SerializeField] LayerMask marbleMask;
     private MarbleBehaviour heldMarble;
 
-    public static Action<MarbleBehaviour> OnDragBegin;
-    public static Action<MarbleBehaviour> OnDragEnd;
+    public static event Action<MarbleBehaviour> OnDragBegin;
+    public static event Action<MarbleBehaviour> OnDragEnd;
 
     private void Start()
     {
@@ -20,7 +20,6 @@ public class MarbleInputs : MonoBehaviour
         if (TryCatchMarble(out MarbleBehaviour marble))
         {
             heldMarble = marble;
-            heldMarble.OnGrabbed();
             if (OnDragBegin != null)
             {
                 OnDragBegin.Invoke(heldMarble);

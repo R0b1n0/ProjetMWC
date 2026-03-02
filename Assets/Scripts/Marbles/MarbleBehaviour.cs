@@ -39,6 +39,12 @@ public class MarbleBehaviour : MonoBehaviour
         rend = trans.GetComponent<Renderer>();
         mat = new(rend.material);
         rend.material = mat;
+        MarbleInputs.OnDragBegin += OnGrabbed;
+    }
+
+    private void OnDestroy()
+    {
+        MarbleInputs.OnDragBegin -= OnGrabbed;
     }
 
     public void UpdateOnCanvaRescale(float newDefaultScale)
@@ -59,7 +65,7 @@ public class MarbleBehaviour : MonoBehaviour
         OnInitScale = initScale;
         defaultScale = initScale;
         trans.localScale = new Vector3(OnInitScale, OnInitScale, OnInitScale);
-        SetState(MarbleState.lerpIn);
+        SetState(MarbleState.empty);
     }
 
     public void SetState(MarbleState newState)
@@ -69,6 +75,7 @@ public class MarbleBehaviour : MonoBehaviour
         switch (newState)
         {
             case MarbleState.lerpIn:
+                StopAuraRender?.Invoke(this);
                 coll.enabled = false;
                 break;
             case MarbleState.dragged:
@@ -81,9 +88,12 @@ public class MarbleBehaviour : MonoBehaviour
                 break;
             case MarbleState.recover: 
                 coll.enabled = false;
+                OnRecoverBegin();
                 break;
             case MarbleState.consummed:
                 coll.enabled = false;
+                //Start shrinking
+
             break;
         }
 
@@ -96,14 +106,17 @@ public class MarbleBehaviour : MonoBehaviour
         StartCoroutine(Expand(newLevel));
     }
 
-    public void OnGrabbed()
+    private void OnGrabbed(MarbleBehaviour marble)
     {
+        if (marble != this)
+            return;
+
         SetState(MarbleState.dragged);
         StopAllCoroutines();
         StartCoroutine(Expand(0));
     }
 
-    public void OnRecoverBegin()
+    private void OnRecoverBegin()
     {
         OnReleasePos = trans.position;
         StopAllCoroutines();
@@ -173,6 +186,7 @@ public class MarbleBehaviour : MonoBehaviour
 
 public enum MarbleState
 {
+    empty,
     dragged,
     idle, 
     recover, 

@@ -125,6 +125,13 @@ public class MarbleManager : MonoBehaviour
                 case MarbleState.thrown:
                     ThrowMarble(marbles[i]);
                     break;
+                case MarbleState.consummed:
+                    AbsorbeMarble(marbles[i]);
+                    break;
+                case MarbleState.lerpIn:
+                    StartCoroutine(LerpIn(new List<MarbleBehaviour> { marbles[i] }));
+                    marbles[i].SetState(MarbleState.empty);
+                    break;
             }
         }
     }
@@ -213,7 +220,7 @@ public class MarbleManager : MonoBehaviour
         {
             //Magic number, make it a variable :/ 
             movementVector += v2Part.normalized * Time.deltaTime;
-            marble.speed -= Time.deltaTime * 20;
+            marble.speed -= Time.deltaTime * 10;
         }
 
         movementVector += marble.direction * (Mathf.Max(marble.speed,0) * Time.deltaTime);
@@ -222,12 +229,27 @@ public class MarbleManager : MonoBehaviour
 
         marble.direction = movementVector.normalized;
 
-        //either absorbed or recovered
-        if (movementVector.magnitude <= 0.001f || d2Part <= 0.005f)
+        //Absorbed 
+        if (d2Part < 0.005f)
         {
-            marble.OnRecoverBegin();
+            marble.SetState(MarbleState.consummed);
+        }
+
+        //Back to the slot
+        if (movementVector.magnitude <= 0.001f )
+        {
             marble.SetState(MarbleState.recover);
         }
+    }
+    private void AbsorbeMarble(MarbleBehaviour marble)
+    {
+        Vector2 viewportPos = Utils.World2ViewPort(marble.trans.position);
+        Vector2 uvPos = Utils.World2UV(marble.trans.position);
+        Vector2 closestPartPos = BlobManager.instance.GetClosestPart(uvPos);
+
+        marble.trans.position = closestPartPos;
+
+        marble.SetState(MarbleState.lerpIn);
     }
     #region Load Marble
     private void LoadMarble()
@@ -258,7 +280,7 @@ public class MarbleManager : MonoBehaviour
 #if UNITY_EDITOR
     public void TriggerLerpInAnimation()
     {
-        StartCoroutine(LerpIn(marbles));
+        //StartCoroutine(LerpIn(marbles));
     }
 #endif
     private IEnumerator SetupOnStart()
