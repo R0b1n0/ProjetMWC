@@ -52,11 +52,6 @@ public class MarbleManagerEditor : Editor
 
         moodOrder.DoLayoutList();
 
-        if (GUILayout.Button("Start Lerping"))
-        {
-            script.TriggerLerpInAnimation();
-        }
-
         serializedObject.ApplyModifiedProperties();
         EditorUtility.SetDirty(target);
     }

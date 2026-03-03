@@ -25,7 +25,7 @@ public class RecoverState : MarbleStateBehaviour
     public override void ExitState()
     {
         //Stop rendering aura
-        marble.OnRecovered();
+        marble.SetAura(false);
     }
 
     public override MarbleStateBehaviour Update()

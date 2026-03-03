@@ -33,7 +33,8 @@ public class AbsorbState : MarbleStateBehaviour
         marble.trans.localScale = new Vector3 (scale, scale, scale);
 
         if (l > 1)
-        { 
+        {
+            marble.SetAura(false);
             return new LerpInState(marble);
         }
 
