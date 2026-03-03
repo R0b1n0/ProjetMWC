@@ -36,6 +36,7 @@ public class IdleState : MarbleStateBehaviour
         if (hasBeenGrabbed)
         {
             marble.OnGrabbed();
+            marble.SetAura(true);
             return new DraggingState(marble);
         }
 

@@ -30,8 +30,8 @@ public class MarbleData : MonoBehaviour
     public float speed;
     public Vector3 direction;
     
-    public static event Action<MarbleData> RenderAura;
-    public static event Action<MarbleData> StopAuraRender;
+    public static event Action<MarbleData,bool> RenderAura;
+    public static event Action<MarbleData,bool> StopAuraRender;
 
     private MarbleStateBehaviour stateBh;
 
@@ -89,16 +89,15 @@ public class MarbleData : MonoBehaviour
     public void OnGrabbed()
     {
         StopAllCoroutines();
-        RenderAura?.Invoke(this);
         StartCoroutine(Expand(0));
     }
 
-    public void SetAura(bool v)
+    public void SetAura(bool value, bool instantState = false)
     {
-        if (v)
-            RenderAura?.Invoke(this);
+        if (value)
+            RenderAura?.Invoke(this,instantState);
         else
-            StopAuraRender?.Invoke(this);
+            StopAuraRender?.Invoke(this, instantState);
     }
 
     #region Animation

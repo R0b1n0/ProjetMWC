@@ -17,23 +17,31 @@ public class MarbleAuraManager
         MarbleData.RenderAura -= OnRenderCall;
         MarbleData.StopAuraRender -= StopRendering;
     }
-    void OnRenderCall(MarbleData marble)
+    void OnRenderCall(MarbleData marble, bool instant = false)
     {
         //Check if the marble is already here
         if (ContainMarbleData(marble, out MarbleAuraRenderState state))
         {
             state.render = true;
+
+            if (instant)
+                state.scale = 1;
         }
         else
         {
             marbles2Render.Add(new MarbleAuraRenderState(marble));
+
+            if (instant)
+                marbles2Render[marbles2Render.Count - 1].scale = 1;
         }
     }
-    void StopRendering(MarbleData marble)
+    void StopRendering(MarbleData marble, bool instant = false)
     {
         if (ContainMarbleData(marble, out MarbleAuraRenderState marbleState))
         {
             marbleState.render = false;
+            if (instant)
+                marbleState.scale = 0;
         }
     }
     public void ProcessMarblesAura()

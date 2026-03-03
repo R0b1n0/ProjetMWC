@@ -3,7 +3,6 @@ using UnityEngine;
 public class AbsorbState : MarbleStateBehaviour
 {
     float absorbtionSpeed = 0.7f;
-    float absorb;
     float startScale;
     float l = 0;
 
@@ -23,6 +22,7 @@ public class AbsorbState : MarbleStateBehaviour
         float marbleDefaultScale = marble.defaultScale;
         marble.trans.localScale = new Vector3(marbleDefaultScale, marbleDefaultScale, marbleDefaultScale);
         marble.mat.color = marble.ogColor;
+        marble.SetAura(false,true);
     }
 
     public override MarbleStateBehaviour Update()
@@ -34,7 +34,6 @@ public class AbsorbState : MarbleStateBehaviour
 
         if (l > 1)
         {
-            marble.SetAura(false);
             return new LerpInState(marble);
         }
 
