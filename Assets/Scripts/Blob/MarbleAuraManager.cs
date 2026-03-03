@@ -8,16 +8,16 @@ public class MarbleAuraManager
     public MarbleAuraManager()
     {
         marbles2Render = new();
-        MarbleBehaviour.RenderAura += OnRenderCall;
-        MarbleBehaviour.StopAuraRender += StopRendering;
+        MarbleData.RenderAura += OnRenderCall;
+        MarbleData.StopAuraRender += StopRendering;
     }
 
     ~MarbleAuraManager()
     {
-        MarbleBehaviour.RenderAura -= OnRenderCall;
-        MarbleBehaviour.StopAuraRender -= StopRendering;
+        MarbleData.RenderAura -= OnRenderCall;
+        MarbleData.StopAuraRender -= StopRendering;
     }
-    void OnRenderCall(MarbleBehaviour marble)
+    void OnRenderCall(MarbleData marble)
     {
         //Check if the marble is already here
         if (ContainMarbleData(marble, out MarbleAuraRenderState state))
@@ -29,7 +29,7 @@ public class MarbleAuraManager
             marbles2Render.Add(new MarbleAuraRenderState(marble));
         }
     }
-    void StopRendering(MarbleBehaviour marble)
+    void StopRendering(MarbleData marble)
     {
         if (ContainMarbleData(marble, out MarbleAuraRenderState marbleState))
         {
@@ -63,7 +63,7 @@ public class MarbleAuraManager
         }
     }
 
-    private bool ContainMarbleData(MarbleBehaviour marble, out MarbleAuraRenderState state)
+    private bool ContainMarbleData(MarbleData marble, out MarbleAuraRenderState state)
     {
         for (int i = 0; i < marbles2Render.Count; i++)
         {
@@ -83,9 +83,9 @@ public class MarbleAuraRenderState
     public float scale;
     public bool render;
     public bool obsolete;
-    public MarbleBehaviour marble;
+    public MarbleData marble;
 
-    public MarbleAuraRenderState(MarbleBehaviour newMarble = null)
+    public MarbleAuraRenderState(MarbleData newMarble = null)
     {
         scale = 0f;
         render = true;

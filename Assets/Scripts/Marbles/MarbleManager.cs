@@ -11,7 +11,7 @@ public class MarbleManager : MonoBehaviour
     [SerializeField] RectTransform[] holders;
     [SerializeField] string marbleHolderTag;
 
-    List<MarbleBehaviour> marbles = new List<MarbleBehaviour>();
+    List<MarbleData> marbles = new List<MarbleData>();
     List<SlotDrawer> drawers = new List<SlotDrawer>();
     int draggedMarbleIndex;
 
@@ -49,33 +49,35 @@ public class MarbleManager : MonoBehaviour
         else
             Destroy(this);
 
-        MarbleInputs.OnDragBegin += OnDragBegin;
-        MarbleInputs.OnDragEnd += OnDragEnd;
+        /*MarbleInputs.OnDragBegin += OnDragBegin;
+        MarbleInputs.OnDragEnd += OnDragEnd;*/
         StartCoroutine(SetupOnStart());
 
         Utils.OnScreenRescale += UpdateMarblesOnCanvaResize;
+        DraggingState.OnMarbleLevelUpdate += OnIntensityLevelUpdate;
     }
 
     private void OnDestroy()
     {
-        MarbleInputs.OnDragBegin -= OnDragBegin;
-        MarbleInputs.OnDragEnd -= OnDragEnd;
+        /*MarbleInputs.OnDragBegin -= OnDragBegin;
+        MarbleInputs.OnDragEnd -= OnDragEnd;*/
         Utils.OnScreenRescale -= UpdateMarblesOnCanvaResize;
+        DraggingState.OnMarbleLevelUpdate += OnIntensityLevelUpdate;
     }
 
     private void Update()
     {
-        HandleMarbles();
+        //HandleMarbles();
     }
 
-    private void OnDragBegin(MarbleBehaviour selectedMarble)
+    /*private void OnDragBegin(MarbleData selectedMarble)
     {
         selectedMarble.SetState(MarbleState.dragged);
         draggedMarbleIndex = selectedMarble.index;
         loadValue = 0;
         draggedMarblePreviousPos = InputManager.instance.TouchWorldPos;
     }
-    private void OnDragEnd(MarbleBehaviour selectedMarble)
+    private void OnDragEnd(MarbleData selectedMarble)
     {
         selectedMarble.SetState(MarbleState.thrown);
         drawers[draggedMarbleIndex].SetSatelliteCount(1);
@@ -84,10 +86,21 @@ public class MarbleManager : MonoBehaviour
         float marbleSpeedOnRelease = (inputDir.magnitude / Time.deltaTime)/10;
         selectedMarble.speed = marbleSpeedOnRelease;
         selectedMarble.direction = inputDir.normalized;
-    }
+    }*/
 
+    private void UpdateMarblesOnCanvaResize()
+    {
+        Vector3[] corners = new Vector3[4];
+        holders[0].GetWorldCorners(corners);
+        float scale = (corners[3].x - corners[0].x) * marbleScaleRelativToHolder;
+
+        for (int i = 0; i < marbles.Count; i++)
+        {
+            marbles[i].UpdateOnCanvaRescale(scale);
+        }
+    }
     #region Utils
-    private bool TryGetHolderIndex(RectTransform rect, out int index)
+    public bool TryGetHolderIndex(RectTransform rect, out int index)
     {
         index = 0;
         for (int i = 0; i < holders.Length; i++)
@@ -104,9 +117,24 @@ public class MarbleManager : MonoBehaviour
     {
         return EmotionParameters.Instance.GetMoodInfo(moodOrder[index]);
     }
+
+    public Vector3 GetSlotPos(int slotIndex)
+    {
+        Vector3[] corners = new Vector3[4];
+        RectTransform holder = holders[slotIndex];
+        holder.GetWorldCorners(corners);
+        return new Vector3(holder.position.x, holder.position.y, 0);
+    }
+    public Vector3 GetLerpInStartPos(int slotIndex)
+    {
+        Vector3[] corners = new Vector3[4];
+        RectTransform holder = holders[slotIndex];
+        holder.GetWorldCorners(corners);
+        return new Vector3(holder.position.x, holder.position.y - (corners[1].y - corners[0].y), 0);
+    }
     #endregion
 
-    #region Animation 
+    /*#region Animation 
     private void HandleMarbles()
     {
         for (int i = 0; i < marbles.Count; i++)
@@ -129,18 +157,18 @@ public class MarbleManager : MonoBehaviour
                     AbsorbeMarble(marbles[i]);
                     break;
                 case MarbleState.lerpIn:
-                    StartCoroutine(LerpIn(new List<MarbleBehaviour> { marbles[i] }));
+                    StartCoroutine(LerpIn(new List<MarbleData> { marbles[i] }));
                     marbles[i].SetState(MarbleState.empty);
                     break;
             }
         }
     }
-    private void IdleMarble(MarbleBehaviour marble)
+    private void IdleMarble(MarbleData marble)
     {
         marble.trans.position = new Vector3(holders[marble.index].position.x, holders[marble.index].position.y + Mathf.Sin(marble.lerpValue) * idleRange, 0);
         marble.lerpValue += Time.deltaTime * idleSpeed;
     }
-    private void DragMarble(MarbleBehaviour marble)
+    private void DragMarble(MarbleData marble)
     {
         Vector2 randomOffset = new Vector2(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f));
         float offsetFactor = loadValue / maxLoadValue;
@@ -175,18 +203,7 @@ public class MarbleManager : MonoBehaviour
             marble.trans.position = marble.trans.position + (target - marble.trans.position).normalized * stepDistance;
         }
     }
-    private void UpdateMarblesOnCanvaResize()
-    {
-        Vector3[] corners = new Vector3[4];
-        holders[0].GetWorldCorners(corners);
-        float scale = (corners[3].x - corners[0].x) * marbleScaleRelativToHolder;
-
-        for (int i = 0; i < marbles.Count; i++)
-        {
-            marbles[i].UpdateOnCanvaRescale(scale);
-        }
-    }
-    private void RecoverMarble(MarbleBehaviour marble)
+    private void RecoverMarble(MarbleData marble)
     {
         RectTransform holder = holders[marble.index];
         Vector3 destination = new Vector3(holder.position.x, holder.position.y, 0);
@@ -200,7 +217,7 @@ public class MarbleManager : MonoBehaviour
             marble.SetState(MarbleState.idle);
         }
     }
-    private void ThrowMarble(MarbleBehaviour marble)
+    private void ThrowMarble(MarbleData marble)
     {
         Vector2 viewportPos = Utils.World2ViewPort(marble.trans.position);
         Vector2 uvPos = Utils.World2UV(marble.trans.position);
@@ -241,7 +258,7 @@ public class MarbleManager : MonoBehaviour
             marble.SetState(MarbleState.recover);
         }
     }
-    private void AbsorbeMarble(MarbleBehaviour marble)
+    private void AbsorbeMarble(MarbleData marble)
     {
         Vector2 viewportPos = Utils.World2ViewPort(marble.trans.position);
         Vector2 uvPos = Utils.World2UV(marble.trans.position);
@@ -251,7 +268,7 @@ public class MarbleManager : MonoBehaviour
 
         marble.SetState(MarbleState.lerpIn);
     }
-    #region Load Marble
+
     private void LoadMarble()
     {
         int previousWhole = Mathf.FloorToInt(loadValue);
@@ -266,16 +283,15 @@ public class MarbleManager : MonoBehaviour
         if (previousWhole != flooredValue)
         {
             //New loading level 
-            OnIntensityLevelUpdate(flooredValue);
+            //OnIntensityLevelUpdate(flooredValue);
         }
-    }
-    private void OnIntensityLevelUpdate(int newLevel)
+    }*/
+    
+    private void OnIntensityLevelUpdate(MarbleData marble, int newLevel)
     {
-        //Maybe it should be event driven, but i'm going the easy naive way here
-        marbles[draggedMarbleIndex].OnLevelUpdate(newLevel);
-        drawers[draggedMarbleIndex].SetSatelliteCount(newLevel+1);
+        //Maybe this sould be in the holder drawer class
+        drawers[marble.index].SetSatelliteCount(newLevel+1);
     }
-    #endregion
 
 #if UNITY_EDITOR
     public void TriggerLerpInAnimation()
@@ -294,22 +310,24 @@ public class MarbleManager : MonoBehaviour
         for (int i = 0; i < holders.Length; i++)
         {
             GameObject marble = Instantiate(marblePb);
-            MarbleBehaviour marbleBh = marble.GetComponent<MarbleBehaviour>();
+            MarbleData marbleBh = marble.GetComponent<MarbleData>();
             marbles.Add(marbleBh);
             marbleBh.Initialize(EmotionParameters.Instance.GetMoodInfo(moodOrder[i]).marbleColor, i, scale);
             drawers.Add(holders[i].GetComponent<SlotDrawer>());
 
-            marble.transform.position = new Vector3(holders[i].position.x, holders[i].position.y - (corners[1].y - corners[0].y),0);
-        }
+            //marble.transform.position = new Vector3(holders[i].position.x, holders[i].position.y - (corners[1].y - corners[0].y),0);
 
-        for (int i = 0; i < holders.Length; i++)
-        {
-            StartCoroutine(LerpIn(new List<MarbleBehaviour> { marbles[i] }));
             yield return new WaitForSeconds(0.3f);
         }
+
+        /*for (int i = 0; i < holders.Length; i++)
+        {
+            StartCoroutine(LerpIn(new List<MarbleData> { marbles[i] }));
+            yield return new WaitForSeconds(0.3f);
+        }*/
         
     }
-    private IEnumerator LerpIn(List<MarbleBehaviour> marbles)
+    private IEnumerator LerpIn(List<MarbleData> marbles)
     {
         float t = 0;
 
@@ -339,8 +357,7 @@ public class MarbleManager : MonoBehaviour
         {
             marbles[i].trans.position = destination[i];
             marbles[i].lerpValue = 0;
-            marbles[i].SetState( MarbleState.idle);
+            //marbles[i].SetState( MarbleState.idle);
         }
     }
-    #endregion
 }

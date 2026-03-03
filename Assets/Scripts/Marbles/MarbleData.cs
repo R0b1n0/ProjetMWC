@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class MarbleBehaviour : MonoBehaviour
+public class MarbleData : MonoBehaviour
 {
-    private Collider coll;
     [HideInInspector] public Transform trans;
     [HideInInspector] public Color color;
     [HideInInspector] public Color ogColor;
@@ -19,8 +18,16 @@ public class MarbleBehaviour : MonoBehaviour
     [SerializeField] float levelScaleOffset;
     [SerializeField] float scaleSpeed;
 
+    [Header("Lerp in")]
+    [SerializeField] AnimationCurve lerpInCurve;
+    public AnimationCurve LerpInCurve { get { return lerpInCurve; } }
+
+    [Header("Recover")]
+    [SerializeField] AnimationCurve recoverCurve;
+    public AnimationCurve RecoverCurve { get { return recoverCurve; } }
+
     float OnInitScale;
-    float defaultScale;
+    public float defaultScale { get; private set; }
 
     public float speed;
     public Vector3 direction;
@@ -29,22 +36,44 @@ public class MarbleBehaviour : MonoBehaviour
 
     Renderer rend;
 
-    public static event Action<MarbleBehaviour> RenderAura;
-    public static event Action<MarbleBehaviour> StopAuraRender;
+    public static event Action<MarbleData> RenderAura;
+    public static event Action<MarbleData> StopAuraRender;
 
+    private MarbleStateBehaviour stateBh;
+
+    public int maxLoadValue  { get { return 2; } }
+    public float currentLoadValue = 0;
     private void Awake()
     {
-        coll = GetComponent<Collider>();
         trans = transform;
         rend = trans.GetComponent<Renderer>();
         mat = new(rend.material);
         rend.material = mat;
-        MarbleInputs.OnDragBegin += OnGrabbed;
+    }
+    public void Initialize(Color color, int index, float initScale)
+    {
+        ogColor = color;
+        this.color = color;
+        this.index = index;
+        mat.color = color;
+        OnInitScale = initScale;
+        defaultScale = initScale;
+        trans.localScale = new Vector3(OnInitScale, OnInitScale, OnInitScale);
+        stateBh = new LerpInState(this);
     }
 
-    private void OnDestroy()
+    private void Update()
     {
-        MarbleInputs.OnDragBegin -= OnGrabbed;
+        if (stateBh == null)
+            return;
+
+        MarbleStateBehaviour newState = stateBh.Update();
+        if (newState != stateBh)
+        {
+            stateBh.ExitState();
+            newState.EnterState();
+            stateBh = newState;
+        }
     }
 
     public void UpdateOnCanvaRescale(float newDefaultScale)
@@ -56,19 +85,7 @@ public class MarbleBehaviour : MonoBehaviour
         }
     }
 
-    public void Initialize(Color color, int index, float initScale)
-    {
-        ogColor = color;
-        this.color = color;
-        this.index = index;
-        mat.color = color;
-        OnInitScale = initScale;
-        defaultScale = initScale;
-        trans.localScale = new Vector3(OnInitScale, OnInitScale, OnInitScale);
-        SetState(MarbleState.empty);
-    }
-
-    public void SetState(MarbleState newState)
+    /*public void SetState(MarbleState newState)
     {
         lerpValue = 0;
         //Enter
@@ -98,7 +115,7 @@ public class MarbleBehaviour : MonoBehaviour
         }
 
         state = newState;
-    }
+    }*/
 
     public void OnLevelUpdate(int newLevel)
     {
@@ -106,23 +123,24 @@ public class MarbleBehaviour : MonoBehaviour
         StartCoroutine(Expand(newLevel));
     }
 
-    private void OnGrabbed(MarbleBehaviour marble)
+    public void OnGrabbed()
     {
-        if (marble != this)
-            return;
-
-        SetState(MarbleState.dragged);
         StopAllCoroutines();
+        RenderAura?.Invoke(this);
         StartCoroutine(Expand(0));
     }
-
-    private void OnRecoverBegin()
+    public void OnRecovered()
+    {
+        StopAuraRender?.Invoke(this);
+    }
+    public void OnRecoverBegin()
     {
         OnReleasePos = trans.position;
         StopAllCoroutines();
-        StartCoroutine(Shrink());
+        StartCoroutine(RestoreDefaultScale());
     }
 
+    #region Animation
     private IEnumerator Expand(int level)
     {
         float targetScale;
@@ -146,7 +164,7 @@ public class MarbleBehaviour : MonoBehaviour
         mat.color = targetColor;
     }
 
-    private IEnumerator Shrink()
+    private IEnumerator RestoreDefaultScale()
     {
         float targetScale;
         float onShrinkBeginSize = trans.localScale.x;
@@ -182,6 +200,7 @@ public class MarbleBehaviour : MonoBehaviour
                 return Color.rosyBrown;
         }
     }
+    #endregion
 }
 
 public enum MarbleState

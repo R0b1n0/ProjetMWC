@@ -4,10 +4,10 @@ using UnityEngine;
 public class MarbleInputs : MonoBehaviour
 {
     [SerializeField] LayerMask marbleMask;
-    private MarbleBehaviour heldMarble;
+    private MarbleData heldMarble;
 
-    public static event Action<MarbleBehaviour> OnDragBegin;
-    public static event Action<MarbleBehaviour> OnDragEnd;
+    public static event Action<MarbleData> OnDragBegin;
+    public static event Action<MarbleData> OnDragEnd;
 
     private void Start()
     {
@@ -17,28 +17,22 @@ public class MarbleInputs : MonoBehaviour
 
     private void OnTouchStarted()
     {
-        if (TryCatchMarble(out MarbleBehaviour marble))
+        if (OnDragBegin != null && TryCatchMarble(out MarbleData marble))
         {
             heldMarble = marble;
-            if (OnDragBegin != null)
-            {
-                OnDragBegin.Invoke(heldMarble);
-            }
+            OnDragBegin?.Invoke(heldMarble);
         }
     }
     private void OnTouchEnd()
     {
-        if (heldMarble)
+        if (OnDragEnd != null &&  heldMarble)
         {
-            if (OnDragEnd != null)
-            {
-                OnDragEnd.Invoke(heldMarble);
-            }
+            OnDragEnd?.Invoke(heldMarble);
             heldMarble = null;
         }
     }
 
-    private bool TryCatchMarble(out MarbleBehaviour marlbe)
+    private bool TryCatchMarble(out MarbleData marlbe)
     {
         marlbe = null;
 
@@ -49,7 +43,7 @@ public class MarbleInputs : MonoBehaviour
         
 
         if (Physics.Raycast(new Vector3(touchWorldPos.x, touchWorldPos.y, 0) - new Vector3(0, 0, 2), Vector3.forward, out hit, marbleMask) && 
-            hit.transform.TryGetComponent<MarbleBehaviour>(out MarbleBehaviour marbleHit))
+            hit.transform.TryGetComponent<MarbleData>(out MarbleData marbleHit))
         {
             marlbe = marbleHit;
             return true;
