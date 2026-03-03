@@ -5,7 +5,6 @@ using UnityEngine;
 public class MarbleData : MonoBehaviour
 {
     [HideInInspector] public Transform trans;
-    [HideInInspector] public Color color;
     [HideInInspector] public Color ogColor;
     [HideInInspector] public int index;
     [HideInInspector] public Material mat;
@@ -15,6 +14,7 @@ public class MarbleData : MonoBehaviour
     [SerializeField] float grabScaleOffset;
     [SerializeField] float levelScaleOffset;
     [SerializeField] float scaleSpeed;
+    public float defaultScale { get; private set; }
 
     [Header("Lerp in")]
     [SerializeField] AnimationCurve lerpInCurve;
@@ -24,11 +24,8 @@ public class MarbleData : MonoBehaviour
     [SerializeField] AnimationCurve recoverCurve;
     public AnimationCurve RecoverCurve { get { return recoverCurve; } }
 
-    float OnInitScale;
-    public float defaultScale { get; private set; }
-
-    public float speed;
-    public Vector3 direction;
+    [HideInInspector] public float speed;
+    [HideInInspector] public Vector3 direction;
     
     public static event Action<MarbleData,bool> RenderAura;
     public static event Action<MarbleData,bool> StopAuraRender;
@@ -36,7 +33,8 @@ public class MarbleData : MonoBehaviour
     private MarbleStateBehaviour stateBh;
 
     public int maxLoadValue  { get { return 2; } }
-    public float currentLoadValue = 0;
+    [HideInInspector] public float currentLoadValue = 0;
+
     private void Awake()
     {
         trans = transform;
@@ -47,15 +45,13 @@ public class MarbleData : MonoBehaviour
     public void Initialize(Color color, int index, float initScale)
     {
         ogColor = color;
-        this.color = color;
         this.index = index;
         mat.color = color;
-        OnInitScale = initScale;
         defaultScale = initScale;
+        float OnInitScale = initScale;
         trans.localScale = new Vector3(OnInitScale, OnInitScale, OnInitScale);
         stateBh = new LerpInState(this);
     }
-
     private void Update()
     {
         if (stateBh == null)
@@ -69,7 +65,6 @@ public class MarbleData : MonoBehaviour
             stateBh = newState;
         }
     }
-
     public void UpdateOnCanvaRescale(float newDefaultScale)
     {
         defaultScale = newDefaultScale;
@@ -79,19 +74,11 @@ public class MarbleData : MonoBehaviour
             trans.localScale = new Vector3(defaultScale, defaultScale, defaultScale);
         }*/
     }
-
     public void OnLevelUpdate(int newLevel)
     {
         StopAllCoroutines();
         StartCoroutine(Expand(newLevel));
     }
-
-    public void OnGrabbed()
-    {
-        StopAllCoroutines();
-        StartCoroutine(Expand(0));
-    }
-
     public void SetAura(bool value, bool instantState = false)
     {
         if (value)
@@ -123,7 +110,6 @@ public class MarbleData : MonoBehaviour
         trans.localScale = new Vector3(targetScale, targetScale, targetScale);
         mat.color = targetColor;
     }
-
     private Color GetMarbleColor(int intensityLevel)
     {
         switch (intensityLevel)
