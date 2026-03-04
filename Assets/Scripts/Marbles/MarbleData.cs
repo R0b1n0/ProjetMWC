@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class MarbleData : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class MarbleData : MonoBehaviour
     [SerializeField] float grabScaleOffset;
     [SerializeField] float levelScaleOffset;
     [SerializeField] float scaleSpeed;
+
+    [Header("Transparency")]
+    [SerializeField] float fadeTreshold;
+    [SerializeField] float maxTransparency;
     public float defaultScale { get; private set; }
 
     [Header("Lerp in")]
@@ -88,7 +93,19 @@ public class MarbleData : MonoBehaviour
         else
             StopAuraRender?.Invoke(this, instantState);
     }
-
+    
+    public void FadeWithPartDistance()
+    {
+        Vector2 UVPos = Utils.World2UV(trans.position);
+        Vector2 closestPart = BlobManager.instance.GetClosestPartPos(UVPos);
+        SetTransparency(Mathf.Min(1, Mathf.Max(maxTransparency, Vector2.Distance(UVPos, closestPart) / fadeTreshold)));
+    }
+    public void SetTransparency(float alphaValue)
+    {
+        Color newMatColor = mat.color;
+        newMatColor.a = alphaValue;
+        mat.color = newMatColor;
+    }
     #region Animation
     private IEnumerator Expand(int level)
     {

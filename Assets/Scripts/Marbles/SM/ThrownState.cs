@@ -43,10 +43,11 @@ public class ThrownState : MarbleStateBehaviour
 
         marble.direction = movementVector.normalized;
 
+        marble.FadeWithPartDistance();
+
         //Absorbed 
         if (d2Part < 0.005f)
         {
-            //TODO absorb the marble
             return new AbsorbState(marble, BlobManager.instance.GetClosestPartRef(uvPos));
         }
 

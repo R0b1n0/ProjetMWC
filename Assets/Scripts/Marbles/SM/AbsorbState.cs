@@ -26,6 +26,7 @@ public class AbsorbState : MarbleStateBehaviour
         marble.trans.localScale = new Vector3(marbleDefaultScale, marbleDefaultScale, marbleDefaultScale);
         marble.mat.color = marble.ogColor;
         marble.SetAura(false,true);
+        marble.SetTransparency(1);
     }
 
     public override MarbleStateBehaviour Update()
