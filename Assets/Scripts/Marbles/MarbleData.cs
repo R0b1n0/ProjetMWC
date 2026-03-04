@@ -8,6 +8,7 @@ public class MarbleData : MonoBehaviour
     [HideInInspector] public Color ogColor;
     [HideInInspector] public int index;
     [HideInInspector] public Material mat;
+    [HideInInspector] public Mood mood;
 
     [Header("Scaling Animation")]
     [SerializeField] AnimationCurve scalingCurve;
@@ -42,8 +43,9 @@ public class MarbleData : MonoBehaviour
         mat = new(rend.material);
         rend.material = mat;
     }
-    public void Initialize(Color color, int index, float initScale)
+    public void Initialize(Mood marbleMood, Color color, int index, float initScale)
     {
+        mood = marbleMood;
         ogColor = color;
         this.index = index;
         mat.color = color;

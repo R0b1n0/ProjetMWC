@@ -45,6 +45,15 @@ public class DraggingState : MarbleStateBehaviour
             OnMarbleLevelUpdate?.Invoke(marble, 0);
             return new ThrownState(marble);
         }
+        Debug.Log($"World Pos {marble.trans.position}");
+        Debug.Log($" screen pos {Utils.World2Screen(InputManager.instance.TouchWorldPos)} ");
+        Debug.Log($" UV pos {Utils.World2UV(InputManager.instance.TouchWorldPos)} ");
+        Debug.Log($" Wiewport pos {Utils.World2ViewPort(InputManager.instance.TouchWorldPos)} ");
+
+        Debug.Log($" UV To Screens {Utils.UV2Screen(InputManager.instance.TouchWorldPos)} ");
+        Debug.Log($" UV To World {Utils.UV2World(Utils.World2UV(InputManager.instance.TouchWorldPos))} ");
+
+
 
         Vector2 randomOffset = new Vector2(UnityEngine.Random.Range(-0.02f, 0.02f), UnityEngine.Random.Range(-0.02f, 0.02f));
         float offsetFactor = marble.currentLoadValue / marble.maxLoadValue;

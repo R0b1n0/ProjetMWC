@@ -223,6 +223,24 @@ public class BlobManager : MonoBehaviour
         previousState = MakeSnapShot();
         computedState = new State { color = GetBlendColor(), speed = ComputeSpeed() };
     }
+    public void SetMoodState(Mood mood, float intensity, float index)
+    {
+        switch (index)
+        {
+            case 0: 
+                first.mood = mood;
+                first.intensity = intensity;
+                break;
+            case 1: 
+                second.mood = mood;
+                second.intensity = intensity;
+                break;
+            case 2:
+                third.mood = mood;
+                third.intensity = intensity;
+                break;
+        }
+    }
     #endregion
     #region Color
     private Color GetBlendColor()
@@ -294,9 +312,14 @@ public class BlobManager : MonoBehaviour
 
         return inBounds;
     }
-    public Vector2 GetClosestPart(Vector2 UvPos)
+    public Vector2 GetClosestPartPos(Vector2 UvPos)
     {
-        Vector2 closestPartPos = new();
+        return GetClosestPartRef(UvPos).currentPos;
+    }
+
+    public Part GetClosestPartRef(Vector2 UvPos)
+    {
+        Part closestPartPos = new();
         float sd = 2;
 
         float currentSD;
@@ -306,7 +329,7 @@ public class BlobManager : MonoBehaviour
             if (currentSD < sd)
             {
                 sd = currentSD;
-                closestPartPos = part.currentPos;
+                closestPartPos = part;
             }
         }
 
