@@ -51,14 +51,14 @@ public class MarbleAuraManager
             if (state.render)
             {
                 //Increase aura scale
-                state.scale += Time.deltaTime;
+                state.scale += Time.deltaTime * 2;
                 if (state.scale >= 1)
                     state.scale = 1;
             }
             else
             {
                 //Decrease aura and remove if needed
-                state.scale -= Time.deltaTime;
+                state.scale -= Time.deltaTime * 2;
                 if (state.scale <= 0)
                     state.obsolete = true;
             }

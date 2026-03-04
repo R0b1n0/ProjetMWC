@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class BlobManager : MonoBehaviour
 {
@@ -47,10 +45,10 @@ public class BlobManager : MonoBehaviour
     [SerializeField] Color blobEdgeColor;
     [SerializeField] Color blobInnerColor;
     [SerializeField]
-    [Range(0, 3)]
+    [Range(0, 4)]
     int innerRenderMethod;
     [SerializeField]
-    [Range(0, 9)]
+    [Range(0, 10)]
     int outerRenderMethod;
     [SerializeField][Range(0, 100)] int rtpcValue;
     [SerializeField] AK.Wwise.RTPC rTPC;
@@ -79,6 +77,7 @@ public class BlobManager : MonoBehaviour
 
         circleCount = partsData.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
+        //This includes the four marble circles
         toShader = new Vector4[circleCount + 4];
 
         for (int i = 0; i < circleCount; i++)
@@ -90,7 +89,6 @@ public class BlobManager : MonoBehaviour
             partsData[i].lerpPhase = 0;
         }
 
-        //speedFactor = computedState.speed;
         LerpToComputedState(1);
     }
     private void Update()
@@ -170,19 +168,25 @@ public class BlobManager : MonoBehaviour
         }
 
         int partCount = circleCount;
-        //Add the marble extra aura 
+        Vector4[] extraColors = new Vector4[4];
+
+
         marbleAura.ProcessMarblesAura();
-        foreach(MarbleAuraRenderState state in marbleAura.marbles2Render)
+        //Add the marble extra aura 
+        foreach (MarbleAuraRenderState state in marbleAura.marbles2Render)
         {
             partCount++;
             Vector2 marbleUvPos = Utils.World2UV(state.marble.trans.position);
             float radius = Utils.World2UV(state.marble.trans.localScale).x / 1.9f * state.scale;
+            
+            extraColors[partCount - circleCount] = state.marble.mat.color;
 
             toShader[partCount-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius);
         }
 
         blobMaterial.SetInt("_CircleCount", partCount);
         blobMaterial.SetVectorArray("_Circles", toShader);
+        blobMaterial.SetVectorArray("_CirclesColors", extraColors);
     }
 
     #region State

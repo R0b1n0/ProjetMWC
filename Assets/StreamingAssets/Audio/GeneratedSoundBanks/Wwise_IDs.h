@@ -63,10 +63,16 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID BASS_METER = 1241500558U;
+        static const AkUniqueID HIGH_METER = 3514497119U;
         static const AkUniqueID INTENSITY_SLOT1 = 2328106540U;
         static const AkUniqueID INTENSITY_SLOT2 = 2328106543U;
         static const AkUniqueID INTENSITY_SLOT3 = 2328106542U;
+        static const AkUniqueID MID_METER = 3032130471U;
         static const AkUniqueID MUSIC_INTENSITY = 872999148U;
+        static const AkUniqueID SLOT1_METER = 3595230880U;
+        static const AkUniqueID SLOT2_METER = 1305185983U;
+        static const AkUniqueID SLOT3_METER = 240082670U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS
@@ -78,10 +84,18 @@ namespace AK
     namespace BUSSES
     {
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
-        static const AkUniqueID SLOT1 = 3888770466U;
-        static const AkUniqueID SLOT2 = 3888770465U;
-        static const AkUniqueID SLOT3 = 3888770464U;
+        static const AkUniqueID METER = 2406858644U;
+        static const AkUniqueID SLOT1_BUS = 2054164089U;
+        static const AkUniqueID SLOT2_BUS = 742985878U;
+        static const AkUniqueID SLOT3_BUS = 2834954507U;
     } // namespace BUSSES
+
+    namespace AUX_BUSSES
+    {
+        static const AkUniqueID BASS = 1291433344U;
+        static const AkUniqueID HIGH = 3550808449U;
+        static const AkUniqueID MID = 1182670505U;
+    } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
     {

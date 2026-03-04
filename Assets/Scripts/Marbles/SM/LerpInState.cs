@@ -16,6 +16,7 @@ public class LerpInState : MarbleStateBehaviour
 
     public override void EnterState()
     {
+        marble.trans.position = start;
     }
 
     public override void ExitState()
