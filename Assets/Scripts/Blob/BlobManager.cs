@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BlobManager : MonoBehaviour
 {
+    public static BlobManager instance;
+
     [Header("Channel inputs ")]
     [SerializeField] Material blobMaterial;
     [SerializeField]
@@ -36,15 +38,17 @@ public class BlobManager : MonoBehaviour
     float beatFactor;
     [SerializeField] float scaleFactorOnBeat;
 
+    MarbleAuraManager marbleAura = new();
+
 
     [Header("Debug")]
     [SerializeField] Color blobEdgeColor;
     [SerializeField] Color blobInnerColor;
     [SerializeField]
-    [Range(0, 3)]
+    [Range(0, 4)]
     int innerRenderMethod;
     [SerializeField]
-    [Range(0, 9)]
+    [Range(0, 10)]
     int outerRenderMethod;
     [SerializeField][Range(0, 100)] int rtpcValue;
     [SerializeField] AK.Wwise.RTPC rTPC;
@@ -62,9 +66,19 @@ public class BlobManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         circleCount = partsData.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
-        toShader = new Vector4[circleCount];
+        //This includes the four marble circles
+        toShader = new Vector4[circleCount + 4];
 
         for (int i = 0; i < circleCount; i++)
         {
@@ -75,7 +89,6 @@ public class BlobManager : MonoBehaviour
             partsData[i].lerpPhase = 0;
         }
 
-        //speedFactor = computedState.speed;
         LerpToComputedState(1);
     }
     private void Update()
@@ -91,11 +104,6 @@ public class BlobManager : MonoBehaviour
         blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
         blobMaterial.SetFloat("_auraF", auraFrequency);
 
-        /*Debug.Log("rtp auraRange value raw " + auraRangeRTPC.GetGlobalValue());
-        Debug.Log("rtp auraRange value normalized " + (1 + ((auraRangeRTPC.GetGlobalValue() + 15) / 8)));
-        Debug.Log("rtpc beat value raw " + beat.GetGlobalValue());
-        Debug.Log((auraRangeRTPC.GetGlobalValue() + 23) / 8);*/
-
         blobMaterial.SetFloat("_auraRange", auraRange * ( 1 + ((auraRangeRTPC.GetGlobalValue() + 15 ) / 8)));
         blobMaterial.SetFloat("_auraOffset", auraOffset);
         blobMaterial.SetFloat("_auraWidth", auraWidth);
@@ -104,10 +112,6 @@ public class BlobManager : MonoBehaviour
         blobMaterial.SetFloat("_yOffset", yOffset);
         blobMaterial.SetFloat("_lightSdScale", lightSdScale);
 
-        blobMaterial.SetInt("_CircleCount", circleCount);
-
-        beatFactor = waveFormCurve.Evaluate(1 - ((-beat.GetGlobalValue()) / 48));
-        blobMaterial.SetFloat("_LightFactor", beatFactor);
         blobMaterial.SetFloat("_LightFactor", lightFactor.Get());
 
         blobMaterial.SetInt("_innerRenderMethod", innerRenderMethod);
@@ -137,7 +141,6 @@ public class BlobManager : MonoBehaviour
             //Linear lerp constant speed
             partsData[i].lerpPhase += Time.deltaTime * (partsData[i].lerpSpeed / (Vector2.Distance(partsData[i].origin, partsData[i].destination) * 2)) * speedFactor;
 
-
             float lerpValue = speedCurve.Evaluate(partsData[i].lerpPhase);
             //Linear move 
             Vector2 linearLerp = Vector2.Lerp(partsData[i].origin, partsData[i].destination, lerpValue);
@@ -147,7 +150,6 @@ public class BlobManager : MonoBehaviour
 
             computePos = Vector2.Lerp(linearLerp, circularLerp, movementType);
 
-
             if (partsData[i].lerpPhase >= 1)
             {
                 //Circle finished lerping
@@ -156,6 +158,8 @@ public class BlobManager : MonoBehaviour
                 partsData[i].lerpPhase = 0;
             }
 
+            partsData[i].currentPos = computePos;
+
             toShader[i] = new Vector4(
                 computePos.x,
                 computePos.y,
@@ -163,7 +167,26 @@ public class BlobManager : MonoBehaviour
                 0);
         }
 
+        int partCount = circleCount;
+        Vector4[] extraColors = new Vector4[4];
+
+
+        marbleAura.ProcessMarblesAura();
+        //Add the marble extra aura 
+        foreach (MarbleAuraRenderState state in marbleAura.marbles2Render)
+        {
+            partCount++;
+            Vector2 marbleUvPos = Utils.World2UV(state.marble.trans.position);
+            float radius = Utils.World2UV(state.marble.trans.localScale).x / 1.9f * state.scale;
+            
+            extraColors[partCount - circleCount] = state.marble.mat.color;
+
+            toShader[partCount-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius);
+        }
+
+        blobMaterial.SetInt("_CircleCount", partCount);
         blobMaterial.SetVectorArray("_Circles", toShader);
+        blobMaterial.SetVectorArray("_CirclesColors", extraColors);
     }
 
     #region State
@@ -256,9 +279,38 @@ public class BlobManager : MonoBehaviour
     }
     #endregion
     #region Utils
-    public bool IsWithinBlobBounds(Vector3 screenPos)
+    public bool IsWithinBlobBounds(Vector2 UvPos, float uvRadius)
     {
-        return false;
+        bool inBounds = false;
+
+        for(int i = 0; i < circleCount; i++)
+        {
+            if ((partsData[i].currentPos - UvPos).magnitude - uvRadius - partsData[i].radius < 0.07)
+            {
+                inBounds = true;
+                break;
+            }
+        }
+
+        return inBounds;
+    }
+    public Vector2 GetClosestPart(Vector2 UvPos)
+    {
+        Vector2 closestPartPos = new();
+        float sd = 2;
+
+        float currentSD;
+        foreach (Part part in partsData)
+        {
+            currentSD = (part.currentPos - UvPos).magnitude;
+            if (currentSD < sd)
+            {
+                sd = currentSD;
+                closestPartPos = part.currentPos;
+            }
+        }
+
+        return closestPartPos;
     }
     #endregion
 }
@@ -288,6 +340,8 @@ public class Part
 {
     public float radius;
     public float lerpSpeed;
+    //All of those are UV value
+    [HideInInspector] public Vector2 currentPos;
     [HideInInspector] public Vector2 destination;
     [HideInInspector] public Vector2 origin;
     [HideInInspector] public float lerpPhase;

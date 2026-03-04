@@ -29,9 +29,9 @@ Transform:
   m_GameObject: {fileID: 6742356349850153021}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.48, y: -3.56, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -166,3 +166,72 @@ MonoBehaviour:
   grabScaleOffset: 0.1
   levelScaleOffset: 0.01
   scaleSpeed: 7
+  lerpInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0015983582
+      value: 0.0056152344
+      inSlope: 6.2421546
+      outSlope: 6.2421546
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.10584684
+    - serializedVersion: 3
+      time: 0.34375238
+      value: 1.1177548
+      inSlope: -0.085552916
+      outSlope: -0.085552916
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14183462
+      outWeight: 0.47607672
+    - serializedVersion: 3
+      time: 0.6565293
+      value: 0.91049635
+      inSlope: -0.3746143
+      outSlope: -0.3746143
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24204415
+      outWeight: 0.42726082
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.05148352
+      outSlope: -0.05148352
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.7244637
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoverCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speed: 0
+  direction: {x: 0, y: 0, z: 0}
+  currentLoadValue: 0

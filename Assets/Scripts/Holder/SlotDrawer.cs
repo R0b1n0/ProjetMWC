@@ -17,10 +17,11 @@ public class SlotDrawer : MonoBehaviour
     [SerializeField, Range(0, 1)] float outerCircleRadius;
     [Min(0),SerializeField] int satelliteCount;
     [SerializeField] float satelliteMaxScale;
+    [SerializeField] float salettilesSpeed;
 
     List<SatelliteBehaviour> satellites = new List<SatelliteBehaviour>();
 
-    float outerCircleAngleOffset;
+    [SerializeField] float outerCircleAngleOffset;
     RectTransform holder;
     CircleCollider2D coll;
 
