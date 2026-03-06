@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5666bfad0968324982a48fd35153975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkEvent
-  triggerList: f7e1664c
+  triggerList: 
   useOtherObject: 0
   actionOnEventType: 0
   curveInterpolation: 4
@@ -1873,46 +1873,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobManager
   blobMaterial: {fileID: 2100000, guid: dad41460bfa0afc439904de3efb505f2, type: 2}
-  first:
-    intensity: 0
-    mood: 3
-  second:
-    intensity: 0
-    mood: 2
-  third:
-    intensity: 0
-    mood: 0
+  emotions:
+  - intensity: 0
+    mood: 1
+  - intensity: 0
+    mood: 1
+  - intensity: 0
+    mood: 1
   partsData:
   - radius: 0.1
     lerpSpeed: 0.5
-    currentPos: {x: 0, y: 0}
-    destination: {x: 0.13147168, y: -0.11312543}
-    origin: {x: -0.14973406, y: 0.096063465}
-    lerpPhase: 0.58854365
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
   - radius: 0.2
     lerpSpeed: 0.7
-    currentPos: {x: 0, y: 0}
-    destination: {x: -0.14057817, y: -0.16713671}
-    origin: {x: 0.100179434, y: -0.008469224}
-    lerpPhase: 0.6298714
+    currentPos: {x: 0.00850799, y: 0.07530336}
+    destination: {x: -0.061228827, y: 0.14841442}
+    origin: {x: 0.14335899, y: -0.06607244}
+    lerpPhase: 0.6067782
   - radius: 0.15
     lerpSpeed: 0.5
-    currentPos: {x: 0, y: 0}
-    destination: {x: 0.057575174, y: -0.021966621}
-    origin: {x: -0.07759689, y: 0.051860847}
-    lerpPhase: 0.34461105
+    currentPos: {x: 0.15853557, y: 0.12469369}
+    destination: {x: -0.13559352, y: -0.038326293}
+    origin: {x: 0.16338654, y: 0.12738232}
+    lerpPhase: 0.07318743
   - radius: 0.2
     lerpSpeed: 0.4
-    currentPos: {x: 0, y: 0}
-    destination: {x: 0.08185596, y: 0.058178283}
-    origin: {x: -0.18419982, y: 0.04576175}
-    lerpPhase: 0.11116446
+    currentPos: {x: -0.007009381, y: 0.0073623764}
+    destination: {x: -0.1036769, y: -0.016842917}
+    origin: {x: 0.05543126, y: 0.02299735}
+    lerpPhase: 0.42636362
   - radius: 0.19
     lerpSpeed: 0.7
-    currentPos: {x: 0, y: 0}
-    destination: {x: 0.053553477, y: 0.12581344}
-    origin: {x: 0.005164176, y: -0.12306915}
-    lerpPhase: 0.18161881
+    currentPos: {x: -0.011369008, y: -0.19269969}
+    destination: {x: -0.028068751, y: 0.061250634}
+    origin: {x: -0.011284471, y: -0.19398524}
+    lerpPhase: 0.039226178
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -1938,8 +1936,44 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   movementAreaRadius: 0.2
-  speedFactor: 0.05
+  dispertionFactor: 0
+  dispertionMax: 0.2
+  speedFactor: 0
   movementType: 0
+  speedFactorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lowSpeedValue: 0.5
+  highSpeedValue: 2
+  shakeCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxShakeRange: 0.015
+  shakeFactor: 0
   auraFrequency: 0.72
   auraSpeed: 5
   auraRange: 3.4
@@ -1952,7 +1986,7 @@ MonoBehaviour:
     rtpc:
       idInternal: 0
       valueGuidInternal: 
-      WwiseObjectReference: {fileID: 0}
+      WwiseObjectReference: {fileID: 11400000, guid: 10c900cc78ab5f94ab9642f8e6f65e4f, type: 2}
     evaluationMode: 1
     rtpcMin: -48
     rtpcMax: 0
@@ -2006,10 +2040,91 @@ MonoBehaviour:
       m_RotationOrder: 4
     baseValue: 0
     outputMin: 0
-    outputMax: 3
-  scaleFactorOnBeat: 0.2
-  blobEdgeColor: {r: 1, g: 1, b: 1, a: 1}
-  blobInnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    outputMax: 1
+  scaleFactorRtpc:
+    rtpc:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 95b87f530ed9ca649bb14a267cbbd2f3, type: 2}
+    evaluationMode: 3
+    rtpcMin: -23
+    rtpcMax: -15
+    normalizedCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rangeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    baseValue: 0
+    outputMin: 0
+    outputMax: 0.5
+  auraRangeRTPC:
+    rtpc:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: e2ce245d1feb1cf49a9c3ab7608591dc, type: 2}
+    evaluationMode: 1
+    rtpcMin: -48
+    rtpcMax: 0
+    normalizedCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rangeCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    baseValue: 3
+    outputMin: 2
+    outputMax: 5
+  blobEdgeColor: {r: 1, g: 0.83252466, b: 0.12188655, a: 1}
+  blobInnerColor: {r: 0.91618574, g: 0.7627472, b: 0.11167073, a: 0.007931534}
   innerRenderMethod: 4
   outerRenderMethod: 10
   rtpcValue: 0
@@ -2063,10 +2178,6 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 3d5c5e7ce8215cb478f93845e352b0af, type: 2}
-  auraRangeRTPC:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 95b87f530ed9ca649bb14a267cbbd2f3, type: 2}
 --- !u!114 &1867051473
 MonoBehaviour:
   m_ObjectHideFlags: 0

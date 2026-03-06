@@ -8,19 +8,24 @@ public class BlobManager : MonoBehaviour
 
     [Header("Channel inputs ")]
     [SerializeField] Material blobMaterial;
+
     [SerializeField]
-    MoodInput first;
-    [SerializeField]
-    MoodInput second;
-    [SerializeField]
-    MoodInput third;
+    MoodInput[] emotions = new MoodInput[3];
 
     [Header("Movements")]
     [SerializeField] List<Part> partsData = new List<Part>();
     [SerializeField] AnimationCurve speedCurve;
     [SerializeField] float movementAreaRadius;
+    [SerializeField] float dispertionFactor;
+    [SerializeField] float dispertionMax;
     [SerializeField] float speedFactor;
     [SerializeField][Range(0f, 1f)] float movementType;
+    [SerializeField] AnimationCurve speedFactorCurve;
+    [SerializeField] float lowSpeedValue;
+    [SerializeField] float highSpeedValue;
+    [SerializeField] AnimationCurve shakeCurve;
+    [SerializeField] float maxShakeRange;
+    [SerializeField, Range(0, 1)] float shakeFactor;
 
     [Header("Render")]
     [SerializeField][Range(0f, 10)] float auraFrequency;
@@ -31,15 +36,12 @@ public class BlobManager : MonoBehaviour
     [SerializeField][Range(0f, 100f)] float lightSdScale;
     [SerializeField][Range(-10f, 10f)] float xOffset;
     [SerializeField][Range(-10f, 10f)] float yOffset;
-    [SerializeField] RtpcDependent lightFactor;
     float auraOffset;
 
-    [Header("Beat Parameters ")]
-    float beatFactor;
-    [SerializeField] float scaleFactorOnBeat;
-
-    MarbleAuraManager marbleAura = new();
-
+    [Header("RTPC dependent parameters  ")]
+    [SerializeField] RtpcDependent lightFactor;
+    [SerializeField] RtpcDependent scaleFactorRtpc;
+    [SerializeField] RtpcDependent auraRangeRTPC; 
 
     [Header("Debug")]
     [SerializeField] Color blobEdgeColor;
@@ -54,7 +56,6 @@ public class BlobManager : MonoBehaviour
     [SerializeField] AK.Wwise.RTPC rTPC;
     [SerializeField] AnimationCurve waveFormCurve;
     [SerializeField] AK.Wwise.RTPC beat;
-    [SerializeField] AK.Wwise.RTPC auraRangeRTPC;
 
     Vector4[] toShader;
     int circleCount;
@@ -63,6 +64,8 @@ public class BlobManager : MonoBehaviour
     State computedState = new();
     float stateLerp;
     bool stateLerping = false;
+
+    MarbleAuraManager marbleAura = new();
 
     private void Awake()
     {
@@ -104,7 +107,7 @@ public class BlobManager : MonoBehaviour
         blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
         blobMaterial.SetFloat("_auraF", auraFrequency);
 
-        blobMaterial.SetFloat("_auraRange", auraRange * ( 1 + ((auraRangeRTPC.GetGlobalValue() + 15 ) / 8)));
+        blobMaterial.SetFloat("_auraRange", auraRange * auraRangeRTPC.Get());
         blobMaterial.SetFloat("_auraOffset", auraOffset);
         blobMaterial.SetFloat("_auraWidth", auraWidth);
         blobMaterial.SetFloat("_uvLengthFactor", uvLengthFactor);
@@ -136,10 +139,16 @@ public class BlobManager : MonoBehaviour
     private void UpdatePartsPos()
     {
         Vector2 computePos;
+
+        //Compute shakeFactor
+        Vector2 shakeOffset = new Vector2(UnityEngine.Random.Range(-1,1), UnityEngine.Random.Range(-1, 1)).normalized * maxShakeRange;
+        shakeOffset *= shakeFactor;
+
         for (int i = 0; i < circleCount; i++)
         {
             //Linear lerp constant speed
-            partsData[i].lerpPhase += Time.deltaTime * (partsData[i].lerpSpeed / (Vector2.Distance(partsData[i].origin, partsData[i].destination) * 2)) * speedFactor;
+            float newSpeedFactor = lowSpeedValue + (speedFactorCurve.Evaluate(speedFactor) * highSpeedValue);
+            partsData[i].lerpPhase += Time.deltaTime * (partsData[i].lerpSpeed / (Vector2.Distance(partsData[i].origin, partsData[i].destination) * 2)) * newSpeedFactor;
 
             float lerpValue = speedCurve.Evaluate(partsData[i].lerpPhase);
             //Linear move 
@@ -154,16 +163,17 @@ public class BlobManager : MonoBehaviour
             {
                 //Circle finished lerping
                 partsData[i].origin = partsData[i].destination;
-                partsData[i].destination.Set(UnityEngine.Random.Range(-movementAreaRadius, movementAreaRadius), UnityEngine.Random.Range(-movementAreaRadius, movementAreaRadius));
+                float movementAreaRad = movementAreaRadius + dispertionFactor * dispertionMax;
+                partsData[i].destination.Set(UnityEngine.Random.Range(-movementAreaRad, movementAreaRad), UnityEngine.Random.Range(-movementAreaRad, movementAreaRad));
                 partsData[i].lerpPhase = 0;
             }
 
-            partsData[i].currentPos = computePos;
+            partsData[i].currentPos = computePos + shakeOffset;
 
             toShader[i] = new Vector4(
-                computePos.x,
-                computePos.y,
-                partsData[i].radius + scaleFactorOnBeat * (beatFactor * partsData[i].radius),
+                partsData[i].currentPos.x,
+                partsData[i].currentPos.y,
+                partsData[i].radius + (scaleFactorRtpc.Get() * partsData[i].radius),
                 0);
         }
 
@@ -190,62 +200,74 @@ public class BlobManager : MonoBehaviour
     }
 
     #region State
-    private float ComputeSpeed()
-    {
-        MoodProperties firstData = GetMoodData(first.mood);
-        MoodProperties secondData = GetMoodData(second.mood);
-        MoodProperties thirdData = GetMoodData(third.mood);
-        float divisionValue = (first.intensity + second.intensity + third.intensity);
-
-        return divisionValue != 0 ?
-            (firstData.speedFactor * Mathf.Pow(first.intensity, 2) +
-            secondData.speedFactor * Mathf.Pow(second.intensity, 2) +
-            thirdData.speedFactor * Mathf.Pow(third.intensity, 2)) / 100 / divisionValue
-            : 0.05f;
-    }
     private State MakeSnapShot()
     {
-        return new State { color = blobInnerColor, speed = speedFactor };
+        return new State { color = blobInnerColor, speed = speedFactor, shake = shakeFactor, dispertion = movementAreaRadius};
     }
     private void LerpToComputedState(float t)
     {
-        //Colors
         blobInnerColor = Color.Lerp(previousState.color, computedState.color, t);
         Color.RGBToHSV(blobInnerColor, out float h, out float s, out float v);
         blobEdgeColor = Color.HSVToRGB(h, s, 1);
 
         speedFactor = Mathf.Lerp(previousState.speed, computedState.speed, t);
+        shakeFactor = Mathf.Lerp(previousState.shake, computedState.shake, t);
+        dispertionFactor = Mathf.Lerp(previousState.dispertion, computedState.dispertion, t);
     }
     public void StartLerping()
     {
         stateLerp = 0;
         stateLerping = true;
         previousState = MakeSnapShot();
-        computedState = new State { color = GetBlendColor(), speed = ComputeSpeed() };
+        computedState = new State 
+        { 
+            color = GetBlendColor(), 
+            speed = ProcessSpeed(), 
+            shake = ProcessShakeFactor(),
+            dispertion = ProcessDispertion()
+        };
     }
-    public void SetMoodState(Mood mood, float intensity, float index)
+    public void SetMoodState(Mood mood, float intensity, int index)
     {
-        switch (index)
-        {
-            case 0: 
-                first.mood = mood;
-                first.intensity = intensity;
-                break;
-            case 1: 
-                second.mood = mood;
-                second.intensity = intensity;
-                break;
-            case 2:
-                third.mood = mood;
-                third.intensity = intensity;
-                break;
-        }
+        emotions[index].mood = mood;
+        emotions[index].intensity = intensity;
     }
     #endregion
+    #region Mood Dependent param
+    private float ProcessShakeFactor()
+    {
+        float angerCount = 0;
+        for (int i = 0; i < emotions.Length; i++)
+        {
+            if (emotions[i].mood == Mood.Anger && emotions[i].intensity > 0)
+                angerCount++;
+        }
+        return (angerCount / emotions.Length);
+    }
+    private float ProcessSpeed()
+    {
+        //Speed only depends on the intensity of the first slot 
+        return emotions[0].intensity / 100;
+    }
+    private float ProcessDispertion()
+    {
+        float fearCount = 0;
+        for (int i = 0; i < emotions.Length; i++)
+        {
+            if (emotions[i].mood == Mood.Fear && emotions[i].intensity > 0)
+                fearCount++;
+        }
+        return (fearCount / emotions.Length);
+    }
+    #endregion 
     #region Color
     private Color GetBlendColor()
     {
-        float divisionValue = (first.intensity + second.intensity + third.intensity);
+        float divisionValue = 0;
+        for (int i = 0; i < emotions.Length; i++)
+        {
+            divisionValue += emotions[i].intensity;
+        }
 
         //This mean absolutly no input 
         if (divisionValue == 0)
@@ -253,16 +275,16 @@ public class BlobManager : MonoBehaviour
             return Color.gray;
         }
 
-        Color color1 = GetMoodColor(first.mood, first.intensity);
-        Color color2 = GetMoodColor(second.mood, second.intensity);
-        Color color3 = GetMoodColor(third.mood, third.intensity);
+        float r = 0, g = 0, b = 0;
+        for (int i = 0; i < emotions.Length; i++)
+        {
+            Color currentColor = GetMoodColor(emotions[i].mood, emotions[i].intensity);
+            r += currentColor.r * emotions[i].intensity;
+            g += currentColor.g * emotions[i].intensity;
+            b += currentColor.b * emotions[i].intensity;
+        }
 
-
-        float r = (color1.r * first.intensity + color2.r * second.intensity + color3.r * third.intensity) / divisionValue;
-        float g = (color1.g * first.intensity + color2.g * second.intensity + color3.g * third.intensity) / divisionValue;
-        float b = (color1.b * first.intensity + color2.b * second.intensity + color3.b * third.intensity) / divisionValue;
-
-        return new Color(r, g, b);
+        return new Color(r, g, b)/divisionValue;
     }
     private Color GetMoodColor(Mood mood, float intensity)
     {
@@ -279,21 +301,6 @@ public class BlobManager : MonoBehaviour
                 return Color.Lerp(inst.Sadness.minColor, inst.Sadness.maxColor, intensity / 100f);
         }
         return Color.white;
-    }
-    private MoodProperties GetMoodData(Mood mood)
-    {
-        switch (mood)
-        {
-            case Mood.Anger:
-                return EmotionParameters.Instance.Anger;
-            case Mood.Joice:
-                return EmotionParameters.Instance.Joice;
-            case Mood.Fear:
-                return EmotionParameters.Instance.Fear;
-            case Mood.Sadness:
-                return EmotionParameters.Instance.Sadness;
-        }
-        return EmotionParameters.Instance.Anger;
     }
     #endregion
     #region Utils
@@ -316,7 +323,6 @@ public class BlobManager : MonoBehaviour
     {
         return GetClosestPartRef(UvPos).currentPos;
     }
-
     public Part GetClosestPartRef(Vector2 UvPos)
     {
         Part closestPartPos = new();
@@ -351,10 +357,15 @@ public class State
 {
     public Color color;
     public float speed;
+    public float shake;
+    public float dispertion;
+
     public State()
     {
         color = Color.gray;
         speed = 0.05f;
+        shake = 0;
+        dispertion = 0.2f;
     }
 }
 
@@ -407,7 +418,7 @@ public struct RtpcDependent
                 return normalizedCurve.Evaluate(normalizedRtpc);
                 
             case EEvaluationMode.CurvedRange:
-                    return outputMin + normalizedCurve.Evaluate(normalizedRtpc) * (outputMax - outputMin);
+                    return outputMin + rangeCurve.Evaluate(normalizedRtpc) * (outputMax - outputMin);
         }
 
         return baseValue;

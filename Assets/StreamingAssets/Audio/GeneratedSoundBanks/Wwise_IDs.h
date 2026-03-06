@@ -64,6 +64,7 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID BASS_METER = 1241500558U;
+        static const AkUniqueID BPM = 798609784U;
         static const AkUniqueID HIGH_METER = 3514497119U;
         static const AkUniqueID INTENSITY_SLOT1 = 2328106540U;
         static const AkUniqueID INTENSITY_SLOT2 = 2328106543U;
@@ -83,6 +84,8 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID CLICK = 1584507803U;
+        static const AkUniqueID CLICK_BUS = 1866973044U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
         static const AkUniqueID METER = 2406858644U;
         static const AkUniqueID SLOT1_BUS = 2054164089U;
