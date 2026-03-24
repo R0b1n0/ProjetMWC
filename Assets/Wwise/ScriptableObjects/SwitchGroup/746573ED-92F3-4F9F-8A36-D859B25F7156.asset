@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56fa644ce8ac33428f6f35cfb142a37, type: 3}
+  m_Name: 746573ED-92F3-4F9F-8A36-D859B25F7156
+  m_EditorClassIdentifier: AK.Wwise.Unity.API.WwiseTypes::WwiseSwitchGroupReference
+  objectName: Slot1_Switch
+  id: 3202463081
+  guid: 746573ED-92F3-4F9F-8A36-D859B25F7156

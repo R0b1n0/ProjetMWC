@@ -1,14 +1,18 @@
+using System;
 using UnityEngine;
 
 public class AbsorbState : MarbleStateBehaviour
 {
+    public static event Action<Mood, float> OnMarbleAbsorbtion;
     float absorbtionSpeed = 0.7f;
     float startScale;
     float l = 0;
+    Part closestP;
 
-    public AbsorbState(MarbleData marble) : base(marble)
+    public AbsorbState(MarbleData marble, Part closetPart) : base(marble)
     {
         startScale = marble.trans.localScale.x;
+        closestP = closetPart;
     }
 
     public override void EnterState()
@@ -17,12 +21,12 @@ public class AbsorbState : MarbleStateBehaviour
 
     public override void ExitState()
     {
-        //TODO Stop rendering aura
-        //Set scale and color back 2 default 
+        OnMarbleAbsorbtion?.Invoke(marble.mood, marble.currentLoadValue / marble.maxLoadValue);
         float marbleDefaultScale = marble.defaultScale;
         marble.trans.localScale = new Vector3(marbleDefaultScale, marbleDefaultScale, marbleDefaultScale);
         marble.mat.color = marble.ogColor;
         marble.SetAura(false,true);
+        marble.SetTransparency(1);
     }
 
     public override MarbleStateBehaviour Update()
@@ -31,6 +35,10 @@ public class AbsorbState : MarbleStateBehaviour
 
         float scale = startScale - startScale * l;
         marble.trans.localScale = new Vector3 (scale, scale, scale);
+
+        //Stay on the closest part
+        Vector2 closestPartUVPos = BlobManager.instance.GetClosestPartPos(closestP.currentPos);
+        marble.trans.position = Utils.UV2World(closestPartUVPos);
 
         if (l > 1)
         {

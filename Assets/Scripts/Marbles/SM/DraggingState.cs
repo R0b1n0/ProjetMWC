@@ -68,6 +68,8 @@ public class DraggingState : MarbleStateBehaviour
         float stepDistance = Time.deltaTime * marbleSpeedOnDrag * Mathf.Max(d2Target, accelerationTreshold);
         draggedMarblePreviousPos = marble.trans.position;
 
+        marble.FadeWithPartDistance();
+
         if (d2Target <= stepDistance)
         {
             marble.transform.position = target;

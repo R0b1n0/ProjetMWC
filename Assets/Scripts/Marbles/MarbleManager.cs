@@ -107,7 +107,7 @@ public class MarbleManager : MonoBehaviour
             GameObject marble = Instantiate(marblePb);
             MarbleData marbleBh = marble.GetComponent<MarbleData>();
             marbles.Add(marbleBh);
-            marbleBh.Initialize(EmotionParameters.Instance.GetMoodInfo(moodOrder[i]).marbleColor, i, scale);
+            marbleBh.Initialize(moodOrder[i], EmotionParameters.Instance.GetMoodInfo(moodOrder[i]).marbleColor, i, scale);
             drawers.Add(holders[i].GetComponent<SlotDrawer>());
 
             yield return new WaitForSeconds(0.3f);

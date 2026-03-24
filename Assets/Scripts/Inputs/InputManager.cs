@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour
     public Vector2 TouchWorldPos => cam.ScreenToWorldPoint(TouchScreenPos);
 
     private void Awake()
-    {
+    {    
         inputActions = new();
         if (instance == null)
         {

@@ -30,6 +30,21 @@ public class Utils : MonoBehaviour
         return new Vector2(screenPos.x / canva.rect.width, screenPos.y / canva.rect.width) * 2;
     }
 
+    public static Vector2 UV2Screen(Vector2 uvPos)
+    {
+        return new Vector2(uvPos.x, uvPos.y ) * canva.rect.width/2;
+    }
+
+    public static Vector2 Screen2World(Vector2 ScreenPos)
+    {
+        return ScreenPos * screen2World;
+    }
+
+    public static Vector2 UV2World(Vector2 uvPos) 
+    {
+        return Screen2World(UV2Screen(uvPos));
+    }
+
     #region UIResize 
     private void OnRectTransformDimensionsChange()
     {
