@@ -52,10 +52,12 @@ public class BlobManager : MonoBehaviour
     [SerializeField]
     [Range(0, 10)]
     int outerRenderMethod;
-    [SerializeField][Range(0, 100)] int rtpcValue;
-    [SerializeField] AK.Wwise.RTPC rTPC;
-    [SerializeField] AnimationCurve waveFormCurve;
-    [SerializeField] AK.Wwise.RTPC beat;
+    [SerializeField] AK.Wwise.Switch testSwitch;
+    [SerializeField] GameObject testValue;
+    //[SerializeField][Range(0, 100)] int rtpcValue;
+    //[SerializeField] AK.Wwise.RTPC rTPC;
+    //[SerializeField] AnimationCurve waveFormCurve;
+    //[SerializeField] AK.Wwise.RTPC beat;
 
     Vector4[] toShader;
     int circleCount;
@@ -133,8 +135,6 @@ public class BlobManager : MonoBehaviour
                 stateLerp += Time.deltaTime;
             }
         }
-
-        rTPC.SetGlobalValue(rtpcValue);
     }
     private void UpdatePartsPos()
     {
@@ -219,6 +219,8 @@ public class BlobManager : MonoBehaviour
         stateLerp = 0;
         stateLerping = true;
         previousState = MakeSnapShot();
+        testSwitch.SetValue(testValue);
+
         computedState = new State 
         { 
             color = GetBlendColor(), 

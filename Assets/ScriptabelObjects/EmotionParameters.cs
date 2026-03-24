@@ -56,5 +56,4 @@ public struct MoodProperties
     public Color marbleColor;
     public Color marbleColor1;
     public Color marbleColor2;
-    public float speedFactor;
 }
