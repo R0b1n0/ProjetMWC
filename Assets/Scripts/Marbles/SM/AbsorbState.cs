@@ -37,7 +37,7 @@ public class AbsorbState : MarbleStateBehaviour
         marble.trans.localScale = new Vector3 (scale, scale, scale);
 
         //Stay on the closest part
-        Vector2 closestPartUVPos = BlobManager.instance.GetClosestPartPos(closestP.currentPos);
+        Vector2 closestPartUVPos = BlobRenderer.instance.GetClosestPartPos(closestP.currentPos);
         marble.trans.position = Utils.UV2World(closestPartUVPos);
 
         if (l > 1)

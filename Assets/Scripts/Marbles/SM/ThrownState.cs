@@ -26,7 +26,7 @@ public class ThrownState : MarbleStateBehaviour
         Vector3 movementVector = new();
 
         //Move towards the blob if close enough
-        Vector2 closestPartPos = BlobManager.instance.GetClosestPartPos(uvPos);
+        Vector2 closestPartPos = BlobRenderer.instance.GetClosestPartPos(uvPos);
         Vector3 v2Part = closestPartPos - uvPos;
         float d2Part = v2Part.magnitude;
 
@@ -48,7 +48,7 @@ public class ThrownState : MarbleStateBehaviour
         //Absorbed 
         if (d2Part < 0.005f)
         {
-            return new AbsorbState(marble, BlobManager.instance.GetClosestPartRef(uvPos));
+            return new AbsorbState(marble, BlobRenderer.instance.GetClosestPartRef(uvPos));
         }
 
         //Back to the slot

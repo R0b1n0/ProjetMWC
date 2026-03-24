@@ -1,14 +1,14 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BlobManager))]
+[CustomEditor(typeof(BlobRenderer))]
 public class BlobManagerEditor : Editor
 {
-    BlobManager script;
+    BlobRenderer script;
 
     private void OnEnable()
     {
-        script = (BlobManager)target;
+        script = (BlobRenderer)target;
     }
 
     public override void OnInspectorGUI()
