@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class MarbleData : MonoBehaviour
 {
@@ -97,7 +96,7 @@ public class MarbleData : MonoBehaviour
     public void FadeWithPartDistance()
     {
         Vector2 UVPos = Utils.World2UV(trans.position);
-        Vector2 closestPart = BlobManager.instance.GetClosestPartPos(UVPos);
+        Vector2 closestPart = BlobRenderer.instance.GetClosestPartPos(UVPos);
         SetTransparency(Mathf.Min(1, Mathf.Max(maxTransparency, Vector2.Distance(UVPos, closestPart) / fadeTreshold)));
     }
     public void SetTransparency(float alphaValue)

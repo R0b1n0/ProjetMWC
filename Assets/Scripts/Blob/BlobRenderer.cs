@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlobManager : MonoBehaviour
+public class BlobRenderer : MonoBehaviour
 {
-    public static BlobManager instance;
+    public static BlobRenderer instance;
 
     [Header("Channel inputs ")]
     [SerializeField] Material blobMaterial;

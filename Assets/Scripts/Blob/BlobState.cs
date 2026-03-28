@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BlobState : MonoBehaviour
 {
-    [SerializeField] BlobManager blobRend;
+    [SerializeField] BlobRenderer blobRend;
 
     private void Awake()
     {
