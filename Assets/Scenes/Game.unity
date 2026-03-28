@@ -803,28 +803,111 @@ MonoBehaviour:
     groupIdInternal: 0
     groupGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 661f980321e47674bb41e0af1772eeba, type: 2}
+  slot: 1
   parameters:
-    switchs:
-    - idInternal: 0
-      valueGuidInternal: 
-      groupIdInternal: 0
-      groupGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: 661f980321e47674bb41e0af1772eeba, type: 2}
-    - idInternal: 0
-      valueGuidInternal: 
-      groupIdInternal: 0
-      groupGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: 86ee88edaf7e3224ba79ce7d261c2570, type: 2}
-    - idInternal: 0
-      valueGuidInternal: 
-      groupIdInternal: 0
-      groupGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: 14594998107f73a4195b19a2d6b64f21, type: 2}
-    - idInternal: 0
-      valueGuidInternal: 
-      groupIdInternal: 0
-      groupGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: 17b6c9afe523e0a4f9855e3d4b5f04c3, type: 2}
+    slotsInfo:
+    - slotSwitchEvents:
+        _serializedList:
+        - Key: 0
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 661f980321e47674bb41e0af1772eeba, type: 2}
+        - Key: 1
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 14594998107f73a4195b19a2d6b64f21, type: 2}
+        - Key: 2
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 86ee88edaf7e3224ba79ce7d261c2570, type: 2}
+        - Key: 3
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 17b6c9afe523e0a4f9855e3d4b5f04c3, type: 2}
+      intensity:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 2ee2a844218d65c4992ea5d9c153baec, type: 2}
+    - slotSwitchEvents:
+        _serializedList:
+        - Key: 0
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 3525f32d244330e43b75883fce01873f, type: 2}
+        - Key: 1
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 4994b74ea152fad45886613e7a5a8751, type: 2}
+        - Key: 2
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 047f99a6b5041df459f2f733004973f6, type: 2}
+        - Key: 3
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 221043ab773d8924f92ac501f227d61e, type: 2}
+      intensity:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 3f46d2e0413292844abc9090e01506aa, type: 2}
+    - slotSwitchEvents:
+        _serializedList:
+        - Key: 0
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: fae18a09ca0b9ce479c7aaad771f1696, type: 2}
+        - Key: 1
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 7234b0ad983b06345a7fd773714a631e, type: 2}
+        - Key: 2
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 8d92c5d2400a41447a50f1c92b5eb8d0, type: 2}
+        - Key: 3
+          Value:
+            idInternal: 0
+            valueGuidInternal: 
+            groupIdInternal: 0
+            groupGuidInternal: 
+            WwiseObjectReference: {fileID: 11400000, guid: 070ff7cb84c33a643b0de3a56e64ad4d, type: 2}
+      intensity:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 06cdcbef2129b9844a533803104a81b2, type: 2}
 --- !u!1 &874297767
 GameObject:
   m_ObjectHideFlags: 0
