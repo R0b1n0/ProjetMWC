@@ -31,7 +31,7 @@ Shader "Custom/Blob"
 
             int _CircleCount;
             float4 _Circles[MAX_CIRCLES];
-            float4 _CirclesColors[4];
+            float4 _CirclesColors[MAX_CIRCLES];
 
             float _LightFactor;
             half4 _InnerColor;
@@ -84,6 +84,8 @@ Shader "Custom/Blob"
             }
             float2 SmoothUnionQuadraticPolynomialBlend(float a, float b, float k)
             {
+                //X is the actual sdf value
+                //Y is a lerp value that is used for color blending
                 float h = 1.0 - min( abs(a-b)/(4.0*k), 1.0 );
                 float w = h*h;
                 float m = w*0.5;
@@ -173,10 +175,7 @@ Shader "Custom/Blob"
                         BLEND_FACTOR
                         );
 
-                    if (i > 4 && i <= 8)
-                    {
-                        color = ColorLerp(color, _CirclesColors[i - 4], sd.y );
-                    }
+                    color = ColorLerp(color, _CirclesColors[i], sd.y );
                 }
                 result.sd = sd.x;
                 result.color = color;

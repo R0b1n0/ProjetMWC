@@ -48,6 +48,7 @@ public class BlobRenderer : MonoBehaviour
     [SerializeField] GameObject testValue;
 
     Vector4[] toShader;
+    Vector4[] toShaderColors;
     int circleCount;
 
     State previousState = new();
@@ -71,6 +72,7 @@ public class BlobRenderer : MonoBehaviour
         circleCount = partsData.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
         toShader = new Vector4[32];
+        toShaderColors = new Vector4[32];
 
         for (int i = 0; i < circleCount; i++)
         {
@@ -133,10 +135,11 @@ public class BlobRenderer : MonoBehaviour
                 partsData[i].currentPos.y,
                 partsData[i].radius + (scaleFactorRtpc.Get() * partsData[i].radius),
                 0);
+
+            toShaderColors[i] = blobEdgeColor;
         }
 
         int partCount = circleCount;
-        Vector4[] extraColors = new Vector4[4];
 
 
         marbleAura.ProcessMarblesAura();
@@ -147,8 +150,7 @@ public class BlobRenderer : MonoBehaviour
             Vector2 marbleUvPos = Utils.World2UV(state.marble.trans.position);
             float radius = Utils.World2UV(state.marble.trans.localScale).x / 1.9f * state.scale;
             
-            extraColors[partCount - circleCount] = state.marble.mat.color;
-
+            toShaderColors[partCount - 1] = state.marble.mat.color;
             toShader[partCount-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius);
         }
 
@@ -158,11 +160,12 @@ public class BlobRenderer : MonoBehaviour
         {
             partCount++;
             toShader[partCount - 1] = new Vector4(drop.currentPos.x, drop.currentPos.y, drop.radius);
+            toShaderColors[partCount - 1] = blobEdgeColor;
         }
 
         blobMaterial.SetInt("_CircleCount", partCount);
         blobMaterial.SetVectorArray("_Circles", toShader);
-        blobMaterial.SetVectorArray("_CirclesColors", extraColors);
+        blobMaterial.SetVectorArray("_CirclesColors", toShaderColors);
     }
 
     #region State
