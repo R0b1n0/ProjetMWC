@@ -173,7 +173,7 @@ Shader "Custom/Blob"
                         BLEND_FACTOR
                         );
 
-                    if (i > 4)
+                    if (i > 4 && i <= 8)
                     {
                         color = ColorLerp(color, _CirclesColors[i - 4], sd.y );
                     }

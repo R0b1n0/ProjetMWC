@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class BlobRenderer : MonoBehaviour
 {
@@ -14,18 +15,9 @@ public class BlobRenderer : MonoBehaviour
 
     [Header("Movements")]
     [SerializeField] List<Part> partsData = new List<Part>();
-    [SerializeField] AnimationCurve speedCurve;
-    [SerializeField] float movementAreaRadius;
-    [SerializeField] float dispertionFactor;
-    [SerializeField] float dispertionMax;
-    [SerializeField] float speedFactor;
-    [SerializeField][Range(0f, 1f)] float movementType;
-    [SerializeField] AnimationCurve speedFactorCurve;
-    [SerializeField] float lowSpeedValue;
-    [SerializeField] float highSpeedValue;
-    [SerializeField] AnimationCurve shakeCurve;
-    [SerializeField] float maxShakeRange;
-    [SerializeField, Range(0, 1)] float shakeFactor;
+    [SerializeField] BlobPartMovement partMovement;
+
+    [SerializeField] BlobRain rain;
 
     [Header("Render")]
     [SerializeField][Range(0f, 10)] float auraFrequency;
@@ -54,10 +46,6 @@ public class BlobRenderer : MonoBehaviour
     int outerRenderMethod;
     [SerializeField] AK.Wwise.Switch testSwitch;
     [SerializeField] GameObject testValue;
-    //[SerializeField][Range(0, 100)] int rtpcValue;
-    //[SerializeField] AK.Wwise.RTPC rTPC;
-    //[SerializeField] AnimationCurve waveFormCurve;
-    //[SerializeField] AK.Wwise.RTPC beat;
 
     Vector4[] toShader;
     int circleCount;
@@ -82,15 +70,14 @@ public class BlobRenderer : MonoBehaviour
 
         circleCount = partsData.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
-        //This includes the four marble circles
-        toShader = new Vector4[circleCount + 4];
+        toShader = new Vector4[32];
 
         for (int i = 0; i < circleCount; i++)
         {
             partsData[i].origin = Vector2.zero;
             partsData[i].destination = new Vector2(
-                UnityEngine.Random.Range(-movementAreaRadius, movementAreaRadius),
-                UnityEngine.Random.Range(-movementAreaRadius, movementAreaRadius));
+                UnityEngine.Random.Range(-partMovement.movementAreaRadius, partMovement.movementAreaRadius),
+                UnityEngine.Random.Range(-partMovement.movementAreaRadius, partMovement.movementAreaRadius));
             partsData[i].lerpPhase = 0;
         }
 
@@ -138,38 +125,9 @@ public class BlobRenderer : MonoBehaviour
     }
     private void UpdatePartsPos()
     {
-        Vector2 computePos;
-
-        //Compute shakeFactor
-        Vector2 shakeOffset = new Vector2(UnityEngine.Random.Range(-1,1), UnityEngine.Random.Range(-1, 1)).normalized * maxShakeRange;
-        shakeOffset *= shakeFactor;
-
+        partMovement.UpdatePartPos(partsData);
         for (int i = 0; i < circleCount; i++)
         {
-            //Linear lerp constant speed
-            float newSpeedFactor = lowSpeedValue + (speedFactorCurve.Evaluate(speedFactor) * highSpeedValue);
-            partsData[i].lerpPhase += Time.deltaTime * (partsData[i].lerpSpeed / (Vector2.Distance(partsData[i].origin, partsData[i].destination) * 2)) * newSpeedFactor;
-
-            float lerpValue = speedCurve.Evaluate(partsData[i].lerpPhase);
-            //Linear move 
-            Vector2 linearLerp = Vector2.Lerp(partsData[i].origin, partsData[i].destination, lerpValue);
-
-            //Curved movement 
-            Vector2 circularLerp = Vector3.Slerp(partsData[i].origin, partsData[i].destination, lerpValue);
-
-            computePos = Vector2.Lerp(linearLerp, circularLerp, movementType);
-
-            if (partsData[i].lerpPhase >= 1)
-            {
-                //Circle finished lerping
-                partsData[i].origin = partsData[i].destination;
-                float movementAreaRad = movementAreaRadius + dispertionFactor * dispertionMax;
-                partsData[i].destination.Set(UnityEngine.Random.Range(-movementAreaRad, movementAreaRad), UnityEngine.Random.Range(-movementAreaRad, movementAreaRad));
-                partsData[i].lerpPhase = 0;
-            }
-
-            partsData[i].currentPos = computePos + shakeOffset;
-
             toShader[i] = new Vector4(
                 partsData[i].currentPos.x,
                 partsData[i].currentPos.y,
@@ -194,6 +152,14 @@ public class BlobRenderer : MonoBehaviour
             toShader[partCount-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius);
         }
 
+        rain.UpdateRainDrops(partsData);
+
+        foreach(Part drop in rain.rainDrops)
+        {
+            partCount++;
+            toShader[partCount - 1] = new Vector4(drop.currentPos.x, drop.currentPos.y, drop.radius);
+        }
+
         blobMaterial.SetInt("_CircleCount", partCount);
         blobMaterial.SetVectorArray("_Circles", toShader);
         blobMaterial.SetVectorArray("_CirclesColors", extraColors);
@@ -202,7 +168,7 @@ public class BlobRenderer : MonoBehaviour
     #region State
     private State MakeSnapShot()
     {
-        return new State { color = blobInnerColor, speed = speedFactor, shake = shakeFactor, dispertion = movementAreaRadius};
+        return new State { color = blobInnerColor, speed = partMovement.speedFactor, shake = partMovement.shakeFactor, dispertion = partMovement.movementAreaRadius };
     }
     private void LerpToComputedState(float t)
     {
@@ -210,9 +176,9 @@ public class BlobRenderer : MonoBehaviour
         Color.RGBToHSV(blobInnerColor, out float h, out float s, out float v);
         blobEdgeColor = Color.HSVToRGB(h, s, 1);
 
-        speedFactor = Mathf.Lerp(previousState.speed, computedState.speed, t);
-        shakeFactor = Mathf.Lerp(previousState.shake, computedState.shake, t);
-        dispertionFactor = Mathf.Lerp(previousState.dispertion, computedState.dispertion, t);
+        partMovement.speedFactor = Mathf.Lerp(previousState.speed, computedState.speed, t);
+        partMovement.shakeFactor = Mathf.Lerp(previousState.shake, computedState.shake, t);
+        partMovement.dispertionFactor = Mathf.Lerp(previousState.dispertion, computedState.dispertion, t);
     }
     public void StartLerping()
     {
@@ -225,8 +191,8 @@ public class BlobRenderer : MonoBehaviour
         { 
             color = GetBlendColor(), 
             speed = ProcessSpeed(), 
-            shake = ProcessShakeFactor(),
-            dispertion = ProcessDispertion()
+            shake = ProcessEmotionRatio(Mood.Anger),
+            dispertion = ProcessEmotionRatio(Mood.Fear)
         };
     }
     public void SetMoodState(Mood mood, float intensity, int index)
@@ -236,30 +202,20 @@ public class BlobRenderer : MonoBehaviour
     }
     #endregion
     #region Mood Dependent param
-    private float ProcessShakeFactor()
+    private float ProcessEmotionRatio(Mood mood)
     {
-        float angerCount = 0;
+        float moodOccurance = 0;
         for (int i = 0; i < emotions.Length; i++)
         {
-            if (emotions[i].mood == Mood.Anger && emotions[i].intensity > 0)
-                angerCount++;
+            if (emotions[i].mood == mood && emotions[i].intensity > 0)
+                moodOccurance++;
         }
-        return (angerCount / emotions.Length);
+        return (moodOccurance / emotions.Length);
     }
     private float ProcessSpeed()
     {
         //Speed only depends on the intensity of the first slot 
         return emotions[0].intensity / 100;
-    }
-    private float ProcessDispertion()
-    {
-        float fearCount = 0;
-        for (int i = 0; i < emotions.Length; i++)
-        {
-            if (emotions[i].mood == Mood.Fear && emotions[i].intensity > 0)
-                fearCount++;
-        }
-        return (fearCount / emotions.Length);
     }
     #endregion 
     #region Color
@@ -380,7 +336,7 @@ public class Part
     [HideInInspector] public Vector2 currentPos;
     [HideInInspector] public Vector2 destination;
     [HideInInspector] public Vector2 origin;
-    [HideInInspector] public float lerpPhase;
+    [HideInInspector] public float lerpPhase = 0;
 }
 
 [Serializable]

@@ -2092,6 +2092,8 @@ GameObject:
   - component: {fileID: 1867051471}
   - component: {fileID: 1867051472}
   - component: {fileID: 1867051473}
+  - component: {fileID: 1867051474}
+  - component: {fileID: 1867051475}
   m_Layer: 0
   m_Name: BlobManager
   m_TagString: Untagged
@@ -2166,69 +2168,8 @@ MonoBehaviour:
     destination: {x: -0.028068751, y: 0.061250634}
     origin: {x: -0.011284471, y: -0.19398524}
     lerpPhase: 0.039226178
-  speedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.014950284
-      outSlope: 0.014950284
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.13836786
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  movementAreaRadius: 0.2
-  dispertionFactor: 0
-  dispertionMax: 0.2
-  speedFactor: 0
-  movementType: 0
-  speedFactorCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  lowSpeedValue: 0.5
-  highSpeedValue: 2
-  shakeCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxShakeRange: 0.015
-  shakeFactor: 0
+  partMovement: {fileID: 1867051474}
+  rain: {fileID: 1867051475}
   auraFrequency: 0.72
   auraSpeed: 5
   auraRange: 3.4
@@ -2402,6 +2343,90 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobState
   blobRend: {fileID: 1867051472}
+--- !u!114 &1867051474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867051469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca18ec2a99d79245847a04e83b21303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlobPartMovement
+  movementType: 0
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.014950284
+      outSlope: 0.014950284
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.13836786
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  movementAreaRadius: 0.2
+  dispertionFactor: 0
+  dispertionMax: 0.2
+  speedFactor: 0
+  speedFactorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lowSpeedValue: 0.5
+  highSpeedValue: 2
+  maxShakeRange: 0.015
+  shakeFactor: 0
+--- !u!114 &1867051475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867051469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed14f86a3058483419bf34188d396e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlobRain
+  maxRainDropCount: 20
+  maxRadius: 0.01
+  minRadius: 0.03
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
