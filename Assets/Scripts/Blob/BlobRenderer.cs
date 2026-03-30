@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 public class BlobRenderer : MonoBehaviour
 {
@@ -372,10 +371,11 @@ public struct RtpcDependent
     {
         if (rtpc.WwiseObjectReference == null) 
             return baseValue;
-
+        float rtpcVal = rtpc.GetGlobalValue();
         float normalizedRtpc = (rtpc.GetGlobalValue() - rtpcMin) / Math.Abs(rtpcMax - rtpcMin);
 
-        if (normalizedRtpc == float.NaN)
+        //So, a rtpc could be zero, but to us, it means dead zone
+        if (normalizedRtpc == float.NaN || rtpcVal == 0)
             return 0;
 
         switch (evaluationMode)

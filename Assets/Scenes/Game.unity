@@ -716,7 +716,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693463602}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02aadb693cda14409927536fac9cb0c, type: 3}
   m_Name: 
@@ -740,7 +740,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693463602}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02aadb693cda14409927536fac9cb0c, type: 3}
   m_Name: 
@@ -2322,12 +2322,6 @@ MonoBehaviour:
   blobInnerColor: {r: 0.91618574, g: 0.7627472, b: 0.11167073, a: 0.007931534}
   innerRenderMethod: 4
   outerRenderMethod: 10
-  testSwitch:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 661f980321e47674bb41e0af1772eeba, type: 2}
   testValue: {fileID: 153923052}
 --- !u!114 &1867051473
 MonoBehaviour:
