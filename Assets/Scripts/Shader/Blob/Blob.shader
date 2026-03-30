@@ -3,7 +3,6 @@ Shader "Custom/Blob"
     
     Properties
     {
-        //[MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white"
     }
 

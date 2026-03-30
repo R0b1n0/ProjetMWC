@@ -1,7 +1,6 @@
+using System;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 public class BlobRain : MonoBehaviour
 {
@@ -9,53 +8,95 @@ public class BlobRain : MonoBehaviour
     //9 are reserved for the main parts and marbles
 
     [SerializeField] int maxRainDropCount = 20;
-    [HideInInspector] public List<Part> rainDrops { get; private set; }
+    [HideInInspector] public List<Part> rainDropPart { get; private set; }
+    private List<RainDrop> rainDrops = new List<RainDrop>();
 
     [Header("Drop appearance")]
     [SerializeField] float maxRadius;
     [SerializeField] float minRadius;
-    [SerializeField] AnimationCurve dropScale;
+    [SerializeField] AnimationCurve fallingCurve;
+    [SerializeField] AnimationCurve radiusCurve;
+    [SerializeField] float dropFallingSpeed;
+    [SerializeField] float dropScalingSpeed;
 
     float lastDropDt;
 
-    float delayBetweenDrops = 0.5f;
+    float delayBetweenDrops = 2f;
+
+    class RainDrop
+    {
+        public Part parent;
+        public Part part;
+        public Vector2 freefallOg;
+        public float originRadius;
+        public bool freeFall = false;
+        public static float freefallTreshold;
+    }
 
     private void Awake()
     {
-        rainDrops = new List<Part>();
+        rainDropPart = new List<Part>();
+        Keyframe[] keys = new Keyframe[3];
+        fallingCurve.GetKeys(keys);
+        RainDrop.freefallTreshold = keys[1].time;
     }
 
     public void UpdateRainDrops(List<Part> blobParts)
     {
         lastDropDt += Time.deltaTime;
 
-        if (lastDropDt > delayBetweenDrops && rainDrops.Count < maxRainDropCount)
+        if (lastDropDt > delayBetweenDrops && rainDropPart.Count < maxRainDropCount)
         {
             // create a new Drop
             Part drop = new Part();
-            drop.radius = Random.Range(minRadius, maxRadius);
-            drop.currentPos = blobParts[Random.Range(0, blobParts.Count - 1)].currentPos;
+            drop.radius = UnityEngine.Random.Range(minRadius, maxRadius);
+
+            int parentIndex = UnityEngine.Random.Range(0, blobParts.Count - 1);
+            drop.currentPos = blobParts[parentIndex].currentPos - new Vector2(0, blobParts[parentIndex].radius) ;
             drop.destination = drop.currentPos + new Vector2(0, -1f);
             drop.origin = drop.currentPos;
-            drop.lerpSpeed = 0.2f;
-
-            rainDrops.Add(drop);
+            drop.lerpSpeed = dropFallingSpeed;
+            rainDropPart.Add(drop);
+            rainDrops.Add(new RainDrop
+            {
+                parent = blobParts[parentIndex],
+                part = rainDropPart[rainDropPart.Count - 1],
+                originRadius = drop.radius
+            });
             lastDropDt = 0;
         }
 
-        foreach (Part drop in rainDrops)
+        foreach (RainDrop rainDrop in rainDrops)
         {
-            drop.currentPos = Vector2.Lerp(drop.origin, drop.destination, drop.lerpPhase);
-            //drop.lerpPhase += Time.deltaTime * (drop.lerpSpeed / (Vector2.Distance(drop.origin, drop.destination) * 2));
-            drop.lerpPhase += Time.deltaTime * drop.lerpSpeed;
+            rainDrop.part.radius = radiusCurve.Evaluate(rainDrop.part.lerpPhase) * rainDrop.originRadius;
+
+            if (!rainDrop.freeFall)
+            {
+                rainDrop.part.lerpPhase += Time.deltaTime * dropScalingSpeed;
+
+                rainDrop.part.currentPos = rainDrop.parent.currentPos - new Vector2(0, rainDrop.parent.radius + rainDrop.part.radius);
+                
+                if (rainDrop.part.lerpPhase > RainDrop.freefallTreshold)
+                {
+                    rainDrop.freeFall = true;
+                    rainDrop.part.origin = rainDrop.part.currentPos;
+                    rainDrop.part.destination = rainDrop.part.currentPos - new Vector2(0, 1f);
+                }
+            }
+            else
+            {
+                rainDrop.part.lerpPhase += Time.deltaTime * dropFallingSpeed;
+                float dropLerp = (rainDrop.part.lerpPhase - RainDrop.freefallTreshold) / (1 - RainDrop.freefallTreshold);
+                rainDrop.part.currentPos = Vector2.Lerp(rainDrop.part.origin, rainDrop.part.destination, dropLerp);
+            }
         }
 
         //Remove old drops
-        for (int i = rainDrops.Count-1; i >= 0; i-- )
+        for (int i = rainDropPart.Count-1; i >= 0; i-- )
         {
-            if (rainDrops[i].lerpPhase > 1)
+            if (rainDropPart[i].lerpPhase > 1)
             {
-                rainDrops.RemoveAt(i);
+                rainDropPart.RemoveAt(i);
             }
         }
     }

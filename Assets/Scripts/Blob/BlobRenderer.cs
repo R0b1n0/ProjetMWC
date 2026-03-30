@@ -156,7 +156,7 @@ public class BlobRenderer : MonoBehaviour
 
         rain.UpdateRainDrops(partsData);
 
-        foreach(Part drop in rain.rainDrops)
+        foreach(Part drop in rain.rainDropPart)
         {
             partCount++;
             toShader[partCount - 1] = new Vector4(drop.currentPos.x, drop.currentPos.y, drop.radius);

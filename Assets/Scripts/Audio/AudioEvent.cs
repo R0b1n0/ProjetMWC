@@ -7,7 +7,6 @@ public class AudioEvent : MonoBehaviour
 {
     [Header("Events References")]
     [SerializeField] AK.Wwise.Event playAll;
-    [SerializeField] AK.Wwise.Switch slot1;
 
     [SerializeField, Range(0, 2)] int slot;
     [Header("Params")]
@@ -26,7 +25,7 @@ public class AudioEvent : MonoBehaviour
 
     private void Start()
     {
-        playAll.Post(gameObject);
+        //playAll.Post(gameObject);
     }
 
     private void OnMarbleAbsorbed(Mood marbleMood, float intensity)
