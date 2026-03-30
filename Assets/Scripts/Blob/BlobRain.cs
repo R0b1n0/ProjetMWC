@@ -12,6 +12,7 @@ public class BlobRain : MonoBehaviour
     [SerializeField] float maxDropDelay;
     [HideInInspector] public List<Part> rainDropPart { get; private set; }
     private List<RainDrop> rainDrops = new List<RainDrop>();
+    [SerializeField, Tooltip("How low the rain drop will fall")] float dropOffset; 
 
     [Header("Drop appearance")]
     [SerializeField] float maxRadius;
@@ -71,7 +72,7 @@ public class BlobRain : MonoBehaviour
 
             int parentIndex = UnityEngine.Random.Range(0, blobParts.Count - 1);
             drop.currentPos = blobParts[parentIndex].currentPos - new Vector2(0, blobParts[parentIndex].radius) ;
-            drop.destination = drop.currentPos + new Vector2(0, -1f);
+            drop.destination = drop.currentPos + new Vector2(0, - dropOffset);
             drop.origin = drop.currentPos;
             drop.lerpSpeed = dropFallingSpeed;
             rainDropPart.Add(drop);
@@ -100,7 +101,7 @@ public class BlobRain : MonoBehaviour
                 {
                     rainDrop.freeFall = true;
                     rainDrop.part.origin = rainDrop.part.currentPos;
-                    rainDrop.part.destination = rainDrop.part.currentPos - new Vector2(0, 1f);
+                    rainDrop.part.destination = rainDrop.part.currentPos - new Vector2(0, dropOffset);
                 }
             }
             else

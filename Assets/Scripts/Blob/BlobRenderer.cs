@@ -203,7 +203,6 @@ public class BlobRenderer : MonoBehaviour
             dispertion = ProcessEmotionRatio(Mood.Fear),
             rainIntensity = ProcessEmotionRatio(Mood.Sadness)
         };
-        Debug.Log(computedState.rainIntensity);
     }
     public void SetMoodState(Mood mood, float intensity, int index)
     {

@@ -1,0 +1,3159 @@
+fileFormatVersion: 2
+guid: 67ca536eed0b5134d9bf1f6436bc06ba
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3282249966146903526
+    second: "Etoil\xE9_0"
+  - first:
+      213: -3305309083526338007
+    second: "Etoil\xE9_1"
+  - first:
+      213: -1543485406481904032
+    second: "Etoil\xE9_2"
+  - first:
+      213: -5745720361868918471
+    second: "Etoil\xE9_3"
+  - first:
+      213: 8714637779285508323
+    second: "Etoil\xE9_4"
+  - first:
+      213: 8291221973159387664
+    second: "Etoil\xE9_5"
+  - first:
+      213: -2351320297106856878
+    second: "Etoil\xE9_6"
+  - first:
+      213: 2500373403643718130
+    second: "Etoil\xE9_7"
+  - first:
+      213: 9222304975088742197
+    second: "Etoil\xE9_8"
+  - first:
+      213: -3448833553848257596
+    second: "Etoil\xE9_9"
+  - first:
+      213: 8611329446717826905
+    second: "Etoil\xE9_10"
+  - first:
+      213: 3434740935718125272
+    second: "Etoil\xE9_11"
+  - first:
+      213: 7868775074622423164
+    second: "Etoil\xE9_12"
+  - first:
+      213: -906698913046149275
+    second: "Etoil\xE9_13"
+  - first:
+      213: -3891714544680076697
+    second: "Etoil\xE9_14"
+  - first:
+      213: 7490406623225027949
+    second: "Etoil\xE9_15"
+  - first:
+      213: -7668813528339325544
+    second: "Etoil\xE9_16"
+  - first:
+      213: 3799013262502239150
+    second: "Etoil\xE9_17"
+  - first:
+      213: 3392559908724793927
+    second: "Etoil\xE9_18"
+  - first:
+      213: -7448596811533770282
+    second: "Etoil\xE9_19"
+  - first:
+      213: -3773480100264727538
+    second: "Etoil\xE9_20"
+  - first:
+      213: 7550903342580738048
+    second: "Etoil\xE9_21"
+  - first:
+      213: -3896578011398408987
+    second: "Etoil\xE9_22"
+  - first:
+      213: 6686735287190463074
+    second: "Etoil\xE9_23"
+  - first:
+      213: -8672876549695498286
+    second: "Etoil\xE9_24"
+  - first:
+      213: 4758095075167060182
+    second: "Etoil\xE9_25"
+  - first:
+      213: -7304047772472028662
+    second: "Etoil\xE9_26"
+  - first:
+      213: -5709900789162971816
+    second: "Etoil\xE9_27"
+  - first:
+      213: -6683840341249564228
+    second: "Etoil\xE9_28"
+  - first:
+      213: -4995200607327748449
+    second: "Etoil\xE9_29"
+  - first:
+      213: 4399606766639955359
+    second: "Etoil\xE9_30"
+  - first:
+      213: 3605555726541533050
+    second: "Etoil\xE9_31"
+  - first:
+      213: -3274335780027008074
+    second: "Etoil\xE9_32"
+  - first:
+      213: 3459173803949577942
+    second: "Etoil\xE9_33"
+  - first:
+      213: 1323010598828299330
+    second: "Etoil\xE9_34"
+  - first:
+      213: 114104487065586786
+    second: "Etoil\xE9_35"
+  - first:
+      213: -6065566386228330885
+    second: "Etoil\xE9_36"
+  - first:
+      213: 1714880505907833020
+    second: "Etoil\xE9_37"
+  - first:
+      213: 1735893861354789862
+    second: "Etoil\xE9_38"
+  - first:
+      213: 5741403385244602102
+    second: "Etoil\xE9_39"
+  - first:
+      213: 6376435450500005228
+    second: "Etoil\xE9_40"
+  - first:
+      213: 5364857634338164921
+    second: "Etoil\xE9_41"
+  - first:
+      213: -5542202491691097436
+    second: "Etoil\xE9_42"
+  - first:
+      213: -1749967998475830939
+    second: "Etoil\xE9_43"
+  - first:
+      213: -686638597460030681
+    second: "Etoil\xE9_44"
+  - first:
+      213: -3820467145200647055
+    second: "Etoil\xE9_45"
+  - first:
+      213: 6577292469155093183
+    second: "Etoil\xE9_46"
+  - first:
+      213: 115181754807590174
+    second: "Etoil\xE9_47"
+  - first:
+      213: -7762452013675519617
+    second: "Etoil\xE9_48"
+  - first:
+      213: 1330100296946640795
+    second: "Etoil\xE9_49"
+  - first:
+      213: 6961230791080647611
+    second: "Etoil\xE9_50"
+  - first:
+      213: 5168392693583757326
+    second: "Etoil\xE9_51"
+  - first:
+      213: -3285441423788081068
+    second: "Etoil\xE9_52"
+  - first:
+      213: -3338799981352638292
+    second: "Etoil\xE9_53"
+  - first:
+      213: 5143614073786963490
+    second: "Etoil\xE9_54"
+  - first:
+      213: 3107219432065842140
+    second: "Etoil\xE9_55"
+  - first:
+      213: -8088955309643314323
+    second: "Etoil\xE9_56"
+  - first:
+      213: 4192366017482396163
+    second: "Etoil\xE9_57"
+  - first:
+      213: -1211353422096660423
+    second: "Etoil\xE9_58"
+  - first:
+      213: -5925098162116149242
+    second: "Etoil\xE9_59"
+  - first:
+      213: -1624672434887298700
+    second: "Etoil\xE9_60"
+  - first:
+      213: 4840192414670036540
+    second: "Etoil\xE9_61"
+  - first:
+      213: -5227980138103726755
+    second: "Etoil\xE9_62"
+  - first:
+      213: 8782025790739701070
+    second: "Etoil\xE9_63"
+  - first:
+      213: 5600163999889208221
+    second: "Etoil\xE9_64"
+  - first:
+      213: -3975676773444929121
+    second: "Etoil\xE9_65"
+  - first:
+      213: 1243150946665978158
+    second: "Etoil\xE9_66"
+  - first:
+      213: -4118052564370805446
+    second: "Etoil\xE9_67"
+  - first:
+      213: 2490830982479442314
+    second: "Etoil\xE9_68"
+  - first:
+      213: 6550810295415502340
+    second: "Etoil\xE9_69"
+  - first:
+      213: -7151397911797499187
+    second: "Etoil\xE9_70"
+  - first:
+      213: -4766528417856003052
+    second: "Etoil\xE9_71"
+  - first:
+      213: -1868229396554541083
+    second: "Etoil\xE9_72"
+  - first:
+      213: 8918902649194717235
+    second: "Etoil\xE9_73"
+  - first:
+      213: 5515157956732919724
+    second: "Etoil\xE9_74"
+  - first:
+      213: 3477725228480942122
+    second: "Etoil\xE9_75"
+  - first:
+      213: 2285667500278554540
+    second: "Etoil\xE9_76"
+  - first:
+      213: 3404539506127241631
+    second: "Etoil\xE9_77"
+  - first:
+      213: 4256261565209410251
+    second: "Etoil\xE9_78"
+  - first:
+      213: -3409647826198814235
+    second: "Etoil\xE9_79"
+  - first:
+      213: -4324951983892290459
+    second: "Etoil\xE9_80"
+  - first:
+      213: -6167292861264971513
+    second: "Etoil\xE9_81"
+  - first:
+      213: -6217894410590291491
+    second: "Etoil\xE9_82"
+  - first:
+      213: -5012677534392810443
+    second: "Etoil\xE9_83"
+  - first:
+      213: 6762531454505168249
+    second: "Etoil\xE9_84"
+  - first:
+      213: 3811411469564181184
+    second: "Etoil\xE9_85"
+  - first:
+      213: -1425442703789831538
+    second: "Etoil\xE9_86"
+  - first:
+      213: 6950929847282974823
+    second: "Etoil\xE9_87"
+  - first:
+      213: -6047708491734410767
+    second: "Etoil\xE9_88"
+  - first:
+      213: -123023017722933258
+    second: "Etoil\xE9_89"
+  - first:
+      213: 3608830910921030209
+    second: "Etoil\xE9_90"
+  - first:
+      213: -422719865178970655
+    second: "Etoil\xE9_91"
+  - first:
+      213: -6558154994225643928
+    second: "Etoil\xE9_92"
+  - first:
+      213: 7495739435709715246
+    second: "Etoil\xE9_93"
+  - first:
+      213: 279399637602469015
+    second: "Etoil\xE9_94"
+  - first:
+      213: 6367290225659389255
+    second: "Etoil\xE9_95"
+  - first:
+      213: 5292703164045816867
+    second: "Etoil\xE9_96"
+  - first:
+      213: 4114907601301684804
+    second: "Etoil\xE9_97"
+  - first:
+      213: -45974360836516205
+    second: "Etoil\xE9_98"
+  - first:
+      213: 6051337147590434357
+    second: "Etoil\xE9_99"
+  - first:
+      213: -3054372076940823075
+    second: "Etoil\xE9_100"
+  - first:
+      213: 3253451211690226353
+    second: "Etoil\xE9_101"
+  - first:
+      213: 2689286159373399989
+    second: "Etoil\xE9_102"
+  - first:
+      213: -722062121730599662
+    second: "Etoil\xE9_103"
+  - first:
+      213: -4059160732350571279
+    second: "Etoil\xE9_104"
+  - first:
+      213: -8361282879000127727
+    second: "Etoil\xE9_105"
+  - first:
+      213: 574833084783506146
+    second: "Etoil\xE9_106"
+  - first:
+      213: -8374302102696476838
+    second: "Etoil\xE9_107"
+  - first:
+      213: -611408514142819582
+    second: "Etoil\xE9_108"
+  - first:
+      213: -8151561033829949306
+    second: "Etoil\xE9_109"
+  - first:
+      213: 2970018958360267627
+    second: "Etoil\xE9_110"
+  - first:
+      213: -3197990521275476006
+    second: "Etoil\xE9_111"
+  - first:
+      213: 1490139715337949225
+    second: "Etoil\xE9_112"
+  - first:
+      213: -9186210517755667401
+    second: "Etoil\xE9_113"
+  - first:
+      213: -1153654591866049756
+    second: "Etoil\xE9_114"
+  - first:
+      213: -4501693291605410460
+    second: "Etoil\xE9_115"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Etoil\xE9_0"
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1196
+        width: 2071
+        height: 1790
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a12a6cfbb0b1372d0800000000000000
+      internalID: -3282249966146903526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_1"
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1778
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92a6a8b96ee2122d0800000000000000
+      internalID: -3305309083526338007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_2"
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1724
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06e85a65330749ae0800000000000000
+      internalID: -1543485406481904032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_3"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1511
+        width: 22
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9310314e5c91340b0800000000000000
+      internalID: -5745720361868918471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_4"
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1273
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e0038c53ec90f870800000000000000
+      internalID: 8714637779285508323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_5"
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 1278
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0122410b476501370800000000000000
+      internalID: 8291221973159387664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_6"
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 1276
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 254a7c9c5ae6e5fd0800000000000000
+      internalID: -2351320297106856878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_7"
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1252
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f9a402fc5c13b220800000000000000
+      internalID: 2500373403643718130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_8"
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 1245
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53f6b7253853cff70800000000000000
+      internalID: 9222304975088742197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_9"
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1238
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c33d6dc7284320d0800000000000000
+      internalID: -3448833553848257596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_10"
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1214
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9572a7bc186918770800000000000000
+      internalID: 8611329446717826905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_11"
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 1212
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8deb8f8dea6aaaf20800000000000000
+      internalID: 3434740935718125272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_12"
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1158
+        width: 20
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7041546d31833d60800000000000000
+      internalID: 7868775074622423164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_13"
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 1143
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 567c6a97422ca63f0800000000000000
+      internalID: -906698913046149275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_14"
+      rect:
+        serializedVersion: 2
+        x: 1016
+        y: 1174
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76a7f15ad3addf9c0800000000000000
+      internalID: -3891714544680076697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_15"
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 1164
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6d9f80532543f760800000000000000
+      internalID: 7490406623225027949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_16"
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 1179
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89ddf922ab6e29590800000000000000
+      internalID: -7668813528339325544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_17"
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 1078
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eab91782f6ec8b430800000000000000
+      internalID: 3799013262502239150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_18"
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 1129
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 742e5ce234bc41f20800000000000000
+      internalID: 3392559908724793927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_19"
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 1131
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d12c6d0aa441a890800000000000000
+      internalID: -7448596811533770282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_20"
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 1109
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0c27b077d7e1abc0800000000000000
+      internalID: -3773480100264727538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_21"
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 1093
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 008a5db65923ac860800000000000000
+      internalID: 7550903342580738048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_22"
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 1084
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e4fffe81f29ce9c0800000000000000
+      internalID: -3896578011398408987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_23"
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 1047
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 262ae0cd05e0ccc50800000000000000
+      internalID: 6686735287190463074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_24"
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 1027
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d7959a9ab0c3a780800000000000000
+      internalID: -8672876549695498286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_25"
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 1033
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d04edae246280240800000000000000
+      internalID: 4758095075167060182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_26"
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1001
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a02525bdf3fc2aa90800000000000000
+      internalID: -7304047772472028662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_27"
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 1008
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85de73f0c7b52c0b0800000000000000
+      internalID: -5709900789162971816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_28"
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 1007
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb1e4644f9a3e33a0800000000000000
+      internalID: -6683840341249564228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_29"
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 1006
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9ef96a638b7daab0800000000000000
+      internalID: -4995200607327748449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_30"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 942
+        width: 34
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9dbafc4b0b8e0d30800000000000000
+      internalID: 4399606766639955359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_31"
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 961
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7f226a84d1890230800000000000000
+      internalID: 3605555726541533050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_32"
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 959
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bb732cc4f83f82d0800000000000000
+      internalID: -3274335780027008074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_33"
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 931
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d650c84f34710030800000000000000
+      internalID: 3459173803949577942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_34"
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 927
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 244dc3941274c5210800000000000000
+      internalID: 1323010598828299330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_35"
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 865
+        width: 36
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26c82da2d61659100800000000000000
+      internalID: 114104487065586786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_36"
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 860
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7e7f4b2287c2dba0800000000000000
+      internalID: -6065566386228330885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_37"
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 899
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb8e0eafbba7cc710800000000000000
+      internalID: 1714880505907833020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_38"
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 855
+        width: 40
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6eb55dd0542271810800000000000000
+      internalID: 1735893861354789862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_39"
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 851
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fecab9a5ff8daf40800000000000000
+      internalID: 5741403385244602102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_40"
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 798
+        width: 45
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6db2482246ad7850800000000000000
+      internalID: 6376435450500005228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_41"
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 843
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b0d44d189dc37a40800000000000000
+      internalID: 5364857634338164921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_42"
+      rect:
+        serializedVersion: 2
+        x: 1046
+        y: 825
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a2a77992342613b0800000000000000
+      internalID: -5542202491691097436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_43"
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 777
+        width: 38
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 569fb8a806dd6b7e0800000000000000
+      internalID: -1749967998475830939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_44"
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 793
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72b825565d19876f0800000000000000
+      internalID: -686638597460030681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_45"
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 766
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 174c3468f59fafac0800000000000000
+      internalID: -3820467145200647055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_46"
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 760
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba57d717ac374b50800000000000000
+      internalID: 6577292469155093183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_47"
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 747
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1d99eb1235399100800000000000000
+      internalID: 115181754807590174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_48"
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 749
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f71ead2550b364490800000000000000
+      internalID: -7762452013675519617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_49"
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 741
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9765234c27757210800000000000000
+      internalID: 1330100296946640795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_50"
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 711
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbb9fd5b5824b9060800000000000000
+      internalID: 6961230791080647611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_51"
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 717
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e00c8c085c1d9b740800000000000000
+      internalID: 5168392693583757326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_52"
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 696
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45002cc9e64c762d0800000000000000
+      internalID: -3285441423788081068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_53"
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 699
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca8256f4b133aa1d0800000000000000
+      internalID: -3338799981352638292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_54"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 864
+        height: 686
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22695c18fb9c16740800000000000000
+      internalID: 5143614073786963490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_55"
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 675
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdbb9775c9f0f1b20800000000000000
+      internalID: 3107219432065842140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_56"
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 636
+        width: 43
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6b43b4c0024ebf80800000000000000
+      internalID: -8088955309643314323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_57"
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 622
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30215784ea64e2a30800000000000000
+      internalID: 4192366017482396163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_58"
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 610
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 938897a0b78603fe0800000000000000
+      internalID: -1211353422096660423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_59"
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 612
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6004fb33d92d5cda0800000000000000
+      internalID: -5925098162116149242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_60"
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 575
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4717c2247010479e0800000000000000
+      internalID: -1624672434887298700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_61"
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 575
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e92f05b51db2340800000000000000
+      internalID: 4840192414670036540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_62"
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 552
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5d978f63cb7277b0800000000000000
+      internalID: -5227980138103726755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_63"
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 534
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4ddb517de500e970800000000000000
+      internalID: 8782025790739701070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_64"
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 516
+        width: 30
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d93b359ac77c7bd40800000000000000
+      internalID: 5600163999889208221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_65"
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 489
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f993b01e90f83d8c0800000000000000
+      internalID: -3975676773444929121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_66"
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 384
+        width: 83
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e295732133f804110800000000000000
+      internalID: 1243150946665978158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_67"
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 424
+        width: 23
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3daa46d20db9d6c0800000000000000
+      internalID: -4118052564370805446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_68"
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 447
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a817932e495319220800000000000000
+      internalID: 2490830982479442314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_69"
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 357
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4067639814729ea50800000000000000
+      internalID: 6550810295415502340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_70"
+      rect:
+        serializedVersion: 2
+        x: 1111
+        y: 383
+        width: 18
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcaf6db2d7121cc90800000000000000
+      internalID: -7151397911797499187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_71"
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 386
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41463e978a3e9ddb0800000000000000
+      internalID: -4766528417856003052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_72"
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 370
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e79c6b1347b216e0800000000000000
+      internalID: -1868229396554541083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_73"
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 357
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 330aa8f74be46cb70800000000000000
+      internalID: 8918902649194717235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_74"
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 360
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf1c3be0f6c98c40800000000000000
+      internalID: 5515157956732919724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_75"
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 341
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2055066bac534030800000000000000
+      internalID: 3477725228480942122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_76"
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 288
+        width: 37
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf12c44b7258bf10800000000000000
+      internalID: 2285667500278554540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_77"
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 325
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f918f7e84aa5f3f20800000000000000
+      internalID: 3404539506127241631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_78"
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 304
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bca7479c757411b30800000000000000
+      internalID: 4256261565209410251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_79"
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 296
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e1ac3efd5f7ea0d0800000000000000
+      internalID: -3409647826198814235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_80"
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 287
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 564aa71d51faaf3c0800000000000000
+      internalID: -4324951983892290459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_81"
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 275
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 709bf7281df596aa0800000000000000
+      internalID: -6167292861264971513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_82"
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 269
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd9f0e53af995b9a0800000000000000
+      internalID: -6217894410590291491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_83"
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 275
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5348fec37546f6ab0800000000000000
+      internalID: -5012677534392810443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_84"
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 222
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97daf28478659dd50800000000000000
+      internalID: 6762531454505168249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_85"
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 241
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0caf830b98ad4e430800000000000000
+      internalID: 3811411469564181184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_86"
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 241
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a4fe8c96fc73ce0800000000000000
+      internalID: -1425442703789831538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_87"
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 222
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76046f55ed9a67060800000000000000
+      internalID: 6950929847282974823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_88"
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 229
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f99e0d3b29321ca0800000000000000
+      internalID: -6047708491734410767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_89"
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 216
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ff8d69973fea4ef0800000000000000
+      internalID: -123023017722933258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_90"
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 209
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14ab5e3d794251230800000000000000
+      internalID: 3608830910921030209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_91"
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 188
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e5a184b582322af0800000000000000
+      internalID: -422719865178970655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_92"
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 146
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86ef93387c0ccf4a0800000000000000
+      internalID: -6558154994225643928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_93"
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 151
+        width: 17
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e235d5a7d47360860800000000000000
+      internalID: 7495739435709715246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_94"
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 153
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7940ba57d70a0e300800000000000000
+      internalID: 279399637602469015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_95"
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 165
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 745ae3299b82d5850800000000000000
+      internalID: 6367290225659389255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_96"
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 163
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 324798a5c75737940800000000000000
+      internalID: 5292703164045816867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_97"
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 193
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 442442369a61b1930800000000000000
+      internalID: 4114907601301684804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_98"
+      rect:
+        serializedVersion: 2
+        x: 1111
+        y: 172
+        width: 30
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3965099ff8aac5ff0800000000000000
+      internalID: -45974360836516205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_99"
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 139
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53ed04a031baaf350800000000000000
+      internalID: 6051337147590434357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_100"
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 76
+        width: 43
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd5f11e57c0bc95d0800000000000000
+      internalID: -3054372076940823075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_101"
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 124
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b23cd6b3a4962d20800000000000000
+      internalID: 3253451211690226353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_102"
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 102
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b773d47383425520800000000000000
+      internalID: 2689286159373399989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_103"
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 74
+        width: 8
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2159b707358baf5f0800000000000000
+      internalID: -722062121730599662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_104"
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 96
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc970ef1d6faa7c0800000000000000
+      internalID: -4059160732350571279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_105"
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 89
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11754a28581c6fb80800000000000000
+      internalID: -8361282879000127727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_106"
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 87
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e2b9af15a73af700800000000000000
+      internalID: 574833084783506146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_107"
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 89
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5f38f64b9088cb80800000000000000
+      internalID: -8374302102696476838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_108"
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 75
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b2edd1237d387f0800000000000000
+      internalID: -611408514142819582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_109"
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 65
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68066a5bd66dfde80800000000000000
+      internalID: -8151561033829949306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_110"
+      rect:
+        serializedVersion: 2
+        x: 967
+        y: 53
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6b4d3db180a73920800000000000000
+      internalID: 2970018958360267627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_111"
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 57
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad71f4880947e93d0800000000000000
+      internalID: -3197990521275476006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_112"
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 33
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9209b6e0d2a0ea410800000000000000
+      internalID: 1490139715337949225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_113"
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 14
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73c57396436048080800000000000000
+      internalID: -9186210517755667401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_114"
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42b6352d2456dffe0800000000000000
+      internalID: -1153654591866049756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Etoil\xE9_115"
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46db9126dc5c681c0800000000000000
+      internalID: -4501693291605410460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "Etoil\xE9_0": -3282249966146903526
+      "Etoil\xE9_1": -3305309083526338007
+      "Etoil\xE9_10": 8611329446717826905
+      "Etoil\xE9_100": -3054372076940823075
+      "Etoil\xE9_101": 3253451211690226353
+      "Etoil\xE9_102": 2689286159373399989
+      "Etoil\xE9_103": -722062121730599662
+      "Etoil\xE9_104": -4059160732350571279
+      "Etoil\xE9_105": -8361282879000127727
+      "Etoil\xE9_106": 574833084783506146
+      "Etoil\xE9_107": -8374302102696476838
+      "Etoil\xE9_108": -611408514142819582
+      "Etoil\xE9_109": -8151561033829949306
+      "Etoil\xE9_11": 3434740935718125272
+      "Etoil\xE9_110": 2970018958360267627
+      "Etoil\xE9_111": -3197990521275476006
+      "Etoil\xE9_112": 1490139715337949225
+      "Etoil\xE9_113": -9186210517755667401
+      "Etoil\xE9_114": -1153654591866049756
+      "Etoil\xE9_115": -4501693291605410460
+      "Etoil\xE9_12": 7868775074622423164
+      "Etoil\xE9_13": -906698913046149275
+      "Etoil\xE9_14": -3891714544680076697
+      "Etoil\xE9_15": 7490406623225027949
+      "Etoil\xE9_16": -7668813528339325544
+      "Etoil\xE9_17": 3799013262502239150
+      "Etoil\xE9_18": 3392559908724793927
+      "Etoil\xE9_19": -7448596811533770282
+      "Etoil\xE9_2": -1543485406481904032
+      "Etoil\xE9_20": -3773480100264727538
+      "Etoil\xE9_21": 7550903342580738048
+      "Etoil\xE9_22": -3896578011398408987
+      "Etoil\xE9_23": 6686735287190463074
+      "Etoil\xE9_24": -8672876549695498286
+      "Etoil\xE9_25": 4758095075167060182
+      "Etoil\xE9_26": -7304047772472028662
+      "Etoil\xE9_27": -5709900789162971816
+      "Etoil\xE9_28": -6683840341249564228
+      "Etoil\xE9_29": -4995200607327748449
+      "Etoil\xE9_3": -5745720361868918471
+      "Etoil\xE9_30": 4399606766639955359
+      "Etoil\xE9_31": 3605555726541533050
+      "Etoil\xE9_32": -3274335780027008074
+      "Etoil\xE9_33": 3459173803949577942
+      "Etoil\xE9_34": 1323010598828299330
+      "Etoil\xE9_35": 114104487065586786
+      "Etoil\xE9_36": -6065566386228330885
+      "Etoil\xE9_37": 1714880505907833020
+      "Etoil\xE9_38": 1735893861354789862
+      "Etoil\xE9_39": 5741403385244602102
+      "Etoil\xE9_4": 8714637779285508323
+      "Etoil\xE9_40": 6376435450500005228
+      "Etoil\xE9_41": 5364857634338164921
+      "Etoil\xE9_42": -5542202491691097436
+      "Etoil\xE9_43": -1749967998475830939
+      "Etoil\xE9_44": -686638597460030681
+      "Etoil\xE9_45": -3820467145200647055
+      "Etoil\xE9_46": 6577292469155093183
+      "Etoil\xE9_47": 115181754807590174
+      "Etoil\xE9_48": -7762452013675519617
+      "Etoil\xE9_49": 1330100296946640795
+      "Etoil\xE9_5": 8291221973159387664
+      "Etoil\xE9_50": 6961230791080647611
+      "Etoil\xE9_51": 5168392693583757326
+      "Etoil\xE9_52": -3285441423788081068
+      "Etoil\xE9_53": -3338799981352638292
+      "Etoil\xE9_54": 5143614073786963490
+      "Etoil\xE9_55": 3107219432065842140
+      "Etoil\xE9_56": -8088955309643314323
+      "Etoil\xE9_57": 4192366017482396163
+      "Etoil\xE9_58": -1211353422096660423
+      "Etoil\xE9_59": -5925098162116149242
+      "Etoil\xE9_6": -2351320297106856878
+      "Etoil\xE9_60": -1624672434887298700
+      "Etoil\xE9_61": 4840192414670036540
+      "Etoil\xE9_62": -5227980138103726755
+      "Etoil\xE9_63": 8782025790739701070
+      "Etoil\xE9_64": 5600163999889208221
+      "Etoil\xE9_65": -3975676773444929121
+      "Etoil\xE9_66": 1243150946665978158
+      "Etoil\xE9_67": -4118052564370805446
+      "Etoil\xE9_68": 2490830982479442314
+      "Etoil\xE9_69": 6550810295415502340
+      "Etoil\xE9_7": 2500373403643718130
+      "Etoil\xE9_70": -7151397911797499187
+      "Etoil\xE9_71": -4766528417856003052
+      "Etoil\xE9_72": -1868229396554541083
+      "Etoil\xE9_73": 8918902649194717235
+      "Etoil\xE9_74": 5515157956732919724
+      "Etoil\xE9_75": 3477725228480942122
+      "Etoil\xE9_76": 2285667500278554540
+      "Etoil\xE9_77": 3404539506127241631
+      "Etoil\xE9_78": 4256261565209410251
+      "Etoil\xE9_79": -3409647826198814235
+      "Etoil\xE9_8": 9222304975088742197
+      "Etoil\xE9_80": -4324951983892290459
+      "Etoil\xE9_81": -6167292861264971513
+      "Etoil\xE9_82": -6217894410590291491
+      "Etoil\xE9_83": -5012677534392810443
+      "Etoil\xE9_84": 6762531454505168249
+      "Etoil\xE9_85": 3811411469564181184
+      "Etoil\xE9_86": -1425442703789831538
+      "Etoil\xE9_87": 6950929847282974823
+      "Etoil\xE9_88": -6047708491734410767
+      "Etoil\xE9_89": -123023017722933258
+      "Etoil\xE9_9": -3448833553848257596
+      "Etoil\xE9_90": 3608830910921030209
+      "Etoil\xE9_91": -422719865178970655
+      "Etoil\xE9_92": -6558154994225643928
+      "Etoil\xE9_93": 7495739435709715246
+      "Etoil\xE9_94": 279399637602469015
+      "Etoil\xE9_95": 6367290225659389255
+      "Etoil\xE9_96": 5292703164045816867
+      "Etoil\xE9_97": 4114907601301684804
+      "Etoil\xE9_98": -45974360836516205
+      "Etoil\xE9_99": 6051337147590434357
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

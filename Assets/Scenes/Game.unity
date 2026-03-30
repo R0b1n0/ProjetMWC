@@ -609,9 +609,6 @@ GameObject:
   - component: {fileID: 693463607}
   - component: {fileID: 693463603}
   - component: {fileID: 693463606}
-  - component: {fileID: 693463608}
-  - component: {fileID: 693463610}
-  - component: {fileID: 693463609}
   - component: {fileID: 693463611}
   m_Layer: 0
   m_Name: AkBank
@@ -709,78 +706,6 @@ MonoBehaviour:
   spatialAudioPoolSize: 0
   maxSoundPropagationDepth: 0
   engineLogging: 0
---- !u!114 &693463608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693463602}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02aadb693cda14409927536fac9cb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkSwitch
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 17b6c9afe523e0a4f9855e3d4b5f04c3, type: 2}
-  valueIdInternal: 0
-  groupIdInternal: 0
-  valueGuidInternal: 
-  groupGuidInternal: 
---- !u!114 &693463609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693463602}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02aadb693cda14409927536fac9cb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkSwitch
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 070ff7cb84c33a643b0de3a56e64ad4d, type: 2}
-  valueIdInternal: 0
-  groupIdInternal: 0
-  valueGuidInternal: 
-  groupGuidInternal: 
---- !u!114 &693463610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693463602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02aadb693cda14409927536fac9cb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkSwitch
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 221043ab773d8924f92ac501f227d61e, type: 2}
-  valueIdInternal: 0
-  groupIdInternal: 0
-  valueGuidInternal: 
-  groupGuidInternal: 
 --- !u!114 &693463611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,6 +759,10 @@ MonoBehaviour:
         idInternal: 0
         valueGuidInternal: 
         WwiseObjectReference: {fileID: 11400000, guid: 2ee2a844218d65c4992ea5d9c153baec, type: 2}
+      unmutEvent:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 8c6ccc3e7e27dd64b86f467de5aa5987, type: 2}
     - slotSwitchEvents:
         _serializedList:
         - Key: 0
@@ -868,6 +797,10 @@ MonoBehaviour:
         idInternal: 0
         valueGuidInternal: 
         WwiseObjectReference: {fileID: 11400000, guid: 3f46d2e0413292844abc9090e01506aa, type: 2}
+      unmutEvent:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 53291ae7a49e81443acc5aa509c5e771, type: 2}
     - slotSwitchEvents:
         _serializedList:
         - Key: 0
@@ -902,6 +835,10 @@ MonoBehaviour:
         idInternal: 0
         valueGuidInternal: 
         WwiseObjectReference: {fileID: 11400000, guid: 06cdcbef2129b9844a533803104a81b2, type: 2}
+      unmutEvent:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 2add97804edf9c94e82b433c6ff2e4c4, type: 2}
 --- !u!1 &874297767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2418,9 +2355,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobRain
   maxRainDropCount: 20
-  minDropDelay: 1
-  maxDropDelay: 3
-  maxRadius: 0.1
+  minDropDelay: 0.5
+  maxDropDelay: 2
+  dropOffset: 1
+  maxRadius: 0.07
   minRadius: 0.05
   radiusCurve:
     serializedVersion: 2
