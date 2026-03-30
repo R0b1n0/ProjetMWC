@@ -609,9 +609,6 @@ GameObject:
   - component: {fileID: 693463607}
   - component: {fileID: 693463603}
   - component: {fileID: 693463606}
-  - component: {fileID: 693463608}
-  - component: {fileID: 693463610}
-  - component: {fileID: 693463609}
   - component: {fileID: 693463611}
   m_Layer: 0
   m_Name: AkBank
@@ -709,78 +706,6 @@ MonoBehaviour:
   spatialAudioPoolSize: 0
   maxSoundPropagationDepth: 0
   engineLogging: 0
---- !u!114 &693463608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693463602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02aadb693cda14409927536fac9cb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkSwitch
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 17b6c9afe523e0a4f9855e3d4b5f04c3, type: 2}
-  valueIdInternal: 0
-  groupIdInternal: 0
-  valueGuidInternal: 
-  groupGuidInternal: 
---- !u!114 &693463609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693463602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02aadb693cda14409927536fac9cb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkSwitch
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 070ff7cb84c33a643b0de3a56e64ad4d, type: 2}
-  valueIdInternal: 0
-  groupIdInternal: 0
-  valueGuidInternal: 
-  groupGuidInternal: 
---- !u!114 &693463610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693463602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02aadb693cda14409927536fac9cb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkSwitch
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 221043ab773d8924f92ac501f227d61e, type: 2}
-  valueIdInternal: 0
-  groupIdInternal: 0
-  valueGuidInternal: 
-  groupGuidInternal: 
 --- !u!114 &693463611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,13 +722,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 6aa12dfc407bb8646a8fcaf6d6a8f0ef, type: 2}
-  slot1:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 661f980321e47674bb41e0af1772eeba, type: 2}
-  slot: 1
+  slot: 0
   parameters:
     slotsInfo:
     - slotSwitchEvents:
@@ -840,6 +759,10 @@ MonoBehaviour:
         idInternal: 0
         valueGuidInternal: 
         WwiseObjectReference: {fileID: 11400000, guid: 2ee2a844218d65c4992ea5d9c153baec, type: 2}
+      unmutEvent:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 8c6ccc3e7e27dd64b86f467de5aa5987, type: 2}
     - slotSwitchEvents:
         _serializedList:
         - Key: 0
@@ -874,6 +797,10 @@ MonoBehaviour:
         idInternal: 0
         valueGuidInternal: 
         WwiseObjectReference: {fileID: 11400000, guid: 3f46d2e0413292844abc9090e01506aa, type: 2}
+      unmutEvent:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 53291ae7a49e81443acc5aa509c5e771, type: 2}
     - slotSwitchEvents:
         _serializedList:
         - Key: 0
@@ -908,6 +835,10 @@ MonoBehaviour:
         idInternal: 0
         valueGuidInternal: 
         WwiseObjectReference: {fileID: 11400000, guid: 06cdcbef2129b9844a533803104a81b2, type: 2}
+      unmutEvent:
+        idInternal: 0
+        valueGuidInternal: 
+        WwiseObjectReference: {fileID: 11400000, guid: 2add97804edf9c94e82b433c6ff2e4c4, type: 2}
 --- !u!1 &874297767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,6 +2023,8 @@ GameObject:
   - component: {fileID: 1867051471}
   - component: {fileID: 1867051472}
   - component: {fileID: 1867051473}
+  - component: {fileID: 1867051474}
+  - component: {fileID: 1867051475}
   m_Layer: 0
   m_Name: BlobManager
   m_TagString: Untagged
@@ -2138,97 +2071,41 @@ MonoBehaviour:
   partsData:
   - radius: 0.1
     lerpSpeed: 0.5
+    alpha: 1
     currentPos: {x: -0.001579493, y: 0.122828916}
     destination: {x: 0.19472672, y: -0.14156036}
     origin: {x: -0.015433818, y: 0.14148821}
     lerpPhase: 0.15454619
   - radius: 0.2
     lerpSpeed: 0.7
-    currentPos: {x: 0.00850799, y: 0.07530336}
-    destination: {x: -0.061228827, y: 0.14841442}
-    origin: {x: 0.14335899, y: -0.06607244}
-    lerpPhase: 0.6067782
+    alpha: 1
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
   - radius: 0.15
     lerpSpeed: 0.5
-    currentPos: {x: 0.15853557, y: 0.12469369}
-    destination: {x: -0.13559352, y: -0.038326293}
-    origin: {x: 0.16338654, y: 0.12738232}
-    lerpPhase: 0.07318743
+    alpha: 1
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
   - radius: 0.2
     lerpSpeed: 0.4
-    currentPos: {x: -0.007009381, y: 0.0073623764}
-    destination: {x: -0.1036769, y: -0.016842917}
-    origin: {x: 0.05543126, y: 0.02299735}
-    lerpPhase: 0.42636362
+    alpha: 1
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
   - radius: 0.19
     lerpSpeed: 0.7
-    currentPos: {x: -0.011369008, y: -0.19269969}
-    destination: {x: -0.028068751, y: 0.061250634}
-    origin: {x: -0.011284471, y: -0.19398524}
-    lerpPhase: 0.039226178
-  speedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.014950284
-      outSlope: 0.014950284
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.13836786
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  movementAreaRadius: 0.2
-  dispertionFactor: 0
-  dispertionMax: 0.2
-  speedFactor: 0
-  movementType: 0
-  speedFactorCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  lowSpeedValue: 0.5
-  highSpeedValue: 2
-  shakeCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxShakeRange: 0.015
-  shakeFactor: 0
+    alpha: 1
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
+  partMovement: {fileID: 1867051474}
+  rain: {fileID: 1867051475}
   auraFrequency: 0.72
   auraSpeed: 5
   auraRange: 3.4
@@ -2382,12 +2259,6 @@ MonoBehaviour:
   blobInnerColor: {r: 0.91618574, g: 0.7627472, b: 0.11167073, a: 0.007931534}
   innerRenderMethod: 4
   outerRenderMethod: 10
-  testSwitch:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 661f980321e47674bb41e0af1772eeba, type: 2}
   testValue: {fileID: 153923052}
 --- !u!114 &1867051473
 MonoBehaviour:
@@ -2402,6 +2273,129 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobState
   blobRend: {fileID: 1867051472}
+--- !u!114 &1867051474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867051469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca18ec2a99d79245847a04e83b21303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlobPartMovement
+  movementType: 0
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.014950284
+      outSlope: 0.014950284
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.13836786
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  movementAreaRadius: 0.2
+  dispertionFactor: 0
+  dispertionMax: 0.2
+  speedFactor: 0
+  speedFactorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lowSpeedValue: 0.5
+  highSpeedValue: 2
+  maxShakeRange: 0.015
+  shakeFactor: 0
+--- !u!114 &1867051475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867051469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed14f86a3058483419bf34188d396e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlobRain
+  maxRainDropCount: 20
+  minDropDelay: 0.5
+  maxDropDelay: 2
+  dropOffset: 1
+  maxRadius: 0.07
+  minRadius: 0.05
+  radiusCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -1
+      inSlope: 8.411624
+      outSlope: 8.411624
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.05425663
+    - serializedVersion: 3
+      time: 0.40341944
+      value: 1.0010582
+      inSlope: -0.09557114
+      outSlope: -0.09557114
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.44319126
+    - serializedVersion: 3
+      time: 1
+      value: -1
+      inSlope: -9.100848
+      outSlope: -9.100848
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.045593143
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dropFallingSpeed: 0.25
+  dropScalingSpeed: 0.2
+  delayBetweenDrops: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

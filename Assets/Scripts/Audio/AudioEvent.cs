@@ -7,7 +7,6 @@ public class AudioEvent : MonoBehaviour
 {
     [Header("Events References")]
     [SerializeField] AK.Wwise.Event playAll;
-    [SerializeField] AK.Wwise.Switch slot1;
 
     [SerializeField, Range(0, 2)] int slot;
     [Header("Params")]
@@ -31,9 +30,9 @@ public class AudioEvent : MonoBehaviour
 
     private void OnMarbleAbsorbed(Mood marbleMood, float intensity)
     {
-        Debug.Log($"Slot {slot} was set to {marbleMood}, {intensity}");
         parameters.slotsInfo[slot].slotSwitchEvents[marbleMood].SetValue(gameObject);
         parameters.slotsInfo[slot].intensity.SetGlobalValue(intensity * 100);
+        parameters.slotsInfo[slot].unmutEvent.Post(gameObject);
     }
 }
 
@@ -49,6 +48,7 @@ public class SlotParam
     [SerializedDictionary("Marble Mood", "SwitchToSet")]
     public SerializedDictionary<Mood, AK.Wwise.Switch> slotSwitchEvents;
     public AK.Wwise.RTPC intensity;
+    public AK.Wwise.Event unmutEvent;
 }
 
 /* 

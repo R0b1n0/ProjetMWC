@@ -3,7 +3,6 @@ Shader "Custom/Blob"
     
     Properties
     {
-        //[MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white"
     }
 
@@ -31,13 +30,14 @@ Shader "Custom/Blob"
 
             int _CircleCount;
             float4 _Circles[MAX_CIRCLES];
-            float4 _CirclesColors[4];
+            float4 _CirclesColors[MAX_CIRCLES];
 
             float _LightFactor;
             half4 _InnerColor;
             half4 _EdgeColor;
             int _innerRenderMethod;
             int _outerRenderMethod;
+            half4 bckg = half4(0,0,0,0);
 
             float _auraF;
             float _auraRange;
@@ -65,6 +65,7 @@ Shader "Custom/Blob"
             struct SdfResult
             {
                 float sd;
+                float alpha;
                 half4 color;
             };
 
@@ -84,6 +85,8 @@ Shader "Custom/Blob"
             }
             float2 SmoothUnionQuadraticPolynomialBlend(float a, float b, float k)
             {
+                //X is the actual sdf value
+                //Y is a lerp value that is used for color blending
                 float h = 1.0 - min( abs(a-b)/(4.0*k), 1.0 );
                 float w = h*h;
                 float m = w*0.5;
@@ -143,8 +146,8 @@ Shader "Custom/Blob"
             SdfResult GetCircleSdf(float2 uv)
             {
                 SdfResult result;
-                half4 color = _EdgeColor;
-
+                
+                
                 //Blend the two first circles 
                 float2 sd = SmoothUnionQuadraticPolynomialBlend(
                     SDCircle(
@@ -159,6 +162,8 @@ Shader "Custom/Blob"
                         ),
                     BLEND_FACTOR
                     );
+                float alpha = lerp(_Circles[0].w, _Circles[1].w, sd.y);
+                half4 color = ColorLerp(_CirclesColors[0], _CirclesColors[1], sd.y );
 
                 //Blend any other circle 
                 for (int i = 2; i <_CircleCount; i++)
@@ -172,13 +177,11 @@ Shader "Custom/Blob"
                             ),
                         BLEND_FACTOR
                         );
-
-                    if (i > 4)
-                    {
-                        color = ColorLerp(color, _CirclesColors[i - 4], sd.y );
-                    }
+                    alpha = lerp(alpha, _Circles[i].w, sd.y);
+                    color = ColorLerp(color, _CirclesColors[i], sd.y );
                 }
                 result.sd = sd.x;
+                result.alpha = alpha;
                 result.color = color;
                 return result;
             }
@@ -231,15 +234,16 @@ Shader "Custom/Blob"
                         return sd * _InnerColor;
                     }
                     else if (_innerRenderMethod == 3)
-                    {
-                        //Weird trippy effect, kinda cool tho 
+                    {                        //Weird trippy effect, kinda cool tho 
                         half4 color = half4(ColorLerp(_EdgeColor, _InnerColor,(abs(sd) * 10)%1.2 ).xyz,0) ;
                         return max(((1 - abs(sd * 30)) * _LightFactor) , 0) + color;
                     }
                     else if (_innerRenderMethod == 4)
                     {
                         half4 color = half4(ColorLerp(sdf.color, _InnerColor,(abs(sd) * 10)%1.2 ).xyz,0) ;
-                        return max(((1 - abs(sd * 30)) * _LightFactor) , 0) + color;
+                        half4 innerColor = max(((1 - abs(sd * 30)) * _LightFactor) , 0) + color;
+
+                        return ColorLerp(bckg, innerColor, sdf.alpha);
                     }
                     
                     return half4 (1,0,0,0);
@@ -325,16 +329,14 @@ Shader "Custom/Blob"
                     }
                     else if (_outerRenderMethod == 10)
                     {
-                        half4 bckg = half4(0,0,0,0);
-
                         float lightValue = (1/(sdf.sd * _lightSdScale + _xOffset) - _yOffset) * _LightFactor * length(uv);
 
                         //This line was here to make the aura fade with UV length, but it messes the whole marble aura waves so...
                         //float lerp = cos(200 * _auraF * sd * (Length(uv) * _uvLengthFactor) - (_auraOffset)) + _auraWidth;
                         float lerp = cos(200 * _auraF * sdf.sd  - (_auraOffset)) + _auraWidth;
                         half4 color = ColorLerp(bckg,sdf.color,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
-
-                        return max(ColorLerp(color, bckg, min(sdf.sd * (100/_auraRange), 1)), lightValue/2);
+                        half4 outerColor = max(ColorLerp(color, bckg, min(sdf.sd * (100/_auraRange), 1)), lightValue/2);
+                        return ColorLerp(bckg, outerColor, sdf.alpha);
                     }
 
                     return half4(0,1,0,0);

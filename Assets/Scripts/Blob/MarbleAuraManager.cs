@@ -25,14 +25,14 @@ public class MarbleAuraManager
             state.render = true;
 
             if (instant)
-                state.scale = 1;
+                state.alpha = 1;
         }
         else
         {
             marbles2Render.Add(new MarbleAuraRenderState(marble));
 
             if (instant)
-                marbles2Render[marbles2Render.Count - 1].scale = 1;
+                marbles2Render[marbles2Render.Count - 1].alpha = 1;
         }
     }
     void StopRendering(MarbleData marble, bool instant = false)
@@ -41,7 +41,7 @@ public class MarbleAuraManager
         {
             marbleState.render = false;
             if (instant)
-                marbleState.scale = 0;
+                marbleState.alpha = 0;
         }
     }
     public void ProcessMarblesAura()
@@ -51,15 +51,15 @@ public class MarbleAuraManager
             if (state.render)
             {
                 //Increase aura scale
-                state.scale += Time.deltaTime * 2;
-                if (state.scale >= 1)
-                    state.scale = 1;
+                state.alpha += Time.deltaTime * 2;
+                if (state.alpha >= 1)
+                    state.alpha = 1;
             }
             else
             {
                 //Decrease aura and remove if needed
-                state.scale -= Time.deltaTime * 2;
-                if (state.scale <= 0)
+                state.alpha -= Time.deltaTime * 2;
+                if (state.alpha <= 0)
                     state.obsolete = true;
             }
         }
@@ -88,14 +88,14 @@ public class MarbleAuraManager
 
 public class MarbleAuraRenderState
 {
-    public float scale;
+    public float alpha;
     public bool render;
     public bool obsolete;
     public MarbleData marble;
 
     public MarbleAuraRenderState(MarbleData newMarble = null)
     {
-        scale = 0f;
+        alpha = 0f;
         render = true;
         obsolete = false;
         marble = newMarble;
