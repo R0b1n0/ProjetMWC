@@ -6,22 +6,25 @@ public class BlobRain : MonoBehaviour
 {
     //Shader was set to have a maximum of 32 parts 
     //9 are reserved for the main parts and marbles
-
+    [Header("Cloud parameters")]
     [SerializeField] int maxRainDropCount = 20;
+    [SerializeField] float minDropDelay;
+    [SerializeField] float maxDropDelay;
     [HideInInspector] public List<Part> rainDropPart { get; private set; }
     private List<RainDrop> rainDrops = new List<RainDrop>();
 
     [Header("Drop appearance")]
     [SerializeField] float maxRadius;
     [SerializeField] float minRadius;
-    [SerializeField] AnimationCurve fallingCurve;
     [SerializeField] AnimationCurve radiusCurve;
     [SerializeField] float dropFallingSpeed;
     [SerializeField] float dropScalingSpeed;
 
     float lastDropDt;
 
-    float delayBetweenDrops = 2f;
+    [SerializeField] float delayBetweenDrops = 0f;
+    bool enableDrops = false;
+    public float rainIntensity {  get; private set; }
 
     class RainDrop
     {
@@ -37,11 +40,26 @@ public class BlobRain : MonoBehaviour
     {
         rainDropPart = new List<Part>();
         Keyframe[] keys = new Keyframe[3];
-        fallingCurve.GetKeys(keys);
+        radiusCurve.GetKeys(keys);
         RainDrop.freefallTreshold = keys[1].time;
     }
 
     public void UpdateRainDrops(List<Part> blobParts)
+    {
+        if (enableDrops)
+            CreateNewDrops(blobParts);
+
+        UpdateDropsPos();
+        TrimRainDrops();
+    }
+    public void SetRainLevel(float i)
+    {
+        enableDrops = i > 0;
+        delayBetweenDrops = maxDropDelay - i * (maxDropDelay - minDropDelay);
+        rainIntensity = i;
+    }
+
+    private void CreateNewDrops(List<Part> blobParts)
     {
         lastDropDt += Time.deltaTime;
 
@@ -65,7 +83,9 @@ public class BlobRain : MonoBehaviour
             });
             lastDropDt = 0;
         }
-
+    }
+    private void UpdateDropsPos()
+    {
         foreach (RainDrop rainDrop in rainDrops)
         {
             rainDrop.part.radius = radiusCurve.Evaluate(rainDrop.part.lerpPhase) * rainDrop.originRadius;
@@ -75,7 +95,7 @@ public class BlobRain : MonoBehaviour
                 rainDrop.part.lerpPhase += Time.deltaTime * dropScalingSpeed;
 
                 rainDrop.part.currentPos = rainDrop.parent.currentPos - new Vector2(0, rainDrop.parent.radius + rainDrop.part.radius);
-                
+
                 if (rainDrop.part.lerpPhase > RainDrop.freefallTreshold)
                 {
                     rainDrop.freeFall = true;
@@ -87,12 +107,15 @@ public class BlobRain : MonoBehaviour
             {
                 rainDrop.part.lerpPhase += Time.deltaTime * dropFallingSpeed;
                 float dropLerp = (rainDrop.part.lerpPhase - RainDrop.freefallTreshold) / (1 - RainDrop.freefallTreshold);
+                rainDrop.part.alpha = 1 - dropLerp;
                 rainDrop.part.currentPos = Vector2.Lerp(rainDrop.part.origin, rainDrop.part.destination, dropLerp);
             }
         }
-
+    }
+    private void TrimRainDrops()
+    {
         //Remove old drops
-        for (int i = rainDropPart.Count-1; i >= 0; i-- )
+        for (int i = rainDropPart.Count - 1; i >= 0; i--)
         {
             if (rainDropPart[i].lerpPhase > 1)
             {

@@ -797,7 +797,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 6aa12dfc407bb8646a8fcaf6d6a8f0ef, type: 2}
-  slot: 1
+  slot: 0
   parameters:
     slotsInfo:
     - slotSwitchEvents:
@@ -2132,8 +2132,37 @@ MonoBehaviour:
   - intensity: 0
     mood: 1
   partsData:
+  - radius: 0.1
+    lerpSpeed: 0.5
+    alpha: 1
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
   - radius: 0.2
-    lerpSpeed: 0
+    lerpSpeed: 0.7
+    alpha: 1
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
+  - radius: 0.15
+    lerpSpeed: 0.5
+    alpha: 1
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
+  - radius: 0.2
+    lerpSpeed: 0.4
+    alpha: 1
+    currentPos: {x: -0.001579493, y: 0.122828916}
+    destination: {x: 0.19472672, y: -0.14156036}
+    origin: {x: -0.015433818, y: 0.14148821}
+    lerpPhase: 0.15454619
+  - radius: 0.19
+    lerpSpeed: 0.7
+    alpha: 1
     currentPos: {x: -0.001579493, y: 0.122828916}
     destination: {x: 0.19472672, y: -0.14156036}
     origin: {x: -0.015433818, y: 0.14148821}
@@ -2395,41 +2424,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobRain
   maxRainDropCount: 20
-  maxRadius: 0.03
-  minRadius: 0.01
-  fallingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.2585935
-      outSlope: 0.2585935
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.99787414
-    - serializedVersion: 3
-      time: 0.8
-      value: 0.2020986
-      inSlope: 0.47108638
-      outSlope: 0.47108638
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.08464515
-      outWeight: 0.43244365
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 5.2190323
-      outSlope: 5.2190323
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.11999995
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  minDropDelay: 1
+  maxDropDelay: 3
+  maxRadius: 0.1
+  minRadius: 0.05
   radiusCurve:
     serializedVersion: 2
     m_Curve:
@@ -2443,8 +2441,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.05425663
     - serializedVersion: 3
-      time: 0.76822656
-      value: 0.9971901
+      time: 0.40341944
+      value: 1.0010582
       inSlope: -0.09557114
       outSlope: -0.09557114
       tangentMode: 0
@@ -2454,17 +2452,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: -1
-      inSlope: -21.890024
-      outSlope: -21.890024
+      inSlope: -9.100848
+      outSlope: -9.100848
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.042497993
+      inWeight: 0.045593143
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dropFallingSpeed: 0.3
+  dropFallingSpeed: 0.25
   dropScalingSpeed: 0.2
+  delayBetweenDrops: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

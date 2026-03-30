@@ -44,7 +44,6 @@ public class BlobRenderer : MonoBehaviour
     [SerializeField]
     [Range(0, 10)]
     int outerRenderMethod;
-    [SerializeField] AK.Wwise.Switch testSwitch;
     [SerializeField] GameObject testValue;
 
     Vector4[] toShader;
@@ -134,7 +133,7 @@ public class BlobRenderer : MonoBehaviour
                 partsData[i].currentPos.x,
                 partsData[i].currentPos.y,
                 partsData[i].radius + (scaleFactorRtpc.Get() * partsData[i].radius),
-                0);
+                partsData[i].alpha);
 
             toShaderColors[i] = blobEdgeColor;
         }
@@ -148,10 +147,10 @@ public class BlobRenderer : MonoBehaviour
         {
             partCount++;
             Vector2 marbleUvPos = Utils.World2UV(state.marble.trans.position);
-            float radius = Utils.World2UV(state.marble.trans.localScale).x / 1.9f * state.scale;
+            float radius = Utils.World2UV(state.marble.trans.localScale).x / 1.9f ;
             
             toShaderColors[partCount - 1] = state.marble.mat.color;
-            toShader[partCount-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius);
+            toShader[partCount-1] = new Vector4(marbleUvPos.x, marbleUvPos.y, radius, state.alpha);
         }
 
         rain.UpdateRainDrops(partsData);
@@ -159,7 +158,7 @@ public class BlobRenderer : MonoBehaviour
         foreach(Part drop in rain.rainDropPart)
         {
             partCount++;
-            toShader[partCount - 1] = new Vector4(drop.currentPos.x, drop.currentPos.y, drop.radius);
+            toShader[partCount - 1] = new Vector4(drop.currentPos.x, drop.currentPos.y, drop.radius, drop.alpha);
             toShaderColors[partCount - 1] = blobEdgeColor;
         }
 
@@ -171,7 +170,14 @@ public class BlobRenderer : MonoBehaviour
     #region State
     private State MakeSnapShot()
     {
-        return new State { color = blobInnerColor, speed = partMovement.speedFactor, shake = partMovement.shakeFactor, dispertion = partMovement.movementAreaRadius };
+        return new State
+        {
+            color = blobInnerColor,
+            speed = partMovement.speedFactor,
+            shake = partMovement.shakeFactor,
+            dispertion = partMovement.movementAreaRadius,
+            rainIntensity = rain.rainIntensity
+        };
     }
     private void LerpToComputedState(float t)
     {
@@ -182,21 +188,23 @@ public class BlobRenderer : MonoBehaviour
         partMovement.speedFactor = Mathf.Lerp(previousState.speed, computedState.speed, t);
         partMovement.shakeFactor = Mathf.Lerp(previousState.shake, computedState.shake, t);
         partMovement.dispertionFactor = Mathf.Lerp(previousState.dispertion, computedState.dispertion, t);
+        rain.SetRainLevel(Mathf.Lerp(previousState.rainIntensity, computedState.rainIntensity, t));
     }
     public void StartLerping()
     {
         stateLerp = 0;
         stateLerping = true;
         previousState = MakeSnapShot();
-        testSwitch.SetValue(testValue);
 
         computedState = new State 
         { 
             color = GetBlendColor(), 
             speed = ProcessSpeed(), 
             shake = ProcessEmotionRatio(Mood.Anger),
-            dispertion = ProcessEmotionRatio(Mood.Fear)
+            dispertion = ProcessEmotionRatio(Mood.Fear),
+            rainIntensity = ProcessEmotionRatio(Mood.Sadness)
         };
+        Debug.Log(computedState.rainIntensity);
     }
     public void SetMoodState(Mood mood, float intensity, int index)
     {
@@ -320,6 +328,7 @@ public class State
     public float speed;
     public float shake;
     public float dispertion;
+    public float rainIntensity;
 
     public State()
     {
@@ -327,6 +336,7 @@ public class State
         speed = 0.05f;
         shake = 0;
         dispertion = 0.2f;
+        rainIntensity = 0;
     }
 }
 
@@ -335,6 +345,7 @@ public class Part
 {
     public float radius;
     public float lerpSpeed;
+    public float alpha = 1;
     //All of those are UV value
     [HideInInspector] public Vector2 currentPos;
     [HideInInspector] public Vector2 destination;

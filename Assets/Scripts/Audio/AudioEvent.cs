@@ -25,7 +25,7 @@ public class AudioEvent : MonoBehaviour
 
     private void Start()
     {
-        //playAll.Post(gameObject);
+        playAll.Post(gameObject);
     }
 
     private void OnMarbleAbsorbed(Mood marbleMood, float intensity)
