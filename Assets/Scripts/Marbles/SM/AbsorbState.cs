@@ -4,6 +4,8 @@ using UnityEngine;
 public class AbsorbState : MarbleStateBehaviour
 {
     public static event Action<Mood, float> OnMarbleAbsorbtion;
+    public static event Action OnAbsorbtionBegin;
+
     float absorbtionSpeed = 0.7f;
     float startScale;
     float l = 0;
@@ -17,6 +19,7 @@ public class AbsorbState : MarbleStateBehaviour
 
     public override void EnterState()
     {
+        OnAbsorbtionBegin?.Invoke();
     }
 
     public override void ExitState()

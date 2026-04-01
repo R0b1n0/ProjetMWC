@@ -6,16 +6,16 @@ public class BlobState : MonoBehaviour
 
     private void Awake()
     {
-        AbsorbState.OnMarbleAbsorbtion += OnMarbleAbsorbed;
+        Channel.OnChannelUpdate += OnMarbleAbsorbed;
     }
     private void OnDestroy()
     {
-        AbsorbState.OnMarbleAbsorbtion -= OnMarbleAbsorbed;
+        Channel.OnChannelUpdate -= OnMarbleAbsorbed;
     }
 
-    private void OnMarbleAbsorbed(Mood marbleMood, float intensity)
+    private void OnMarbleAbsorbed(int slot, Mood marbleMood, float intensity)
     {
-        blobRend.SetMoodState(marbleMood, intensity * 100, 0);
+        blobRend.SetMoodState(marbleMood, intensity * 100, slot);
         blobRend.StartLerping();
     }
 }

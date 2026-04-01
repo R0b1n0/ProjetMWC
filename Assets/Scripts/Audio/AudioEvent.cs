@@ -1,26 +1,24 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
 using AYellowpaper.SerializedCollections;
+using System;
+using UnityEngine;
 
 public class AudioEvent : MonoBehaviour
 {
     [Header("Events References")]
     [SerializeField] AK.Wwise.Event playAll;
 
-    [SerializeField, Range(0, 2)] int slot;
     [Header("Params")]
     [SerializeField] AudioParam parameters;
 
 
     private void Awake()
     {
-        AbsorbState.OnMarbleAbsorbtion += OnMarbleAbsorbed;
+        Channel.OnChannelUpdate += OnMarbleAbsorbed;
     }
 
     private void OnDestroy()
     {
-        AbsorbState.OnMarbleAbsorbtion -= OnMarbleAbsorbed;
+        Channel.OnChannelUpdate -= OnMarbleAbsorbed;
     }
 
     private void Start()
@@ -28,7 +26,7 @@ public class AudioEvent : MonoBehaviour
         playAll.Post(gameObject);
     }
 
-    private void OnMarbleAbsorbed(Mood marbleMood, float intensity)
+    private void OnMarbleAbsorbed(int slot, Mood marbleMood, float intensity)
     {
         parameters.slotsInfo[slot].slotSwitchEvents[marbleMood].SetValue(gameObject);
         parameters.slotsInfo[slot].intensity.SetGlobalValue(intensity * 100);
@@ -51,9 +49,3 @@ public class SlotParam
     public AK.Wwise.Event unmutEvent;
 }
 
-/* 
- Todo 
-struct {
-Dictionnary[Mood,Switch] data [3] 
- }
-*/

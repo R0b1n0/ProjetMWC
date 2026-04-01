@@ -37,6 +37,17 @@ public class EmotionParameters : ScriptableObject
         }
         return new MoodProperties();
     }
+
+    public Color GetMoodColor(Mood mood, float intensity)
+    {
+        MoodProperties palet = GetMoodInfo(mood);
+
+        if (intensity < 1f / 3f)
+            return palet.marbleColor;
+        else if (intensity < 2f / 3f)
+            return palet.marbleColor1;
+        else return palet.marbleColor2;
+    }
 }
 
 

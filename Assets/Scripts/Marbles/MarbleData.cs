@@ -74,11 +74,6 @@ public class MarbleData : MonoBehaviour
     public void UpdateOnCanvaRescale(float newDefaultScale)
     {
         defaultScale = newDefaultScale;
-        //TODO instant update on canva resize 
-        /*if (state == MarbleState.idle)
-        {
-            trans.localScale = new Vector3(defaultScale, defaultScale, defaultScale);
-        }*/
     }
     public void OnLevelUpdate(int newLevel)
     {

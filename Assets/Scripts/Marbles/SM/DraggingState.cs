@@ -3,6 +3,8 @@ using UnityEngine;
 public class DraggingState : MarbleStateBehaviour
 {
     public static event Action<MarbleData,int> OnMarbleLevelUpdate;
+    public static event Action OnMarbleDragBegin;
+    public static event Action OnMarbleDragEnd;
 
     float marbleSpeedOnDrag = 8;
     float accelerationTreshold = 2;
@@ -22,11 +24,13 @@ public class DraggingState : MarbleStateBehaviour
         MarbleInputs.OnDragEnd += OnRelease;
         draggedMarblePreviousPos = InputManager.instance.TouchWorldPos;
         marble.currentLoadValue = 0;
+        OnMarbleDragBegin?.Invoke();
     }
 
     public override void ExitState()
     {
         MarbleInputs.OnDragEnd -= OnRelease;
+        OnMarbleDragEnd?.Invoke();
     }
 
     private void OnRelease(MarbleData marble)
