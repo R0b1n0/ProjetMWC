@@ -17,7 +17,6 @@ public class SlotDrawer : MonoBehaviour
     [SerializeField, Range(0, 1)] float outerCircleRadius;
     [Min(0),SerializeField] int satelliteCount;
     [SerializeField] float satelliteMaxScale;
-    [SerializeField] float salettilesSpeed;
 
     List<SatelliteBehaviour> satellites = new List<SatelliteBehaviour>();
 
@@ -61,13 +60,13 @@ public class SlotDrawer : MonoBehaviour
 
     private void Rescale()
     {
-        Vector3[] holderCornersS = new Vector3[4];
-        holder.GetLocalCorners(holderCornersS);
-        float holderHalfWidth = (holderCornersS[2].x - holderCornersS[0].x) / 2 * Utils.screen2World;
+        Vector3[] holderCorners = new Vector3[4];
+        holder.GetLocalCorners(holderCorners);
+        float holderHalfWidth = (holderCorners[2].x - holderCorners[0].x) / 2 * Utils.screen2World;
 
         outerDrawer.radius = holderHalfWidth * outerCircleRadius;
         innerDrawer.radius = holderHalfWidth * innerCircleRadius;
-        coll.radius = (holderCornersS[2].x - holderCornersS[0].x) / 2 * innerCircleRadius;
+        coll.radius = (holderCorners[2].x - holderCorners[0].x) / 2 * innerCircleRadius;
     }
 
     private void RotateSatellites()

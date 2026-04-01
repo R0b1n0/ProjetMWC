@@ -29,7 +29,7 @@ public class SatelliteBehaviour : MonoBehaviour
     {
         while (transform.localScale.x < targetScale)
         {
-            transform.localScale = transform.localScale + new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime) * scaleSpeed;
+            transform.localScale = transform.localScale + (new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime) * scaleSpeed);
             yield return null;
         }
         transform.localScale = new Vector3(targetScale, targetScale, targetScale);
@@ -40,7 +40,7 @@ public class SatelliteBehaviour : MonoBehaviour
     {
         while (transform.localScale.x > 0)
         {
-            transform.localScale = transform.localScale - new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime) * scaleSpeed;
+            transform.localScale = transform.localScale - (new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime) * scaleSpeed);
             yield return null;
         }
         transform.localScale = Vector3.zero;

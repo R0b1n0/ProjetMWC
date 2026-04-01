@@ -197,8 +197,8 @@ public class BlobRenderer : MonoBehaviour
 
         computedState = new State 
         { 
-            color = GetBlendColor(), 
-            speed = ProcessSpeed(), 
+            color = GetBlendColor(),
+            speed = ProcessSpeed(),
             shake = ProcessEmotionRatio(Mood.Anger),
             dispertion = ProcessEmotionRatio(Mood.Fear),
             rainIntensity = ProcessEmotionRatio(Mood.Sadness)
