@@ -6,7 +6,6 @@ public class BlobRenderer : MonoBehaviour
 {
     public static BlobRenderer instance;
 
-    [Header("Channel inputs ")]
     [SerializeField] Material blobMaterial;
 
     [SerializeField]
@@ -15,7 +14,6 @@ public class BlobRenderer : MonoBehaviour
     [Header("Movements")]
     [SerializeField] List<Part> partsData = new List<Part>();
     [SerializeField] BlobPartMovement partMovement;
-
     [SerializeField] BlobRain rain;
 
     [Header("Render")]
@@ -28,22 +26,13 @@ public class BlobRenderer : MonoBehaviour
     [SerializeField][Range(-10f, 10f)] float xOffset;
     [SerializeField][Range(-10f, 10f)] float yOffset;
     float auraOffset;
+    Color blobEdgeColor;
+    Color blobInnerColor;
 
-    [Header("RTPC dependent parameters  ")]
+    [Header("RTPC dependent parameters")]
     [SerializeField] RtpcDependent lightFactor;
     [SerializeField] RtpcDependent scaleFactorRtpc;
     [SerializeField] RtpcDependent auraRangeRTPC; 
-
-    [Header("Debug")]
-    [SerializeField] Color blobEdgeColor;
-    [SerializeField] Color blobInnerColor;
-    [SerializeField]
-    [Range(0, 4)]
-    int innerRenderMethod;
-    [SerializeField]
-    [Range(0, 10)]
-    int outerRenderMethod;
-    [SerializeField] GameObject testValue;
 
     Vector4[] toShader;
     Vector4[] toShaderColors;
@@ -69,6 +58,15 @@ public class BlobRenderer : MonoBehaviour
 
         circleCount = partsData.Count;
         blobMaterial.SetInt("_CircleCount", circleCount);
+        blobMaterial.SetFloat("_xOffset", xOffset);
+        blobMaterial.SetFloat("_yOffset", yOffset);
+        blobMaterial.SetFloat("_auraWidth", auraWidth);
+        blobMaterial.SetFloat("_lightSdScale", lightSdScale);
+        blobMaterial.SetFloat("_auraF", auraFrequency);
+        blobMaterial.SetColor("_InnerColor", blobInnerColor);
+        blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
+        blobMaterial.SetFloat("_uvLengthFactor", uvLengthFactor);
+
         toShader = new Vector4[32];
         toShaderColors = new Vector4[32];
 
@@ -92,22 +90,9 @@ public class BlobRenderer : MonoBehaviour
 
         auraOffset += Time.deltaTime * auraSpeed;
 
-        blobMaterial.SetColor("_InnerColor", blobInnerColor);
-        blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
-        blobMaterial.SetFloat("_auraF", auraFrequency);
-
         blobMaterial.SetFloat("_auraRange", auraRange * auraRangeRTPC.Get());
         blobMaterial.SetFloat("_auraOffset", auraOffset);
-        blobMaterial.SetFloat("_auraWidth", auraWidth);
-        blobMaterial.SetFloat("_uvLengthFactor", uvLengthFactor);
-        blobMaterial.SetFloat("_xOffset", xOffset);
-        blobMaterial.SetFloat("_yOffset", yOffset);
-        blobMaterial.SetFloat("_lightSdScale", lightSdScale);
-
         blobMaterial.SetFloat("_LightFactor", lightFactor.Get());
-
-        blobMaterial.SetInt("_innerRenderMethod", innerRenderMethod);
-        blobMaterial.SetInt("_outerRenderMethod", outerRenderMethod);
 
         if (stateLerping)
         {
@@ -183,6 +168,8 @@ public class BlobRenderer : MonoBehaviour
         blobInnerColor = Color.Lerp(previousState.color, computedState.color, t);
         Color.RGBToHSV(blobInnerColor, out float h, out float s, out float v);
         blobEdgeColor = Color.HSVToRGB(h, s, 1);
+        blobMaterial.SetColor("_InnerColor", blobInnerColor);
+        blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
 
         partMovement.speedFactor = Mathf.Lerp(previousState.speed, computedState.speed, t);
         partMovement.shakeFactor = Mathf.Lerp(previousState.shake, computedState.shake, t);

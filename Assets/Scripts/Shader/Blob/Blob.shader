@@ -35,8 +35,6 @@ Shader "Custom/Blob"
             float _LightFactor;
             half4 _InnerColor;
             half4 _EdgeColor;
-            int _innerRenderMethod;
-            int _outerRenderMethod;
             half4 bckg = half4(0,0,0,0);
 
             float _auraF;
@@ -78,11 +76,6 @@ Shader "Custom/Blob"
             }
 
             //-------------------------Utils--------------------------------
-            float SmoothUnionQuadraticPolynomial(float distA, float distB, float k)
-            {
-                float h = max(k - abs(distA - distB), 0.0) / k;
-                return min(distA, distB) - h*h*k*(1.0/4.0);
-            }
             float2 SmoothUnionQuadraticPolynomialBlend(float a, float b, float k)
             {
                 //X is the actual sdf value
@@ -111,42 +104,10 @@ Shader "Custom/Blob"
             {
                 return distance(inpoint, inorigin) - inradius;
             }
-            float GetCircleSd(float2 uv)
-            {
-                //Blend the two first circles 
-                float2 sd = SmoothUnionQuadraticPolynomialBlend(
-                    SDCircle(
-                        uv,
-                        _Circles[0].xy,
-                        _Circles[0].z
-                        ),
-                    SDCircle(
-                        uv,
-                        _Circles[1].xy,
-                        _Circles[1].z
-                        ),
-                    BLEND_FACTOR
-                    );
-                //Blend any other circle 
-                for (int i = 2; i <_CircleCount; i++)
-                {
-                    sd = SmoothUnionQuadraticPolynomialBlend(
-                        sd.x,
-                        SDCircle(
-                            uv,
-                            _Circles[i].xy,
-                            _Circles[i].z
-                            ),
-                        BLEND_FACTOR
-                        );
-                }
-
-                return sd;
-            }
+            
             SdfResult GetCircleSdf(float2 uv)
             {
                 SdfResult result;
-                
                 
                 //Blend the two first circles 
                 float2 sd = SmoothUnionQuadraticPolynomialBlend(
@@ -185,161 +146,31 @@ Shader "Custom/Blob"
                 result.color = color;
                 return result;
             }
-            float SDSpikeCircle(half2 inpoint, half2 inorigin, float inradius )
-            {
-                float sd = SDCircle(inpoint,inorigin,inradius);
-
-                float teta = atan(abs(inpoint.y - inorigin.y) / abs(inpoint.x - inorigin.x)) ;
-                //return teta / 3.14/2;
-
-                //float amplitube = smoothstep(0,1, min(Length(inpoint) - 0.5, 0.08 ));
-                return cos(teta*70) + sd * 5 + 0.9/Length(inpoint);
-            }
 
             //-------------------------Rendeeeeer--------------------------------
             half4 frag(v2f IN) : SV_Target
-            { 
-                #if _ENABLE_DEBUGVIEW
-                    return float4(1, 0, 0, 1);
-                #endif
-
+            {
                 //Center the coordinates
                 half2 uv = (IN.positionHCS * 2 - _ScreenParams.xy)/_ScreenParams.x;
-
-                float sd = GetCircleSd(uv);
                 SdfResult sdf = GetCircleSdf(uv);
                 
-                if (sd < 0) //Inner Blob
+                if (sdf.sd < 0) //Inner Blob
                 {
-                    if (_innerRenderMethod == 0)
-                    {
-                        //Edge/Inner 
-                        if (abs(sd) > 0.01)
-                            return _InnerColor ;
-                        else
-                            return _EdgeColor;
-                    }
-                    else if (_innerRenderMethod == 1)
-                    {
-                        //Toon like effect 
-                        if (abs(sd) > 0.1)
-                            return _InnerColor ;
-                        else
-                            return _EdgeColor;
-                    }
-                    else if (_innerRenderMethod == 2)
-                    {
-                        //Boring cell like effect
-                        sd = smoothstep(0.0, 0.05,abs(sd) );
-                        return sd * _InnerColor;
-                    }
-                    else if (_innerRenderMethod == 3)
-                    {                        //Weird trippy effect, kinda cool tho 
-                        half4 color = half4(ColorLerp(_EdgeColor, _InnerColor,(abs(sd) * 10)%1.2 ).xyz,0) ;
-                        return max(((1 - abs(sd * 30)) * _LightFactor) , 0) + color;
-                    }
-                    else if (_innerRenderMethod == 4)
-                    {
-                        half4 color = half4(ColorLerp(sdf.color, _InnerColor,(abs(sd) * 10)%1.2 ).xyz,0) ;
-                        half4 innerColor = max(((1 - abs(sd * 30)) * _LightFactor) , 0) + color;
+                    half4 color = half4(ColorLerp(sdf.color, _InnerColor,(abs(sdf.sd) * 10)%1.2 ).xyz,0) ;
+                    half4 innerColor = max(((1 - abs(sdf.sd * 30)) * _LightFactor) , 0) + color;
 
-                        return ColorLerp(bckg, innerColor, sdf.alpha);
-                    }
-                    
-                    return half4 (1,0,0,0);
+                    return ColorLerp(bckg, innerColor, sdf.alpha);
                 }   
                 else //Outer Blob
                 {
-                    if (_outerRenderMethod == 0)
-                    {
-                        //Diffuse outline 
-                        sd =  smoothstep(0.0, 0.2, sd); 
-                        return sd * half4(1,1,1,0);
-                    }
-                    else if (_outerRenderMethod == 1)
-                    {
-                        //Dynamic diffuse outline, catching outside  
-                        return half4(1,1,1,0) * (sd*2) / (pow(Length(uv),2) );
-                    }
-                    else if (_outerRenderMethod == 2)
-                    {
-                        //Dynamic diffuse
-                        return ( half4(1,1,1,0) * pow((sd*2),2) / (pow(Length(uv),2)) );
-                    }
-                    else if (_outerRenderMethod == 3)
-                    {
-                        //Wave effect, surely that's what drug feels like
-                        return abs(cos(10*(sd-_UnityTime/5)) * _EdgeColor);
-                    }
-                    else if (_outerRenderMethod == 4)
-                    {
-                        //Drugs, but cooler
-                        return ColorLerp(
-                        half4(0,0,0,0),
-                        abs(cos(70*(sd - _UnityTime/5)) * _EdgeColor),
-                        Length(sd));
-                    }
-                    else if (_outerRenderMethod == 5)
-                    {
-                        //Fade along the sd, weird af
-                        return ColorLerp(
-                        (cos(15*(sd-_UnityTime/5)) * _EdgeColor),
-                        half4(0,0,0,0),
-                        Length(sd));
-                    }
-                    else if (_outerRenderMethod == 6)
-                    {
-                        //Vibrating edges 
-                        half4 bckg = half4(0,0,0,0);
+                    float lightValue = (1/(sdf.sd * _lightSdScale + _xOffset) - _yOffset) * _LightFactor * length(uv);
 
-                        if (sd < 0.1)
-                            return ColorLerp(bckg,_EdgeColor,cos(500 * sd * (Length(uv) ))  );
-                        else 
-                            return bckg;
-                    }
-                    else if (_outerRenderMethod == 7)
-                    {
-                        //Vibrating edges 
-                        half4 bckg = half4(0,0,0,0);
-
-                        if (sd > 0.01 && sd < 0.05)
-                            return ColorLerp(bckg,_EdgeColor,cos(400 * sd * (Length(uv)) - _UnityTime*5));
-                        else 
-                            return bckg;
-                    }
-                    else if (_outerRenderMethod == 8)
-                    {
-                        half4 bckg = half4(0,0,0,0);
-                        float wave = cos(400 * sd * (Length(uv)) - _UnityTime*5);
-
-                        return wave;
-                    }
-                    else if (_outerRenderMethod == 9)
-                    {
-                        half4 bckg = half4(0,0,0,0);
-
-                        float lightValue = (1/(sd * _lightSdScale + _xOffset) - _yOffset) * _LightFactor * length(uv);
-
-                        //This line was here to make the aura fade with UV length, but it messes the whole marble aura waves so...
-                        //float lerp = cos(200 * _auraF * sd * (Length(uv) * _uvLengthFactor) - (_auraOffset)) + _auraWidth;
-                        float lerp = cos(200 * _auraF * sd  - (_auraOffset)) + _auraWidth;
-                        half4 color = ColorLerp(bckg,_EdgeColor,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
-
-                        return max(ColorLerp(color, bckg, min(sd * (100/_auraRange), 1)), lightValue/2);
-                    }
-                    else if (_outerRenderMethod == 10)
-                    {
-                        float lightValue = (1/(sdf.sd * _lightSdScale + _xOffset) - _yOffset) * _LightFactor * length(uv);
-
-                        //This line was here to make the aura fade with UV length, but it messes the whole marble aura waves so...
-                        //float lerp = cos(200 * _auraF * sd * (Length(uv) * _uvLengthFactor) - (_auraOffset)) + _auraWidth;
-                        float lerp = cos(200 * _auraF * sdf.sd  - (_auraOffset)) + _auraWidth;
-                        half4 color = ColorLerp(bckg,sdf.color,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
-                        half4 outerColor = max(ColorLerp(color, bckg, min(sdf.sd * (100/_auraRange), 1)), lightValue/2);
-                        return ColorLerp(bckg, outerColor, sdf.alpha);
-                    }
-
-                    return half4(0,1,0,0);
+                    //This line was here to make the aura fade with UV length, but it messes the whole marble aura waves so...
+                    //float lerp = cos(200 * _auraF * sd * (Length(uv) * _uvLengthFactor) - (_auraOffset)) + _auraWidth;
+                    float lerp = cos(200 * _auraF * sdf.sd  - (_auraOffset)) + _auraWidth;
+                    half4 color = ColorLerp(bckg,sdf.color,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
+                    half4 outerColor = max(ColorLerp(color, bckg, min(sdf.sd * (100/_auraRange), 1)), lightValue/2);
+                    return ColorLerp(bckg, outerColor, sdf.alpha);
                 }
             }
             ENDHLSL
