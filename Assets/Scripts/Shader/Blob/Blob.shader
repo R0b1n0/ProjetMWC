@@ -27,6 +27,7 @@ Shader "Custom/Blob"
             //#define BLEND_FACTOR 0.14
             #define BLEND_FACTOR 0.05
             float _UnityTime;
+            float _InvScreenX;
 
             int _CircleCount;
             float4 _Circles[MAX_CIRCLES];
@@ -58,7 +59,6 @@ Shader "Custom/Blob"
                 //Vertex shader to frag shader 
                 //Sometimes called interpolator, cuz that's how they're treated later on
                 float4 positionHCS : SV_POSITION; //SV_POSITION = clip space position of the vertex
-                float2 uv : TEXCOORD0;
             };
             struct SdfResult
             {
@@ -98,7 +98,12 @@ Shader "Custom/Blob"
             {
                 return sqrt(vec.x*vec.x + vec.y*vec.y);
             }
-
+            float CosFast(float x)
+            {
+                x = frac(x / 6.2832) * 6.2832 - 3.1416;
+                float x2 = x * x;
+                return 1.0 - x2 * (0.5 - x2 * (0.0416 - x2 * 0.0013));
+            }
             //-------------------------SDF--------------------------------
             float SDCircle(half2 inpoint, half2 inorigin, float inradius)
             {
@@ -151,27 +156,25 @@ Shader "Custom/Blob"
             half4 frag(v2f IN) : SV_Target
             {
                 //Center the coordinates
-                half2 uv = (IN.positionHCS * 2 - _ScreenParams.xy)/_ScreenParams.x;
+                half2 uv = (IN.positionHCS * 2.0 - _ScreenParams.xy) * _InvScreenX;
                 SdfResult sdf = GetCircleSdf(uv);
+                float isInner = step(sdf.sd, 0.0);
+
                 
-                if (sdf.sd < 0) //Inner Blob
-                {
-                    half4 color = half4(ColorLerp(sdf.color, _InnerColor,(abs(sdf.sd) * 10)%1.2 ).xyz,0) ;
-                    half4 innerColor = max(((1 - abs(sdf.sd * 30)) * _LightFactor) , 0) + color;
+                //Process inner color
+                half4 innerColor = half4(ColorLerp(sdf.color, _InnerColor,(abs(sdf.sd) * 10.0 ) % 1.2 ).xyz, 0.0) ;
+                half4 innerPatern = max(((1 - abs(sdf.sd * 30.0 )) * _LightFactor) , 0.0 ) + innerColor;
+                
+                //Process outer color, sd>0
+                float lightValue = ( 1.0 /(sdf.sd * _lightSdScale + _xOffset) - _yOffset) * _LightFactor * length(uv);
 
-                    return ColorLerp(bckg, innerColor, sdf.alpha);
-                }   
-                else //Outer Blob
-                {
-                    float lightValue = (1/(sdf.sd * _lightSdScale + _xOffset) - _yOffset) * _LightFactor * length(uv);
+                //Cheap Cos()
 
-                    //This line was here to make the aura fade with UV length, but it messes the whole marble aura waves so...
-                    //float lerp = cos(200 * _auraF * sd * (Length(uv) * _uvLengthFactor) - (_auraOffset)) + _auraWidth;
-                    float lerp = cos(200 * _auraF * sdf.sd  - (_auraOffset)) + _auraWidth;
-                    half4 color = ColorLerp(bckg,sdf.color,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
-                    half4 outerColor = max(ColorLerp(color, bckg, min(sdf.sd * (100/_auraRange), 1)), lightValue/2);
-                    return ColorLerp(bckg, outerColor, sdf.alpha);
-                }
+                float lerp = CosFast( 200.0 * _auraF * sdf.sd  - _auraOffset) + _auraWidth;
+                half4 color = ColorLerp(bckg,sdf.color,lerp) + (_LightFactor * half4(1,1,1,0) * lerp);
+                half4 outerPatern = max(ColorLerp(color, bckg, min(sdf.sd * ( 100.0 / _auraRange ), 1.0)), lightValue/2.0);
+                
+                return ColorLerp(bckg, ColorLerp(outerPatern, innerPatern, isInner), sdf.alpha);
             }
             ENDHLSL
         }

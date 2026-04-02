@@ -26,8 +26,8 @@ public class BlobRenderer : MonoBehaviour
     [SerializeField][Range(-10f, 10f)] float xOffset;
     [SerializeField][Range(-10f, 10f)] float yOffset;
     float auraOffset;
-    Color blobEdgeColor;
-    Color blobInnerColor;
+    [SerializeField] Color blobEdgeColor;
+    [SerializeField] Color blobInnerColor;
 
     [Header("RTPC dependent parameters")]
     [SerializeField] RtpcDependent lightFactor;
@@ -36,7 +36,7 @@ public class BlobRenderer : MonoBehaviour
 
     Vector4[] toShader;
     Vector4[] toShaderColors;
-    int circleCount;
+    int blobPartCount;
 
     State previousState = new();
     State computedState = new();
@@ -56,21 +56,21 @@ public class BlobRenderer : MonoBehaviour
             Destroy(this);
         }
 
-        circleCount = partsData.Count;
-        blobMaterial.SetInt("_CircleCount", circleCount);
+        blobPartCount = partsData.Count;
+        blobMaterial.SetInt("_CircleCount", blobPartCount);
         blobMaterial.SetFloat("_xOffset", xOffset);
         blobMaterial.SetFloat("_yOffset", yOffset);
         blobMaterial.SetFloat("_auraWidth", auraWidth);
         blobMaterial.SetFloat("_lightSdScale", lightSdScale);
         blobMaterial.SetFloat("_auraF", auraFrequency);
-        blobMaterial.SetColor("_InnerColor", blobInnerColor);
-        blobMaterial.SetColor("_EdgeColor", blobEdgeColor);
         blobMaterial.SetFloat("_uvLengthFactor", uvLengthFactor);
 
         toShader = new Vector4[32];
         toShaderColors = new Vector4[32];
 
-        for (int i = 0; i < circleCount; i++)
+        Utils.OnScreenRescale += ProcessScreenParam;
+
+        for (int i = 0; i < blobPartCount; i++)
         {
             partsData[i].origin = Vector2.zero;
             partsData[i].destination = new Vector2(
@@ -81,6 +81,16 @@ public class BlobRenderer : MonoBehaviour
 
         LerpToComputedState(1);
     }
+    private void OnDestroy()
+    {
+        Utils.OnScreenRescale -= ProcessScreenParam;
+    }
+
+    private void ProcessScreenParam()
+    {
+        blobMaterial.SetFloat("_InvScreenX", 1f/Utils.canva.rect.width);
+    }
+
     private void Update()
     {
         //Set pos
@@ -111,7 +121,7 @@ public class BlobRenderer : MonoBehaviour
     private void UpdatePartsPos()
     {
         partMovement.UpdatePartPos(partsData);
-        for (int i = 0; i < circleCount; i++)
+        for (int i = 0; i < blobPartCount; i++)
         {
             toShader[i] = new Vector4(
                 partsData[i].currentPos.x,
@@ -122,7 +132,7 @@ public class BlobRenderer : MonoBehaviour
             toShaderColors[i] = blobEdgeColor;
         }
 
-        int partCount = circleCount;
+        int partCount = blobPartCount;
 
 
         marbleAura.ProcessMarblesAura();
@@ -262,7 +272,7 @@ public class BlobRenderer : MonoBehaviour
     {
         bool inBounds = false;
 
-        for(int i = 0; i < circleCount; i++)
+        for(int i = 0; i < blobPartCount; i++)
         {
             if ((partsData[i].currentPos - UvPos).magnitude - uvRadius - partsData[i].radius < 0.07)
             {
@@ -352,6 +362,7 @@ public struct RtpcDependent
 
     public float outputMin;
     public float outputMax;
+    public float valueOnInvalidRTPC;
 
     public float Get()
     {
@@ -362,7 +373,7 @@ public struct RtpcDependent
 
         //So, a rtpc could be zero, but to us, it means dead zone
         if (normalizedRtpc == float.NaN || rtpcVal == 0)
-            return 0;
+            return valueOnInvalidRTPC;
 
         switch (evaluationMode)
         {

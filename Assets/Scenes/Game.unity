@@ -2479,6 +2479,8 @@ MonoBehaviour:
   lightSdScale: 17.5
   xOffset: 1.1
   yOffset: 0.25
+  blobEdgeColor: {r: 1, g: 1, b: 1, a: 0}
+  blobInnerColor: {r: 1, g: 1, b: 1, a: 0}
   lightFactor:
     rtpc:
       idInternal: 0
@@ -2538,6 +2540,7 @@ MonoBehaviour:
     baseValue: 0
     outputMin: 0
     outputMax: 1
+    valueOnInvalidRTPC: 0
   scaleFactorRtpc:
     rtpc:
       idInternal: 0
@@ -2597,6 +2600,7 @@ MonoBehaviour:
     baseValue: 0
     outputMin: 0
     outputMax: 0.5
+    valueOnInvalidRTPC: 0
   auraRangeRTPC:
     rtpc:
       idInternal: 0
@@ -2620,11 +2624,7 @@ MonoBehaviour:
     baseValue: 3
     outputMin: 2
     outputMax: 5
-  blobEdgeColor: {r: 1, g: 0.83252466, b: 0.12188655, a: 1}
-  blobInnerColor: {r: 0.91618574, g: 0.7627472, b: 0.11167073, a: 0.007931534}
-  innerRenderMethod: 4
-  outerRenderMethod: 10
-  testValue: {fileID: 153923052}
+    valueOnInvalidRTPC: 0.1
 --- !u!114 &1867051473
 MonoBehaviour:
   m_ObjectHideFlags: 0

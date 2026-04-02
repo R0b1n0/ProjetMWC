@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Utils : MonoBehaviour
 {
-    static RectTransform canva;
+    public static RectTransform canva {  get; private set; }
 
     public static float screen2World {  get; private set; }
     public static event Action OnScreenRescale;
