@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
 
 [RequireComponent(typeof(RectTransform))]
 public class SlotDrawer : MonoBehaviour
