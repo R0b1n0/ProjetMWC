@@ -297,6 +297,7 @@ MonoBehaviour:
   satelliteCount: 3
   satelliteMaxScale: 20
   outerCircleAngleOffset: 250
+  id: 0
 --- !u!114 &478479405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,6 +1306,7 @@ MonoBehaviour:
   satelliteCount: 3
   satelliteMaxScale: 20
   outerCircleAngleOffset: 10
+  id: 0
 --- !u!58 &928505572
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1634,6 +1636,7 @@ MonoBehaviour:
   satelliteCount: 3
   satelliteMaxScale: 20
   outerCircleAngleOffset: 323
+  id: 0
 --- !u!114 &1136680574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2074,6 +2077,7 @@ MonoBehaviour:
   satelliteCount: 3
   satelliteMaxScale: 20
   outerCircleAngleOffset: 180
+  id: 0
 --- !u!114 &1564028640
 MonoBehaviour:
   m_ObjectHideFlags: 0
