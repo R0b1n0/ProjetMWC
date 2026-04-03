@@ -5,17 +5,22 @@ using UnityEngine;
 public class Channel : MonoBehaviour
 {
     public static event Action<int, Mood, float> OnChannelUpdate;
+    public static event Action<int> OnChannelClear;
 
-    [SerializeField] List<ChannelDisplay> drawers = new List<ChannelDisplay> ();
+    [SerializeField] List<ChannelDisplay> drawers = new List<ChannelDisplay>();
 
-    int currentSlot = 0;
+    public int currentSlot { get; private set; }
     int slotCount = 3;
 
     private void Awake()
     {
+        for (int i = 0; i < drawers.Count; i++) drawers[i].SetId(i);
         AbsorbState.OnMarbleAbsorbtion += OnMarbleAbsorbed;
     }
-
+    private void Start()
+    {
+        SetCurrentChannel(0, true);
+    }
     private void OnDestroy()
     {
         AbsorbState.OnMarbleAbsorbtion -= OnMarbleAbsorbed;
@@ -25,19 +30,30 @@ public class Channel : MonoBehaviour
     {
         OnChannelUpdate?.Invoke(currentSlot, marbleMood, intensity);
         drawers[currentSlot].SetDisplay(marbleMood, intensity);
-        currentSlot = (currentSlot + 1) % slotCount;
+        SetCurrentChannel((currentSlot + 1) % slotCount);
     }
-
-    public void SetCurrentChannel(ChannelDisplay channel)
+    public bool TrySetCurrentChannel(int channelId)
     {
-        for (int i = 0; i < drawers.Count; i++)
+        if (channelId != currentSlot)
         {
-            if (drawers[i] == channel)
-            {
-                currentSlot = i;
-                return;
-            }
+            SetCurrentChannel(channelId);
+            return true;
         }
-    }
 
+        return false;
+    }
+    public void EmptyCurrentChannel()
+    {
+        drawers[currentSlot].Clear();
+        OnChannelClear?.Invoke(currentSlot);
+    }
+    public void SetCurrentChannel(int id, bool force = false)
+    {
+        if (id == currentSlot && !force)
+            return;
+
+        drawers[currentSlot].UnSelect();
+        currentSlot = id;
+        drawers[currentSlot].Select();
+    }
 }

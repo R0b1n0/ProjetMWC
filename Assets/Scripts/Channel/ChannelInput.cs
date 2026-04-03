@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ChannelInput : MonoBehaviour
@@ -5,8 +6,12 @@ public class ChannelInput : MonoBehaviour
     [SerializeField] Channel channelManager;
     [SerializeField] float doubleTapGap;
 
+    public static event Action OnSlotSelect;
+    public static event Action OnSlotClear;
     float dtSinceSelect;
-    ChannelDisplay selectedSlot;
+    ChannelDisplay selectedChannel;
+
+    int consecutivClick = 0;
 
     private void Start()
     {
@@ -17,23 +22,52 @@ public class ChannelInput : MonoBehaviour
         InputManager.instance.OnTouchStartEvent -= OnTouchStarted;
     }
 
-    private void OnTouchStarted()
+    private void Update()
     {
-        if (selectedSlot)
+        if (selectedChannel)
+        {
             dtSinceSelect += Time.deltaTime;
 
+            if (dtSinceSelect > doubleTapGap)
+            {
+                consecutivClick = 0;
+            }
+        }
+    }
+
+    private void OnTouchStarted()
+    {
+        //Detect channel slot
         if (TryCatchChannel(out ChannelDisplay channel))
         {
-            if (channel != selectedSlot)
+            //Try to set the new channel 
+            if (channelManager.TrySetCurrentChannel(channel.id))
             {
-                //Select new channel
-                channelManager.SetCurrentChannel(channel);
-                dtSinceSelect = 0;
+                OnSlotSelect?.Invoke();
+                consecutivClick = 1;
             }
-            else if (dtSinceSelect > doubleTapGap)
+            else if (selectedChannel)
             {
-                //That's a double click, empty the slot 
+                //Clicked on the same slot
+                consecutivClick++;
+
+                if (consecutivClick > 1)
+                {
+                    EnptySlot();
+                    consecutivClick = 0;
+                }
             }
+            dtSinceSelect = 0;
+            selectedChannel = channel;
+        }
+    }
+
+    private void EnptySlot()
+    {
+        if (!selectedChannel.empty)
+        {
+            OnSlotClear?.Invoke();
+            channelManager.EmptyCurrentChannel();
         }
     }
 
@@ -49,8 +83,6 @@ public class ChannelInput : MonoBehaviour
             channel = slot;
             return true;
         }
-
-
         return false;
     }
 }

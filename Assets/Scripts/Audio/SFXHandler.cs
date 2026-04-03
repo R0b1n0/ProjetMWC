@@ -9,6 +9,8 @@ public class SFXHandler : MonoBehaviour
     [SerializeField] AK.Wwise.Event OnLevelThree; 
     [SerializeField] AK.Wwise.Event OnAbsrobtionBegin; 
     [SerializeField] AK.Wwise.Event OnMorphBegin;
+    [SerializeField] AK.Wwise.Event OnSlotSelect;
+    [SerializeField] AK.Wwise.Event OnSlotClear;
 
     private void Awake()
     {
@@ -17,6 +19,8 @@ public class SFXHandler : MonoBehaviour
         DraggingState.OnMarbleLevelUpdate += OnMarbleLevelUpdate;
         AbsorbState.OnAbsorbtionBegin += OnMarbleAbsorbionBegin;
         Channel.OnChannelUpdate += OnMarbleAbsorbed;
+        ChannelInput.OnSlotSelect += OnSlotSelected;
+        ChannelInput.OnSlotClear += OnSlotCleared;
     }
 
     private void OnDestroy()
@@ -26,8 +30,17 @@ public class SFXHandler : MonoBehaviour
         DraggingState.OnMarbleLevelUpdate -= OnMarbleLevelUpdate;
         AbsorbState.OnAbsorbtionBegin -= OnMarbleAbsorbionBegin;
         Channel.OnChannelUpdate -= OnMarbleAbsorbed;
+        ChannelInput.OnSlotSelect -= OnSlotSelected;
+        ChannelInput.OnSlotClear -= OnSlotCleared;
     }
-
+    private void OnSlotSelected()
+    {
+        OnSlotSelect.Post(gameObject);
+    }
+    private void OnSlotCleared()
+    {
+        OnSlotClear.Post(gameObject);
+    }
     private void OnMarbleGrabbed()
     {
         OnMarbleSelect.Post(gameObject);

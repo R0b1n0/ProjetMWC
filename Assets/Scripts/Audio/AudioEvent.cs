@@ -14,6 +14,7 @@ public class AudioEvent : MonoBehaviour
     private void Awake()
     {
         Channel.OnChannelUpdate += OnMarbleAbsorbed;
+        Channel.OnChannelClear += OnChannelClear;
     }
 
     private void OnDestroy()
@@ -25,7 +26,10 @@ public class AudioEvent : MonoBehaviour
     {
         playAll.Post(gameObject);
     }
-
+    private void OnChannelClear(int slot)
+    {
+        parameters.slotsInfo[slot].mutEvent.Post(gameObject);
+    }
     private void OnMarbleAbsorbed(int slot, Mood marbleMood, float intensity)
     {
         parameters.slotsInfo[slot].slotSwitchEvents[marbleMood].SetValue(gameObject);
@@ -47,5 +51,6 @@ public class SlotParam
     public SerializedDictionary<Mood, AK.Wwise.Switch> slotSwitchEvents;
     public AK.Wwise.RTPC intensity;
     public AK.Wwise.Event unmutEvent;
+    public AK.Wwise.Event mutEvent;
 }
 
