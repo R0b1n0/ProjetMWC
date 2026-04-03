@@ -46,6 +46,7 @@ public class ChannelDisplay : MonoBehaviour
         transform.GetComponent<RectTransform>().GetLocalCorners(holderCorners);
         maxScale = (holderCorners[3].x - holderCorners[0].x) * marbleScaleRelativToHolder;
         maxScaleV = new Vector3(maxScale, maxScale, maxScale);
+        transform.GetComponent<CircleCollider2D>().radius = (holderCorners[3].x - holderCorners[0].x) /2;
         marble.transform.localScale = Vector3.zero;
     }
 

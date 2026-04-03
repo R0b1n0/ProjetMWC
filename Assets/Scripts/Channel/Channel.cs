@@ -27,4 +27,17 @@ public class Channel : MonoBehaviour
         drawers[currentSlot].SetDisplay(marbleMood, intensity);
         currentSlot = (currentSlot + 1) % slotCount;
     }
+
+    public void SetCurrentChannel(ChannelDisplay channel)
+    {
+        for (int i = 0; i < drawers.Count; i++)
+        {
+            if (drawers[i] == channel)
+            {
+                currentSlot = i;
+                return;
+            }
+        }
+    }
+
 }
