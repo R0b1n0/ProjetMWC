@@ -21,6 +21,7 @@ public class SlotDrawer : MonoBehaviour
     [SerializeField] float outerCircleAngleOffset;
     RectTransform holder;
     CircleCollider2D coll;
+    public int id;
 
     private void Awake()
     {
