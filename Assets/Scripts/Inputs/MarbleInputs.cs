@@ -4,6 +4,7 @@ using UnityEngine;
 public class MarbleInputs : MonoBehaviour
 {
     [SerializeField] LayerMask marbleMask;
+    [SerializeField] TagHandle marbleHolderTag;
     private MarbleData heldMarble;
 
     public static event Action<MarbleData> OnDragBegin;
@@ -35,17 +36,13 @@ public class MarbleInputs : MonoBehaviour
     private bool TryCatchMarble(out MarbleData marlbe)
     {
         marlbe = null;
-
         Vector2 touchWorldPos = InputManager.instance.TouchWorldPos;
-        Ray ray = new Ray(new Vector3(touchWorldPos.x, touchWorldPos.y, 0) - new  Vector3(0,0,2), Vector3.forward);
 
-        RaycastHit hit;
-        
+        RaycastHit2D hit = Physics2D.Raycast(new Vector3(touchWorldPos.x, touchWorldPos.y, 0), Vector2.zero, 0.1f);
 
-        if (Physics.Raycast(new Vector3(touchWorldPos.x, touchWorldPos.y, 0) - new Vector3(0, 0, 2), Vector3.forward, out hit, marbleMask) && 
-            hit.transform.TryGetComponent<MarbleData>(out MarbleData marbleHit))
+        if (hit.transform != null && hit.transform.TryGetComponent(out SlotDrawer slot))
         {
-            marlbe = marbleHit;
+            marlbe = MarbleManager.instance.GetMarble(slot.id);
             return true;
         }
 

@@ -6,12 +6,14 @@ public class LerpInState : MarbleStateBehaviour
     Vector3 end;
     Vector3 s2f;
     float t;
+    float speed;
 
-    public LerpInState(MarbleData marble) : base(marble)
+    public LerpInState(MarbleData marble, float speed = 1) : base(marble)
     {
         end = MarbleManager.instance.GetSlotPos(marble.index);
         start = MarbleManager.instance.GetLerpInStartPos(marble.index);
         s2f = end - start;
+        this.speed = speed;
     }
 
     public override void EnterState()
@@ -26,7 +28,7 @@ public class LerpInState : MarbleStateBehaviour
     public override MarbleStateBehaviour Update()
     {
         marble.trans.position = start + s2f * marble.LerpInCurve.Evaluate(t);
-        t += Time.deltaTime / 3;
+        t += Time.deltaTime * speed;
 
         //Reached Destination
         if (t >= 1)

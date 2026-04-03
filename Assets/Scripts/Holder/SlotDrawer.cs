@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
 
 [RequireComponent(typeof(RectTransform))]
 public class SlotDrawer : MonoBehaviour
@@ -19,10 +17,11 @@ public class SlotDrawer : MonoBehaviour
     [SerializeField] float satelliteMaxScale;
 
     List<SatelliteBehaviour> satellites = new List<SatelliteBehaviour>();
-
+ 
     [SerializeField] float outerCircleAngleOffset;
     RectTransform holder;
     CircleCollider2D coll;
+    [HideInInspector] public int id;
 
     private void Awake()
     {

@@ -45,7 +45,7 @@ public class AbsorbState : MarbleStateBehaviour
 
         if (l > 1)
         {
-            return new LerpInState(marble);
+            return new LerpInState(marble, 1);
         }
 
         return this;

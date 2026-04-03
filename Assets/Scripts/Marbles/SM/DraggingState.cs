@@ -59,9 +59,8 @@ public class DraggingState : MarbleStateBehaviour
 
         if (hit2D.collider != null &&
             hit2D.transform.CompareTag(marbleHolderTag) &&
-            hit2D.transform.TryGetComponent(out RectTransform holder) &&
-            MarbleManager.instance.TryGetHolderIndex(holder, out int holderIndex) &&
-            holderIndex == marble.index)
+            hit2D.transform.TryGetComponent(out SlotDrawer holder) &&
+            holder.id == marble.index)
         {
             LoadMarble();
         }

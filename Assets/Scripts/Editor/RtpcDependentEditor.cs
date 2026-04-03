@@ -61,7 +61,7 @@ public class RtpcDependentEditor : PropertyDrawer
                 DrawDefaultProperty(ref position, property.FindPropertyRelative("rangeCurve"));
                 break;
         }
-
+        DrawDefaultProperty(ref position, property.FindPropertyRelative("valueOnInvalidRTPC"));
         EditorGUI.indentLevel--;
         EditorGUI.EndProperty();
     }

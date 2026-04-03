@@ -56,7 +56,7 @@ public class MarbleData : MonoBehaviour
         defaultScale = initScale;
         float OnInitScale = initScale;
         trans.localScale = new Vector3(OnInitScale, OnInitScale, OnInitScale);
-        stateBh = new LerpInState(this);
+        stateBh = new LerpInState(this, 0.3f);
     }
     private void Update()
     {

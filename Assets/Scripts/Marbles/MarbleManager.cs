@@ -28,8 +28,6 @@ public class MarbleManager : MonoBehaviour
         else
             Destroy(this);
 
-        /*MarbleInputs.OnDragBegin += OnDragBegin;
-        MarbleInputs.OnDragEnd += OnDragEnd;*/
         StartCoroutine(SetupOnStart());
 
         Utils.OnScreenRescale += UpdateMarblesOnCanvaResize;
@@ -54,30 +52,20 @@ public class MarbleManager : MonoBehaviour
         }
     }
     #region Utils
-    public bool TryGetHolderIndex(RectTransform rect, out int index)
-    {
-        index = 0;
-        for (int i = 0; i < holders.Length; i++)
-        {
-            if(rect ==  holders[i])
-            {
-                index = i;
-                return true;
-            }
-        }
-        return false;
-    }
     public MoodProperties GetMoodData(int index)
     {
         return EmotionParameters.Instance.GetMoodInfo(moodOrder[index]);
     }
-
     public Vector3 GetSlotPos(int slotIndex)
     {
         Vector3[] corners = new Vector3[4];
         RectTransform holder = holders[slotIndex];
         holder.GetWorldCorners(corners);
         return new Vector3(holder.position.x, holder.position.y, 0);
+    }
+    public MarbleData GetMarble(int index)
+    { 
+        return marbles[index];
     }
     public Vector3 GetLerpInStartPos(int slotIndex)
     {
@@ -92,7 +80,6 @@ public class MarbleManager : MonoBehaviour
         //Maybe this sould be in the holder drawer class
         drawers[marble.index].SetSatelliteCount(newLevel+1);
     }
-
     private IEnumerator SetupOnStart()
     {
         yield return new WaitForEndOfFrame();
@@ -101,7 +88,7 @@ public class MarbleManager : MonoBehaviour
         holders[0].GetWorldCorners(corners);
         float scale = (corners[3].x - corners[0].x) * marbleScaleRelativToHolder;
 
-        //Instantiate the marbles 
+        //Instantiate the marbles and register slots 
         for (int i = 0; i < holders.Length; i++)
         {
             GameObject marble = Instantiate(marblePb);
@@ -109,10 +96,9 @@ public class MarbleManager : MonoBehaviour
             marbles.Add(marbleBh);
             marbleBh.Initialize(moodOrder[i], EmotionParameters.Instance.GetMoodInfo(moodOrder[i]).marbleColor, i, scale);
             drawers.Add(holders[i].GetComponent<SlotDrawer>());
+            drawers[drawers.Count - 1].id = i;
 
             yield return new WaitForSeconds(0.3f);
         }
-
     }
-    
 }

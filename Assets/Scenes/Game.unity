@@ -297,6 +297,7 @@ MonoBehaviour:
   satelliteCount: 3
   satelliteMaxScale: 20
   outerCircleAngleOffset: 250
+  id: 0
 --- !u!114 &478479405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,6 +1306,7 @@ MonoBehaviour:
   satelliteCount: 3
   satelliteMaxScale: 20
   outerCircleAngleOffset: 10
+  id: 0
 --- !u!58 &928505572
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1634,6 +1636,7 @@ MonoBehaviour:
   satelliteCount: 3
   satelliteMaxScale: 20
   outerCircleAngleOffset: 323
+  id: 0
 --- !u!114 &1136680574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2074,6 +2077,7 @@ MonoBehaviour:
   satelliteCount: 3
   satelliteMaxScale: 20
   outerCircleAngleOffset: 180
+  id: 0
 --- !u!114 &1564028640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2267,7 +2271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1636188112}
   - component: {fileID: 1636188114}
-  - component: {fileID: 1636188113}
+  - component: {fileID: 1636188115}
   m_Layer: 5
   m_Name: BlobRender
   m_TagString: Untagged
@@ -2294,36 +2298,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1636188113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636188111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 2100000, guid: dad41460bfa0afc439904de3efb505f2, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1636188114
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2332,6 +2306,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636188111}
   m_CullTransparentMesh: 1
+--- !u!114 &1636188115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636188111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 2100000, guid: dad41460bfa0afc439904de3efb505f2, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1739910707
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,6 +2480,8 @@ MonoBehaviour:
   lightSdScale: 17.5
   xOffset: 1.1
   yOffset: 0.25
+  blobEdgeColor: {r: 1, g: 1, b: 1, a: 0}
+  blobInnerColor: {r: 1, g: 1, b: 1, a: 0}
   lightFactor:
     rtpc:
       idInternal: 0
@@ -2538,6 +2541,7 @@ MonoBehaviour:
     baseValue: 0
     outputMin: 0
     outputMax: 1
+    valueOnInvalidRTPC: 0
   scaleFactorRtpc:
     rtpc:
       idInternal: 0
@@ -2597,6 +2601,7 @@ MonoBehaviour:
     baseValue: 0
     outputMin: 0
     outputMax: 0.5
+    valueOnInvalidRTPC: 0
   auraRangeRTPC:
     rtpc:
       idInternal: 0
@@ -2620,11 +2625,7 @@ MonoBehaviour:
     baseValue: 3
     outputMin: 2
     outputMax: 5
-  blobEdgeColor: {r: 1, g: 0.83252466, b: 0.12188655, a: 1}
-  blobInnerColor: {r: 0.91618574, g: 0.7627472, b: 0.11167073, a: 0.007931534}
-  innerRenderMethod: 4
-  outerRenderMethod: 10
-  testValue: {fileID: 153923052}
+    valueOnInvalidRTPC: 0.1
 --- !u!114 &1867051473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2761,10 +2762,164 @@ MonoBehaviour:
   dropFallingSpeed: 0.5
   dropScalingSpeed: 0.2
   delayBetweenDrops: 0
+--- !u!1 &2049182737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2049182741}
+  - component: {fileID: 2049182740}
+  - component: {fileID: 2049182739}
+  - component: {fileID: 2049182738}
+  - component: {fileID: 2049182742}
+  m_Layer: 0
+  m_Name: BlobCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2049182738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049182737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
+--- !u!81 &2049182739
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049182737}
+  m_Enabled: 1
+--- !u!20 &2049182740
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049182737}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 34
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 128
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 0
+  m_HDR: 1
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 0
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &2049182741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049182737}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2049182742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049182737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c17ec190142c4c4aa9a4ec563cd8a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlobRenderTexture
+  blobCamera: {fileID: 2049182740}
+  displayImage: {fileID: 1636188115}
+  scaleDivider: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2049182741}
   - {fileID: 519420032}
   - {fileID: 1023189336}
   - {fileID: 1026600517}
