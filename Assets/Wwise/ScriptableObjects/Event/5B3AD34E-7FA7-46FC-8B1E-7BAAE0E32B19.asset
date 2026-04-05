@@ -15,4 +15,4 @@ MonoBehaviour:
   objectName: MuteRythm
   id: 4120555910
   guid: 5B3AD34E-7FA7-46FC-8B1E-7BAAE0E32B19
-  IsInUserDefinedSoundBank: 0
+  IsInUserDefinedSoundBank: 1

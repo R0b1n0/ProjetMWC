@@ -15,4 +15,4 @@ MonoBehaviour:
   objectName: MuteMelody
   id: 471066306
   guid: 6CDE18BA-2558-405F-AD92-69464894439B
-  IsInUserDefinedSoundBank: 0
+  IsInUserDefinedSoundBank: 1

@@ -91,7 +91,7 @@ public class MarbleManager : MonoBehaviour
         //Instantiate the marbles and register slots 
         for (int i = 0; i < holders.Length; i++)
         {
-            GameObject marble = Instantiate(marblePb);
+            GameObject marble = Instantiate(marblePb,new Vector3(500,0,0), Quaternion.identity);
             MarbleData marbleBh = marble.GetComponent<MarbleData>();
             marbles.Add(marbleBh);
             marbleBh.Initialize(moodOrder[i], EmotionParameters.Instance.GetMoodInfo(moodOrder[i]).marbleColor, i, scale);

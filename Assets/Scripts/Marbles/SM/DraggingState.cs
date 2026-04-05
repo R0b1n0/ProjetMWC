@@ -10,7 +10,7 @@ public class DraggingState : MarbleStateBehaviour
     float accelerationTreshold = 2;
     string marbleHolderTag = "MarbleHolder";
     private Vector2 draggedMarblePreviousPos;
-    float marbleLoadingTime = 2;
+    float marbleLoadingTime = 1;
 
     private bool released = false;
 

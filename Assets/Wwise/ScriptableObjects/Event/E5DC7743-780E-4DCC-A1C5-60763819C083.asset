@@ -15,4 +15,4 @@ MonoBehaviour:
   objectName: MuteHarmony
   id: 852115372
   guid: E5DC7743-780E-4DCC-A1C5-60763819C083
-  IsInUserDefinedSoundBank: 0
+  IsInUserDefinedSoundBank: 1
