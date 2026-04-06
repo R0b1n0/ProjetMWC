@@ -8,12 +8,15 @@ public class LerpInState : MarbleStateBehaviour
     float t;
     float speed;
 
-    public LerpInState(MarbleData marble, float speed = 1) : base(marble)
+    public LerpInState(MarbleData marble) : base(marble)
     {
         end = MarbleManager.instance.GetSlotPos(marble.index);
         start = MarbleManager.instance.GetLerpInStartPos(marble.index);
         s2f = end - start;
-        this.speed = speed;
+        if (GameState.State == EGameState.intro)
+            speed = 0.3f;
+        else
+            speed = 0.5f;
     }
 
     public override void EnterState()

@@ -980,12 +980,12 @@ GameObject:
   - component: {fileID: 829360885}
   - component: {fileID: 829360884}
   m_Layer: 5
-  m_Name: Button
+  m_Name: HelpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &829360883
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1088,6 +1088,146 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829360882}
   m_CullTransparentMesh: 1
+--- !u!1 &854996940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854996942}
+  - component: {fileID: 854996941}
+  - component: {fileID: 854996943}
+  m_Layer: 0
+  m_Name: Intro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &854996941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854996940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a482473fb90009f42977438e8a50b749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Intro
+  steps:
+  - rid: 7456937467651293476
+  - rid: 7456937467651293535
+  - rid: 7456937467651293542
+  - rid: 7456937467651293543
+  - rid: 7456937467651293547
+  - rid: 7456937467651293548
+  - rid: 7456937467651293551
+  gameState: {fileID: 854996943}
+  skipIntro: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 7456937467651293476
+      type: {class: DelayStep, ns: , asm: Assembly-CSharp}
+      data:
+        OnEnterEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        OnExitEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        delay: 4
+    - rid: 7456937467651293535
+      type: {class: CreateAndAbsorbMarble, ns: , asm: Assembly-CSharp}
+      data:
+        OnEnterEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        OnExitEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        mood: 1
+    - rid: 7456937467651293542
+      type: {class: DelayStep, ns: , asm: Assembly-CSharp}
+      data:
+        OnEnterEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        OnExitEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        delay: 3
+    - rid: 7456937467651293543
+      type: {class: CreateAndAbsorbMarble, ns: , asm: Assembly-CSharp}
+      data:
+        OnEnterEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        OnExitEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        mood: 2
+    - rid: 7456937467651293547
+      type: {class: DelayStep, ns: , asm: Assembly-CSharp}
+      data:
+        OnEnterEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        OnExitEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        delay: 3
+    - rid: 7456937467651293548
+      type: {class: CreateAndAbsorbMarble, ns: , asm: Assembly-CSharp}
+      data:
+        OnEnterEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        OnExitEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        mood: 3
+    - rid: 7456937467651293551
+      type: {class: DelayStep, ns: , asm: Assembly-CSharp}
+      data:
+        OnEnterEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        OnExitEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        delay: 5
+--- !u!4 &854996942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854996940}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.09976, y: 3.68062, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &854996943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854996940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9891d1668f6f50046a6804510ce1ca51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameState
 --- !u!1 &874297767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,3 +3747,4 @@ SceneRoots:
   - {fileID: 1616479313}
   - {fileID: 1493176111}
   - {fileID: 693463604}
+  - {fileID: 854996942}
