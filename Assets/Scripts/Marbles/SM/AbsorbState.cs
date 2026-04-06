@@ -45,7 +45,10 @@ public class AbsorbState : MarbleStateBehaviour
 
         if (l > 1)
         {
-            return new LerpInState(marble, 1);
+            if (GameState.State == EGameState.intro)
+                return new HideState(marble);
+
+            return new LerpInState(marble);
         }
 
         return this;

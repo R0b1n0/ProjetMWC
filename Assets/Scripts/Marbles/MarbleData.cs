@@ -47,6 +47,27 @@ public class MarbleData : MonoBehaviour
         mat = new(rend.material);
         rend.material = mat;
     }
+    private void Update()
+    {
+        if (stateBh == null)
+            return;
+
+        SetState(stateBh.Update());
+    }
+
+    #region State 
+    public void SetState(MarbleStateBehaviour newState)
+    {
+        if (newState != stateBh)
+        {
+            stateBh.ExitState();
+
+            if (newState != null)
+                newState.EnterState();
+
+            stateBh = newState;
+        }
+    }
     public void Initialize(Mood marbleMood, Color color, int index, float initScale)
     {
         mood = marbleMood;
@@ -56,30 +77,11 @@ public class MarbleData : MonoBehaviour
         defaultScale = initScale;
         float OnInitScale = initScale;
         trans.localScale = new Vector3(OnInitScale, OnInitScale, OnInitScale);
-        stateBh = new LerpInState(this, 0.3f);
+        stateBh = new HideState(this);
     }
-    private void Update()
-    {
-        if (stateBh == null)
-            return;
+    #endregion 
 
-        MarbleStateBehaviour newState = stateBh.Update();
-        if (newState != stateBh)
-        {
-            stateBh.ExitState();
-            newState.EnterState();
-            stateBh = newState;
-        }
-    }
-    public void UpdateOnCanvaRescale(float newDefaultScale)
-    {
-        defaultScale = newDefaultScale;
-    }
-    public void OnLevelUpdate(int newLevel)
-    {
-        StopAllCoroutines();
-        StartCoroutine(Expand(newLevel));
-    }
+    #region Rendering
     public void SetAura(bool value, bool instantState = false)
     {
         if (value)
@@ -87,20 +89,30 @@ public class MarbleData : MonoBehaviour
         else
             StopAuraRender?.Invoke(this, instantState);
     }
-    
-    public void FadeWithPartDistance()
-    {
-        Vector2 UVPos = Utils.World2UV(trans.position);
-        Vector2 closestPart = BlobRenderer.instance.GetClosestPartPos(UVPos);
-        SetTransparency(Mathf.Min(1, Mathf.Max(maxTransparency, Vector2.Distance(UVPos, closestPart) / fadeTreshold)));
-    }
     public void SetTransparency(float alphaValue)
     {
         Color newMatColor = mat.color;
         newMatColor.a = alphaValue;
         mat.color = newMatColor;
     }
+    public void FadeWithPartDistance()
+    {
+        Vector2 UVPos = Utils.World2UV(trans.position);
+        Vector2 closestPart = BlobRenderer.instance.GetClosestPartPos(UVPos);
+        SetTransparency(Mathf.Min(1, Mathf.Max(maxTransparency, Vector2.Distance(UVPos, closestPart) / fadeTreshold)));
+    }
+    public void UpdateOnCanvaRescale(float newDefaultScale)
+    {
+        defaultScale = newDefaultScale;
+    }
+    #endregion
+
     #region Animation
+    public void OnLevelUpdate(int newLevel)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Expand(newLevel));
+    }
     private IEnumerator Expand(int level)
     {
         float targetScale;
