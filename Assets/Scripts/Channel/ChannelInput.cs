@@ -74,6 +74,9 @@ public class ChannelInput : MonoBehaviour
     private bool TryCatchChannel(out ChannelDisplay channel)
     {
         channel = null;
+        if (GameState.State != EGameState.game)
+            return false;
+
         Vector2 touchWorldPos = InputManager.instance.TouchWorldPos;
 
         RaycastHit2D hit = Physics2D.Raycast(new Vector3(touchWorldPos.x, touchWorldPos.y, 0), Vector2.zero, 0.1f);

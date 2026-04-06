@@ -7,6 +7,11 @@ public class GameState : MonoBehaviour
     static public EGameState State { get { return currentState; } }
     private static EGameState currentState;
 
+    private void Awake()
+    {
+        currentState = EGameState.intro;
+    }
+
     public void SetGameState(EGameState state)
     {
         OnGameStateUpdate?.Invoke(currentState,state);
