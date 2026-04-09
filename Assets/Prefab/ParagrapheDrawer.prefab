@@ -166,5 +166,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ParagraphDrawer
   text: {fileID: 329869091292445910}
-  delayBetweenLetters: 0
-  test: dbehbdhzedbhezdsqdqsdqsdqsdqsdsqdsq
+  spellDelay: 0.05
+  eraseDelay: 0

@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 public class ParagraphDrawer : MonoBehaviour
 {
@@ -12,46 +8,43 @@ public class ParagraphDrawer : MonoBehaviour
     public bool isEmpty { get; private set; }
     [SerializeField] float spellDelay;
     [SerializeField] float eraseDelay;
-    [SerializeField] string test;
+    public bool cleared { get { return text.text.Length == 0; } }
 
-
-    private void Start()
+    public void DisplayText(Paragraph toDisplay)
     {
-        RemoveText();
+        StartCoroutine(SpellText(toDisplay));
     }
-
-    public void DisplayText()
-    {
-        StartCoroutine(SpellText(test));
-    }
-    private IEnumerator SpellText(string textToDisplay)
+    private IEnumerator SpellText(Paragraph para)
     {
         int currentChar = 0;
+        text.color = para.color;
+        transform.position = para.target.position;
 
-        while (currentChar < textToDisplay.Length)
+        while (currentChar < para.text.Length)
         {
-            if (textToDisplay[currentChar] == '<')
+            if (para.text[currentChar] == '<')
             {
-                while (textToDisplay[currentChar] != '>')
+                while (para.text[currentChar] != '>')
                 {
-                    text.text += textToDisplay[currentChar];
+                    text.text += para.text[currentChar];
                     currentChar++;
                 }
                 //Add the '>'
-                text.text += textToDisplay[currentChar];
+                text.text += para.text[currentChar];
                 currentChar++;
                 yield return null;
             }
             else
             {
-                text.text += textToDisplay[currentChar];
+                text.text += para.text[currentChar];
                 currentChar++;
                 yield return new WaitForSeconds(spellDelay);
             }
         }
     }
-    private void RemoveText()
+    public void RemoveText()
     {
+        StopAllCoroutines();
         StartCoroutine(EraseText());
     }
     private IEnumerator EraseText()
