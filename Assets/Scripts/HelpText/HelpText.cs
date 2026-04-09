@@ -72,10 +72,10 @@ public class HelpText : MonoBehaviour
     //Triggered by the help button 
     public void StartText()
     {
-        if (lockInputs)
+        if (lockInputs || GameState.State != EGameState.game)
             return;
 
-        gameState.SetGameState(EGameState.info);
+        gameState.SetGameState(EGameState.helpText);
         currentPage = 0;
         DisplayCurrentPage();
     }
@@ -88,7 +88,7 @@ public class HelpText : MonoBehaviour
         //Create page if needed 
         if (page.paragraphs.Count > drawers.Count)
         {
-            for (int i = 0; i < (page.paragraphs.Count - drawers.Count); i++)
+            for (int i = drawers.Count; i < page.paragraphs.Count ; i++)
                 drawers.Add(CreateParagraphe());
         }
 

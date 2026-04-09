@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2316f4555d305594eb9239bcec566748
+guid: 12281990b23bfaf41a0ce1695a0df702
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Paager
+  - IBM Plex Sans
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

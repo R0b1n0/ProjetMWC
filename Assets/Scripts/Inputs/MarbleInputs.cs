@@ -18,7 +18,7 @@ public class MarbleInputs : MonoBehaviour
 
     private void OnTouchStarted()
     {
-        if (OnDragBegin != null && TryCatchMarble(out MarbleData marble) && GameState.State == EGameState.game)
+        if (OnDragBegin != null && TryCatchMarble(out MarbleData marble) && GameState.State != EGameState.helpText)
         {
             heldMarble = marble;
             OnDragBegin?.Invoke(heldMarble);
