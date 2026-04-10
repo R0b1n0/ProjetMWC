@@ -364,9 +364,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1702605250}
   - {fileID: 1139009847}
-  - {fileID: 829360883}
+  - {fileID: 1702605250}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1150,18 +1149,6 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 481634536ffebe846a0f087d27c9bf41, type: 2}
-  OnMarbleRelease:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ec4b4e0d33b0f0841836b8a2d0e7caf2, type: 2}
-  OnLevelTwo:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 92e6c4921d882304782e6551e967d635, type: 2}
-  OnLevelThree:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 8e22ac56809574c45be98c816b8ef6ad, type: 2}
   OnAbsrobtionBegin:
     idInternal: 0
     valueGuidInternal: 
@@ -1265,6 +1252,7 @@ GameObject:
   - component: {fileID: 829360886}
   - component: {fileID: 829360885}
   - component: {fileID: 829360884}
+  - component: {fileID: 829360887}
   m_Layer: 5
   m_Name: HelpButton
   m_TagString: Untagged
@@ -1285,7 +1273,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1246840907}
-  m_Father: {fileID: 241494242}
+  m_Father: {fileID: 1023189336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1386,6 +1374,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829360882}
   m_CullTransparentMesh: 1
+--- !u!114 &829360887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829360882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c0bd7b163ed954b8b3aefd00947672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HelpBtn
+  text: {fileID: 1246840908}
 --- !u!1 &854996940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1426,7 @@ MonoBehaviour:
   - rid: 7456937467651293548
   - rid: 7456937467651293551
   gameState: {fileID: 854996943}
-  skipIntro: 1
+  skipIntro: 0
   references:
     version: 2
     RefIds:
@@ -1448,7 +1449,7 @@ MonoBehaviour:
         OnExitEvents:
           m_PersistentCalls:
             m_Calls: []
-        mood: 1
+        mood: 2
     - rid: 7456937467651293542
       type: {class: DelayStep, ns: , asm: Assembly-CSharp}
       data:
@@ -1468,7 +1469,7 @@ MonoBehaviour:
         OnExitEvents:
           m_PersistentCalls:
             m_Calls: []
-        mood: 2
+        mood: 1
     - rid: 7456937467651293547
       type: {class: DelayStep, ns: , asm: Assembly-CSharp}
       data:
@@ -1960,6 +1961,7 @@ RectTransform:
   - {fileID: 1494342124}
   - {fileID: 646296321}
   - {fileID: 228010698}
+  - {fileID: 829360883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2113,16 +2115,16 @@ MonoBehaviour:
       color: {r: 1, g: 1, b: 1, a: 1}
       target: {fileID: 888059034}
     - text: Anger
-      color: {r: 1, g: 0, b: 0, a: 1}
+      color: {r: 0.8, g: 0.4, b: 0.4, a: 1}
       target: {fileID: 1824334139}
     - text: Joice
-      color: {r: 1, g: 0.931468, b: 0.18396229, a: 1}
+      color: {r: 0.89411765, g: 0.9019608, b: 0.45490196, a: 1}
       target: {fileID: 301940930}
     - text: Fear
-      color: {r: 0, g: 1, b: 0.17391229, a: 1}
+      color: {r: 0.49803922, g: 0.70980394, b: 0.36862746, a: 1}
       target: {fileID: 2107728143}
     - text: Sadness
-      color: {r: 0.0990566, g: 0.6593115, b: 1, a: 1}
+      color: {r: 0.36078432, g: 0.44313726, b: 0.654902, a: 1}
       target: {fileID: 959510148}
   - paragraphs:
     - text: ' The longer you press on a marble,<br> the more <b>intense</b> the emotion
@@ -2150,7 +2152,7 @@ MonoBehaviour:
       color: {r: 1, g: 1, b: 1, a: 1}
       target: {fileID: 888059034}
   - paragraphs:
-    - text: Have fun !!
+    - text: Have fun
       color: {r: 1, g: 1, b: 1, a: 1}
       target: {fileID: 1497010417}
   paragraphePb: {fileID: 1353772700503742976, guid: fd3e03b3a09aaae4cb6fbf5a21ef7204, type: 3}
@@ -2661,8 +2663,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
