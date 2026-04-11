@@ -2047,7 +2047,7 @@ MonoBehaviour:
     Android_HapticPattern:
     - Delay: 0
       PulseTime: 100
-      PulseStrength: 100
+      PulseStrength: 200
   marbleLvl3:
     IOS_HapticPattern:
     - Delay: 0
@@ -2055,7 +2055,7 @@ MonoBehaviour:
     Android_HapticPattern:
     - Delay: 0
       PulseTime: 100
-      PulseStrength: 200
+      PulseStrength: 250
 --- !u!1 &928505565
 GameObject:
   m_ObjectHideFlags: 0

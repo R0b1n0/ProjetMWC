@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static Solo.MOST_IN_ONE.MOST_HapticFeedback;
 
@@ -9,11 +10,18 @@ public class HapticFeedBack : MonoBehaviour
     private void Awake()
     {
         DraggingState.OnMarbleLevelUpdate += OnMarbleLevelUpdate;
+        DraggingState.OnMarbleDragBegin += OnMarbleGrabbed;
+    }
+
+    private void OnMarbleGrabbed()
+    {
+        GeneratePattern(marbleLvl2);
     }
 
     private void OnDestroy()
     {
         DraggingState.OnMarbleLevelUpdate -= OnMarbleLevelUpdate;
+        DraggingState.OnMarbleDragBegin -= OnMarbleGrabbed;
     }
 
     private void OnMarbleLevelUpdate(MarbleData data, int arg2)
