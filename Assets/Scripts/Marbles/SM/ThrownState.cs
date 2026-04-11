@@ -46,7 +46,7 @@ public class ThrownState : MarbleStateBehaviour
         marble.FadeWithPartDistance();
 
         //Absorbed 
-        if (d2Part < 0.05f)
+        if (d2Part < 0.01f)
         {
             return new AbsorbState(marble, BlobRenderer.instance.GetClosestPartRef(uvPos));
         }

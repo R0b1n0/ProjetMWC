@@ -24,5 +24,6 @@ public enum EGameState
 {
     intro, 
     game, 
-    helpText
+    helpText, 
+    credit
 }
