@@ -403,7 +403,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 540, y: -915}
-  m_SizeDelta: {x: 813.12, y: 561.61}
+  m_SizeDelta: {x: 813.12, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &218092312
 MonoBehaviour:
@@ -425,10 +425,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Credits :\r\n\r\nAn original concept by Meize\r\nMusic by sound design
+  m_text: "Credits :\r\n\r\nAn original concept by Meize\r\nMusic & sound design
     by Meize\r\nUnity Developer : Robin Hemon\r\nShader Artist : Robin Hemon\r\nUI
-    Designer : Ga\xEBl Jardin\r\nSpecial Thanks : St\xE9phane Bernon, David Jarnage\r\n\r\nPowered
-    by Wwise\r\n\r\nMeize 2026\r\nwww.meize-studio.com"
+    Designer : Ga\xEBl Jardin\r\nSpecial Thanks : St\xE9phane Bernon, David Jarnage,
+    Alexia Bal\xE8ge\n\r\n\r\nPowered by Wwise\r\n\r\nMeize 2026\r\nwww.meize-studio.com"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f4fada19ed8bfc74890a1bafe913d8a1, type: 2}
   m_sharedMaterial: {fileID: 304415142531685315, guid: f4fada19ed8bfc74890a1bafe913d8a1, type: 2}
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
-  m_VerticalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &222040500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,7 +1750,7 @@ MonoBehaviour:
   - rid: 7456937467651293548
   - rid: 7456937467651293551
   gameState: {fileID: 854996943}
-  skipIntro: 1
+  skipIntro: 0
   references:
     version: 2
     RefIds:

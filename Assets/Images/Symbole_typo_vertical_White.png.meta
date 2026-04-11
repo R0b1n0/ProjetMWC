@@ -1,0 +1,390 @@
+fileFormatVersion: 2
+guid: b538f1ba4b435ed4fbc8f89b7a229331
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7716247218922015656
+    second: Symbole_typo_vertical_White_0
+  - first:
+      213: 3463767683327125741
+    second: Symbole_typo_vertical_White_1
+  - first:
+      213: -5695676422719604280
+    second: Symbole_typo_vertical_White_2
+  - first:
+      213: 694016961424159236
+    second: Symbole_typo_vertical_White_3
+  - first:
+      213: 8291309471387304726
+    second: Symbole_typo_vertical_White_4
+  - first:
+      213: -4836175786951452508
+    second: Symbole_typo_vertical_White_5
+  - first:
+      213: 6026563927945268590
+    second: Symbole_typo_vertical_White_6
+  - first:
+      213: -6130336013561521115
+    second: Symbole_typo_vertical_White_7
+  - first:
+      213: -1810557452472994574
+    second: Symbole_typo_vertical_White_8
+  - first:
+      213: -1074699996118373298
+    second: Symbole_typo_vertical_White_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_0
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1729
+        width: 1018
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 854be0d69026ae490800000000000000
+      internalID: -7716247218922015656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_1
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 2004
+        width: 667
+        height: 309
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de8e03d2b56c11030800000000000000
+      internalID: 3463767683327125741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_2
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 1381
+        width: 1114
+        height: 598
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9fa347874e4f0b0800000000000000
+      internalID: -5695676422719604280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_3
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 1196
+        width: 700
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40278c5dfb4a1a900800000000000000
+      internalID: 694016961424159236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_4
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 195
+        width: 563
+        height: 501
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6134fd4f806a01370800000000000000
+      internalID: 8291309471387304726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_5
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 635
+        width: 101
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a8d963beb372ecb0800000000000000
+      internalID: -4836175786951452508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_6
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 186
+        width: 336
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6d4c5d56f7a2a350800000000000000
+      internalID: 6026563927945268590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_7
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 195
+        width: 181
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52c91e520ebaceaa0800000000000000
+      internalID: -6130336013561521115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_8
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 195
+        width: 308
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f439e7f69b9fd6e0800000000000000
+      internalID: -1810557452472994574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_vertical_White_9
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 186
+        width: 335
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4c204b2c06e511f0800000000000000
+      internalID: -1074699996118373298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Symbole_typo_vertical_White_0: -7716247218922015656
+      Symbole_typo_vertical_White_1: 3463767683327125741
+      Symbole_typo_vertical_White_2: -5695676422719604280
+      Symbole_typo_vertical_White_3: 694016961424159236
+      Symbole_typo_vertical_White_4: 8291309471387304726
+      Symbole_typo_vertical_White_5: -4836175786951452508
+      Symbole_typo_vertical_White_6: 6026563927945268590
+      Symbole_typo_vertical_White_7: -6130336013561521115
+      Symbole_typo_vertical_White_8: -1810557452472994574
+      Symbole_typo_vertical_White_9: -1074699996118373298
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
