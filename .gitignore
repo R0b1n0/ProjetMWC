@@ -99,4 +99,6 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 /.idea
 
+WwiseUnityIntegration_*_Src.zip
 Assets/Wwise/API/Runtime/Plugins/iOS/
+Assets/Wwise/API/Runtime/Plugins/iOS.meta
