@@ -5,12 +5,7 @@ public class GameState : MonoBehaviour
 {
     public static event Action<EGameState,EGameState> OnGameStateUpdate;
     static public EGameState State { get { return currentState; } }
-    private static EGameState currentState;
-
-    private void Awake()
-    {
-        currentState = EGameState.intro;
-    }
+    private static EGameState currentState = EGameState.intro;
 
     public void SetGameState(EGameState state)
     {

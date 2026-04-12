@@ -7,7 +7,7 @@ public class UiFadeIn : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI helpTextBtn;
     [SerializeField] Image creditBtn;
-    private void Start()
+    private void Awake()
     {
         GameState.OnGameStateUpdate += DisplayBtn;
     }
