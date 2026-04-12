@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ThrownState : MarbleStateBehaviour
 {
+    private float blobAttractionTreshold = 0.6f;
     public ThrownState(MarbleData marble) : base(marble)
     {
     }
@@ -30,9 +31,8 @@ public class ThrownState : MarbleStateBehaviour
         Vector3 v2Part = closestPartPos - uvPos;
         float d2Part = v2Part.magnitude;
 
-        if (d2Part < 0.6f)
+        if (d2Part < blobAttractionTreshold)
         {
-            //Magic number, make it a variable :/ 
             movementVector += v2Part.normalized * Time.deltaTime;
             marble.speed -= Time.deltaTime * 10;
         }
@@ -46,7 +46,7 @@ public class ThrownState : MarbleStateBehaviour
         marble.FadeWithPartDistance();
 
         //Absorbed 
-        if (d2Part < 0.005f)
+        if (d2Part < 0.01f)
         {
             return new AbsorbState(marble, BlobRenderer.instance.GetClosestPartRef(uvPos));
         }

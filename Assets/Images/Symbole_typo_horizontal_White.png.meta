@@ -1,34 +1,37 @@
 fileFormatVersion: 2
-guid: a2be56f173117d245b89e3083a08f61f
+guid: 7077d1c0ef680fc40945a81c2489f53a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1851252556672373280
-    second: Logo Tones Prod _0
+      213: -1899610794162861772
+    second: Symbole_typo_horizontal_White_0
   - first:
-      213: -1037904934227801803
-    second: Logo Tones Prod _1
+      213: -4996255146707874400
+    second: Symbole_typo_horizontal_White_1
   - first:
-      213: 1422145116235727215
-    second: Logo Tones Prod _2
+      213: -5778547867699688454
+    second: Symbole_typo_horizontal_White_2
   - first:
-      213: 8782973006896498925
-    second: Logo Tones Prod _3
+      213: -7655221052277510868
+    second: Symbole_typo_horizontal_White_3
   - first:
-      213: 2186422298476610316
-    second: Logo Tones Prod _4
+      213: -5394537741236276876
+    second: Symbole_typo_horizontal_White_4
   - first:
-      213: 6426625913903069548
-    second: Logo Tones Prod _5
+      213: 477331321239181328
+    second: Symbole_typo_horizontal_White_5
   - first:
-      213: 9077772852033586764
-    second: Logo Tones Prod _6
+      213: 5595136419979485558
+    second: Symbole_typo_horizontal_White_6
   - first:
-      213: 71798792014515819
-    second: Logo Tones Prod _7
+      213: 1320062305873199432
+    second: Symbole_typo_horizontal_White_7
   - first:
-      213: 7834568440197640447
-    second: Logo Tones Prod _8
+      213: -8306416990711383686
+    second: Symbole_typo_horizontal_White_8
+  - first:
+      213: 7713600019276458411
+    second: Symbole_typo_horizontal_White_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -133,30 +136,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Logo Tones Prod _0
+      name: Symbole_typo_horizontal_White_0
       rect:
         serializedVersion: 2
-        x: 54
-        y: 85
-        width: 66
-        height: 103
+        x: 37
+        y: 295
+        width: 569
+        height: 257
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0229df55468f0b910800000000000000
-      internalID: 1851252556672373280
+      spriteID: 439cc6a1c0a33a5e0800000000000000
+      internalID: -1899610794162861772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logo Tones Prod _1
+      name: Symbole_typo_horizontal_White_1
       rect:
         serializedVersion: 2
-        x: 120
-        y: 82
-        width: 109
-        height: 109
+        x: 192
+        y: 449
+        width: 374
+        height: 172
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +177,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5390abc16fe9891f0800000000000000
-      internalID: -1037904934227801803
+      spriteID: 0ad82455a6cb9aab0800000000000000
+      internalID: -4996255146707874400
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logo Tones Prod _2
+      name: Symbole_typo_horizontal_White_2
       rect:
         serializedVersion: 2
-        x: 229
-        y: 54
-        width: 143
-        height: 165
+        x: 1505
+        y: 403
+        width: 56
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,20 +199,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f618948c2797cb310800000000000000
-      internalID: 1422145116235727215
+      spriteID: afb4b2494597ecfa0800000000000000
+      internalID: -5778547867699688454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logo Tones Prod _3
+      name: Symbole_typo_horizontal_White_3
       rect:
         serializedVersion: 2
-        x: 383
-        y: 85
-        width: 59
-        height: 104
+        x: 0
+        y: 101
+        width: 621
+        height: 335
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de809e36a6363e970800000000000000
-      internalID: 8782973006896498925
+      spriteID: c2d28e5130133c590800000000000000
+      internalID: -7655221052277510868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logo Tones Prod _4
+      name: Symbole_typo_horizontal_White_4
       rect:
         serializedVersion: 2
-        x: 454
-        y: 83
-        width: 68
-        height: 107
+        x: 137
+        y: 0
+        width: 392
+        height: 208
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,20 +243,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c0301bd0f7bb75e10800000000000000
-      internalID: 2186422298476610316
+      spriteID: 4717c2e7180c225b0800000000000000
+      internalID: -5394537741236276876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logo Tones Prod _5
+      name: Symbole_typo_horizontal_White_5
       rect:
         serializedVersion: 2
-        x: 533
-        y: 137
-        width: 23
-        height: 42
+        x: 930
+        y: 163
+        width: 308
+        height: 274
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,20 +265,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c69338e0836ff2950800000000000000
-      internalID: 6426625913903069548
+      spriteID: 01811a2ce42df9600800000000000000
+      internalID: 477331321239181328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logo Tones Prod _6
+      name: Symbole_typo_horizontal_White_6
       rect:
         serializedVersion: 2
-        x: 560
-        y: 147
-        width: 23
-        height: 32
+        x: 1270
+        y: 159
+        width: 183
+        height: 214
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c468525105abafd70800000000000000
-      internalID: 9077772852033586764
+      spriteID: 6716abefdeae5ad40800000000000000
+      internalID: 5595136419979485558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logo Tones Prod _7
+      name: Symbole_typo_horizontal_White_7
       rect:
         serializedVersion: 2
-        x: 587
-        y: 147
-        width: 23
-        height: 32
+        x: 1483
+        y: 163
+        width: 99
+        height: 210
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,20 +309,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b6ec355fe941ff000800000000000000
-      internalID: 71798792014515819
+      spriteID: 84184f65cadc15210800000000000000
+      internalID: 1320062305873199432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logo Tones Prod _8
+      name: Symbole_typo_horizontal_White_8
       rect:
         serializedVersion: 2
-        x: 614
-        y: 147
-        width: 23
-        height: 42
+        x: 1608
+        y: 163
+        width: 169
+        height: 205
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,8 +331,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff0777eac7af9bc60800000000000000
-      internalID: 7834568440197640447
+      spriteID: a79f06891cda9bc80800000000000000
+      internalID: -8306416990711383686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Symbole_typo_horizontal_White_9
+      rect:
+        serializedVersion: 2
+        x: 1802
+        y: 159
+        width: 184
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba96b6069563c0b60800000000000000
+      internalID: 7713600019276458411
       vertices: []
       indices: 
       edges: []
@@ -361,15 +373,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Logo Tones Prod _0: 1851252556672373280
-      Logo Tones Prod _1: -1037904934227801803
-      Logo Tones Prod _2: 1422145116235727215
-      Logo Tones Prod _3: 8782973006896498925
-      Logo Tones Prod _4: 2186422298476610316
-      Logo Tones Prod _5: 6426625913903069548
-      Logo Tones Prod _6: 9077772852033586764
-      Logo Tones Prod _7: 71798792014515819
-      Logo Tones Prod _8: 7834568440197640447
+      Symbole_typo_horizontal_White_0: -1899610794162861772
+      Symbole_typo_horizontal_White_1: -4996255146707874400
+      Symbole_typo_horizontal_White_2: -5778547867699688454
+      Symbole_typo_horizontal_White_3: -7655221052277510868
+      Symbole_typo_horizontal_White_4: -5394537741236276876
+      Symbole_typo_horizontal_White_5: 477331321239181328
+      Symbole_typo_horizontal_White_6: 5595136419979485558
+      Symbole_typo_horizontal_White_7: 1320062305873199432
+      Symbole_typo_horizontal_White_8: -8306416990711383686
+      Symbole_typo_horizontal_White_9: 7713600019276458411
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
